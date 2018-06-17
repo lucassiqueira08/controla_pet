@@ -32,15 +32,17 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
 
-    login = models.CharField('Login', max_length=150, unique=True)
     first_name = models.CharField('Primeiro nome', max_length=50)
     last_name = models.CharField('Último nome', max_length=50)
+    login = models.CharField('Login', max_length=150, unique=True, default=str(first_name)+'.'+str(last_name))
     is_staff = models.BooleanField('faz parte da equipe?', default=False)
     is_superuser = models.BooleanField('é super usuario?', default=False)
+    situacao = models.BooleanField('Está ativo?', default=True)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'login'
+    REQUIRED_FIELDS = ['first_name, last_name']
 
     def __str__(self):
         return self.first_name+' '+self.last_name

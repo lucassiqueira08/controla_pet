@@ -23,6 +23,8 @@ class FuncionarioAbstrato(models.Model):
 class Funcionario(FuncionarioAbstrato, User):
     cargo = models.ForeignKey(CargoFuncionario, on_delete=models.CASCADE, verbose_name='Cargo')
 
+    def __str__(self):
+        return self.cargo
 
 
 class Veterinario(FuncionarioAbstrato):
@@ -31,3 +33,6 @@ class Veterinario(FuncionarioAbstrato):
     ultimo_nome = models.CharField('Último nome', max_length=50)
     crm = models.CharField('CRM', max_length=50, unique=True)
     estado_emissor = models.CharField('Estado Emissor', max_length=2)
+
+    def __str__(self):
+        return self.primeiro_nome + self.ultimo_nome

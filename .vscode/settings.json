@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/home/isaque/.virtualenvs/ControlaPet/bin/python",
+    "python.venvFolders": [
+        ".pyenv",
+        "/home/isaque/.virtualenvs/"
+    ],
+    "python.venvPath": "/home/isaque/.virtualenvs/"
+}

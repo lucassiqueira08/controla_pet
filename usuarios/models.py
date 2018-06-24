@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin,
+                                        BaseUserManager)
+
 
 class UserManager(BaseUserManager):
 
@@ -47,5 +49,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     def save(self, *args, **kwargs):
         self.login = str(self.primeiro_nome+'.'+self.ultimo_nome)
         super(User, self).save(*args, **kwargs)
-
-# Create your models here.

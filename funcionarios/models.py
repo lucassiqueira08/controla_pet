@@ -1,27 +1,17 @@
-"""Teste de string."""
-
 from django.db import models
 
 from usuarios.models import User
 
 
 class CargoFuncionario(models.Model):
-    """Bananas sao lesgais."""
 
     nome = models.CharField('Cargo do funcionário', max_length=80, unique=True)
 
     def __str__(self):
-        """
-        Retorna texto.
-
-        retorna
-        retorna
-        """
         return self.nome
 
 
 class FuncionarioAbstrato(models.Model):
-    """Bananas sao lesgais."""
 
     cpf = models.CharField('CPF', max_length=11, unique=True)
     data_nasc = models.DateField('Data de nascimento', null=False)
@@ -32,7 +22,6 @@ class FuncionarioAbstrato(models.Model):
 
 
 class Funcionario(FuncionarioAbstrato, User):
-    """Abracada ftog."""
 
     cargo = models.ForeignKey(CargoFuncionario,
                               on_delete=models.CASCADE, verbose_name='Cargo')

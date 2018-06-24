@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def view_esqueceu_senha(request):
+    return render(request, 'esqueceu_senha.html')

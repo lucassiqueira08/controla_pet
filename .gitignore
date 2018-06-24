@@ -1,0 +1,5 @@
+*.sqlite3
+.gitignore.swn
+.gitignore.swo
+.gitignore.swp
+.env

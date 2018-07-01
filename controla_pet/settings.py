@@ -28,8 +28,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['systemcontrolapet.herokuapp.com']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['systemcontrolapet.herokuapp.com']
 
 
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usuarios',
     'funcionarios',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +63,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ['funcionarios/funcionarios_templates',
-                 'usuarios/usuarios_templates'],
+                 'usuarios/usuarios_templates',
+                 'core/templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,6 +126,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     'usuarios/usuarios_static',
+    'core/static',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # -----------------------------------

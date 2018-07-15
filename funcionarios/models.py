@@ -27,7 +27,7 @@ class Funcionario(FuncionarioAbstrato, User):
                               on_delete=models.CASCADE, verbose_name='Cargo')
 
     def __str__(self):
-        return self.cargo
+        return self.login
 
 
 class Veterinario(FuncionarioAbstrato):

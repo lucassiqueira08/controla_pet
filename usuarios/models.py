@@ -43,6 +43,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['primeiro_nome', 'ultimo_nome']
     USERNAME_FIELD = 'login'
 
+    class Meta:
+        db_table = 'User'
+
     def __str__(self):
         return self.primeiro_nome+' '+self.ultimo_nome
 

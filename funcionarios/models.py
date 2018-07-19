@@ -16,7 +16,7 @@ class FuncionarioAbstrato(models.Model):
 class Funcionario(FuncionarioAbstrato, User):
 
     class Meta:
-        dt_table = 'Funcionario'
+        db_table = 'FUNCIONARIO'
 
     def __str__(self):
         return self.login
@@ -30,7 +30,7 @@ class Veterinario(FuncionarioAbstrato):
     estado_emissor = models.CharField('Estado Emissor', max_length=2)
 
     class Meta:
-        dt_table = 'Veterinario'    
+        db_table = 'VETERINARIO'
 
     def __str__(self):
         return self.primeiro_nome + self.ultimo_nome

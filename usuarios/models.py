@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'login'
 
     class Meta:
-        db_table = 'User'
+        db_table = 'USER'
 
     def __str__(self):
         return self.primeiro_nome+' '+self.ultimo_nome

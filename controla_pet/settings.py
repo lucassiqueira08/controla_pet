@@ -28,8 +28,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['systemcontrolapet.herokuapp.com']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['systemcontrolapet.herokuapp.com']
 
 
 
@@ -82,10 +82,15 @@ WSGI_APPLICATION = 'controla_pet.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
-DATABASES = {'default': config('DATABASE_URL',
-             default=default_dburl, cast=dburl), }
+DATABASES = {
+    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+    'titles': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'titles',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

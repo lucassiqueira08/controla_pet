@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import request
+
 from funcionarios.forms import FormFuncionario, FormVeterinario
 
 
@@ -14,7 +15,7 @@ def view_cadastrar_funcionario(request):
 
     contexto = {'form': form}
     pass
-    # return render(request, "cadastrar_funcionario.html", contexto)
+    #return render(request, "cadastrar_funcionario.html", contexto)
 
 
 def view_cadastrar_veterinario(request):

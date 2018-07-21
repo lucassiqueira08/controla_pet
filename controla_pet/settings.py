@@ -84,13 +84,31 @@ WSGI_APPLICATION = 'controla_pet.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
+
+#   !!!!    BANCO EM PRODUÇÃO   !!!!
+# DATABASES = {
+#     'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+#     'titles': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'titles',
+#     }
+# }
+
+
+#  !!!!    BANCO LOCAL   !!!!
 DATABASES = {
-    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
-    'titles': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'titles',
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Morumbichos',
+        'USER': 'user',
+        'PASSWORD': 'senha',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

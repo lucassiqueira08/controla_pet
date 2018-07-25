@@ -107,3 +107,12 @@ venv.bak/
 
 #pycharm
 .idea
+
+
+#modelos.py
+
+core/migrations/0*
+
+funcionarios/migrations/0*
+
+usuarios/migrations/0*

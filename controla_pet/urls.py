@@ -20,6 +20,6 @@ from usuarios import urls as usuarios_urls
 
 
 urlpatterns = [
-    path('☮/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('usuario/', include(usuarios_urls)),
 ]

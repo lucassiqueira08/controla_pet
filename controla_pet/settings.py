@@ -86,25 +86,29 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
 
 #   !!!!    BANCO EM PRODUÇÃO   !!!!
+#DATABASES = {
+#    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+#    'titles': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': 'titles',
+#    }
+#}
+
+
+# !!!!   BANCO LOCAL   !!!!
 DATABASES = {
-    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('DATABASE_LOCAL_NAME'),
+        'USER': config('USER_LOCAL'),
+        'PASSWORD': config('DATABASE_LOCAL_URL'),
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+     },
     'titles': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'titles',
     }
-}
-
-
-#  !!!!    BANCO LOCAL   !!!!
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'morumbichos',
-#         'USER': 'root',
-#         'PASSWORD': 'Kl#1j',
-#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-#         'PORT': '3306',
-#      },
 }
 
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']

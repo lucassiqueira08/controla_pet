@@ -52,3 +52,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def save(self, *args, **kwargs):
         self.login = str(self.primeiro_nome+'.'+self.ultimo_nome)
         super(User, self).save(*args, **kwargs)
+
+
+

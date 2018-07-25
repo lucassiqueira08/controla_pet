@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuarios',
-    'funcionarios',
+    'cliente',
     'core',
 ]
 
@@ -111,9 +111,22 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'prin',
+#      },
+#     'titles': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'titles',
+#     }
+# }
+
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']
 DATABASE_APPS_MAPPING = {
     'core': 'titles',
+    'usuarios': 'default',
+    'cliente': 'default',
 }
 
 

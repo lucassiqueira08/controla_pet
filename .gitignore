@@ -116,3 +116,5 @@ core/migrations/0*
 funcionarios/migrations/0*
 
 usuarios/migrations/0*
+
+controla_pet/__pycache__

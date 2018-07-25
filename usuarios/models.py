@@ -44,6 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'login'
 
     class Meta:
+        app_label = 'usuarios'
         db_table = 'USER'
 
     def __str__(self):
@@ -54,4 +55,64 @@ class User(AbstractBaseUser, PermissionsMixin):
         super(User, self).save(*args, **kwargs)
 
 
+class FuncionarioAbstrato(models.Model):
 
+    cpf = models.CharField('CPF', max_length=11, unique=True)
+    data_nasc = models.DateField('Data de nascimento', null=False)
+    equipe_sistema = models.BooleanField('tem acesso ao sistema?')
+
+    class Meta:
+        abstract = True
+
+
+class Cargo(models.Model):
+    nome = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        app_label = 'usuarios'
+        db_table = 'CARGO'
+
+        def __str__(self):
+            return self.id
+
+
+class Funcionario(FuncionarioAbstrato, User):
+
+    class Meta:
+        app_label = 'usuarios'
+        db_table = 'FUNCIONARIO'
+
+    def __str__(self):
+        return self.login
+
+
+class Veterinario(FuncionarioAbstrato):
+
+    primeiro_nome = models.CharField('Primeiro nome', max_length=50)
+    ultimo_nome = models.CharField('Último nome', max_length=50)
+    crm = models.CharField('CRM', max_length=50, unique=True)
+    estado_emissor = models.CharField('Estado Emissor', max_length=2)
+
+    class Meta:
+        app_label = 'usuarios'
+        db_table = 'VETERINARIO'
+
+    def __str__(self):
+        return self.primeiro_nome + self.ultimo_nome
+
+
+class CargoFuncionario(models.Model):
+    id_cargo = models.ForeignKey(Cargo, models.DO_NOTHING,
+                                 db_column='id_cargo', primary_key=True)
+    id_func = models.ForeignKey('Funcionario', models.DO_NOTHING,
+                                db_column='id_func')
+
+    class Meta:
+        managed = False
+        app_label = 'usuarios'
+        db_table = 'CARGO_FUNCIONARIO'
+        unique_together = (('id_cargo', 'id_func'),)
+
+    def __str__(self):
+        return self.id_cargo + ' ' + self.id_func

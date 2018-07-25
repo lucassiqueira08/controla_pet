@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from usuarios.models import User
-from usuarios.forms import FormUser, FormAlteraUser
+from usuarios.models import User, Funcionario, Veterinario
+from usuarios.forms import (FormUser, FormAlteraUser, FormVeterinario,
+                            FormFuncionario, FormAlteraFuncionario)
 
 
 class UsuarioAdmin(UserAdmin):
@@ -18,5 +19,33 @@ class UsuarioAdmin(UserAdmin):
     list_filter = []
 
 
+class FuncionarioAdmin(UserAdmin):
+
+    form = FormAlteraFuncionario
+    fieldsets = ((None, {'fields': (
+        'primeiro_nome',
+        'ultimo_nome',
+        'cpf',
+        'data_nasc',
+        'equipe_sistema',
+        'password'
+    )}),)
+
+    add_form = FormFuncionario
+    add_fieldsets = ((None, {'fields': (
+        'primeiro_nome',
+        'ultimo_nome',
+        'cpf',
+        'data_nasc',
+        'equipe_sistema'
+    )}),)
+
+    list_display = ['login']
+    ordering = ['login']
+    filter_horizontal = []
+    list_filter = []
+
+
 admin.site.register(User, UsuarioAdmin)
-# Register your models here.
+admin.site.register(Funcionario, FuncionarioAdmin)
+admin.site.register(Veterinario)

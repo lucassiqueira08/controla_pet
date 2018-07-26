@@ -72,8 +72,8 @@ class Cargo(models.Model):
         app_label = 'usuarios'
         db_table = 'CARGO'
 
-        def __str__(self):
-            return self.id
+        # def __str__(self):
+        #     return self.id
 
 
 class Funcionario(FuncionarioAbstrato, User):
@@ -112,5 +112,5 @@ class CargoFuncionario(models.Model):
         db_table = 'CARGO_FUNCIONARIO'
         unique_together = (('id_cargo', 'id_func'),)
 
-    def __str__(self):
-        return self.id_cargo + ' ' + self.id_func
+    # def __str__(self):
+    #     return self.id_cargo + ' ' + self.id_func

@@ -96,20 +96,6 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
 
 # !!!!   BANCO LOCAL   !!!!
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_LOCAL_NAME'),
-        'USER': config('USER_LOCAL'),
-        'PASSWORD': config('DATABASE_LOCAL_URL'),
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-     },
-    'titles': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'titles',
-    }
-}
 
 # DATABASES = {
 #     'default': {
@@ -127,6 +113,9 @@ DATABASE_APPS_MAPPING = {
     'core': 'titles',
     'usuarios': 'default',
     'cliente': 'default',
+    'auth': 'default',
+    'django': 'default',
+    'admin': 'default',
 }
 
 

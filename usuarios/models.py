@@ -69,7 +69,6 @@ class Cargo(models.Model):
     nome = models.CharField(max_length=50)
 
     class Meta:
-        managed = False
         app_label = 'usuarios'
         db_table = 'CARGO'
 
@@ -109,7 +108,6 @@ class CargoFuncionario(models.Model):
                                 db_column='id_func')
 
     class Meta:
-        managed = False
         app_label = 'usuarios'
         db_table = 'CARGO_FUNCIONARIO'
         unique_together = (('id_cargo', 'id_func'),)

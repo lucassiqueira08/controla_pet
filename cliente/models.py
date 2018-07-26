@@ -5,7 +5,6 @@ class TipoCliente(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'cliente'
         db_table = 'TIPO_CLIENTE'
 
@@ -27,7 +26,6 @@ class Cliente(models.Model):
                                         db_column='id_tipo_cliente')
 
     class Meta:
-        managed = False
         app_label = 'cliente'
         db_table = 'CLIENTE'
 
@@ -49,12 +47,11 @@ class Animal(models.Model):
                                     db_column='cpf_cliente')
 
     class Meta:
-        managed = False
         app_label = 'cliente'
         db_table = 'ANIMAL'
 
     def __str__(self):
-        return self.cpf_cliente + '-' + self.nome
+        return self.nome
 
 
 class FichaAnimal(models.Model):
@@ -64,25 +61,21 @@ class FichaAnimal(models.Model):
     descricao = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'cliente'
         db_table = 'FICHA_ANIMAL'
         unique_together = (('id_animal', 'data_consulta'),)
 
-    def __str__(self):
-        return self.id
 
 
 class TipoStatusAnimal(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'cliente'
         db_table = 'TIPO_STATUS_ANIMAL'
 
     def __str__(self):
-        return self.id
+        return self.nome
 
 
 class StatusAnimal(models.Model):
@@ -93,13 +86,12 @@ class StatusAnimal(models.Model):
                                   db_column='id_animal')
 
     class Meta:
-        managed = False
         app_label = 'cliente'
         db_table = 'STATUS_ANIMAL'
         unique_together = (('id_status', 'id_animal'),)
 
-    def __str__(self):
-        return self.id_animal + ' ' + self.id_status
+    # def __str__(self):
+    #     return self.id_animal + ' ' + self.id_status
 
 
 class TelefoneCliente(models.Model):
@@ -109,10 +101,9 @@ class TelefoneCliente(models.Model):
     telefone = models.CharField(max_length=11)
 
     class Meta:
-        managed = False
         app_label = 'cliente'
         db_table = 'TELEFONE_CLIENTE'
         unique_together = (('cpf_cliente', 'telefone'),)
 
-    def __str__(self):
-        return self.cpf_cliente + ' ' + self.telefone
+    # def __str__(self):
+    #     return self.cpf_cliente + ' ' + self.telefone

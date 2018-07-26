@@ -7,7 +7,7 @@ class Menu(models.Model):
     url = models.URLField(max_length=300)
     ordem = models.IntegerField('Ordem')
     id_menu_grupo = models.ForeignKey('MenuGrupo',
-                                      on_delete=models.CASCADE, )
+                                      on_delete=models.CASCADE)
 
     class Meta:
         app_label = 'core'

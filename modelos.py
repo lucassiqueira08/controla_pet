@@ -1,5 +1,8 @@
 from django.db import models
 
+
+
+
 class Atendimento(models.Model):
     observacao = models.CharField(max_length=100, blank=True, null=True)
     data_solicitacao = models.DateField(blank=True, null=True)
@@ -24,9 +27,6 @@ class AtendimentoProcClinico(models.Model):
 
     def __str__(self):
         return self.id_atendimento + ' ' + self.id_proc_clinico
-
-
-
 
 class AtendimentoProcEstetico(models.Model):
     id_atendimento = models.ForeignKey(Atendimento, models.DO_NOTHING, db_column='id_atendimento', primary_key=True)
@@ -62,8 +62,6 @@ class Comissao(models.Model):
     def __str__(self):
         return self.login
 
-
-
 class DiagnosticoAnimal(models.Model):
     descricao = models.CharField(max_length=500, blank=True, null=True)
     booleano = models.IntegerField(blank=True, null=True)
@@ -75,8 +73,6 @@ class DiagnosticoAnimal(models.Model):
 
     def __str__(self):
         return self.id
-
-
 
 class Estadia(models.Model):
     observacao = models.CharField(max_length=500, blank=True, null=True)
@@ -93,8 +89,6 @@ class Estadia(models.Model):
     def __str__(self):
         return self.id
 
-
-
 class Exame(models.Model):
     link_doc = models.CharField(unique=True, max_length=500)
     nome = models.CharField(max_length=100)
@@ -108,7 +102,6 @@ class Exame(models.Model):
 
     def __str__(self):
         return self.id
-
 
 class FeitoPor(models.Model):
     id_atendimento = models.ForeignKey(Atendimento, models.DO_NOTHING, db_column='id_atendimento', primary_key=True)
@@ -147,7 +140,6 @@ class Orcamento(models.Model):
     def __str__(self):
         return self.id
 
-
 class ProcedimentoClinico(models.Model):
     id = models.SmallIntegerField(primary_key=True)
     nome = models.CharField(max_length=50)
@@ -163,8 +155,6 @@ class ProcedimentoClinico(models.Model):
     def __str__(self):
         return self.id
 
-
-
 class ProcedimentoEstetico(models.Model):
     id = models.SmallIntegerField(primary_key=True)
     nome = models.CharField(max_length=50)
@@ -179,7 +169,6 @@ class ProcedimentoEstetico(models.Model):
     def __str__(self):
         return self.id
 
-
 class Responde(models.Model):
     cpf_responsavel = models.ForeignKey('Responsavel', models.DO_NOTHING, db_column='cpf_responsavel', primary_key=True)
     id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
@@ -191,7 +180,6 @@ class Responde(models.Model):
 
     def __str__(self):
         return self.cpf_responsavel + ' ' + self.id_animal
-
 
 class Responsavel(models.Model):
     cpf = models.CharField(primary_key=True, max_length=14)
@@ -216,8 +204,6 @@ class StatusAtendimento(models.Model):
     def __str__(self):
         return self.id_atendimento + ' ' + self.id_status
 
-
-
 class StatusEstadia(models.Model):
     id_estadia = models.ForeignKey(Estadia, models.DO_NOTHING, db_column='id_estadia', primary_key=True)
     id_status = models.ForeignKey('TipoStatusEstadia', models.DO_NOTHING, db_column='id_status')
@@ -241,7 +227,6 @@ class TipoDiagnostico(models.Model):
     def __str__(self):
         return self.id
 
-
 class TipoExame(models.Model):
     id = models.SmallIntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
@@ -252,7 +237,6 @@ class TipoExame(models.Model):
 
     def __str__(self):
         return self.id
-
 
 class TipoProcedimento(models.Model):
     id = models.SmallIntegerField(primary_key=True)
@@ -275,8 +259,6 @@ class TipoStatusAtendimento(models.Model):
     def __str__(self):
         return self.id
 
-
-
 class TipoStatusEstadia(models.Model):
     nome_status = models.CharField(max_length=50, blank=True, null=True)
 
@@ -286,6 +268,9 @@ class TipoStatusEstadia(models.Model):
 
     def __str__(self):
         return self.id
+
+
+
 
 class UserGroups(models.Model):
     user = models.ForeignKey(User, models.DO_NOTHING)

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'usuarios',
     'cliente',
     'core',
+    'servicos',
 ]
 
 MIDDLEWARE = [
@@ -111,22 +112,13 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'prin',
-#      },
-#     'titles': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'titles',
-#     }
-# }
 
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']
 DATABASE_APPS_MAPPING = {
     'core': 'titles',
     'usuarios': 'default',
     'cliente': 'default',
+    'servicos': 'default',
 }
 
 

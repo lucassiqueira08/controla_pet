@@ -116,3 +116,29 @@ class TelefoneCliente(models.Model):
 
     def __str__(self):
         return self.cpf_cliente + ' ' + self.telefone
+
+
+
+class Responde(models.Model):
+    cpf_responsavel = models.ForeignKey('Responsavel', models.DO_NOTHING, db_column='cpf_responsavel', primary_key=True)
+    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
+
+    class Meta:
+        managed = False
+        db_table = 'RESPONDE'
+        unique_together = (('cpf_responsavel', 'id_animal'),)
+
+    def __str__(self):
+        return self.cpf_responsavel + ' ' + self.id_animal
+
+
+class Responsavel(models.Model):
+    cpf = models.CharField(primary_key=True, max_length=14)
+    nome = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'RESPONSAVEL'
+
+    def __str__(self):
+        return self.cpf

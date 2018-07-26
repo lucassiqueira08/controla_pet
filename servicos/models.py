@@ -9,12 +9,11 @@ class Orcamento(models.Model):
     preco_final = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'ORCAMENTO'
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 class Atendimento(models.Model):
@@ -24,12 +23,11 @@ class Atendimento(models.Model):
     id_orcamento = models.ForeignKey(Orcamento, models.DO_NOTHING, db_column='id_orcamento', blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'ATENDIMENTO'
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 
@@ -41,12 +39,11 @@ class ProcedimentoEstetico(models.Model):
     preco = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'PROCEDIMENTO_ESTETICO'
 
     def __str__(self):
-        return self.id
+        return self.nome
 
 
 class TipoDiagnostico(models.Model):
@@ -54,12 +51,11 @@ class TipoDiagnostico(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'TIPO_DIAGNOSTICO'
 
     def __str__(self):
-        return self.id
+        return self.nome
 
 
 class TipoExame(models.Model):
@@ -67,12 +63,11 @@ class TipoExame(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'TIPO_EXAME'
 
     def __str__(self):
-        return self.id
+        return self.nome
 
 
 
@@ -81,12 +76,11 @@ class TipoProcedimento(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'TIPO_PROCEDIMENTO'
 
     def __str__(self):
-        return self.id
+        return self.nome
 
 
 
@@ -99,12 +93,11 @@ class ProcedimentoClinico(models.Model):
     id_tipo_proc = models.ForeignKey(TipoProcedimento, models.DO_NOTHING, db_column='id_tipo_proc')
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'PROCEDIMENTO_CLINICO'
 
     def __str__(self):
-        return self.id
+        return self.nome
 
 
 
@@ -113,13 +106,12 @@ class AtendimentoProcClinico(models.Model):
     id_proc_clinico = models.ForeignKey(ProcedimentoEstetico, models.DO_NOTHING, db_column='id_proc_clinico')
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'ATENDIMENTO_PROC_CLINICO'
         unique_together = (('id_atendimento', 'id_proc_clinico'),)
 
     def __str__(self):
-        return self.id_atendimento + ' ' + self.id_proc_clinico
+        return 'Atendimento: ' + str(self.id_atendimento) + ' ' + 'Proc_Clinico:' + str(self.id_proc_clinico)
 
 
 
@@ -128,13 +120,12 @@ class AtendimentoProcEstetico(models.Model):
     id_proc_estetico = models.ForeignKey(ProcedimentoEstetico, models.DO_NOTHING, db_column='id_proc_estetico')
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'ATENDIMENTO_PROC_ESTETICO'
         unique_together = (('id_atendimento', 'id_proc_estetico'),)
 
     def __str__(self):
-        return self.id_atendimento + ' ' + self.id_proc_estetico
+        return 'Atendimento: ' + str(self.id_atendimento) + ' ' + 'Proc_Estetico: ' + str(self.id_proc_estetico)
 
 
 
@@ -143,12 +134,11 @@ class Autorizacao(models.Model):
     id_proc_clinico = models.ForeignKey(ProcedimentoClinico, models.DO_NOTHING, db_column='id_proc_clinico')
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'AUTORIZACAO'
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 
@@ -157,12 +147,11 @@ class Comissao(models.Model):
     id_atendimento = models.ForeignKey(Atendimento, models.DO_NOTHING, db_column='id_atendimento')
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'COMISSAO'
 
     def __str__(self):
-        return self.login
+        return str(self.id)
 
 
 class DiagnosticoAnimal(models.Model):
@@ -171,12 +160,11 @@ class DiagnosticoAnimal(models.Model):
     id_tipo_diagnostico = models.ForeignKey(TipoDiagnostico, models.DO_NOTHING, db_column='id_tipo_diagnostico', blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'DIAGNOSTICO_ANIMAL'
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 
@@ -189,12 +177,11 @@ class Estadia(models.Model):
     cpf_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cpf_cliente')
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'ESTADIA'
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 
@@ -206,12 +193,11 @@ class Exame(models.Model):
     id_tipo_exame = models.ForeignKey(TipoExame, models.DO_NOTHING, db_column='id_tipo_exame')
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'EXAME'
 
     def __str__(self):
-        return self.id
+        return 'Id:' + str(self.id) + 'Nome: ' + str(self.nome)
 
 
 
@@ -221,13 +207,12 @@ class FeitoPor(models.Model):
     data_realizacao = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'FEITO_POR'
         app_label = 'servicos'
         unique_together = (('id_atendimento', 'id_funcionario'),)
 
     def __str__(self):
-        return self.id_atendimento + ' ' + self.id_funcionario
+        return 'Atendimento: ' + str(self.id_atendimento) + ' ' + 'Funcionario: ' + str(self.id_funcionario)
 
 
 
@@ -237,14 +222,13 @@ class FichaDiagnostico(models.Model):
     id_animal = models.ForeignKey(FichaAnimal, models.DO_NOTHING, db_column='id_animal', related_name='+')
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'FICHA_DIAGNOSTICO'
         unique_together = (('id_diagnostico', 'data_consulta', 'id_animal'),)
 
     def __str__(self):
         if __name__ == '__main__':
-            return self.id_animal + ' ' + self.id_diagnostico
+            return 'Animal: '+str(self.id_animal) + ' ' + 'Diagnostico: '+str(self.id_diagnostico)
 
 
 
@@ -252,12 +236,11 @@ class TipoStatusAtendimento(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'TIPO_STATUS_ATENDIMENTO'
 
     def __str__(self):
-        return self.id
+        return self.nome
 
 
 
@@ -265,12 +248,11 @@ class TipoStatusEstadia(models.Model):
     nome_status = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
         app_label = 'servicos'
         db_table = 'TIPO_STATUS_ESTADIA'
 
     def __str__(self):
-        return self.id
+        return self.nome_status
 
 
 
@@ -280,13 +262,12 @@ class StatusAtendimento(models.Model):
     id_status = models.ForeignKey(TipoStatusAtendimento, models.DO_NOTHING, db_column='id_status')
 
     class Meta:
-        managed = False
         db_table = 'STATUS_ATENDIMENTO'
         app_label = 'servicos'
         unique_together = (('id_atendimento', 'id_status'),)
 
     def __str__(self):
-        return self.id_atendimento + ' ' + self.id_status
+        return 'Atendimento: ' + str(self.id_atendimento) + ' ' + 'Status: ' + str(self.id_status)
 
 
 
@@ -297,13 +278,12 @@ class StatusEstadia(models.Model):
     id_status = models.ForeignKey(TipoStatusEstadia, models.DO_NOTHING, db_column='id_status')
 
     class Meta:
-        managed = False
         db_table = 'STATUS_ESTADIA'
         app_label = 'servicos'
         unique_together = (('id_estadia', 'id_status'),)
 
     def __str__(self):
-        return self.id_estadia + ' ' + self.id_status
+        return 'Estadia:' + self.id_estadia + ' ' + 'Status: ' + self.id_status
 
 
 

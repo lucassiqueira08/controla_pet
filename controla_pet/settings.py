@@ -97,7 +97,16 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
 
 # !!!!   BANCO LOCAL   !!!!
-
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': 'prin',
+      },
+     'titles': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': 'titles',
+     }
+}
 
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']
 DATABASE_APPS_MAPPING = {
@@ -107,7 +116,7 @@ DATABASE_APPS_MAPPING = {
     'auth': 'default',
     'django': 'default',
     'admin': 'default',
-    'servicos': 'default'
+    'servicos': 'default',
 }
 
 

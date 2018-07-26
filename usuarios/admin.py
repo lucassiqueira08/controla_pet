@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from usuarios.models import User, Funcionario, Veterinario
+from usuarios.models import User, Funcionario, Veterinario, Cargo, CargoFuncionario
 from usuarios.forms import (FormUser, FormAlteraUser, FormVeterinario,
                             FormFuncionario, FormAlteraFuncionario)
 
@@ -49,3 +49,6 @@ class FuncionarioAdmin(UserAdmin):
 admin.site.register(User, UsuarioAdmin)
 admin.site.register(Funcionario, FuncionarioAdmin)
 admin.site.register(Veterinario)
+admin.site.register(Cargo)
+admin.site.register(CargoFuncionario)
+

@@ -65,6 +65,8 @@ class FichaAnimal(models.Model):
         db_table = 'FICHA_ANIMAL'
         unique_together = (('id_animal', 'data_consulta'),)
 
+    def __str__(self):
+        return str(self.id)
 
 
 class TipoStatusAnimal(models.Model):
@@ -90,8 +92,8 @@ class StatusAnimal(models.Model):
         db_table = 'STATUS_ANIMAL'
         unique_together = (('id_status', 'id_animal'),)
 
-    # def __str__(self):
-    #     return self.id_animal + ' ' + self.id_status
+    def __str__(self):
+        return 'Animal:' + str(self.id_animal) + ' ' + 'Status:' + str(self.id_status)
 
 
 class TelefoneCliente(models.Model):
@@ -105,5 +107,30 @@ class TelefoneCliente(models.Model):
         db_table = 'TELEFONE_CLIENTE'
         unique_together = (('cpf_cliente', 'telefone'),)
 
-    # def __str__(self):
-    #     return self.cpf_cliente + ' ' + self.telefone
+    def __str__(self):
+        return 'Cliente:' + str(self.cpf_cliente) + ' ' + 'Telefone:' + str(self.telefone)
+
+
+
+class Responde(models.Model):
+    cpf_responsavel = models.ForeignKey('Responsavel', models.DO_NOTHING, db_column='cpf_responsavel', primary_key=True)
+    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
+
+    class Meta:
+        db_table = 'RESPONDE'
+        unique_together = (('cpf_responsavel', 'id_animal'),)
+
+    def __str__(self):
+        return 'Responsavel:' + ' ' + str(self.cpf_responsavel) + ' - ' + 'Animal:' + ' ' + str(self.id_animal)
+
+
+class Responsavel(models.Model):
+    cpf = models.CharField(primary_key=True, max_length=14)
+    nome = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'RESPONSAVEL'
+
+    def __str__(self):
+        return self.nome
+

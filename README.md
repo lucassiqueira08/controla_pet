@@ -27,7 +27,8 @@ ControlaPet é um Sistema de Gerenciamento de PetShops e Clinicas Veterinarias  
 
 * **features** - Demais funcionalidades que estão sendo desenvolvidas
 
-![alt image](https://drive.google.com/file/d/1TBYJr_Ei_6rUCuV7EqsPf7Ic8Gn-9l0-/view?usp=sharing "GitFlow")
+
+![alt text](https://lh4.googleusercontent.com/5k4WMnoVQgw52GA6TrWhDv9ALAN20mTdc6S-SgUBQMigshGw0NAJ1Mnhg-XeIIqcuOXY-5IoD3Lv9RAitFbt=w1317-h648-rw "GitFlow")
 
 
 
@@ -111,7 +112,7 @@ Para verificar o situação atual do repositório
 ```
 Se houver alterações a serem commitadas **NÃO** utilizar **" git add ."**, digite:
 ```sh
-    git add <nome do arquivo alterado>
+    git add <nome_do_arquivo_alterado>
 ```
 
 Para commitar as alterações por favor digite uma **MENSAGEM COERENTE** com o que foi desenvolvido:

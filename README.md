@@ -11,15 +11,22 @@ ControlaPet é um Sistema de Gerenciamento de PetShops e Clinicas Veterinarias  
 * Nayara de Paula Muniz
 * Vitor Crepaldi Carlessi    
 
+---
 
 
 ### Quickstart
+
+---
 
 #### Clone este repositório:
 
 ```sh
     git clone https://github.com/ControlaPet/controla_pet.git
 ```
+
+---
+
+
 #### Fluxo de Desenvolvimento da equipe
 
 * **master** - Branch utilizado somente para funcionalidades já testadas e aprovadas pelo cliente
@@ -29,6 +36,8 @@ ControlaPet é um Sistema de Gerenciamento de PetShops e Clinicas Veterinarias  
 
 
 ![alt text](https://lh4.googleusercontent.com/5k4WMnoVQgw52GA6TrWhDv9ALAN20mTdc6S-SgUBQMigshGw0NAJ1Mnhg-XeIIqcuOXY-5IoD3Lv9RAitFbt=w1317-h648-rw "GitFlow")
+
+---
 
 
 
@@ -60,11 +69,15 @@ Certifique-se de que sua branch está atualizada:
     <Exemplo>
     git pull origin develop
 ```
+---
+
 
 #### Adicione suas credenciais
 Para trabalhar com o projeto ControlaPet, crie um arquivo chamado .env na raiz do diretorio, e 
 adicione as credenciais fornecidas pela **equipe de desenvolvimento**.
 
+
+---
 
 #### Rodando o projeto
 
@@ -94,6 +107,10 @@ Para rodar o projeto digite:
     python manage.py runserver
 ```
 Por padrão o servidor é iniciado no endereço: [http://localhost:8000/](http://localhost:8000/)
+
+
+---
+
 
 #### Subindo alterações
 Certifique-se novamente de que está utilizando a versão mais atual do cógido:
@@ -136,3 +153,5 @@ Para subir suas alterações ao GitHub, digite:
 * Utilize o develop/master como branch para desenvolver
 * Digite mensagens em commits sem sentido
 * Force um commit com conflitos
+
+---

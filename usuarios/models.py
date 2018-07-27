@@ -43,9 +43,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['primeiro_nome', 'ultimo_nome']
     USERNAME_FIELD = 'login'
 
+    class Meta:
+        db_table = 'USER'
+
     def __str__(self):
         return self.primeiro_nome+' '+self.ultimo_nome
 
     def save(self, *args, **kwargs):
         self.login = str(self.primeiro_nome+'.'+self.ultimo_nome)
         super(User, self).save(*args, **kwargs)
+
+
+

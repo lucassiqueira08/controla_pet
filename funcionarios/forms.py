@@ -14,14 +14,14 @@ class FormFuncionario(forms.ModelForm):
 
     class Meta:
         model = Funcionario
-        fields = ['primeiro_nome', 'ultimo_nome', 'cpf', 'data_nasc', 'equipe_sistema', 'cargo']
+        fields = ['primeiro_nome', 'ultimo_nome', 'cpf', 'data_nasc', 'equipe_sistema']
 
 
 class FormAlteraFuncionario(forms.ModelForm):
 
     class Meta:
         model = Funcionario
-        fields = ['primeiro_nome', 'ultimo_nome', 'cpf', 'data_nasc', 'equipe_sistema', 'password', 'cargo']
+        fields = ['primeiro_nome', 'ultimo_nome', 'cpf', 'data_nasc', 'equipe_sistema', 'password']
 
 
 class FormVeterinario(forms.ModelForm):

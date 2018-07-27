@@ -66,7 +66,7 @@ class FichaAnimal(models.Model):
         unique_together = (('id_animal', 'data_consulta'),)
 
     def __str__(self):
-        return str(self.id)
+        return 'Animal: ' + str(self.id_animal) + ' - ' + 'Data: ' + str(self.data_consulta)
 
 
 class TipoStatusAnimal(models.Model):

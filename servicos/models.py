@@ -103,7 +103,7 @@ class ProcedimentoClinico(models.Model):
 
 class AtendimentoProcClinico(models.Model):
     id_atendimento = models.ForeignKey(Atendimento, models.DO_NOTHING, db_column='id_atendimento', primary_key=True)
-    id_proc_clinico = models.ForeignKey(ProcedimentoEstetico, models.DO_NOTHING, db_column='id_proc_clinico')
+    id_proc_clinico = models.ForeignKey(ProcedimentoClinico, models.DO_NOTHING, db_column='id_proc_clinico')
 
     class Meta:
         app_label = 'servicos'
@@ -197,7 +197,7 @@ class Exame(models.Model):
         db_table = 'EXAME'
 
     def __str__(self):
-        return 'Id:' + str(self.id) + 'Nome: ' + str(self.nome)
+        return str(self.id) + ' - ' + str(self.nome)
 
 
 
@@ -227,8 +227,7 @@ class FichaDiagnostico(models.Model):
         unique_together = (('id_diagnostico', 'data_consulta', 'id_animal'),)
 
     def __str__(self):
-        if __name__ == '__main__':
-            return 'Animal: '+str(self.id_animal) + ' ' + 'Diagnostico: '+str(self.id_diagnostico)
+        return str(self.id_animal) + ' - ' + 'Diagnostico: ' + str(self.id_diagnostico)
 
 
 
@@ -283,7 +282,7 @@ class StatusEstadia(models.Model):
         unique_together = (('id_estadia', 'id_status'),)
 
     def __str__(self):
-        return 'Estadia:' + self.id_estadia + ' ' + 'Status: ' + self.id_status
+        return 'Estadia:' + str(self.id_estadia) + ' ' + 'Status: ' + str(self.id_status)
 
 
 

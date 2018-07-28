@@ -1,7 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*/__pycache__/
-usuarios/__pycache__/
+*.pyc
+*.pyo
 *.py[cod]
 *$py.class
 
@@ -116,3 +116,9 @@ core/migrations/0*
 funcionarios/migrations/0*
 
 usuarios/migrations/0*
+
+cliente/migrations/0*
+
+servicos/migrations/0*
+
+

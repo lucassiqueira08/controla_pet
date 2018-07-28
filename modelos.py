@@ -1,24 +1,5 @@
-
 from django.db import models
 
-
-class Animal(models.Model):
-    nome = models.CharField(max_length=50, blank=True, null=True)
-    sexo = models.CharField(max_length=1, blank=True, null=True)
-    especie = models.CharField(max_length=50)
-    raca = models.CharField(max_length=50)
-    cor = models.CharField(max_length=50, blank=True, null=True)
-    datanasc = models.DateField(blank=True, null=True)
-    observacao = models.CharField(max_length=200, blank=True, null=True)
-    microchip = models.CharField(unique=True, max_length=50, blank=True, null=True)
-    cpf_cliente = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='cpf_cliente')
-
-    class Meta:
-        managed = False
-        db_table = 'ANIMAL'
-
-    def __str__(self):
-        return self.cpf_cliente + '-' + self.nome
 
 
 
@@ -35,9 +16,6 @@ class Atendimento(models.Model):
     def __str__(self):
         return self.id
 
-
-
-
 class AtendimentoProcClinico(models.Model):
     id_atendimento = models.ForeignKey(Atendimento, models.DO_NOTHING, db_column='id_atendimento', primary_key=True)
     id_proc_clinico = models.ForeignKey('ProcedimentoEstetico', models.DO_NOTHING, db_column='id_proc_clinico')
@@ -49,9 +27,6 @@ class AtendimentoProcClinico(models.Model):
 
     def __str__(self):
         return self.id_atendimento + ' ' + self.id_proc_clinico
-
-
-
 
 class AtendimentoProcEstetico(models.Model):
     id_atendimento = models.ForeignKey(Atendimento, models.DO_NOTHING, db_column='id_atendimento', primary_key=True)
@@ -65,9 +40,6 @@ class AtendimentoProcEstetico(models.Model):
     def __str__(self):
         return self.id_atendimento + ' ' + self.id_proc_estetico
 
-
-
-
 class Autorizacao(models.Model):
     link_doc = models.CharField(unique=True, max_length=500, blank=True, null=True)
     id_proc_clinico = models.ForeignKey('ProcedimentoClinico', models.DO_NOTHING, db_column='id_proc_clinico')
@@ -78,55 +50,6 @@ class Autorizacao(models.Model):
 
     def __str__(self):
         return self.id
-
-
-
-class Cargo(models.Model):
-    nome = models.CharField(max_length=50)
-
-    class Meta:
-        managed = False
-        db_table = 'CARGO'
-
-    def __str__(self):
-        return self.id
-
-
-
-class CargoFuncionario(models.Model):
-    id_cargo = models.ForeignKey(Cargo, models.DO_NOTHING, db_column='id_cargo', primary_key=True)
-    id_func = models.ForeignKey('Funcionario', models.DO_NOTHING, db_column='id_func')
-
-    class Meta:
-        managed = False
-        db_table = 'CARGO_FUNCIONARIO'
-        unique_together = (('id_cargo', 'id_func'),)
-
-    def __str__(self):
-        return self.id_cargo + ' ' + self.id_func
-
-
-
-
-class Cliente(models.Model):
-    cpf = models.CharField(primary_key=True, max_length=14)
-    nome = models.CharField(max_length=50)
-    email = models.CharField(max_length=50, blank=True, null=True)
-    logradouro = models.CharField(max_length=50)
-    bairro = models.CharField(max_length=50)
-    cidade = models.CharField(max_length=50)
-    cep = models.CharField(max_length=8, blank=True, null=True)
-    numero = models.SmallIntegerField()
-    complemento = models.CharField(max_length=100, blank=True, null=True)
-    id_tipo_cliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, db_column='id_tipo_cliente')
-
-    class Meta:
-        managed = False
-        db_table = 'CLIENTE'
-
-    def __str__(self):
-        return self.cpf
-
 
 class Comissao(models.Model):
     valor = models.DecimalField(max_digits=10, decimal_places=2)
@@ -139,8 +62,6 @@ class Comissao(models.Model):
     def __str__(self):
         return self.login
 
-
-
 class DiagnosticoAnimal(models.Model):
     descricao = models.CharField(max_length=500, blank=True, null=True)
     booleano = models.IntegerField(blank=True, null=True)
@@ -152,8 +73,6 @@ class DiagnosticoAnimal(models.Model):
 
     def __str__(self):
         return self.id
-
-
 
 class Estadia(models.Model):
     observacao = models.CharField(max_length=500, blank=True, null=True)
@@ -170,8 +89,6 @@ class Estadia(models.Model):
     def __str__(self):
         return self.id
 
-
-
 class Exame(models.Model):
     link_doc = models.CharField(unique=True, max_length=500)
     nome = models.CharField(max_length=100)
@@ -186,7 +103,6 @@ class Exame(models.Model):
     def __str__(self):
         return self.id
 
-
 class FeitoPor(models.Model):
     id_atendimento = models.ForeignKey(Atendimento, models.DO_NOTHING, db_column='id_atendimento', primary_key=True)
     id_funcionario = models.ForeignKey('Funcionario', models.DO_NOTHING, db_column='id_funcionario')
@@ -199,23 +115,6 @@ class FeitoPor(models.Model):
 
     def __str__(self):
         return self.id_atendimento + ' ' + self.id_funcionario
-
-
-
-class FichaAnimal(models.Model):
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal', primary_key=True)
-    data_consulta = models.DateField()
-    descricao = models.CharField(max_length=500, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'FICHA_ANIMAL'
-        unique_together = (('id_animal', 'data_consulta'),)
-
-    def __str__(self):
-        return self.id
-
-
 
 class FichaDiagnostico(models.Model):
     id_diagnostico = models.IntegerField(primary_key=True)
@@ -231,22 +130,6 @@ class FichaDiagnostico(models.Model):
         if __name__ == '__main__':
             return self.id_animal + ' ' + self.id_diagnostico
 
-
-
-class Funcionario(models.Model):
-    id = models.ForeignKey('User', models.DO_NOTHING, primary_key=True)
-    cpf = models.CharField(unique=True, max_length=11)
-    data_nasc = models.DateField()
-    equipe_sistema = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'FUNCIONARIO'
-
-    def __str__(self):
-        return self.id
-
-
 class Orcamento(models.Model):
     preco_final = models.DecimalField(max_digits=10, decimal_places=2)
 
@@ -256,7 +139,6 @@ class Orcamento(models.Model):
 
     def __str__(self):
         return self.id
-
 
 class ProcedimentoClinico(models.Model):
     id = models.SmallIntegerField(primary_key=True)
@@ -273,8 +155,6 @@ class ProcedimentoClinico(models.Model):
     def __str__(self):
         return self.id
 
-
-
 class ProcedimentoEstetico(models.Model):
     id = models.SmallIntegerField(primary_key=True)
     nome = models.CharField(max_length=50)
@@ -289,7 +169,6 @@ class ProcedimentoEstetico(models.Model):
     def __str__(self):
         return self.id
 
-
 class Responde(models.Model):
     cpf_responsavel = models.ForeignKey('Responsavel', models.DO_NOTHING, db_column='cpf_responsavel', primary_key=True)
     id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
@@ -302,7 +181,6 @@ class Responde(models.Model):
     def __str__(self):
         return self.cpf_responsavel + ' ' + self.id_animal
 
-
 class Responsavel(models.Model):
     cpf = models.CharField(primary_key=True, max_length=14)
     nome = models.CharField(max_length=50)
@@ -313,20 +191,6 @@ class Responsavel(models.Model):
 
     def __str__(self):
         return self.cpf
-
-
-class StatusAnimal(models.Model):
-    id_status = models.ForeignKey('TipoStatusAnimal', models.DO_NOTHING, db_column='id_status', primary_key=True)
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
-
-    class Meta:
-        managed = False
-        db_table = 'STATUS_ANIMAL'
-        unique_together = (('id_status', 'id_animal'),)
-
-    def __str__(self):
-        return self.id_animal + ' ' + self.id_status
-
 
 class StatusAtendimento(models.Model):
     id_atendimento = models.ForeignKey(Atendimento, models.DO_NOTHING, db_column='id_atendimento', primary_key=True)
@@ -340,8 +204,6 @@ class StatusAtendimento(models.Model):
     def __str__(self):
         return self.id_atendimento + ' ' + self.id_status
 
-
-
 class StatusEstadia(models.Model):
     id_estadia = models.ForeignKey(Estadia, models.DO_NOTHING, db_column='id_estadia', primary_key=True)
     id_status = models.ForeignKey('TipoStatusEstadia', models.DO_NOTHING, db_column='id_status')
@@ -354,33 +216,6 @@ class StatusEstadia(models.Model):
     def __str__(self):
         return self.id_estadia + ' ' + self.id_status
 
-
-
-class TelefoneCliente(models.Model):
-    cpf_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cpf_cliente', primary_key=True)
-    telefone = models.CharField(max_length=11)
-
-    class Meta:
-        managed = False
-        db_table = 'TELEFONE_CLIENTE'
-        unique_together = (('cpf_cliente', 'telefone'),)
-
-    def __str__(self):
-        return self.cpf_cliente + ' ' + self.telefone
-
-
-
-class TipoCliente(models.Model):
-    nome = models.CharField(max_length=50, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'TIPO_CLIENTE'
-
-    def __str__(self):
-        return self.id
-
-
 class TipoDiagnostico(models.Model):
     id = models.SmallIntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
@@ -391,7 +226,6 @@ class TipoDiagnostico(models.Model):
 
     def __str__(self):
         return self.id
-
 
 class TipoExame(models.Model):
     id = models.SmallIntegerField(primary_key=True)
@@ -404,7 +238,6 @@ class TipoExame(models.Model):
     def __str__(self):
         return self.id
 
-
 class TipoProcedimento(models.Model):
     id = models.SmallIntegerField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
@@ -416,18 +249,6 @@ class TipoProcedimento(models.Model):
     def __str__(self):
         return self.id
 
-
-class TipoStatusAnimal(models.Model):
-    nome = models.CharField(max_length=50, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'TIPO_STATUS_ANIMAL'
-
-    def __str__(self):
-        return self.id
-
-
 class TipoStatusAtendimento(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
 
@@ -437,8 +258,6 @@ class TipoStatusAtendimento(models.Model):
 
     def __str__(self):
         return self.id
-
-
 
 class TipoStatusEstadia(models.Model):
     nome_status = models.CharField(max_length=50, blank=True, null=True)
@@ -451,22 +270,6 @@ class TipoStatusEstadia(models.Model):
         return self.id
 
 
-class User(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    primeiro_nome = models.CharField(max_length=50)
-    ultimo_nome = models.CharField(max_length=50)
-    login = models.CharField(unique=True, max_length=150)
-    is_staff = models.IntegerField()
-    is_superuser = models.IntegerField()
-    situacao = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'USER'
-
-    def __str__(self):
-        return self.login
 
 
 class UserGroups(models.Model):
@@ -487,23 +290,6 @@ class UserUserPermissions(models.Model):
         managed = False
         db_table = 'USER_user_permissions'
         unique_together = (('user', 'permission'),)
-
-
-class Veterinario(models.Model):
-    cpf = models.CharField(unique=True, max_length=11)
-    data_nasc = models.DateField()
-    equipe_sistema = models.IntegerField()
-    primeiro_nome = models.CharField(max_length=50)
-    ultimo_nome = models.CharField(max_length=50)
-    crm = models.CharField(unique=True, max_length=50)
-    estado_emissor = models.CharField(max_length=2)
-
-    class Meta:
-        managed = False
-        db_table = 'VETERINARIO'
-
-    def __str__(self):
-        return self.cpf
 
 
 class AuthGroup(models.Model):

@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuarios',
-    'funcionarios',
+    'cliente',
     'core',
+    'servicos',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,12 @@ DATABASES = {
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']
 DATABASE_APPS_MAPPING = {
     'core': 'titles',
+    'usuarios': 'default',
+    'cliente': 'default',
+    'auth': 'default',
+    'django': 'default',
+    'admin': 'default',
+    'servicos': 'default',
 }
 
 

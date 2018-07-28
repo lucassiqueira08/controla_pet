@@ -32,7 +32,7 @@ class Atendimento(models.Model):
 
 
 class ProcedimentoEstetico(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=50)
     descricao = models.CharField(max_length=200)
     especie = models.CharField(max_length=50)
@@ -47,7 +47,7 @@ class ProcedimentoEstetico(models.Model):
 
 
 class TipoDiagnostico(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
@@ -59,7 +59,7 @@ class TipoDiagnostico(models.Model):
 
 
 class TipoExame(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
@@ -72,7 +72,7 @@ class TipoExame(models.Model):
 
 
 class TipoProcedimento(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
@@ -85,7 +85,7 @@ class TipoProcedimento(models.Model):
 
 
 class ProcedimentoClinico(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True, default=1)
     nome = models.CharField(max_length=50)
     descricao = models.CharField(max_length=200)
     especie = models.CharField(max_length=50)
@@ -218,16 +218,15 @@ class FeitoPor(models.Model):
 
 class FichaDiagnostico(models.Model):
     id_diagnostico = models.IntegerField(primary_key=True)
-    data_consulta = models.ForeignKey(FichaAnimal, models.DO_NOTHING, db_column='data_consulta', related_name='+')
-    id_animal = models.ForeignKey(FichaAnimal, models.DO_NOTHING, db_column='id_animal', related_name='+')
+    id_ficha = models.ForeignKey(FichaAnimal, models.DO_NOTHING, db_column='id_ficha')
 
     class Meta:
         app_label = 'servicos'
         db_table = 'FICHA_DIAGNOSTICO'
-        unique_together = (('id_diagnostico', 'data_consulta', 'id_animal'),)
+        unique_together = (('id_diagnostico', 'id_ficha'),)
 
     def __str__(self):
-        return str(self.id_animal) + ' - ' + 'Diagnostico: ' + str(self.id_diagnostico)
+        return str(self.id_ficha) + ' - ' + str(self.id_diagnostico)
 
 
 

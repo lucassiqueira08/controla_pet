@@ -38,6 +38,8 @@ class FormFuncionario(forms.ModelForm):
         fields = [
             'primeiro_nome',
             'ultimo_nome',
+            'apelido',
+            'situacao_func',
             'cpf',
             'data_nasc',
             'equipe_sistema'
@@ -68,6 +70,7 @@ class FormVeterinario(forms.ModelForm):
             'cpf',
             'data_nasc',
             'equipe_sistema',
-            'crm',
-            'estado_emissor'
+            'crmv',
+            'estado_emissor',
+            'id_funcionario'
         ]

@@ -55,15 +55,14 @@ class Animal(models.Model):
 
 
 class FichaAnimal(models.Model):
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
-                                  db_column='id_animal', primary_key=True)
-    data_consulta = models.DateField()
+    id = models.AutoField(primary_key=True)
+    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
+    data_consulta = models.DateField(blank=True, null=False)
     descricao = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
         app_label = 'cliente'
         db_table = 'FICHA_ANIMAL'
-        unique_together = (('id_animal', 'data_consulta'),)
 
     def __str__(self):
         return 'Animal: ' + str(self.id_animal) + ' - ' + 'Data: ' + str(self.data_consulta)

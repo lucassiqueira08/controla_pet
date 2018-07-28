@@ -56,8 +56,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class FuncionarioAbstrato(models.Model):
-
-    cpf = models.CharField('CPF', max_length=11, unique=True)
+    cpf = models.CharField('CPF', max_length=11, unique=True, null=False)
     data_nasc = models.DateField('Data de nascimento', null=False)
     equipe_sistema = models.BooleanField('tem acesso ao sistema?')
 
@@ -78,6 +77,9 @@ class Cargo(models.Model):
 
 
 class Funcionario(FuncionarioAbstrato, User):
+    nome = models.CharField('Nome', max_length=50, null=False)
+    apelido = models.CharField('Apelido', max_length=30)
+    situacao_func = models.CharField('Situação', max_length=30, null=False)
 
     class Meta:
         app_label = 'usuarios'
@@ -91,8 +93,9 @@ class Veterinario(FuncionarioAbstrato):
 
     primeiro_nome = models.CharField('Primeiro nome', max_length=50)
     ultimo_nome = models.CharField('Último nome', max_length=50)
-    crm = models.CharField('CRM', max_length=50, unique=True)
+    crmv = models.CharField('CRMV', max_length=50, unique=True)
     estado_emissor = models.CharField('Estado Emissor', max_length=2)
+    id_funcionario = models.ForeignKey('Funcionario', models.DO_NOTHING, db_column='id_funcionario')
 
     class Meta:
         app_label = 'usuarios'

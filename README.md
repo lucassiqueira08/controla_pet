@@ -35,7 +35,7 @@ ControlaPet é um Sistema de Gerenciamento de PetShops e Clinicas Veterinarias  
 * **features** - Demais funcionalidades que estão sendo desenvolvidas
 
 
-![alt text](https://lh4.googleusercontent.com/5k4WMnoVQgw52GA6TrWhDv9ALAN20mTdc6S-SgUBQMigshGw0NAJ1Mnhg-XeIIqcuOXY-5IoD3Lv9RAitFbt=w1317-h648-rw "GitFlow")
+![alt text](https://www.bitbull.it/blog/git-flow-come-funziona/gitflow-1.png "GitFlow")
 
 ---
 

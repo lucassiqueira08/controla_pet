@@ -10,6 +10,8 @@ class Orcamento(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'ORCAMENTO'
+        verbose_name = 'Orçamento'
+        verbose_name_plural = 'Orçamentos'
 
     def __str__(self):
         return str(self.id)
@@ -25,13 +27,15 @@ class Atendimento(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'ATENDIMENTO'
+        verbose_name = 'Atendimento'
+        verbose_name_plural = 'Atendimentos'
 
     def __str__(self):
         return str(self.id)
 
 
 class ProcedimentoEstetico(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=50)
     descricao = models.CharField(max_length=200)
     especie = models.CharField(max_length=50)
@@ -40,30 +44,36 @@ class ProcedimentoEstetico(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'PROCEDIMENTO_ESTETICO'
+        verbose_name = 'Procedimento Estético'
+        verbose_name_plural = 'Procedimentos Estéticos'
 
     def __str__(self):
         return self.nome
 
 
 class TipoDiagnostico(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         app_label = 'servicos'
         db_table = 'TIPO_DIAGNOSTICO'
+        verbose_name = 'Tipo de Diagnóstico'
+        verbose_name_plural = 'Tipos de Diagnósticos'
 
     def __str__(self):
         return self.nome
 
 
 class TipoExame(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         app_label = 'servicos'
         db_table = 'TIPO_EXAME'
+        verbose_name = 'Tipo de Exame'
+        verbose_name_plural = 'Tipos de Exames'
 
     def __str__(self):
         return self.nome
@@ -71,12 +81,14 @@ class TipoExame(models.Model):
 
 
 class TipoProcedimento(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         app_label = 'servicos'
         db_table = 'TIPO_PROCEDIMENTO'
+        verbose_name = 'Tipo de Procedimento'
+        verbose_name_plural = 'Tipos de Procedimentos'
 
     def __str__(self):
         return self.nome
@@ -84,7 +96,7 @@ class TipoProcedimento(models.Model):
 
 
 class ProcedimentoClinico(models.Model):
-    id = models.SmallIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True, default=1)
     nome = models.CharField(max_length=50)
     descricao = models.CharField(max_length=200)
     especie = models.CharField(max_length=50)
@@ -94,6 +106,8 @@ class ProcedimentoClinico(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'PROCEDIMENTO_CLINICO'
+        verbose_name = 'Procedimento Clinico'
+        verbose_name_plural = 'Procedimentos Clinicos'
 
     def __str__(self):
         return self.nome
@@ -108,6 +122,8 @@ class AtendimentoProcClinico(models.Model):
         app_label = 'servicos'
         db_table = 'ATENDIMENTO_PROC_CLINICO'
         unique_together = (('id_atendimento', 'id_proc_clinico'),)
+        verbose_name = 'Atendimento do Procedimento Clinico'
+        verbose_name_plural = 'Atendimentos dos Procedimentos Clínicos'
 
     def __str__(self):
         return 'Atendimento: ' + str(self.id_atendimento) + ' ' + 'Proc_Clinico:' + str(self.id_proc_clinico)
@@ -122,6 +138,8 @@ class AtendimentoProcEstetico(models.Model):
         app_label = 'servicos'
         db_table = 'ATENDIMENTO_PROC_ESTETICO'
         unique_together = (('id_atendimento', 'id_proc_estetico'),)
+        verbose_name = 'Atendimento do Procedimento Estético'
+        verbose_name_plural = 'Atendimentos dos Procedimentos Estéticos'
 
     def __str__(self):
         return 'Atendimento: ' + str(self.id_atendimento) + ' ' + 'Proc_Estetico: ' + str(self.id_proc_estetico)
@@ -135,6 +153,8 @@ class Autorizacao(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'AUTORIZACAO'
+        verbose_name = 'Autorização'
+        verbose_name_plural = 'Autorizações'
 
     def __str__(self):
         return str(self.id)
@@ -148,6 +168,8 @@ class Comissao(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'COMISSAO'
+        verbose_name = 'Comissão'
+        verbose_name_plural = 'Comissões'
 
     def __str__(self):
         return str(self.id)
@@ -161,6 +183,8 @@ class DiagnosticoAnimal(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'DIAGNOSTICO_ANIMAL'
+        verbose_name = 'Diagnóstico do Animal'
+        verbose_name_plural = 'Diagnósticos dos Animais'
 
     def __str__(self):
         return str(self.id)
@@ -178,6 +202,8 @@ class Estadia(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'ESTADIA'
+        verbose_name = 'Estadia'
+        verbose_name_plural = 'Estadias'
 
     def __str__(self):
         return str(self.id)
@@ -194,6 +220,8 @@ class Exame(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'EXAME'
+        verbose_name = 'Exame'
+        verbose_name_plural = 'Exames'
 
     def __str__(self):
         return str(self.id) + ' - ' + str(self.nome)
@@ -209,6 +237,8 @@ class FeitoPor(models.Model):
         db_table = 'FEITO_POR'
         app_label = 'servicos'
         unique_together = (('id_atendimento', 'id_funcionario'),)
+        verbose_name = 'Atendimento Feito por Funcionário (Feito Por)'
+        verbose_name_plural = 'Atendimentos Feitos por Funcionários (Feito Por)'
 
     def __str__(self):
         return 'Atendimento: ' + str(self.id_atendimento) + ' ' + 'Funcionario: ' + str(self.id_funcionario)
@@ -217,16 +247,18 @@ class FeitoPor(models.Model):
 
 class FichaDiagnostico(models.Model):
     id_diagnostico = models.IntegerField(primary_key=True)
-    data_consulta = models.ForeignKey(FichaAnimal, models.DO_NOTHING, db_column='data_consulta', related_name='+')
-    id_animal = models.ForeignKey(FichaAnimal, models.DO_NOTHING, db_column='id_animal', related_name='+')
+    id_ficha = models.ForeignKey(FichaAnimal, models.DO_NOTHING, db_column='id_ficha')
 
     class Meta:
         app_label = 'servicos'
         db_table = 'FICHA_DIAGNOSTICO'
-        unique_together = (('id_diagnostico', 'data_consulta', 'id_animal'),)
+        unique_together = (('id_diagnostico', 'id_ficha'),)
+        verbose_name = 'Ficha de Diagnóstico'
+        verbose_name_plural = 'Fichas de Diagnóstico'
+
 
     def __str__(self):
-        return str(self.id_animal) + ' - ' + 'Diagnostico: ' + str(self.id_diagnostico)
+        return str(self.id_ficha) + ' - ' + str(self.id_diagnostico)
 
 
 
@@ -236,6 +268,8 @@ class TipoStatusAtendimento(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'TIPO_STATUS_ATENDIMENTO'
+        verbose_name = 'Tipo de Status do Atendimento'
+        verbose_name_plural = 'Tipos de Status dos Antendimentos'
 
     def __str__(self):
         return self.nome
@@ -248,6 +282,8 @@ class TipoStatusEstadia(models.Model):
     class Meta:
         app_label = 'servicos'
         db_table = 'TIPO_STATUS_ESTADIA'
+        verbose_name = 'Tipo de Status da Estadia'
+        verbose_name_plural = 'Tipos de Status da Estadia'
 
     def __str__(self):
         return self.nome_status
@@ -263,6 +299,8 @@ class StatusAtendimento(models.Model):
         db_table = 'STATUS_ATENDIMENTO'
         app_label = 'servicos'
         unique_together = (('id_atendimento', 'id_status'),)
+        verbose_name = 'Status do Atendimento'
+        verbose_name_plural = 'Status dos Atendimentos'
 
     def __str__(self):
         return 'Atendimento: ' + str(self.id_atendimento) + ' ' + 'Status: ' + str(self.id_status)
@@ -279,6 +317,8 @@ class StatusEstadia(models.Model):
         db_table = 'STATUS_ESTADIA'
         app_label = 'servicos'
         unique_together = (('id_estadia', 'id_status'),)
+        verbose_name = 'Status da Estadia'
+        verbose_name_plural = 'Status das Estadias'
 
     def __str__(self):
         return 'Estadia:' + str(self.id_estadia) + ' ' + 'Status: ' + str(self.id_status)

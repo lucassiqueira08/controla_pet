@@ -111,10 +111,15 @@ class TelefoneCliente(models.Model):
         return 'Cliente:' + str(self.cpf_cliente) + ' ' + 'Telefone:' + str(self.telefone)
 
 
-
 class Responde(models.Model):
-    cpf_responsavel = models.ForeignKey('Responsavel', models.DO_NOTHING, db_column='cpf_responsavel', primary_key=True)
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
+
+    cpf_responsavel = models.ForeignKey(
+        'Responsavel', models.DO_NOTHING,
+        db_column='cpf_responsavel',
+        primary_key=True
+    )
+    id_animal = models.ForeignKey(Animal,
+                                  models.DO_NOTHING, db_column='id_animal')
 
     class Meta:
         db_table = 'RESPONDE'
@@ -133,4 +138,3 @@ class Responsavel(models.Model):
 
     def __str__(self):
         return self.nome
-

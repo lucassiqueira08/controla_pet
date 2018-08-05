@@ -95,24 +95,28 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 #    }
 #}
 
-
-# !!!!   BANCO LOCAL   !!!!
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_LOCAL_NAME'),
-        'USER': config('USER_LOCAL'),
-        'PASSWORD': config('DATABASE_LOCAL_URL'),
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'NAME': 'morumbichos',
+        'USER': 'root',
+        'PASSWORD': 'Kl#1j',
+        'HOST': 'localhost',
         'PORT': '3306',
      },
+
     'titles': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'titles',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'titulos',
+        'USER': 'root',
+        'PASSWORD': 'Kl#1j',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']
+
 DATABASE_APPS_MAPPING = {
     'core': 'titles',
     'usuarios': 'default',
@@ -141,7 +145,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/

@@ -1,8 +1,7 @@
 from django.db import models
+
 from cliente.models import Cliente, Animal, FichaAnimal
 from usuarios.models import Funcionario
-
-
 
 
 class Orcamento(models.Model):
@@ -17,6 +16,7 @@ class Orcamento(models.Model):
 
 
 class Atendimento(models.Model):
+    
     observacao = models.CharField(max_length=100, blank=True, null=True)
     data_solicitacao = models.DateField(blank=True, null=True)
     cpf_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cpf_cliente')
@@ -28,7 +28,6 @@ class Atendimento(models.Model):
 
     def __str__(self):
         return str(self.id)
-
 
 
 class ProcedimentoEstetico(models.Model):
@@ -283,7 +282,3 @@ class StatusEstadia(models.Model):
 
     def __str__(self):
         return 'Estadia:' + str(self.id_estadia) + ' ' + 'Status: ' + str(self.id_status)
-
-
-
-

@@ -1,10 +1,13 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
-from usuarios.models import User, Funcionario, Veterinario, Cargo, CargoFuncionario
+from usuarios.models import (User, Funcionario, Veterinario,
+                             Cargo, CargoFuncionario)
 from usuarios.forms import (FormUser, FormAlteraUser, FormVeterinario,
                             FormFuncionario, FormAlteraFuncionario)
 
+UserAuth = get_user_model()
 
 class UsuarioAdmin(UserAdmin):
 
@@ -28,7 +31,8 @@ class FuncionarioAdmin(UserAdmin):
         'cpf',
         'data_nasc',
         'equipe_sistema',
-        'password'
+        'password',
+        ''
     )}),)
 
     add_form = FormFuncionario
@@ -46,9 +50,10 @@ class FuncionarioAdmin(UserAdmin):
     list_filter = []
 
 
+# admin.site.register(UserAuth)
 admin.site.register(User, UsuarioAdmin)
+# admin.site.register(Funcionario)
 admin.site.register(Funcionario, FuncionarioAdmin)
 admin.site.register(Veterinario)
 admin.site.register(Cargo)
 admin.site.register(CargoFuncionario)
-

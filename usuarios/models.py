@@ -46,6 +46,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         app_label = 'usuarios'
         db_table = 'USER'
+        verbose_name = 'Usuário'
+        verbose_name_plural = 'Usuários'
 
     def __str__(self):
         return self.primeiro_nome+' '+self.ultimo_nome
@@ -70,6 +72,8 @@ class Cargo(models.Model):
     class Meta:
         app_label = 'usuarios'
         db_table = 'CARGO'
+        verbose_name = 'Cargo'
+        verbose_name_plural = 'Cargos'
 
     def __str__(self):
         return str(self.id)
@@ -84,6 +88,8 @@ class Funcionario(FuncionarioAbstrato, User):
     class Meta:
         app_label = 'usuarios'
         db_table = 'FUNCIONARIO'
+        verbose_name = 'Funcionário'
+        verbose_name_plural = 'Funcionários'
 
     def __str__(self):
         return self.login
@@ -100,6 +106,8 @@ class Veterinario(FuncionarioAbstrato):
     class Meta:
         app_label = 'usuarios'
         db_table = 'VETERINARIO'
+        verbose_name = 'Veterinário'
+        verbose_name_plural = 'Veterinários'
 
     def __str__(self):
         return self.primeiro_nome + ' ' + self.ultimo_nome
@@ -115,6 +123,8 @@ class CargoFuncionario(models.Model):
         app_label = 'usuarios'
         db_table = 'CARGO_FUNCIONARIO'
         unique_together = (('id_cargo', 'id_func'),)
+        verbose_name = 'Cargo do Funcionário'
+        verbose_name_plural = 'Cargos dos Funcionários'
 
     def __str__(self):
         return 'Cargo: ' + str(self.id_cargo) + ' ' + 'Funcionario: ' + str(self.id_func)

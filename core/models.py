@@ -12,6 +12,8 @@ class Menu(models.Model):
     class Meta:
         app_label = 'core'
         db_table = 'MENU'
+        verbose_name = 'Item do Menu'
+        verbose_name_plural = 'Itens do Menu'
 
 
 class MenuGrupo(models.Model):
@@ -22,3 +24,5 @@ class MenuGrupo(models.Model):
     class Meta:
         app_label = 'core'
         db_table = 'MENU_GRUPO'
+        verbose_name = 'Grupo dos Itens do Menu'
+        verbose_name_plural = 'Grupos dos Itens do Menu'

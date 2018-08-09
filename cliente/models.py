@@ -62,7 +62,8 @@ class Animal(models.Model):
 
 class FichaAnimal(models.Model):
     id = models.AutoField(primary_key=True)
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
+    id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
+                                  db_column='id_animal')
     data_consulta = models.DateField(blank=True, null=False)
     descricao = models.CharField(max_length=500, blank=True, null=True)
 
@@ -105,7 +106,6 @@ class StatusAnimal(models.Model):
 
     def __str__(self):
         return 'Animal:' + str(self.id_animal) + ' ' + 'Status:' + str(self.id_status)
-
 
 
 class TelefoneCliente(models.Model):

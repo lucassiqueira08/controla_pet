@@ -63,8 +63,7 @@ ROOT_URLCONF = 'controla_pet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['funcionarios/funcionarios_templates',
-                 'usuarios/usuarios_templates',
+        'DIRS': ['usuarios/templates',
                  'core/templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -165,12 +164,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    'usuarios/usuarios_static',
+    'usuarios/static',
     'core/static',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # -----------------------------------
 
 AUTH_USER_MODEL = 'usuarios.User'
-INDEX_URL = 'cadastrar_usuario'
+INDEX_URL = 'login'
 LOGIN_REDIRECT_URL = INDEX_URL

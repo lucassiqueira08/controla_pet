@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static from staticfiles %}
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+		<form class="centralizado coluna telaTamanhoFixo" method="post">
+		{% csrf_token %}
+			<div class="formulario">
+				<h1 class="tituloGrande">Seja Bem Vindo!</h1>
+				<p class="tituloPequeno">Digite seus dados abaixo</p>
+
+				<div class="dupla">
+					<label class="formLabel">Usuário:</label>
+					<input id class="formInput" name="usuario"  placeholder="Digite seu usuário..." maxlength="100" autofocus required>
+				</div>
+				<div class="dupla">
+					<label class="formLabel">Senha:</label>
+					<input class="formInput" name="senha" type="password" placeholder="Digite sua senha..." maxlength="100" required>
+				</div>
+				<div class="containerBotoes centralizado coluna">
+					<button class="btnPrincipal" href="index.html" type="submit">Entrar</button>
+					<a class="" href="esqueci_senha.html">Esqueceu a senha?</a>
+				</div>
+			</div>
+
+		</form>
+
+		<!--===========FIMM===============-->
+{% endblock %}

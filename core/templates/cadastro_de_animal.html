@@ -1,0 +1,192 @@
+	<!DOCTYPE html>
+	<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>ControlaPet - Cadastro de Animais</title>
+		<!--=========reset============-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!--=========css============-->
+		<link rel="stylesheet" type="text/css" href="css/header_footer.css">
+		<link rel="stylesheet" type="text/css" href="css/hamburguer_menu.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="icon" href="img/logoControlaPet.png" type="image/x-icon" >
+		<!--=========BOOTSTRAP============-->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+		<!--=========JQUERY============-->
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui-1.12.1.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.structure.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.structure.min.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.theme.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.theme.min.css">
+	</head>
+	<body>
+		<header>
+			<img src="img/logocontrolapetwhite.png" class="logoHeader" alt="Controla Pet">
+		</header>
+
+		<main class="main">
+			<div id="menuLateral">
+				<div class="menuLateralPerfil">
+					<img class="perfilImg" src="img/perfil.png" alt="teste">
+					<h3 class="tituloExtraGrande">Pricila Santos</h3 class="tituloExtraGrande">
+				</div>
+				<div class="menuLateralItens">
+					<button  class="item" type="button" data-toggle="collapse" data-target="#submenuCalendarioDeVacinas" aria-expanded="false" aria-controls="collapseExample"><img src="img/1.png" alt="calendario"><h5><a href ="#">Calendário de vacinas</a></h5></button>
+					<div class="submenu collapse" id="submenuCalendarioDeVacinas">
+						<div class="subItem">
+							<img src="img/2.png" alt="ficha">
+							<h5><a href ="#">Ficha animal</a></h5>
+						</div>
+						<div class="subItem">
+							<img src="img/2.png" alt="ficha">
+							<h5><a href ="#">Ficha animal</a></h5>
+						</div>
+						<div class="subItem">
+							<img src="img/2.png" alt="ficha">
+							<h5><a href ="#">Ficha animal</a></h5>
+						</div>
+					</div>
+
+
+
+					<div class="item"><img src="img/2.png" alt="ficha">		<h5><a href ="#">Ficha animal</a></h5></div>
+					<div class="item"><img src="img/3.png" alt="mala">		<h5><a href ="#">Acompanhe sua clínica</a></h5></div>
+					<div class="item"><img src="img/4.png" alt="coracao">	<h5><a href ="#">Diagnóstico de animais</a></h5></div>
+					<div class="item"><img src="img/5.png" alt="pata">		<h5><a href ="#">Cadastre um novo animal</a></h5></div>
+					<div class="item"><img src="img/6.png" alt="aviso">		<h5><a href ="#">Avisos de vacinas</a></h5></div>
+					<div class="item"><img src="img/7.png" alt="agenda">	<h5><a href ="#">Agenda de procedimentos</a></h5></div>
+					<div class="item"><img src="img/8.png" alt="hotel">		<h5><a href ="#">Hospede um animal</a></h5></div>
+					<div class="item"><img src="img/9.png" alt="tesoura">	<h5><a href ="#">Cadastro de serviços</a></h5></div>
+				</div>
+			</div>
+
+			<div class="conteudo">
+				<input type="checkbox" id="navicon">
+				<div class="nav-toggle">
+					<label for="navicon" class="hamburger" onclick="menuSlide();">
+						<span></span>
+						<span></span>
+						<span></span>
+					</label>
+				</div>
+				<div class="titulo">
+					<div class="itensTitulo centralizado">
+						<div class="circulo">
+							<img src="img/5.png" alt="Imagem Animal">
+						</div>
+						<h2>Cadastro de Animal</h2>
+					</div>
+				</div>
+
+				<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+				<form method="post" class='formEtapas'>
+					<ul id="progress">
+						<li class="ativo"><label>Buscar Animal</label></li>
+						<li><label>Cadastro</label></li>
+						<li><label>Informações Complementares</label></li>
+						<li><label>Observações</label></li>
+						<li><label>Responsáveis</label></li>
+					</ul>
+
+					<fieldset>
+						<h3 class="tituloExtraGrande">Buscar Animal</h3 class="tituloExtraGrande">
+						<p>Digite o CPF do Proprietario ou nome do Animal!</p>
+						<input type="search" class="formEtapasInput cpf" name="cpf" placeholder="Digite o CPF do Proprietario..."/ maxlength="14" id="cpf" onkeydown="mascara_apenas_numeros(event);" onkeyup="mascara_cpf();">
+						<div class="containerBotoes">
+							<input type="submit" name="next" class="next acao btnPrincipal " value="Buscar"/>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<h2 class="tituloGrande">Dados cadastrais</h2 class="tituloGrande">
+						<p>Digite algumas informações do animal!</p>
+
+						<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
+						<input type="text" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
+						<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+						<input type="text" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
+						<input type="text" id="Data" class="formEtapasInput" name="data_nasc" placeholder="Data de Nascimento"/>
+						<p>Sexo</p>
+						<div class="formEtapasDupla">
+							<div class="formEtapasRadio">
+								<label><input type="radio" name="sexo" >Masculino</label>
+								<label><input type="radio" name="sexo" >Feminino</label>
+							</div>
+						</div>
+						<div class="containerBotoes">
+							<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+							<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<h2 class="tituloGrande">Informações Complementares</h2 class="tituloGrande">
+						<p>Estamos quase lá! Se preferir, digite algumas informações complementares</p>
+						<input type="text" class="formEtapasInput" name="microchip" placeholder="Microchip" maxlength="50" />
+						<p>O animal está vivo?</p>
+						<div class="formEtapasDupla">
+							<div class="formEtapasRadio">
+								<label><input type="radio" name="simnao">Sim</label>
+								<label><input type="radio" name="simnao">Não</label>
+							</div>
+						</div>
+						<div class="containerBotoes">
+							<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+							<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<h2 class="tituloGrande">Observações</h2 class="tituloGrande">
+						<textarea placeholder="Digite aqui sua Observação..." class="formEtapasTextArea" name="message" maxlength="200"></textarea>
+						<div class="containerBotoes">
+							<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+							<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<h2 class="tituloGrande">Responsáveis</h2 class="tituloGrande">
+						<p>Por favor, nos diga quais os responsáveis pelo animal</p>
+						<input type="search" class="formEtapasInput cpf" name="cpfresponsavel" placeholder="Digite o CPF do Responsável..."/ maxlength="14">
+						<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50">
+						<input type="tel"  class="formEtapasInput ddd_celular" name="telefone" placeholder="Telefone" maxlength="14">
+						<div class="containerBotoes">
+							<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+							<input type="submit" name="fim'" class="acao btnPrincipal" value="Finalizar"/>
+						</div>
+
+					</fieldset>
+
+				</form>
+				<!--===========FIMM===============-->
+
+			</div>
+		</main>
+
+		<footer>
+			<small>Controla Pet © 2018 Todos Diretos reservados. Termos e Uso e Política de Privacidade</small>
+		</footer>
+		<!--=========SWEETALERT============-->
+
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+		<!--=========BOOTSTRAP/JQUERY============-->
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41jstQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+		<!--=========js============-->
+		<script src="js/hamburguer.js"></script>
+		<script src="js/mascara_validacao.js"></script>
+		<script type="text/javascript" src="js/geral.js"></script>
+
+	</body>
+	</html>

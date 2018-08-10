@@ -1,0 +1,499 @@
+/**===========================Posicionamento===========================**/
+.esquerda{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+#calendar {
+    max-width: 700px;
+    margin: 0 auto;
+}
+.direita{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.cima{
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+.baixo{
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+.centralizado{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.linha{
+	display: flex;
+	flex-direction: row;
+}
+.coluna{
+	display: flex;
+	flex-direction: column;
+}
+.destacadoCimaBaixo{
+	margin: 30px 0 30px 0 !important;
+}
+.destacadoEsquerdaDireita{
+	margin: 0 20px 0 20px !important;
+}
+.clearMarginTop{
+	margin-top:0!important;
+}
+.telaTamanhoFixo{
+	height: 452px;
+}
+/**===========================Formularios===================**/
+.formulario{
+	width: 100%;
+	width: 600px;
+	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	position: relative;
+}
+.formLabel{
+	width: 120px;
+	height: 37px;
+	font-size: 15px;
+	color: #ff6600 ;
+	font-weight: 600;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border: 0.2px solid black;
+	border-left: 5px solid #ff6600;
+}
+.formInput{
+	width: 250px;
+	height: 37px;
+	border: .9px solid #A9A9A9;
+	padding-left: 10px;
+	outline: none;
+	box-sizing: border-box;
+}
+.formFileInput{
+	margin:-10px 0 20px 0;
+	width: 370px;
+	height: 37px;
+	color: #ff6600 ;
+	padding-left: 10px;
+	outline: none;
+	box-sizing: border-box;
+	font-size: 15px;
+	font-weight: 600;
+}
+.formInput:focus{
+	border:1px solid rgba(255, 102, 0, 0.9);
+}
+.formRadio{	
+	border:.5px solid #A9A9A9;
+	width: 250px;
+	height: 37px;
+	padding-left: 10px;	
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-end;
+}
+.formRadio label input{
+	margin-right: 5px;
+}
+.dupla{
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	align-items:flex-start;
+}
+.btnPrincipal{
+	width: 250px;
+	height: 37px;
+	background-color: #ff6600;
+	color: #fff;
+	font-weight: 600;
+	border:1px solid #fff;
+	border-radius: 3px;
+	margin-top: 25px;
+}
+.btnPrincipal:hover{
+	background: #c14e01; 
+	cursor: pointer;
+} 
+.btnSecundario{
+	width: 250px;
+	height: 37px;
+	background-color: #868686; 
+	color: #fff;
+	font-weight: 600;
+	border:1px solid #fff;
+	border-radius: 3px;
+	margin-top: 25px;
+}
+.btnSecundario:hover{
+	background: #333;
+	cursor: pointer;
+} 
+.containerBotoes{
+	width: 100%;
+	margin: 10px;
+}
+.containerBotoes a{
+	margin:5px; 
+}
+@media (max-width: 500px) {
+	.formLabel{
+		font-size: 13px;
+		width: 120px;
+	}
+	.formInput, .formEtapasInput{
+		font-size: 12px;
+	}
+	.formRadio, .formEtapasRadio{
+		font-size: 13px;
+	}
+}
+@media (max-width: 425px) {
+	.formLabel{
+		width: 100px;
+		font-size: 12px;
+	}
+	.formInput, .formEtapasInput, .formRadio, .formEtapasRadio{
+		width: 220px;
+	}
+}
+@media (max-width: 375px) {
+	.formLabel{
+		font-size: 12px;
+	}
+	.formLabel{
+		width: 90px;
+		font-size: 12px;
+	}
+	.formInput, .formEtapasInput,.formRadio, .formEtapasRadio{
+		width: 210px;
+	}
+}
+/**===========================Formularios em Etapas===================**/
+.formEtapas{
+	display: flex;
+	justify-content: center;
+    align-items: center;
+    flex-direction: column;
+	width: 100%;
+	text-align: center;
+	position: relative;
+}
+.formEtapas fieldset{
+	width: 600px;
+	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	position: relative;
+}
+.formEtapas fieldset:not(:first-of-type){
+	display: none;
+}
+.formEtapasInput{
+	width: 80%;
+	height: 37px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	border: .9px solid #A9A9A9;
+	padding-left: 10px;
+	border-radius: 4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	outline: none;
+	box-sizing: border-box;
+} 
+.formEtapasTextArea{
+	width: 	90%;
+	height: 250px;
+}
+.formEtapasInput:focus{
+	border:1px solid rgba(255, 102, 0, 0.9);
+}
+.formEtapasRadio{	
+	border:.5px solid #A9A9A9;
+	width: 250px;
+	height: 37px;
+	padding-left: 10px;	
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-end;
+}
+.formEtapasRadio label input{
+	margin-right: 5px;
+}
+.formEtapas p{
+	text-align: center;
+}
+.formEtapas input, .formEtapas textarea{
+	color: rgba(255, 102, 0)
+}
+.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
+	width: 170px;
+	height: 37px;
+	background-color: #ff6600;
+	color: #fff;
+	font-weight: 600;
+	border:1px solid #fff;
+	border-radius: 3px;
+	margin-top: 25px;
+}
+.formEtapas input.acao:hover{
+	background: #c14e01; 
+	cursor: pointer;
+}
+#progress{
+	display: flex;
+	justify-content: center;
+    align-items: center;
+	width: 100%;
+	margin: 30px 0;
+	overflow: hidden;
+	counter-reset: step;
+}
+#progress li{
+	width: 15%;
+	height: 100px;
+	list-style-type: none;
+	color: rgba(134,134,134);
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 11px;
+	float: left;
+	position: relative;
+}
+#progress li:before{
+	content:counter(step);
+	counter-increment: step;
+	font-size: 15px;
+	width: 40px;
+	display: block;
+	line-height: 40px;
+	background: rgba(134,134,134);
+	color: white;
+	border-radius:30px;
+	-moz-border-radius:30px;
+	-webkit-border-radius:40px;
+	margin: 0 auto 10px auto;
+}
+#progress li:after{
+	content: '';
+	width: 100%;
+	background: rgba(134,134,134);
+	height: 2px;
+	position: absolute;
+	top: 17px;
+	left: -50%;
+	z-index: -1;
+}
+#progress li:first-child:after{
+	content: none;
+}
+#progress li.ativo:before, #progress li.ativo:after{
+	background: #ff6600;
+	color: white;
+	text-shadow: 0 1px 0;	
+}
+#progress li.ativo{
+	color: #ff6600;
+}
+.formEtapasDupla{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.formEtapasRadio label{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}
+@media (max-width: 700px) {
+	.formEtapasInput{
+		margin: 5px;
+	}
+	.formEtapasTextArea{
+		width: 	95%;
+		height: 200px;
+	}
+	.formEtapas fieldset{
+		width: 400px	
+	}
+	.formEtapas fieldset .containerBotoes{
+		width: 	100%;
+		margin:0px;
+		flex-direction: row;	
+	}
+
+	.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
+		width: 	150px;
+		margin-top: 15px;
+	}
+	#progress li label{
+		display: none;	
+	}
+	#progress li{
+		height: 50px;
+	}
+	.formEtapas fieldset h3{
+		font-size: 30px;
+	}
+	.formEtapas fieldset p{
+		font-size: 18px;
+	}
+}
+@media (max-width: 500px) {
+	.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
+		width: 	110px;
+	}
+	.formEtapas fieldset{
+		width: 290px	
+	}
+	.formEtapas fieldset h3{
+		font-size: 25px;
+	}
+	.formEtapas fieldset p{
+		font-size: 14px;
+	}
+	.formEtapasInput{
+		font-size: 12px;
+	}
+	.formEtapasRadio{
+		font-size: 13px;
+	}
+}
+@media (max-width: 425px) {
+	#progress li{
+		margin-right: 12px;
+	}
+	.formEtapasInput, .formEtapasRadio{
+		width: 220px;
+	}
+}
+@media (max-width: 375px) {
+	.formEtapasInput, .formEtapasRadio{
+		width: 210px;
+	}
+}
+/**===========================Cards===========================**/
+.cardContorno{
+	height: 100%;
+	padding: 30px 0 30px 0;
+	border-top: 1px dashed #333333 !important; 
+}
+.imagemCard, .imagemCardModal{
+	width: auto;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.imagemCardModal img {
+    width: 350px;
+    border-radius: 3px;
+}
+.imagemCard img {
+    width: 250px;
+    border-radius: 3px;
+}
+@media (max-width: 1100px) {	
+	.conteudoCard{
+		flex-direction: column!important;
+	}
+	.imagemCard{
+		width: 270px;
+		height: 200px;
+	}	
+	.imagemCard img{
+		width: 100%;
+		height: 100%;
+	}	
+}
+@media (max-width: 800px) {	
+	.cardContorno{
+		flex-direction: column;
+	}
+	.imagemCard{
+		margin-bottom: 25px;
+	}
+}
+
+/**===========================específicos===========================**/
+#paginationActive a{
+	background-color: #ff6600!important;
+	border-color: #ff6600!important;
+	color: #fff!important;	
+}
+.page-item a{ 
+	color: #ff6600!important;
+}
+.container{
+	padding: 0;
+	margin: 0;
+}
+.footerModal{
+	height: 70px;
+	border-top: 1px solid #f2f2f2;
+}
+.imgBoasVindas{
+	height: 500px;
+}
+@media (min-width: 992px) {
+	#caixaCep{
+		max-width: 50%!important;
+	}
+}
+
+/**===========================textos===========================**/
+p{
+	text-align:left;
+	font-family: inherit;
+	font-size:20px;
+	font-weight:bold;
+	margin-top:25px;
+}
+.tituloGrande, .tituloExtraGrande{
+	color: #000;	
+}
+.tituloMedio, .tituloPequeno{
+	color: #ff6600;	
+}
+.tituloExtraGrande, .tituloGrande, .tituloMedio, .tituloPequeno{
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 25px;
+}
+.tituloExtraGrande{
+	font-size: 34px;
+}
+.tituloGrande{
+	font-size: 30px;	
+}
+.tituloMedio{
+	font-size: 24px;
+}
+.tituloPequeno{
+	font-size: 18px;
+}
+@media (max-width: 500px) {
+	.tituloGrande{
+		font-size: 28px;	
+	}
+	.tituloMedio{
+		font-size: 20px;
+	}
+	.tituloPequeno{
+		font-size: 16px;
+	}
+
+}

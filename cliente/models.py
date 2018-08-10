@@ -7,6 +7,8 @@ class TipoCliente(models.Model):
     class Meta:
         app_label = 'cliente'
         db_table = 'TIPO_CLIENTE'
+        verbose_name = 'Tipo de Cliente'
+        verbose_name_plural = 'Tipos de Clientes'
 
     def __str__(self):
         return self.nome
@@ -28,6 +30,8 @@ class Cliente(models.Model):
     class Meta:
         app_label = 'cliente'
         db_table = 'CLIENTE'
+        verbose_name = 'Cliente'
+        verbose_name_plural = 'Clientes'
 
     def __str__(self):
         return self.nome
@@ -49,6 +53,8 @@ class Animal(models.Model):
     class Meta:
         app_label = 'cliente'
         db_table = 'ANIMAL'
+        verbose_name = 'Animal'
+        verbose_name_plural = 'Animais'
 
     def __str__(self):
         return self.nome
@@ -63,6 +69,8 @@ class FichaAnimal(models.Model):
     class Meta:
         app_label = 'cliente'
         db_table = 'FICHA_ANIMAL'
+        verbose_name = 'Ficha do Animal'
+        verbose_name_plural = 'Fichas dos Animais'
 
     def __str__(self):
         return 'Animal: ' + str(self.id_animal) + ' - ' + 'Data: ' + str(self.data_consulta)
@@ -74,6 +82,8 @@ class TipoStatusAnimal(models.Model):
     class Meta:
         app_label = 'cliente'
         db_table = 'TIPO_STATUS_ANIMAL'
+        verbose_name = 'Tipo de Status do Animal'
+        verbose_name_plural = 'Tipos de Status dos Animais'
 
     def __str__(self):
         return self.nome
@@ -90,9 +100,12 @@ class StatusAnimal(models.Model):
         app_label = 'cliente'
         db_table = 'STATUS_ANIMAL'
         unique_together = (('id_status', 'id_animal'),)
+        verbose_name = 'Status do Animal'
+        verbose_name_plural = 'Status dos Animais'
 
     def __str__(self):
         return 'Animal:' + str(self.id_animal) + ' ' + 'Status:' + str(self.id_status)
+
 
 
 class TelefoneCliente(models.Model):
@@ -105,6 +118,8 @@ class TelefoneCliente(models.Model):
         app_label = 'cliente'
         db_table = 'TELEFONE_CLIENTE'
         unique_together = (('cpf_cliente', 'telefone'),)
+        verbose_name = 'Telefone do Cliente'
+        verbose_name_plural = 'Telefones dos Clientes'
 
     def __str__(self):
         return 'Cliente:' + str(self.cpf_cliente) + ' ' + 'Telefone:' + str(self.telefone)
@@ -118,6 +133,8 @@ class Responde(models.Model):
     class Meta:
         db_table = 'RESPONDE'
         unique_together = (('cpf_responsavel', 'id_animal'),)
+        verbose_name = 'Responsável por Animal (Responde)'
+        verbose_name_plural = 'Responsáveis por Animais (Responde)'
 
     def __str__(self):
         return 'Responsavel:' + ' ' + str(self.cpf_responsavel) + ' - ' + 'Animal:' + ' ' + str(self.id_animal)
@@ -129,6 +146,8 @@ class Responsavel(models.Model):
 
     class Meta:
         db_table = 'RESPONSAVEL'
+        verbose_name = 'Responsável'
+        verbose_name_plural = 'Responsáveis'
 
     def __str__(self):
         return self.nome

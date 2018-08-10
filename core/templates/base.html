@@ -23,11 +23,11 @@
 	<!--=========BOOTSTRAP============-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 	<!--=========JQUERY============-->
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.min.css">
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.structure.css">
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.structure.min.css">
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.theme.css">
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1/jquery-ui.theme.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.structure.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.structure.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.theme.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.theme.min.css'%}">
 </head>
 <body>
 	<header>
@@ -41,32 +41,21 @@
 				<h3 class="tituloExtraGrande">#nome#</h3 class="tituloExtraGrande">
 				</div>
 				<div class="menuLateralItens">
-					<button  class="item" type="button" data-toggle="collapse" data-target="#submenuCalendarioDeVacinas" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/1.PNG'%}" alt="calendario"><h5><a href ="#">#Menu#</a></h5></button>
+					<button  class="item" type="button" data-toggle="collapse" data-target="#submenuCalendarioDeVacinas" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/1.png'%}" alt="calendario"><h5><a href ="#">#Menu#</a></h5></button>
 					<div class="submenu collapse" id="submenuCalendarioDeVacinas">
 						<div class="subItem">
-							<img src="img/2.PNG" alt="ficha">
+							<img src="img/2.png" alt="ficha">
 							<h5><a href ="#">Ficha animal</a></h5>
 						</div>
 						<div class="subItem">
-							<img src="img/2.PNG" alt="ficha">
+							<img src="img/2.png" alt="ficha">
 							<h5><a href ="#">Ficha animal</a></h5>
 						</div>
 						<div class="subItem">
-							<img src="img/2.PNG" alt="ficha">
+							<img src="img/2.png" alt="ficha">
 							<h5><a href ="#">Ficha animal</a></h5>
 						</div>
 					</div>
-
-
-
-					<div class="item"><img src="img/2.PNG" alt="ficha">		<h5><a href ="#">Ficha animal</a></h5></div>
-					<div class="item"><img src="img/3.PNG" alt="mala">		<h5><a href ="#">Acompanhe sua clínica</a></h5></div>
-					<div class="item"><img src="img/4.PNG" alt="coracao">	<h5><a href ="#">Diagnóstico de animais</a></h5></div>
-					<div class="item"><img src="img/5.PNG" alt="pata">		<h5><a href ="#">Cadastre um novo animal</a></h5></div>
-					<div class="item"><img src="img/6.PNG" alt="aviso">		<h5><a href ="#">Avisos de vacinas</a></h5></div>
-					<div class="item"><img src="img/7.PNG" alt="agenda">	<h5><a href ="#">Agenda de procedimentos</a></h5></div>
-					<div class="item"><img src="img/8.PNG" alt="hotel">		<h5><a href ="#">Hospede um animal</a></h5></div>
-					<div class="item"><img src="img/9.PNG" alt="tesoura">	<h5><a href ="#">Cadastro de serviços</a></h5></div>
 				</div>
 			</div>
 
@@ -82,7 +71,7 @@
 				<div class="titulo">
 					<div class="itensTitulo">
 						<div class="circulo">
-							<img src="img/5.PNG" alt="Imagem Animal">
+							<img src="{% static 'img/5.png'%}" alt="Imagem Animal">
 							<h2>#Titulo#</h2>
 						</div>
 					</div>

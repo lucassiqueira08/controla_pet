@@ -25,13 +25,14 @@
 		<div class="tituloHeader">
 			<div class="itensTitulo">
 				<div class="circulo">
-					<img src="img/5.png" alt="patinha">
+					<img src="	{% static 'img/5.png'%}" alt="patinha">
 				</div>
 			</div>
 		</div>
 
 		<!--===========INSIRA AQUI SEU CONTEUDO===============-->
 		<form class="centralizado coluna telaTamanhoFixo" method="post">
+		{% csrf_token %}
 			<div class="formulario">
 				<h1 class="tituloGrande">Seja Bem Vindo!</h1>
 				<p class="tituloPequeno">Digite seus dados abaixo</p>

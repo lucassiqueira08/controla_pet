@@ -63,8 +63,7 @@ ROOT_URLCONF = 'controla_pet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['funcionarios/funcionarios_templates',
-                 'usuarios/templates',
+        'DIRS': ['usuarios/templates',
                  'core/templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -95,24 +94,28 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 #    }
 #}
 
-
-# !!!!   BANCO LOCAL   !!!!
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_LOCAL_NAME'),
-        'USER': config('USER_LOCAL'),
-        'PASSWORD': config('DATABASE_LOCAL_URL'),
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'NAME': 'morumbichos',
+        'USER': 'root',
+        'PASSWORD': 'Kl#1j',
+        'HOST': 'localhost',
         'PORT': '3306',
      },
+
     'titles': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'titles',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'titulos',
+        'USER': 'root',
+        'PASSWORD': 'Kl#1j',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']
+
 DATABASE_APPS_MAPPING = {
     'core': 'titles',
     'usuarios': 'default',
@@ -142,7 +145,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -162,12 +164,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    'usuarios/static/',
-    'core/static/',
+    'usuarios/static',
+    'core/static',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # -----------------------------------
 
 AUTH_USER_MODEL = 'usuarios.User'
-INDEX_URL = 'cadastrar_usuario'
+INDEX_URL = 'login'
 LOGIN_REDIRECT_URL = INDEX_URL

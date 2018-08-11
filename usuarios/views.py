@@ -1,14 +1,27 @@
+from django.contrib.auth.mixins import (LoginRequiredMixin,
+                                        PermissionRequiredMixin)
 from django.shortcuts import render
+from django.views import View
 
 
-def view_login(request):
-    return render(request, 'login.html')
+class BaseView(LoginRequiredMixin, PermissionRequiredMixin, View):
 
-def view_esqueci_senha(request):
-    return render(request, 'esqueci_senha.html')
+    redirect_field_name = 'redirect_to'
+    login_url = '/usuario/login'
+    permission_required = 'usuarios.Admin'
 
-def view_index(request):
-    return render(request, 'index.html')
 
-def view_cadastro_animal(request):
-    return render(request, 'cadastro_de_animal.html')
+class ViewEsqueceuSenha(View):
+
+    template = 'esqueceu_senha.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
+
+class ViewCadastrarFuncionario(View):
+
+    template = 'cadastro_funcionario.html'
+
+    def get(self, request):
+        return render(request, self.template)

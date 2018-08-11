@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static from staticfiles %}
+
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+<form method="post" class='formEtapas'>
+{% csrf_token %}
+	<ul id="progress">
+		<li class="ativo"><label>Buscar Animal</label></li>
+		<li><label>Cadastro</label></li>
+		<li><label>Informações Complementares</label></li>
+		<li><label>Observações</label></li>
+		<li><label>Responsáveis</label></li>
+	</ul>
+
+	<fieldset>
+		<h3 class="tituloExtraGrande">Buscar Animal</h3 class="tituloExtraGrande">
+		<p>Digite o CPF do Proprietario ou nome do Animal!</p>
+		<input type="search" class="formEtapasInput cpf" name="cpf" placeholder="Digite o CPF do Proprietario..."/ maxlength="14">
+		<div class="containerBotoes">
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Dados cadastrais</h2 class="tituloGrande">
+		<p>Digite algumas informações do animal!</p>
+
+		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
+		<input type="text" id="Data" class="formEtapasInput" name="data_nasc" placeholder="Data de Nascimento"/>
+		<p>Sexo</p>
+		<div class="formEtapasDupla">
+			<div class="formEtapasRadio">
+				<label><input type="radio" name="sexo" >Masculino</label>
+				<label><input type="radio" name="sexo" >Feminino</label>
+			</div>
+		</div>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Informações Complementares</h2 class="tituloGrande">
+		<p>Estamos quase lá! Se preferir, digite algumas informações complementares</p>
+		<input type="text" class="formEtapasInput" name="microchip" placeholder="Microchip" maxlength="50" />
+		<p>O animal está vivo?</p>
+		<div class="formEtapasDupla">
+			<div class="formEtapasRadio">
+				<label><input type="radio" name="simnao">Sim</label>
+				<label><input type="radio" name="simnao">Não</label>
+			</div>
+		</div>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Observações</h2 class="tituloGrande">
+		<textarea placeholder="Digite aqui sua Observação..." class="formEtapasTextArea" name="message" maxlength="200"></textarea>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Responsáveis</h2 class="tituloGrande">
+		<p>Por favor, nos diga quais os responsáveis pelo animal</p>
+		<input type="search" class="formEtapasInput cpf" name="cpfresponsavel" placeholder="Digite o CPF do Responsável..."/ maxlength="14">
+		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50">
+		<input type="tel"  class="formEtapasInput ddd_celular" name="telefone" placeholder="Telefone" maxlength="14">
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="fim'" class="acao btnPrincipal" value="Finalizar"/>
+		</div>
+
+	</fieldset>
+
+</form>
+<!--===========FIMM===============-->
+
+{% endblock %}

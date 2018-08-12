@@ -1,8 +1,6 @@
-		{% block content %}
-		<header>
-			<img src="{% static 'img/logocontrolapetwhite.png' %}" alt="Controla Pet">
-		</header>
-
+{% extends 'base_imports.html' %}
+{% load static %}
+{% block content %}
 		<main class="main">
 			<div id="menuLateral">
 				<div class="menuLateralPerfil">
@@ -57,7 +55,6 @@
 					</div>
 				</div>
 
-
 				{% block content_base %}
 				<!--===========INSIRA AQUI SEU CONTEUDO===============-->
 
@@ -67,8 +64,4 @@
 
 			</div>
 		</main>
-
-		<footer>
-			<small>Controla Pet © 2018 Todos Diretos reservados. Termos e Uso e Política de Privacidade</small>
-		</footer>
-		{% endblock %}
+{% endblock %}

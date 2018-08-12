@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import login, logout
 
-from usuarios.views import ViewEsqueceuSenha, ViewCadastrarFuncionario
+from usuarios.views import ViewEsqueceuSenha
 
 urlpatterns = [
     path('login/', login, {'template_name': 'login.html'}, name='login'),
@@ -9,10 +9,5 @@ urlpatterns = [
 
     path(
         'esqueceu_senha/', ViewEsqueceuSenha.as_view(), name='esqueceu_senha'
-    ),
-
-    path(
-        'cadastrar_funcionario/', ViewCadastrarFuncionario.as_view(),
-        name='cadastrar_funcionario'
     ),
 ]

@@ -1,3 +1,4 @@
+//=====================Formulário em etapas=======================
 $(function(){
 	var atual_fs, next_fs, prev_fs;
 
@@ -25,7 +26,29 @@ $(function(){
 
 });
 
-  $( function() {
-    $( "#Data" ).datepicker();
-  } );
+//=====================Calendário=======================
 
+$( function() {
+  $( "#Data" ).datepicker();
+} );
+
+$('.btnEditar').click(function(){
+	$("#formularioModal :input").prop('readonly', false);
+});
+
+
+//=====================Modal=======================
+
+$('#FormModal').on('shown.bs.modal', function () {
+  $('#FormModal').trigger('focus')
+})
+
+$(window).on('load',function(){
+    $('#modalBemVindo').modal('show');
+});
+
+
+
+function habilitaCampos(){
+	document.getElementsByClassName("input.formInput").prop('disabled', false);
+}

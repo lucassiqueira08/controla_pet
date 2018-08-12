@@ -37,7 +37,7 @@
 	flex-direction: column;
 }
 .destacadoCimaBaixo{
-	margin: 20px 0 20px 0 !important;
+	margin: 30px 0 30px 0 !important;
 }
 .destacadoEsquerdaDireita{
 	margin: 0 20px 0 20px !important;
@@ -45,11 +45,17 @@
 .clearMarginTop{
 	margin-top:0!important;
 }
-
+.telaTamanhoFixo{
+	height: 452px;
+}
 /**===========================Formularios===================**/
 .formulario{
 	width: 100%;
-	margin-top: 30px;
+	width: 600px;
+	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	position: relative;
 }
 .formLabel{
 	width: 120px;
@@ -69,16 +75,19 @@
 	height: 37px;
 	border: .9px solid #A9A9A9;
 	padding-left: 10px;
-	border-radius: 4px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
 	outline: none;
 	box-sizing: border-box;
 }
 .formFileInput{
-	border: .9px solid #A9A9A9;
-	width: 350px;
-
+	margin:-10px 0 20px 0;
+	width: 370px;
+	height: 37px;
+	color: #ff6600 ;
+	padding-left: 10px;
+	outline: none;
+	box-sizing: border-box;
+	font-size: 15px;
+	font-weight: 600;
 }
 .formInput:focus{
 	border:1px solid rgba(255, 102, 0, 0.9);
@@ -378,19 +387,23 @@
 /**===========================Cards===========================**/
 .cardContorno{
 	height: 100%;
-	padding: 10px 0 10px 0;
+	padding: 30px 0 30px 0;
 	border-top: 1px dashed #333333 !important; 
 }
-.imagemCard{
-	width: 250px;
+.imagemCard, .imagemCardModal{
+	width: auto;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.imagemCard img{
-	width: 240px;
-	border-radius: 3px;
+.imagemCardModal img {
+    width: 350px;
+    border-radius: 3px;
+}
+.imagemCard img {
+    width: 250px;
+    border-radius: 3px;
 }
 @media (max-width: 1100px) {	
 	.conteudoCard{
@@ -427,6 +440,13 @@
 	padding: 0;
 	margin: 0;
 }
+.footerModal{
+	height: 70px;
+	border-top: 1px solid #f2f2f2;
+}
+.imgBoasVindas{
+	height: 500px;
+}
 @media (min-width: 992px) {
 	#caixaCep{
 		max-width: 50%!important;
@@ -441,8 +461,13 @@ p{
 	font-weight:bold;
 	margin-top:25px;
 }
+.tituloGrande, .tituloExtraGrande{
+	color: #000;	
+}
+.tituloMedio, .tituloPequeno{
+	color: #ff6600;	
+}
 .tituloExtraGrande, .tituloGrande, .tituloMedio, .tituloPequeno{
-	color: #ff6600;
 	width: 100%;
 	text-align: center;
 	margin-top: 10px;

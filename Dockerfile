@@ -12,9 +12,6 @@ RUN find . -name '*.pyc' -delete
 RUN find . -name '__pycache__' -delete
 
 
-
-
-
 RUN apt update && apt install -y git $(cat apt-get-dependencies.txt)
 
 RUN apt clean

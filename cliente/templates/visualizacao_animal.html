@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block content_base %}
+
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+<div class="titulo">
+	<div class="container esquerda coluna">
+		<!--===========ANIMAL===============-->
+		<a data-toggle="modal" data-target="#modal_1">
+			<div class="linha esquerda cardContorno">
+				<div class="imagemCard">
+					<img src="img/cachorro_ficha_animal.jpg" alt="Cachorrinho 1">
+				</div>
+				<div class="conteudoCard linha esquerda">
+					<div class="coluna destacadoEsquerdaDireita">
+						<div class="dupla">
+							<label for="#" class="formLabel">Nome:</label>
+							<input id="endereco" class="formInput" type="text" value="Luluzinho" disabled>
+						</div>
+						<div class="dupla">
+							<label for="#" class="formLabel">Raça:</label>
+							<input id="endereco" class="formInput" type="text" value="Cachorro" disabled>
+						</div>
+					</div>
+					<div class="coluna destacadoEsquerdaDireita">
+						<div class="dupla">
+							<label for="#" class="formLabel">Espécie:</label>
+							<input id="endereco" class="formInput" type="text" value="Pitbull" disabled>
+						</div>
+						<div class="dupla">
+							<label for="#" class="formLabel">Dono:</label>
+							<input id="endereco" class="formInput" type="text" value="Janete Samaritana" disabled>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="containerBotoes centralizado linha">
+			</div>
+		</a>
+		<!-- Modal -->
+		<div class="modal fade" id="modal_1" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="modal_1Label">Cadastrar um animal</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+				<div class="centralizado">
+					<div class="imagemCardModal coluna">
+						<img src="img/cachorro_ficha_animal.jpg" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+						<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
+					</div>
+				</div>
+				<div class="dupla">
+					<label for="#" class="formLabel">Nome Serviço</label>
+					<input disabled class="formInput" type="text" placeholder="Nome do Serviço" autofocus name="nome" required>
+				</div>
+				<div class="dupla">
+					<label for="#" class="formLabel">Descrição</label>
+					<input disabled class="formInput" type="text" placeholder="Descrição" name="descricao" required>
+				</div>
+				<div class="dupla">
+					<label for="#" class="formLabel">Espécie</label>
+					<input disabled class="formInput" type="text" placeholder="Espécie" name="descricao" required>
+				</div>
+				<div class="dupla">
+					<label for="#" class="formLabel">Preço</label>
+					<input disabled class="formInput" type="text" placeholder="Preço" name="descricao" required>
+				</div>
+				<div class="dupla">
+					<label for="#" class="formLabel">Tipo Procedimento</label>
+					<input disabled class="formInput" type="text" placeholder="Tipo de Procedimento" name="descricao" required>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
+		        <button type="button" class="btnPrincipal clearMarginTop" onclick="habilitaCampos();">Editar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!--===========ANIMAL===============-->
+		<div class="linha esquerda cardContorno">
+			<div class="imagemCard">
+				<img src="img/gato_ficha_animal.jpg" alt="Cachorrinho 1">
+			</div>
+			<div class="conteudoCard linha esquerda">
+				<div class="coluna destacadoEsquerdaDireita">
+					<div class="dupla">
+						<label for="#" class="formLabel">Nome:</label>
+						<input id="endereco" class="formInput" type="text" value="Xuxinha" disabled>
+					</div>
+					<div class="dupla">
+						<label for="#" class="formLabel">Raça:</label>
+						<input id="endereco" class="formInput" type="text" value="Gato" disabled>
+					</div>
+				</div>
+				<div class="coluna destacadoEsquerdaDireita">
+					<div class="dupla">
+						<label for="#" class="formLabel">Espécie:</label>
+						<input id="endereco" class="formInput" type="text" value="Árabe" disabled>
+					</div>
+					<div class="dupla">
+						<label for="#" class="formLabel">Dono:</label>
+						<input id="endereco" class="formInput" type="text" value="João Moraes" disabled>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--===========ANIMAL===============-->
+		<div class="linha esquerda cardContorno">
+			<div class="imagemCard">
+				<img src="img/papagaio_ficha_animal.jpg" alt="Cachorrinho 1">
+			</div>
+			<div class="conteudoCard linha esquerda">
+				<div class="coluna destacadoEsquerdaDireita">
+					<div class="dupla">
+						<label for="#" class="formLabel">Nome:</label>
+						<input id="endereco" class="formInput" type="text" value="Doritos" disabled>
+					</div>
+					<div class="dupla">
+						<label for="#" class="formLabel">Raça:</label>
+						<input id="endereco" class="formInput" type="text" value="Ave" disabled>
+					</div>
+				</div>
+				<div class="coluna destacadoEsquerdaDireita">
+					<div class="dupla">
+						<label for="#" class="formLabel">Espécie:</label>
+						<input id="endereco" class="formInput" type="text" value="Papagaio" disabled>
+					</div>
+					<div class="dupla">
+						<label for="#" class="formLabel">Dono:</label>
+						<input id="endereco" class="formInput" type="text" value="Francisca Dantas" disabled>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--===========PAGINAÇÃO===============-->
+	</div>
+	<div class="centralizado destacadoCimaBaixo">
+		<nav aria-label="...">
+			<ul class="pagination">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" tabindex="-1">Anterior</a>
+				</li>
+				<li class="page-item" id="paginationActive">
+					<a class="page-link" href="#">1</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="#">2 </a>
+				</li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#">Próxima</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<!--===========FIMM===============-->
+
+
+{% endblock %}

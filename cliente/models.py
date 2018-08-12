@@ -62,7 +62,8 @@ class Animal(models.Model):
 
 class FichaAnimal(models.Model):
     id = models.AutoField(primary_key=True)
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
+    id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
+                                  db_column='id_animal')
     data_consulta = models.DateField(blank=True, null=False)
     descricao = models.CharField(max_length=500, blank=True, null=True)
 
@@ -107,7 +108,6 @@ class StatusAnimal(models.Model):
         return 'Animal:' + str(self.id_animal) + ' ' + 'Status:' + str(self.id_status)
 
 
-
 class TelefoneCliente(models.Model):
 
     cpf_cliente = models.ForeignKey(Cliente, models.DO_NOTHING,
@@ -125,10 +125,15 @@ class TelefoneCliente(models.Model):
         return 'Cliente:' + str(self.cpf_cliente) + ' ' + 'Telefone:' + str(self.telefone)
 
 
-
 class Responde(models.Model):
-    cpf_responsavel = models.ForeignKey('Responsavel', models.DO_NOTHING, db_column='cpf_responsavel', primary_key=True)
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, db_column='id_animal')
+
+    cpf_responsavel = models.ForeignKey(
+        'Responsavel', models.DO_NOTHING,
+        db_column='cpf_responsavel',
+        primary_key=True
+    )
+    id_animal = models.ForeignKey(Animal,
+                                  models.DO_NOTHING, db_column='id_animal')
 
     class Meta:
         db_table = 'RESPONDE'
@@ -151,4 +156,3 @@ class Responsavel(models.Model):
 
     def __str__(self):
         return self.nome
-

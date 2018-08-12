@@ -72,5 +72,4 @@ class FormVeterinario(forms.ModelForm):
             'equipe_sistema',
             'crmv',
             'estado_emissor',
-            'id_funcionario'
         ]

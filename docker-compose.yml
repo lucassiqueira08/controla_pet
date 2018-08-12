@@ -1,0 +1,36 @@
+version: '3.5'
+services:
+  app:
+    container_name: sys_controla_pet
+    image: controlapet:develop
+    build:
+      context: .
+    command: >
+      bash -c "python manage.py makemigrations
+      && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    links:
+      - mysql:aquelea01
+    networks:
+      - controlapet
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=Morumbichos
+      - MYSQL_ROOT_PASSWORD=SysControlaPet2018
+    ports:
+      - 3306:3306
+    networks:
+      - controlapet
+
+networks:
+  controlapet:
+    external:
+      name: controlapet

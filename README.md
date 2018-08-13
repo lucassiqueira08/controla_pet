@@ -1,4 +1,4 @@
-ControlaPet 
+ControlaPet
 --------------------------------------------------------------------------
 
 ControlaPet é um Sistema de Gerenciamento de PetShops e Clinicas Veterinarias  desenvolvido por:
@@ -62,7 +62,7 @@ Utilize uma branch já existente:
 Ou crie uma nova para a sua funcionalidade:
 ```sh
     git checkout -b <nome_da_branch>
-    
+
     <Exemplo>
     git checkout -b DBconnection
 ```
@@ -70,7 +70,7 @@ Ou crie uma nova para a sua funcionalidade:
 Certifique-se de que sua branch está atualizada:
 ```sh
     git pull origin <nome_da_branch_mais_att>
-    
+
     <Exemplo>
     git pull origin develop
 ```
@@ -78,7 +78,7 @@ Certifique-se de que sua branch está atualizada:
 
 
 #### Adicione suas credenciais
-Para trabalhar com o projeto ControlaPet, crie um arquivo chamado .env na raiz do diretorio, e 
+Para trabalhar com o projeto ControlaPet, crie um arquivo chamado .env na raiz do diretorio, e
 adicione as credenciais fornecidas pela **equipe de desenvolvimento**.
 
 
@@ -99,22 +99,22 @@ Para dar privilégios ao docker no Linux:
 
 **Iniciando o projeto**
 
-Atualize o repositorio local 
+Atualize o repositorio local
 ```sh
     git pull origin develop
 ```
 Para iniciar o projeto
 
 ```sh
-    docker-compose up 
+    docker-compose up
 ```
-Ao rodar o projeto, o mysql será iniciado e, logo após, a app será iniciará a migração para o banco de dados e subir o servidor.
+Ao rodar o projeto, o mysql será iniciado e, logo após, a app migrará para o banco de dados e irá subir o servidor.
 
 
 **Não esqueça:**
 * Sem as credenciais (.env), o projeto não será iniciado
 * Sem privilegios de administrador talvez algum erro seja exibido
-* O MYSQL estará rodando na porta 3308, para evitar conflitos com a porta padrão do mysql local, portanto se utilizar softwares como Mysql Workbench utilize:
+* O MYSQL estará rodando na porta 3308, para evitar conflitos com a porta padrão do mysql local, portanto ao optar por softwares como Mysql Workbench utilize:
     * Host: localhost
     * Port: 3308
     * User: root
@@ -122,6 +122,8 @@ Ao rodar o projeto, o mysql será iniciado e, logo após, a app será iniciará 
 
 ---
 #### Rodando o projeto sem docker
+
+*Obs:* O MYSQL deve estar instalado.
 
 Apaga todos os arquivos da pasta migrations, exceto init.py, de cada APP, em seguida execute o comando a seguir para identificar migrações:
 ```sh
@@ -159,7 +161,7 @@ Certifique-se novamente de que está utilizando a versão mais atual do cógido:
 
 ```sh
     git pull origin <nome_da_branch_mais_att>
-    
+
     <Exemplo>
     git pull origin develop
 ```
@@ -177,7 +179,7 @@ Se houver alterações a serem commitadas **NÃO** utilizar **" git add ."**, di
 Para commitar as alterações por favor digite uma **MENSAGEM COERENTE** com o que foi desenvolvido:
 ```sh
     git commit -m "Mensagem Coerente"
-    
+
     <Exemplo>
     git commit -m "Conexao com o Banco de Dados remoto"
 ```
@@ -186,7 +188,7 @@ Para subir suas alterações ao GitHub, digite:
 
 ```sh
     git push origin <nome_da_sua_branch>
-    
+
     <Exemplo>
     git push origin DBconnection
 ```

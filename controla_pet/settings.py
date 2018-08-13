@@ -87,7 +87,7 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
 DATABASES = {
    'default': config(
-        'DATABASE_LOCAL', default='DATABASE_URL',
+        'DATABASE_LOCAL',
         cast=dburl
     ),
    'titles': {
@@ -95,6 +95,17 @@ DATABASES = {
        'NAME': 'titles',
    }
 }
+
+
+#   !!!!    BANCO EM PRODUÇÃO   !!!!
+#DATABASES = {
+#    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+#    'titles': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': 'titles',
+#    }
+#}
+
 
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']
 

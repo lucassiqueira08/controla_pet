@@ -6,7 +6,7 @@ services:
     build:
       context: .
     command: >
-      bash -c "python manage.py makemigrations
+      bash -c "find /app -name '000*.py' -delete && python manage.py makemigrations && python manage.py migrate
       && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
@@ -26,7 +26,7 @@ services:
       - MYSQL_DATABASE=Morumbichos
       - MYSQL_ROOT_PASSWORD=SysControlaPet2018
     ports:
-      - 3306:3306
+      - 3308:3306
     networks:
       - controlapet
 

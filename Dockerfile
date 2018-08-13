@@ -7,6 +7,7 @@ ENV DOTENV_PATH /app/.env
 
 RUN find /app -name '*.pyc' -delete
 RUN find /app -name '__pycache__' -delete
+RUN find /app -name '000*.py' -delete
 RUN rm -fr .idea .git* .python-version package-lock.json .pytest_cache
 RUN find . -name '*.pyc' -delete
 RUN find . -name '__pycache__' -delete

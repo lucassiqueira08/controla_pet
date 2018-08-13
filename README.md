@@ -37,6 +37,10 @@ ControlaPet é um Sistema de Gerenciamento de PetShops e Clinicas Veterinarias  
 
 ![alt text](https://www.bitbull.it/blog/git-flow-come-funziona/gitflow-1.png "GitFlow")
 
+**SEMPRE**:
+* Para novas funcionalidades utilize: feature/nome_da_func
+* Para melhorias no codigo: bugfix/nome_da_correcao
+
 ---
 
 
@@ -79,8 +83,45 @@ adicione as credenciais fornecidas pela **equipe de desenvolvimento**.
 
 
 ---
+#### Rodando o projeto com Docker Compose
 
-#### Rodando o projeto
+Docker é uma tecnologia que fornece containers que isolam processos, com a ajuda do Docker Compose é possível orquestrar containers e subir aplicações complexas com poucos comandos.  
+
+Instalação do Docker no Windows: [https://docs.docker.com/docker-for-windows/install/](https://docs.docker.com/docker-for-windows/install/)
+
+Instalação do Docker Compose no Linux: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+
+Para dar privilégios ao docker no Linux:
+
+```sh
+   sudo chmod 777 /var/run/docker.sock
+```
+
+**Iniciando o projeto**
+
+Atualize o repositorio local 
+```sh
+    git pull origin develop
+```
+Para iniciar o projeto
+
+```sh
+    docker-compose up 
+```
+Ao rodar o projeto, o mysql será iniciado e, logo após, a app será iniciará a migração para o banco de dados e subir o servidor.
+
+
+**Não esqueça:**
+* Sem as credenciais (.env), o projeto não será iniciado
+* Sem privilegios de administrador talvez algum erro seja exibido
+* O MYSQL estará rodando na porta 3308, para evitar conflitos com a porta padrão do mysql local, portanto se utilizar softwares como Mysql Workbench utilize:
+    * Host: localhost
+    * Port: 3308
+    * User: root
+    * Password: (A mesma da credencial)
+
+---
+#### Rodando o projeto sem docker
 
 Apaga todos os arquivos da pasta migrations, exceto init.py, de cada APP, em seguida execute o comando a seguir para identificar migrações:
 ```sh

@@ -1,3 +1,4 @@
+{% extends 'base_imports.html' %}
 {% extends 'base.html' %}
 {% block content_base %}
 
@@ -15,9 +16,9 @@
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3 class="tituloExtraGrande">
 		<p>Digite o CPF do Proprietario ou nome do Animal!</p>
-		<input type="search" class="formEtapasInput cpf" name="cpf" placeholder="Digite o CPF do Proprietario..."/ maxlength="14">
+		<input type="search" class="formEtapasInput cpf" name="cpf" placeholder="Digite o CPF do Proprietario..."/ maxlength="14" id="cpf" onkeydown="mascara_apenas_numeros(event);" onkeyup="mascara_cpf();">
 		<div class="containerBotoes">
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
+			<input type="submit" name="next" class="next acao btnPrincipal " value="Buscar"/>
 		</div>
 	</fieldset>
 
@@ -86,3 +87,22 @@
 <!--===========FIMM===============-->
 
 {% endblock %}
+
+</main>
+
+<footer>
+<small>Controla Pet © 2018 Todos Diretos reservados. Termos e Uso e Política de Privacidade</small>
+</footer>
+<!--=========SWEETALERT============-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!--=========BOOTSTRAP/JQUERY============-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41jstQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<!--=========js============-->
+<script src="js/menu.js"></script>
+<script src="js/hamburguer.js"></script>
+<script src="js/mascara_validacao.js"></script>
+
+</body>

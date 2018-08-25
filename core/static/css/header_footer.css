@@ -67,7 +67,7 @@ header{
 
 	text-decoration: underline;
 	color: black;
-
+	
 
 }
 .item img, .subMenuItem img{
@@ -116,7 +116,7 @@ header{
 	padding: 50px 20px;
 	z-index: 90;
 	border-bottom: 1.5px solid #ff6600;
-}
+}	
 .itensTitulo h2{
 	font-size: 27px;
 	margin: 0!important;
@@ -148,17 +148,17 @@ small{
 	height: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: center;	
 }
 
 
 
-@media (min-width: 1301px){
+@media (min-width: 1301px){	
 	#menuLateral{
 		margin-left:0px!important;
 	}
 }
-@media (max-width: 1300px){
+@media (max-width: 1300px){	
 	#menuLateral{
 		margin-left:-290px;
 		position: absolute;
@@ -187,7 +187,7 @@ small{
 }
 @media (max-width: 1000px){
 	.item h5, .subMenuItem h5{
-		font-size: 12px;
+		font-size: 12px;	
 	}
 	.menuLateralPerfil h3{
 		font-size: 15px;
@@ -195,11 +195,11 @@ small{
 	.itensTitulo h2 {
 		font-size: 24px;
 	}
-}
+}	
 @media (max-width: 500px){
 	footer{
 		font-size: .8em;
-	}
+	}	
 	.circulo{
 		width:40px;
 		height:40px;
@@ -215,5 +215,5 @@ small{
 @media (max-width: 500px){
 	footer{
 		font-size: .6em;
-	}
+	}	
 }

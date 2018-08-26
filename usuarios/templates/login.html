@@ -1,10 +1,9 @@
 {% extends 'base_imports.html' %}
 {% block content %}
-		<form class="centralizado coluna telaTamanhoFixo" method="post">
-		{% csrf_token %}
+<form class="centralizado coluna telaTamanhoFixo" method="post">
 			<div class="formulario">
 				<h1 class="tituloGrande">Seja Bem Vindo!</h1>
-				<p class="tituloPequeno">Digite seus dados abaixo</p>
+				<p class="tituloPequeno">Digite seus dados abaixo.</p>
 
 				<div class="dupla">
 					<label class="formLabel">Usuário:</label>
@@ -15,9 +14,33 @@
 					<input class="formInput" name="senha" type="password" placeholder="Digite sua senha..." maxlength="100" required>
 				</div>
 				<div class="containerBotoes centralizado coluna">
-					<button class="btnPrincipal" href="index.html" type="submit">Entrar</button>
-					<a class="" href="{% url 'esqueceu_senha' %}">Esqueceu a senha?</a>
+					<a href="index.html" class="btnPrincipal">Entrar</a>
+
+
+
+					<a class="" href="esqueceu_senha.html">Esqueceu a senha?</a>
 				</div>
 			</div>
+
 		</form>
+
 {% endblock %}
+
+</main>
+
+<footer>
+<small>Controla Pet © 2018 Todos Diretos reservados. Termos e Uso e Política de Privacidade</small>
+</footer>
+<!--=========SWEETALERT============-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!--=========BOOTSTRAP/JQUERY============-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41jstQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<!--=========js============-->
+<script src="js/menu.js"></script>
+<script src="js/hamburguer.js"></script>
+<script src="js/mascara_validacao.js"></script>
+
+</body>

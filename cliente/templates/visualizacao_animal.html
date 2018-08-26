@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content_base %}
+{% load static %}
 
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
 <div class="titulo">
@@ -8,7 +9,7 @@
 		<a data-toggle="modal" data-target="#modal_1">
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
-					<img src="img/cachorro_ficha_animal.jpg" alt="Cachorrinho 1">
+					<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
 				</div>
 				<div class="conteudoCard linha esquerda">
 					<div class="coluna destacadoEsquerdaDireita">
@@ -38,18 +39,18 @@
 		</a>
 		<!-- Modal -->
 		<div class="modal fade" id="modal_1" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="modal_1Label">Cadastrar um animal</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modal_1Label">Cadastrar um animal</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
 				<div class="centralizado">
 					<div class="imagemCardModal coluna">
-						<img src="img/cachorro_ficha_animal.jpg" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+						<img src="{% static 'img/cachorro_ficha_animal.jpg'%}" class="destacadoCimaBaixo" alt="Cachorrinho 1">
 						<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
 					</div>
 				</div>
@@ -73,18 +74,18 @@
 					<label for="#" class="formLabel">Tipo Procedimento</label>
 					<input disabled class="formInput" type="text" placeholder="Tipo de Procedimento" name="descricao" required>
 				</div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
-		        <button type="button" class="btnPrincipal clearMarginTop" onclick="habilitaCampos();">Editar</button>
-		      </div>
-		    </div>
-		  </div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
+						<button type="button" class="btnPrincipal clearMarginTop" onclick="habilitaCampos();">Editar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!--===========ANIMAL===============-->
 		<div class="linha esquerda cardContorno">
 			<div class="imagemCard">
-				<img src="img/gato_ficha_animal.jpg" alt="Cachorrinho 1">
+				<img src="{% static 'img//gato_ficha_animal.jpg'%} alt="Cachorrinho 1">
 			</div>
 			<div class="conteudoCard linha esquerda">
 				<div class="coluna destacadoEsquerdaDireita">
@@ -112,7 +113,7 @@
 		<!--===========ANIMAL===============-->
 		<div class="linha esquerda cardContorno">
 			<div class="imagemCard">
-				<img src="img/papagaio_ficha_animal.jpg" alt="Cachorrinho 1">
+				<img src="{% static 'img/papagaio_ficha_animal.jpg'}" alt="Cachorrinho 1">
 			</div>
 			<div class="conteudoCard linha esquerda">
 				<div class="coluna destacadoEsquerdaDireita">
@@ -160,6 +161,7 @@
 			</ul>
 		</nav>
 	</div>
+
 	<!--===========FIMM===============-->
 
 

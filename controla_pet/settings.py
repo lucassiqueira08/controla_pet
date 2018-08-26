@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'controla_pet.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
-
+# !!!! BANCO DOCKER !!!!
 DATABASES = {
    'default': config(
         'DATABASE_LOCAL',
@@ -96,6 +96,21 @@ DATABASES = {
    }
 }
 
+# !!!!   BANCO LOCAL MYSQL   !!!!
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('DATABASE_LOCAL_NAME'),
+#         'USER': config('USER_LOCAL'),
+#         'PASSWORD': config('DATABASE_LOCAL_URL'),
+#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
+#      },
+#     'titles': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'titles',
+#     }
+# }
 
 #   !!!!    BANCO EM PRODUÇÃO   !!!!
 #DATABASES = {

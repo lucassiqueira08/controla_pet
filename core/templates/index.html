@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content_base %}
 
 <div class="modal fade" id="cadastrar" tabindex="-1"
@@ -55,7 +56,7 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		</button>
 	</div>
 	<div class="modal-body centralizado">
-		<img src="{% static 'img/personagemExclamacao.png' %} class="imgBoasVindas" alt="">
+		<img src="{% static 'img/personagemExclamacao.png' %} "class="imgBoasVindas" alt="">
 	</div>
 	<div class="footerModal centralizado">
 		<a href="index2.html" type="button" class="btnPrincipal clearMarginTop" >	Entendi!</a>

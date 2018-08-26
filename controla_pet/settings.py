@@ -63,8 +63,11 @@ ROOT_URLCONF = 'controla_pet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['usuarios/templates',
-                 'core/templates', ],
+        'DIRS': [
+            'usuarios/templates',
+            'cliente/templates', 
+            'core/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

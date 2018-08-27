@@ -1,8 +1,12 @@
 from django.urls import path
 
-from .views import ViewCadastrarAnimal, ViewVisualizacaoAnimal
+from .views import ViewCadastrarAnimal, ViewVisualizacaoAnimal, ViewCadastrarCliente
 
 urlpatterns = [
+    path(
+        'cadastrar_cliente', ViewCadastrarCliente.as_view(),
+        name='cadastrar_cliente'
+    ),
     path(
         'cadastrar_animal', ViewCadastrarAnimal.as_view(),
         name='cadastrar_animal'

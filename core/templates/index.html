@@ -1,151 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'base_calendar.html' %}
 {% block content_base %}
-				<div class="centralizado">
-					<div class="destacadoCimaBaixo formulario">
-						<div id='calendar'></div>
-					</div>
-				</div>
+{% load static %}
 
+<div id='calendar'></div>
 
-				<div class="modal fade" id="visualizar" tabindex="-1"
-				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title text-center" >Dados do cliente</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="visualizar">
-
-
-								<dl Class = "dl-horizontal">
-									<dt>Nome:</dt>
-									<dd id="Nome"></dd>
-									<dt>Data:</dt>
-									<dd id="DataInicio"></dd>
-								</dl>
-							</div>
-
-							<div class="modal-footer">
-								<button type="button" class="btn btn-canc-vis btn-warning" >Editar</button>
-								<button type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>
-							</div>
-							<div class="formModal">
-								<div class="form-group">
-									<label for="exampleInputName">Nome Dono</label>
-									<input type="text" class="form-control" id="exampleInputName" placeholder="Nome">
-								</div>
-								<div class="form-group">
-									<label for="exampleInputName">Nome Do animal</label>
-									<input type="text" class="form-control" id="NomeAnimal" >
-								</div>
-
-								<div class="form-group">
-									<label for="exampleInputName">Data e hora :</label>
-									<input type="text" class="form-control"  name="start" id="datahora">
-								</div>
-
-								<button type="button" class="btn btn-canc-edit btn-primary" >Cancelar</button>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-
-			<div class="modal fade" id="cadastrar" tabindex="-1"
-			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title text-center" >Cadastrar</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<!-- Usa o form para criar alimentar o evento para gravar dados na google agenda -->
-						<form>
-							<div class="form-group">
-								<label for="exampleInputName">Nome Dono</label>
-								<input type="text" class="form-control" id="exampleInputName" placeholder="Nome">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputName">Nome Do animal</label>
-								<input type="text" class="form-control" id="exampleInputAnimal" placeholder="Name do Animal">
-							</div>
-
-							<div class="form-group">
-								<label for="exampleInputName">Data e hora :</label>
-								<input type="text" class="form-control"  name="start" id="start">
-							</div>
-
-
-						</form>
-					</div>
-
-					<div class="modal-footer">
-
-
-						<button type="button" class="btnPrincipal" >Salvar</button>
-						<button type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-
-		<div class="modal fade" id="cadastrar" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title text-center" >Cadastrar</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="exampleInputName">Nome Dono</label>
-							<input type="text" class="form-control" id="exampleInputName" placeholder="Nome">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputName">Nome Do animal</label>
-							<input type="text" class="form-control" id="exampleInputAnimal" placeholder="Name do Animal">
-						</div>
-
-						<div class="form-group">
-							<label for="exampleInputName">Data e hora :</label>
-							<input type="text" class="form-control"  name="start" id="start">
-						</div>
-
-						<button type="button" class="btn btn-warning" >Salvar</button>
-
-					</form>
-				</div>
-
-				<div class="modal-footer">
-
-					<button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-</div>
-<!-- Modal -->
 <div class="modal fade" id="modalBemVindo" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true" onload="carregaForm();">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -156,12 +14,12 @@
 				</button>
 			</div>
 			<div class="modal-body centralizado">
-				<img src="img/personagemexclamacao.png" class="imgBoasVindas" alt="">
+				<img src="img/personagemExclamacao.png" class="imgBoasVindas" alt="Bem vindo!!!">
 			</div>
 			<div class="footerModal centralizado">
 				<button type="button" class="btnPrincipal clearMarginTop" data-dismiss="modal">ok!</button>
 			</div>
 		</div>
 	</div>
-
+</div>
 {% endblock %}

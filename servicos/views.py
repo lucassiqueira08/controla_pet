@@ -1,3 +1,15 @@
+from django.contrib.auth.mixins import (LoginRequiredMixin,
+                                        PermissionRequiredMixin)
 from django.shortcuts import render
+from django.views import View
+
+
+class ViewCadastroProcedimento(View):
+
+    template = 'cadastro_procedimento.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
 
 # Create your views here.

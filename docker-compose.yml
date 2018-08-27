@@ -6,7 +6,7 @@ services:
     build:
       context: .
     command: >
-      bash -c "find /app -name '000*.py' -delete && python manage.py makemigrations && python manage.py migrate
+      bash -c "find /app -name '000*.py' -delete && python manage.py makemigrations
       && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app

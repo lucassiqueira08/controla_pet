@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content_base %}
-
-<!--===========INSIRA AQUI SEU CONTEUDO===============-->
 <div class="titulo">
 	<div class="container esquerda coluna">
 		<!--===========ANIMAL===============-->
 		<a data-toggle="modal" data-target="#modal_1">
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
-					<img src="img/cachorro_ficha_animal.jpg" alt="Cachorrinho 1">
+					<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
 				</div>
 				<div class="conteudoCard linha esquerda">
 					<div class="coluna destacadoEsquerdaDireita">
@@ -49,7 +48,7 @@
 		      <div class="modal-body">
 				<div class="centralizado">
 					<div class="imagemCardModal coluna">
-						<img src="img/cachorro_ficha_animal.jpg" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+						<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" class="destacadoCimaBaixo" alt="Cachorrinho 1">
 						<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
 					</div>
 				</div>
@@ -84,7 +83,7 @@
 		<!--===========ANIMAL===============-->
 		<div class="linha esquerda cardContorno">
 			<div class="imagemCard">
-				<img src="img/gato_ficha_animal.jpg" alt="Cachorrinho 1">
+				<img src="{% static 'img/gato_ficha_animal.jpg' %}" alt="Cachorrinho 1">
 			</div>
 			<div class="conteudoCard linha esquerda">
 				<div class="coluna destacadoEsquerdaDireita">
@@ -112,7 +111,7 @@
 		<!--===========ANIMAL===============-->
 		<div class="linha esquerda cardContorno">
 			<div class="imagemCard">
-				<img src="img/papagaio_ficha_animal.jpg" alt="Cachorrinho 1">
+				<img src="{% static 'img/papagaio_ficha_animal.jpg' %}" alt="Cachorrinho 1">
 			</div>
 			<div class="conteudoCard linha esquerda">
 				<div class="coluna destacadoEsquerdaDireita">
@@ -160,7 +159,4 @@
 			</ul>
 		</nav>
 	</div>
-	<!--===========FIMM===============-->
-
-
 {% endblock %}

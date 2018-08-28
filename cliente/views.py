@@ -2,10 +2,17 @@ from django.shortcuts import render
 
 from core.views import BaseView
 
+class ViewCadastrarCliente(BaseView):
+
+    template = 'cadastro_cliente.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
 
 class ViewCadastrarAnimal(BaseView):
 
-    template = 'cadastro_de_animal.html'
+    template = 'cadastro_animal.html'
 
     def get(self, request):
         return render(request, self.template)
@@ -13,7 +20,7 @@ class ViewCadastrarAnimal(BaseView):
 
 class ViewVisualizacaoAnimal(BaseView):
 
-    template = 'visualizacao_animal.html'
+    template = 'visualizar_animal.html'
 
     def get(self, request):
         return render(request, self.template)

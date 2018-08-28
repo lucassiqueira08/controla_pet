@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content_base %}
+{% load static %}
+
+<div class="modal fade" id="modalBemVindo" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true" onload="carregaForm();" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal_1Label">Bem vindo, @Usuario!</h5>
+				<a type="button" class="close" href="index" >
+					<span aria-hidden="true">&times;</span>
+				</a>
+			</div>
+			<div class="modal-body centralizado">
+				<img src="{% static 'img/personagemexclamacao.png' %}" class="imgBoasVindas" alt="Bem vindo!!">
+			</div>
+			<div class="footerModal centralizado">
+				<a href="index" type="button" class="btnPrincipal clearMarginTop" >ok!</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

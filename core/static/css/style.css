@@ -4,10 +4,6 @@
 	justify-content: flex-start;
 	align-items: center;
 }
-#calendar {
-    max-width: 700px;
-    margin: 0 auto;
-}
 .direita{
 	display: flex;
 	justify-content: flex-end;
@@ -51,7 +47,7 @@
 /**===========================Formularios===================**/
 .formulario{
 	width: 100%;
-	width: 600px;
+	width: auto;
 	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
 	padding: 20px 30px;
 	box-sizing: border-box;
@@ -111,19 +107,24 @@
 	align-items:flex-start;
 }
 .btnPrincipal{
-	width: 250px;
-	height: 37px;
-	background-color: #ff6600;
-	color: #fff;
-	font-weight: 600;
-	border:1px solid #fff;
-	border-radius: 3px;
-	margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 37px;
+    background-color: #ff6600;
+    color: #fff;
+    font-weight: 600;
+    border:1px solid #fff;
+    border-radius: 3px;
+    margin: 25px 10px 0 10px;
 }
 .btnPrincipal:hover{
-	background: #c14e01; 
-	cursor: pointer;
-} 
+    text-decoration: none;
+    background: #c14e01; 
+    color: #fff;
+    cursor: pointer;
+}
 .btnSecundario{
 	width: 250px;
 	height: 37px;
@@ -139,6 +140,10 @@
 	cursor: pointer;
 } 
 .containerBotoes{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
 	margin: 10px;
 }
@@ -187,6 +192,7 @@
 	width: 100%;
 	text-align: center;
 	position: relative;
+	margin: 40px 0 40px 0;
 }
 .formEtapas fieldset{
 	width: 600px;
@@ -212,9 +218,26 @@
 	box-sizing: border-box;
 } 
 .formEtapasTextArea{
-	width: 	90%;
-	height: 250px;
+	width: 80%;
+	height: 200px;
 }
+/*.formEtapasFileInput{
+	margin:-10px 0 20px 0;
+	width: 370px;
+	height: 37px;
+	color: #000!important ;
+	padding-left: 10px;
+	outline: none;
+	box-sizing: border-box;
+	font-size: 15px;
+	font-weight: 600;
+}
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+	cursor: pointer;
+}*/
+
 .formEtapasInput:focus{
 	border:1px solid rgba(255, 102, 0, 0.9);
 }
@@ -427,11 +450,25 @@
 	}
 }
 
-/**===========================específicos===========================**/
+/**===========================Modal-index===========================**/
+.footerModal{
+	height: 70px;
+	border-top: 1px solid #f2f2f2;
+}
+.modal-body{
+	height: auto;
+}
+.imgBoasVindas{
+	height: 370px;
+}
+/**===========================Específicos===========================**/
 #paginationActive a{
 	background-color: #ff6600!important;
 	border-color: #ff6600!important;
 	color: #fff!important;	
+}
+.close{
+	-webkit-appearance: none!important; 
 }
 .page-item a{ 
 	color: #ff6600!important;
@@ -440,12 +477,9 @@
 	padding: 0;
 	margin: 0;
 }
-.footerModal{
-	height: 70px;
-	border-top: 1px solid #f2f2f2;
-}
-.imgBoasVindas{
-	height: 500px;
+#calendar {
+  max-width: 900px;
+  margin: 40px auto;
 }
 @media (min-width: 992px) {
 	#caixaCep{

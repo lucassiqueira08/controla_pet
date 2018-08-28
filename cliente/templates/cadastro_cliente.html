@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+					<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+<form method="post" class='formEtapas'>
+{% csrf_token %}
+<fieldset>
+<h2 class="tituloGrande">Dados Gerais</h2 class="tituloGrande">
+<p>Digite algumas informações do animal!</p>
+
+	<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
+	<input type="text" class="formEtapasInput cpf" name="cpf" placeholder="CPF" maxlength="50" />
+	<input type="email" class="formEtapasInput email" name="email" placeholder="Email" maxlength="50" />
+	<input type="text" class="formEtapasInput cep" id="cep" name="cep" placeholder="CEP" maxlength="50" onfocusout="preenche_endereco(this)" />
+	<input type="text" class="formEtapasInput" id="endereco" name="endereco" placeholder="endereco" maxlength="50" />
+	<input type="text" class="formEtapasInput" id="cidade" name="cidade" placeholder="cidade" maxlength="50" />
+	<input type="text" class="formEtapasInput" id="estado" name="estado" placeholder="estado" maxlength="50" />
+	<input type="text" class="formEtapasInput" id="bairro" name="bairro" placeholder="bairro" maxlength="50" />
+	<input type="text" class="formEtapasInput" id="numero" name="numero" placeholder="numero" maxlength="50" onkeydown="mascara_apenas_numeros(event);" />
+	<input type="text" id="Data" class="formEtapasInput data" name="datanasc" placeholder="Data de Nascimento"/>
+
+	<p>Tipo de cliente</p>
+	<select id="tipoCliente" class="formInput destacadoCimaBaixo clearMarginTop" required>
+		<option value="masculino">Masculino</option>
+		<option value="feminino">Feminino</option>
+	</select>
+	<p>Tipo de cliente</p>
+	<select id="tipoCliente" class="formInput destacadoCimaBaixo clearMarginTop" required>
+		<option value="Mensal">Mensal</option>
+		<option value="Eventual">Eventual</option>
+		<option value="Plano">Plano</option>
+	</select>
+	<div class="containerBotoes linha centralizado">
+		<input type="submit" name="fim" class="acao btnPrincipal clearMarginTop" value="Cadastrar"/>
+	</div>
+</fieldset>
+</form>
+{% endblock %}

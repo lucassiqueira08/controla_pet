@@ -1,45 +1,71 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content_base %}
+
 <form method="post" class='formEtapas'>
-	{% csrf_token %}
+{% csrf_token %}
 	<ul id="progress">
-		<li class="ativo"><label>Procedimento Clínico</label></li>
-		<li><label>Procedimento Estético</label></li>
+		<li class="ativo"><label>Buscar Animal</label></li>
+		<li><label>Confirmação</label></li>
+		<li><label>Tipo do Serviço</label></li>
 	</ul>
+
 	<fieldset>
-		<h2 class="tituloExtraGrande">Procedimento Clínico</h2>
-		<p>Digite algumas informações do procedimento!</p>
-		<input type="text" class="formEtapasInput" name="nomeprocedimento" placeholder="Nome do procedimento" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="especie" placeholder="Espécie" maxlength="50" />
-		<input type="email" class="formEtapasInput dinheiro" name="preco" placeholder="Preço" maxlength="50" />
-		<div class="centralizado coluna">
-			<p>Tipo de Procedimento:</p>
-			<select id="tipoCliente" class="formInput destacadoCimaBaixo clearMarginTop" required>
-				<option value="Cirurgia">Cirurgia</option>
-				<option value="Eventual">Eventual</option>
-				<option value="Plano">Plano</option>
-			</select>
-		</div>
-		<div class="centralizado">
-			<input type="file" name="autorizacao" id="formEtapasFileInput" class="formEtapasFileInput esquerda destacadoCimaBaixao"  accept="image/png, image/jpeg" hidden="hidden"  multiple />		
-			<button type="button" id="fileInputBtn">Escolha um arquivo</button>
-			<span id="fileInputSpan">Nenhum arquivo selecionado...</span>
-		</div>			
-		<textarea type="texarea" class="formEtapasInput formEtapasTextArea" id="descricao" name="descricao" placeholder="Digite aqui uma descrição..." maxlength="700" ></textarea>
-		<div class="containerBotoes linha centralizado">
-			<input type="submit" name="next" class="next acao btnPrincipal destacadoEsquerdaDireita" value="Proximo"/>
+		<h3 class="tituloExtraGrande">Buscar Animal</h3 class="tituloExtraGrande">
+		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="100">
+		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+		<div class="containerBotoes">
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
 		</div>
 	</fieldset>
+
 	<fieldset>
-		<h2 class="tituloExtraGrande">Procedimento Estético</h2 class="tituloGrande">
-			<p>Digite algumas informações do procedimento!</p>
-			<input type="text" class="formEtapasInput" name="nomeprocedimento" placeholder="Nome do procedimento" maxlength="50" />
-			<input type="email" class="formEtapasInput dinheiro" name="preco" placeholder="Preço" maxlength="50" />
-			<div class="containerBotoes linha centralizado">
-				<input type="submit" name="prev" class="prev acao btnPrincipal destacadoEsquerdaDireita" value="Anterior"/>
-				<input type="submit" name="fim'" class="acao btnPrincipal clearMarginTop" value="Finalizar"/>
+		<h3 class="tituloExtraGrande">Confirmação</h3 class="tituloExtraGrande">
+		<h3 class="tituloMedio">Dados do animal</h3>
+		<input type="search" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="100">
+		<input type="search" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="100">
+		<p>Sexo</p>
+		<div class="formEtapasDupla">
+			<div class="formEtapasRadio">
+				<label><input type="radio" name="sexo" >Masculino</label>
+				<label><input type="radio" name="sexo" >Feminino</label>
 			</div>
-		</fieldset>
+		</div>
+		<h3 class="tituloMedio">Dados do proprietário</h3>
+		<input type="search" class="formEtapasInput" name="nomeproprietario" placeholder="Nome" maxlength="300">
+		<input type="search" class="formEtapasInput cpf" name="cpf" placeholder="CPF" maxlength="14">
+		<input type="text" class="formEtapasInput cep" id="cep" name="cep" placeholder="CEP" maxlength="50" onfocusout="preenche_endereco(this)" />
+		<input type="text" class="formEtapasInput" id="endereco" name="endereco" placeholder="Endereco" maxlength="50" />
+		<input type="text" class="formEtapasInput" id="cidade" name="cidade" placeholder="Cidade" maxlength="50" />
+		<input type="text" class="formEtapasInput" id="estado" name="estado" placeholder="Estado" maxlength="50" />
+		<input type="text" class="formEtapasInput" id="bairro" name="bairro" placeholder="Bairro" maxlength="50" />
+		<input type="text" class="formEtapasInput" id="numero" name="numero" placeholder="Número" maxlength="50" onkeydown="mascara_apenas_numeros(event);" />
+		<input type="search" class="formEtapasInput celular" name="telefone" placeholder="Celular">
+		<h3 class="tituloMedio">Os dados estão corretos?</h3>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>	
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Tipo do serviço</h2 class="tituloGrande">
+		<p>Tipo</p>
+		<div class="formEtapasDupla">
+			<div class="formEtapasRadio">
+				<label><input type="radio" name="sexo" >Procedimento clínico</label>
+				<label><input type="radio" name="sexo" >Procedimento estético</label>
+			</div>
+		</div>
+		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
+		<input type="text" id="Data" class="formEtapasInput data" name="data_nasc" placeholder="Data de Nascimento"/>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+		</div>
+	</fieldset>
 </form>
 {% endblock %}

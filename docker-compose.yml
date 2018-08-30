@@ -9,7 +9,6 @@ services:
       bash -c "find /app -name '000*.py' -delete
       && python manage.py makemigrations
       && python manage.py migrate
-      && python manage.py shell -c "from usuarios.models import User; User.objects.create_superuser(login='controla.pet', primeiro_nome='controla', ultimo_nome='pet', password='SysControlaPet@2018')"
       && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app

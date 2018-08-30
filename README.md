@@ -36,6 +36,7 @@ ControlaPet é um Sistema de Gerenciamento de PetShops e Clinicas Veterinarias  
 
 
 ![alt text](https://www.bitbull.it/blog/git-flow-come-funziona/gitflow-1.png "GitFlow")
+__fonte__: https://www.bitbull.it/blog/git-flow-come-funziona/gitflow-1.png
 
 **SEMPRE**:
 * Para novas funcionalidades utilize: feature/nome_da_func
@@ -103,13 +104,29 @@ Atualize o repositorio local
 ```sh
     git pull origin develop
 ```
-Para iniciar o projeto
+Para iniciar o projeto:
 
 ```sh
     docker-compose up
 ```
 Ao rodar o projeto, o mysql será iniciado e, logo após, a app migrará para o banco de dados e irá subir o servidor.
 
+
+
+**Informações adicionais:**
+
+Para acessar containers utilize:
+```sh
+    docker exec -it <container-name> bash
+    
+    <Exemplo>
+    docker exec -it sys_controla_pet bash
+
+```
+Para derrubar containers:
+```sh
+    docker-compose down
+```
 
 **Não esqueça:**
 * Sem as credenciais (.env), o projeto não será iniciado

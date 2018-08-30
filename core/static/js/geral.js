@@ -18,7 +18,7 @@ $(function(){
 		$('#progress li').eq($('fieldset').index(atual_fs)).removeClass('ativo');
 		atual_fs.hide();
 		prev_fs.show();
-	});	
+	});
 
 	$('.formEtapas input[type=submit]').click(function(){
 		return false;
@@ -26,12 +26,13 @@ $(function(){
 
 });
 
-//=====================Calendário=======================
+//=====================Campo data=======================
 
 $( function() {
   $( "#Data" ).datepicker();
 } );
 
+$("#formularioModal :input").prop('readonly', true);
 $('.btnEditar').click(function(){
 	$("#formularioModal :input").prop('readonly', false);
 });
@@ -49,6 +50,30 @@ $(window).on('load',function(){
 
 
 
-function habilitaCampos(){
-	document.getElementsByClassName("input.formInput").prop('disabled', false);
+function DisableCampos(){
+		$("input").attr('disabled','disabled');
 }
+function EditFields(){
+	if ($("input").attr('disabled','disabled')) {
+		$("input").removeAttr('disabled');
+	}
+	else {
+		$("input").attr('disabled','disabled');
+	}
+}
+//=====================File Input=======================
+const FileInput     = $("#formEtapasFileInput")
+const FileInputBtn  = $("#fileInputBtn")
+var   fileInputSpan   = document.getElementById("fileInputSpan")
+
+FileInputBtn.addEventListener("click", function(){
+	FileInput.click();
+});
+FileInputBtn.addEventListener("change", function(){
+	if (FileInput.value) {
+		fileInputSpan.innerHTML =  FileInput.value;//.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/);
+	}
+	else {
+		fileInputSpan.innerHTML = "Nenhum arquivo selecionado...";
+	}
+});

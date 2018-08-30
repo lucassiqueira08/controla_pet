@@ -1,68 +1,28 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base_calendar.html' %}
 {% block content_base %}
+{% load static %}
 
-<div class="modal fade" id="cadastrar" tabindex="-1"
-role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-<div class="modal-dialog" role="document">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title text-center" >Cadastrar</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="modal-body">
-			<form>
-				<div class="form-group">
-					<label for="exampleInputName">Nome Dono</label>
-					<input type="text" class="form-control" id="exampleInputName" placeholder="Nome">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputName">Nome Do animal</label>
-					<input type="text" class="form-control" id="exampleInputAnimal" placeholder="Name do Animal">
-				</div>
-
-				<div class="form-group">
-					<label for="exampleInputName">Data e hora :</label>
-					<input type="text" class="form-control"  name="start" id="start">
-				</div>
-
-				<button type="button" class="btn btn-warning" >Salvar</button>
-
-			</form>
-		</div>
-
-		<div class="modal-footer">
-
-			<button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
-		</div>
-	</div>
-</div>
-</div>
-
-
-</div>
-<!-- Modal -->
+<div id='calendar'></div>
 
 <div class="modal fade" id="modalBemVindo" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true" onload="carregaForm();">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-	<div class="modal-header">
-		<h5 class="modal-title" id="modal_1Label">Bem vinda, Priscila!</h5>
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body centralizado">
-		<img src="{% static 'img/personagemExclamacao.png' %} "class="imgBoasVindas" alt="">
-	</div>
-	<div class="footerModal centralizado">
-		<a href="index2.html" type="button" class="btnPrincipal clearMarginTop" >	Entendi!</a>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+                {% for con in MenuGrupo %}
+				<h5 class="modal-title" id="modal_1Label">Bem vindo, @usuario!</h5>
+                <p>{{ con.ordem }}</p>
+                {% endfor %}
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body centralizado">
+				<img src="img/personagemExclamacao.png" class="imgBoasVindas" alt="Bem vindo!!!">
+			</div>
+			<div class="footerModal centralizado">
+				<button type="button" class="btnPrincipal clearMarginTop" data-dismiss="modal">ok!</button>
+			</div>
+		</div>
 	</div>
 </div>
-</div>
-</div>
-
 {% endblock %}

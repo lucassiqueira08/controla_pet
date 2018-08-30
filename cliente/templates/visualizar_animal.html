@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
-{% block content_base %}
 {% load static %}
-
-<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+{% block content_base %}
 <div class="titulo">
 	<div class="container esquerda coluna">
 		<!--===========ANIMAL===============-->
@@ -50,7 +48,7 @@
 					<div class="modal-body">
 				<div class="centralizado">
 					<div class="imagemCardModal coluna">
-						<img src="{% static 'img/cachorro_ficha_animal.jpg'%}" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+						<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" class="destacadoCimaBaixo" alt="Cachorrinho 1">
 						<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
 					</div>
 				</div>
@@ -85,7 +83,7 @@
 		<!--===========ANIMAL===============-->
 		<div class="linha esquerda cardContorno">
 			<div class="imagemCard">
-				<img src="{% static 'img//gato_ficha_animal.jpg'%} alt="Cachorrinho 1">
+				<img src="{% static 'img/gato_ficha_animal.jpg' %}" alt="Cachorrinho 1">
 			</div>
 			<div class="conteudoCard linha esquerda">
 				<div class="coluna destacadoEsquerdaDireita">
@@ -113,7 +111,7 @@
 		<!--===========ANIMAL===============-->
 		<div class="linha esquerda cardContorno">
 			<div class="imagemCard">
-				<img src="{% static 'img/papagaio_ficha_animal.jpg'}" alt="Cachorrinho 1">
+				<img src="{% static 'img/papagaio_ficha_animal.jpg' %}" alt="Cachorrinho 1">
 			</div>
 			<div class="conteudoCard linha esquerda">
 				<div class="coluna destacadoEsquerdaDireita">
@@ -161,8 +159,4 @@
 			</ul>
 		</nav>
 	</div>
-
-	<!--===========FIMM===============-->
-
-
 {% endblock %}

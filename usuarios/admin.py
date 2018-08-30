@@ -49,10 +49,10 @@ class FuncionarioAdmin(UserAdmin):
     list_filter = []
 
 
-admin.site.register(UserAuth)
-# admin.site.register(User, UsuarioAdmin)
-admin.site.register(Funcionario)
-# admin.site.register(Funcionario, FuncionarioAdmin)
+# admin.site.register(UserAuth)
+admin.site.register(User, UsuarioAdmin)
+# admin.site.register(Funcionario)
+admin.site.register(Funcionario, FuncionarioAdmin)
 admin.site.register(Veterinario)
 admin.site.register(Cargo)
 admin.site.register(CargoFuncionario)

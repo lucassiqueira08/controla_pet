@@ -24,3 +24,9 @@ class ViewVisualizacaoAnimal(BaseView):
 
     def get(self, request):
         return render(request, self.template)
+class ViewFichaAnimal(BaseView):
+
+    template = 'ficha_animal.html'
+
+    def get(self, request):
+        return render(request, self.template)

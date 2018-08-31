@@ -32,6 +32,18 @@
 	display: flex;
 	flex-direction: column;
 }
+.destacadoCima{
+	margin-top: 30px!important;
+}
+.destacadoBaixo{
+	margin-bottom: 30px!important;
+}
+.destacadoEsquerda{
+	margin-left: 30px!important;
+}
+.destacadoDireita{
+	margin-right: 30px!important;
+}
 .destacadoCimaBaixo{
 	margin: 30px 0 30px 0 !important;
 }
@@ -95,6 +107,20 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-end;	
+}
+select..formCheckbox option:hover {
+    box-shadow: 0 0 10px 100px #1882A8 inset;
+}
+.formCombo{
+	border:.5px solid #A9A9A9;
+	width: 250px;
+	height: 37px;
+	padding-left: 10px;	
+	background-color: #fff;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;	
+	margin-right: 0px!important;
 }
 .formRadio{	
 	border:.5px solid #A9A9A9;
@@ -203,7 +229,7 @@
 	margin: 40px 0 40px 0;
 }
 .formEtapas fieldset{
-	width: 600px;
+	width: 700px;
 	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
 	padding: 20px 30px;
 	box-sizing: border-box;
@@ -251,7 +277,7 @@
 }
 .formEtapasRadio{	
 	border:.5px solid #A9A9A9;
-	width: 250px;
+	width: autp;
 	height: 37px;
 	padding-left: 10px;	
 	display: flex;
@@ -494,14 +520,30 @@
 		max-width: 50%!important;
 	}
 }
-
-/**===========================textos===========================**/
+/**===========================Tabela===========================**/
+table{
+	border:.5px solid black;
+}
+table, td,th{
+	padding: 5px;
+	text-align: left;
+}
+.tituloTabela{
+	font-size: 18px;
+}
+/**===========================Textos===========================**/
 p{
 	text-align:left;
 	font-family: inherit;
 	font-size:20px;
-	font-weight:bold;
 	margin-top:25px;
+}
+.dadosCabecalho{
+	height: 250px;
+}
+.pDadosCabecalho{
+	text-align: left!important;
+	font-size: 16px!important;
 }
 .tituloGrande, .tituloExtraGrande{
 	color: #000;	

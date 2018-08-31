@@ -11,5 +11,12 @@ class ViewCadastroProcedimento(View):
     def get(self, request):
         return render(request, self.template)
 
+class ViewCadastroEstadia(View):
+
+    template = 'cadastro_estadia.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
 
 # Create your views here.

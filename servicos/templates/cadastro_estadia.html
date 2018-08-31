@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+
+<form class="formEtapas" action="submit">
+	<div class="formulario">			
+		<div class="dupla">
+			<label for="#" class="formLabel">Data de inicio</label>
+			<input class="formInput" type="date" name="datainicio">
+		</div>
+		<div class="dupla">
+			<label for="#" class="formLabel">Data de fim</label>
+			<input class="formInput" type="date" name="datafim" >
+		</div>
+		<p>Obs</p>
+		<div class="formEtapasDupla">
+			<div class="formEtapasRadio">
+				<label><input type="radio" name="sexo" >Masculino</label>
+				<label><input type="radio" name="sexo" >Feminino</label>
+			</div>
+		</div>
+		<div class="dupla">
+			<label for="#" class="formLabel">obs</label>
+			<div class="formCheckbox">				
+				<input type="checkbox" name="chckbrinquedo" value="Bike">
+				<label>Brinquedos</label>	
+				<input type="checkbox" name="checkroupas" value="Bike">
+				<label>Roupas</label>	
+				<input type="checkbox" name="checkremedio" value="Bike">
+				<label>Remédios</label> 	
+			</div>
+		</div>
+	</div>
+
+	<div class="dupla">
+		<label for="#" class="formLabel">ID:</label>
+		<input id="ID" class="formInput" type="text" value="4610163" disabled>
+	</div>
+
+	<div class="containerBotoes centralizado linha">
+		<button class="btnPrincipal" type="submit"  onclick="aviso_acesso_sistema()">Salvar</button>
+		<button class="btnSecundario" type="reset">Limpar</button>
+	</div>
+
+</div>	
+
+</form>
+{% endblock %}

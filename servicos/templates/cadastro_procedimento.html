@@ -1,45 +1,124 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content_base %}
+
 <form method="post" class='formEtapas'>
 	{% csrf_token %}
 	<ul id="progress">
-		<li class="ativo"><label>Procedimento Clínico</label></li>
-		<li><label>Procedimento Estético</label></li>
+		<li class="ativo"><label>Buscar Animal</label></li>
+		<li><label>Confirmação</label></li>
+		<li><label>Tipo do Serviço</label></li>
 	</ul>
-	<fieldset>
-		<h2 class="tituloExtraGrande">Procedimento Clínico</h2>
-		<p>Digite algumas informações do procedimento!</p>
-		<input type="text" class="formEtapasInput" name="nomeprocedimento" placeholder="Nome do procedimento" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="especie" placeholder="Espécie" maxlength="50" />
-		<input type="email" class="formEtapasInput dinheiro" name="preco" placeholder="Preço" maxlength="50" />
-		<div class="centralizado coluna">
-			<p>Tipo de Procedimento:</p>
-			<select id="tipoCliente" class="formInput destacadoCimaBaixo clearMarginTop" required>
-				<option value="Cirurgia">Cirurgia</option>
-				<option value="Eventual">Eventual</option>
-				<option value="Plano">Plano</option>
-			</select>
-		</div>
-		<div class="centralizado">
-			<input type="file" name="autorizacao" id="formEtapasFileInput" class="formEtapasFileInput esquerda destacadoCimaBaixao"  accept="image/png, image/jpeg" hidden="hidden"  multiple />		
-			<button type="button" id="fileInputBtn">Escolha um arquivo</button>
-			<span id="fileInputSpan">Nenhum arquivo selecionado...</span>
-		</div>			
-		<textarea type="texarea" class="formEtapasInput formEtapasTextArea" id="descricao" name="descricao" placeholder="Digite aqui uma descrição..." maxlength="700" ></textarea>
-		<div class="containerBotoes linha centralizado">
-			<input type="submit" name="next" class="next acao btnPrincipal destacadoEsquerdaDireita" value="Proximo"/>
+
+	<fieldset>	
+		<h3 class="tituloExtraGrande">Buscar Animal</h3 class="tituloExtraGrande">
+		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="100">
+		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+		<div class="containerBotoes">
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
 		</div>
 	</fieldset>
+
 	<fieldset>
-		<h2 class="tituloExtraGrande">Procedimento Estético</h2 class="tituloGrande">
-			<p>Digite algumas informações do procedimento!</p>
-			<input type="text" class="formEtapasInput" name="nomeprocedimento" placeholder="Nome do procedimento" maxlength="50" />
-			<input type="email" class="formEtapasInput dinheiro" name="preco" placeholder="Preço" maxlength="50" />
-			<div class="containerBotoes linha centralizado">
-				<input type="submit" name="prev" class="prev acao btnPrincipal destacadoEsquerdaDireita" value="Anterior"/>
-				<input type="submit" name="fim'" class="acao btnPrincipal clearMarginTop" value="Finalizar"/>
+		<h2 class="tituloGrande">Confirmar animal</h2>
+		<div class="centralizado">
+			<table>
+				<tr>
+					<th colspan="2" class="tituloTabela">Animal</th>
+					<th colspan="2" class="tituloTabela">Proprietário</th>
+				</tr>
+				<tr>
+					<th>Nome:</th>
+					<td>Xuxuzinho</td>
+					<th>Nome:</th>
+					<td>Lucas Araujo de Oliveira</td>
+				</tr>
+				<tr>
+					<th>Cor:</th>
+					<td>Marrom</td>
+					<th>Cpf:</th>
+					<td>447.459.088-06</td>
+				</tr>
+				<tr>
+					<th>Sexo:</th>
+					<td>Masculino</td>
+					<th>Endereço:</th>
+					<td>Av. Manoel Pedro Pimentel, 465 - Pq. Continental</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+					<th>Telefone:</th>
+					<td>(11)9775-0209</td>
+				</tr>
+			</table>
+		</div>
+		<h2 class="tituloMedio destacadoCima">Esse é o bixinho certo?</h2>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Tipo do serviço</h2>
+		<div class="centralizado">
+			<table>
+				<tr>
+					<th colspan="2" class="tituloTabela">Animal</th>
+					<th colspan="2" class="tituloTabela">Proprietário</th>
+				</tr>
+				<tr>
+					<th>Nome:</th>
+					<td>Xuxuzinho</td>
+					<th>Nome:</th>
+					<td>Lucas Araujo de Oliveira</td>
+				</tr>
+				<tr>
+					<th>Cor:</th>
+					<td>Marrom</td>
+					<th>Cpf:</th>
+					<td>447.459.088-06</td>
+				</tr>
+				<tr>
+					<th>Sexo:</th>
+					<td>Masculino</td>
+					<th>Endereço:</th>
+					<td>Av. Manoel Pedro Pimentel, 465 - Pq. Continental</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+					<th>Telefone:</th>
+					<td>(11)9775-0209</td>
+				</tr>
+			</table>
+		</div>
+
+		<p class="destacadoCima">Tipo</p>	 
+		<div class="centralizado">
+			<div class="formEtapasRadio">
+				<label class="destacadoEsquerdaDireita"><input type="radio" name="sexo" >Procedimento clínico</label>
+				<label class="destacadoEsquerdaDireita"><input type="radio" name="sexo" >Procedimento estético</label>
 			</div>
-		</fieldset>
+		</div>
+		<p class="destacadoCima">Procedimento</p>	
+		<div class="centralizado">
+			<select class="formCombo">
+				<option value="">Escolha o Procedimento...</option>
+				<option value="banho">Banho</option>
+				<option value="tosahigienica">Tosa Higiênica</option>
+				<option value="tosaraca">Tosa Raça</option>
+				<option value="tosanatesoura">Tosa na Tesoura</option>
+				<option value="higieneoral">Higiêne Oral</option>
+			</select>
+		</div>
+
+		<h3 class="tituloMedio direita destacadoCima">Preço atual: R$00,00</h3>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+		</div>
+	</fieldset>
 </form>
 {% endblock %}

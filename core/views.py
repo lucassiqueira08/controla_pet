@@ -15,7 +15,7 @@ class BaseView(LoginRequiredMixin, View):
 class ViewIndexBemVindo(BaseView):
 
     template = 'index_bemvindo.html'
-
+    
     def get(self, request):
         return render(request, self.template)
 

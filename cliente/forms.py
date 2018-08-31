@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Cliente, Animal, FichaAnimal, Responde, Responsavel
+from .models import Cliente, Animal, FichaAnimal, Responde, Responsavel, TipoStatusAnimal, StatusAnimal
 
 
 class FormCliente(forms.ModelForm):
@@ -65,4 +65,22 @@ class FormResponsavel(forms.ModelForm):
         fields = [
             'cpf',
             'nome',
+        ]
+
+
+class FormTipoStatusAnimal(forms.ModelForm):
+
+    class Meta(forms.ModelForm):
+        Model = TipoStatusAnimal
+        fields = [
+            'nome'
+        ]
+
+class FormStatusAnimal(forms.ModelForm):
+
+    class Meta(forms.ModelForm):
+        Model = StatusAnimal
+        fields = [
+            'id_status',
+            'id_animal'
         ]

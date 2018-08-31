@@ -63,8 +63,11 @@ ROOT_URLCONF = 'controla_pet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['usuarios/templates',
-                 'core/templates', ],
+        'DIRS': [
+            'usuarios/templates',
+            'cliente/templates',
+            'core/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -159,10 +162,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'usuarios/static',
     'core/static',
+    'cliente/static'
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # -----------------------------------
 
 AUTH_USER_MODEL = 'usuarios.User'
-INDEX_URL = 'login'
+INDEX_URL = 'index'
 LOGIN_REDIRECT_URL = INDEX_URL

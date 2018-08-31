@@ -18,7 +18,7 @@ $(function(){
 		$('#progress li').eq($('fieldset').index(atual_fs)).removeClass('ativo');
 		atual_fs.hide();
 		prev_fs.show();
-	});	
+	});
 
 	$('.formEtapas input[type=submit]').click(function(){
 		return false;
@@ -66,10 +66,10 @@ const FileInput     = $("#formEtapasFileInput")
 const FileInputBtn  = $("#fileInputBtn")
 var   fileInputSpan   = document.getElementById("fileInputSpan")
 
-fileInputBtn.addEventListener("click", function(){
+FileInputBtn.addEventListener("click", function(){
 	FileInput.click();
 });
-fileInputBtn.addEventListener("change", function(){
+FileInputBtn.addEventListener("change", function(){
 	if (FileInput.value) {
 		fileInputSpan.innerHTML =  FileInput.value;//.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/);
 	}

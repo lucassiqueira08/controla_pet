@@ -122,11 +122,11 @@ select..formCheckbox option:hover {
 	align-items: center;	
 	margin-right: 0px!important;
 }
-.formRadio{	
+.formRadio{
 	border:.5px solid #A9A9A9;
 	width: 250px;
 	height: 37px;
-	padding-left: 10px;	
+	padding-left: 10px;
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-end;
@@ -155,14 +155,14 @@ select..formCheckbox option:hover {
 }
 .btnPrincipal:hover{
     text-decoration: none;
-    background: #c14e01; 
+    background: #c14e01;
     color: #fff;
     cursor: pointer;
 }
 .btnSecundario{
 	width: 250px;
 	height: 37px;
-	background-color: #868686; 
+	background-color: #868686;
 	color: #fff;
 	font-weight: 600;
 	border:1px solid #fff;
@@ -172,7 +172,7 @@ select..formCheckbox option:hover {
 .btnSecundario:hover{
 	background: #333;
 	cursor: pointer;
-} 
+}
 .containerBotoes{
 	display: flex;
 	flex-direction: row;
@@ -182,7 +182,7 @@ select..formCheckbox option:hover {
 	margin: 10px;
 }
 .containerBotoes a{
-	margin:5px; 
+	margin:5px;
 }
 @media (max-width: 500px) {
 	.formLabel{
@@ -250,7 +250,7 @@ select..formCheckbox option:hover {
 	-webkit-border-radius:4px;
 	outline: none;
 	box-sizing: border-box;
-} 
+}
 .formEtapasTextArea{
 	width: 80%;
 	height: 200px;
@@ -275,11 +275,11 @@ select..formCheckbox option:hover {
 .formEtapasInput:focus{
 	border:1px solid rgba(255, 102, 0, 0.9);
 }
-.formEtapasRadio{	
+.formEtapasRadio{
 	border:.5px solid #A9A9A9;
 	width: autp;
 	height: 37px;
-	padding-left: 10px;	
+	padding-left: 10px;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -304,7 +304,7 @@ select..formCheckbox option:hover {
 	margin-top: 25px;
 }
 .formEtapas input.acao:hover{
-	background: #c14e01; 
+	background: #c14e01;
 	cursor: pointer;
 }
 #progress{
@@ -357,7 +357,7 @@ select..formCheckbox option:hover {
 #progress li.ativo:before, #progress li.ativo:after{
 	background: #ff6600;
 	color: white;
-	text-shadow: 0 1px 0;	
+	text-shadow: 0 1px 0;
 }
 #progress li.ativo{
 	color: #ff6600;
@@ -383,12 +383,12 @@ select..formCheckbox option:hover {
 		height: 200px;
 	}
 	.formEtapas fieldset{
-		width: 400px	
+		width: 400px
 	}
 	.formEtapas fieldset .containerBotoes{
 		width: 	100%;
 		margin:0px;
-		flex-direction: row;	
+		flex-direction: row;
 	}
 
 	.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
@@ -396,7 +396,7 @@ select..formCheckbox option:hover {
 		margin-top: 15px;
 	}
 	#progress li label{
-		display: none;	
+		display: none;
 	}
 	#progress li{
 		height: 50px;
@@ -413,7 +413,7 @@ select..formCheckbox option:hover {
 		width: 	110px;
 	}
 	.formEtapas fieldset{
-		width: 290px	
+		width: 290px
 	}
 	.formEtapas fieldset h3{
 		font-size: 25px;
@@ -445,7 +445,7 @@ select..formCheckbox option:hover {
 .cardContorno{
 	height: 100%;
 	padding: 30px 0 30px 0;
-	border-top: 1px dashed #333333 !important; 
+	border-top: 1px dashed #333333 !important;
 }
 .imagemCard, .imagemCardModal{
 	width: auto;
@@ -462,20 +462,20 @@ select..formCheckbox option:hover {
     width: 250px;
     border-radius: 3px;
 }
-@media (max-width: 1100px) {	
+@media (max-width: 1100px) {
 	.conteudoCard{
 		flex-direction: column!important;
 	}
 	.imagemCard{
 		width: 270px;
 		height: 200px;
-	}	
+	}
 	.imagemCard img{
 		width: 100%;
 		height: 100%;
-	}	
+	}
 }
-@media (max-width: 800px) {	
+@media (max-width: 800px) {
 	.cardContorno{
 		flex-direction: column;
 	}
@@ -499,12 +499,12 @@ select..formCheckbox option:hover {
 #paginationActive a{
 	background-color: #ff6600!important;
 	border-color: #ff6600!important;
-	color: #fff!important;	
+	color: #fff!important;
 }
 .close{
-	-webkit-appearance: none!important; 
+	-webkit-appearance: none!important;
 }
-.page-item a{ 
+.page-item a{
 	color: #ff6600!important;
 }
 .container{
@@ -547,10 +547,12 @@ p{
 }
 .tituloGrande, .tituloExtraGrande{
 	color: #000;	
-}/*
+}
+/*
 .tituloMedio, .tituloPequeno{
 	color: #ff6600;	
-}*/
+}
+*/
 .tituloExtraGrande, .tituloGrande, .tituloMedio, .tituloPequeno{
 	width: 100%;
 	text-align: center;
@@ -561,7 +563,7 @@ p{
 	font-size: 34px;
 }
 .tituloGrande{
-	font-size: 30px;	
+	font-size: 30px;
 }
 .tituloMedio{
 	font-size: 24px;
@@ -571,7 +573,7 @@ p{
 }
 @media (max-width: 500px) {
 	.tituloGrande{
-		font-size: 28px;	
+		font-size: 28px;
 	}
 	.tituloMedio{
 		font-size: 20px;

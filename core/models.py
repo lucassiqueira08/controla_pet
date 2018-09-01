@@ -3,8 +3,8 @@ from django.db import models
 
 class Menu(models.Model):
 
-    descricao = models.TextField('Descrição')
-    url = models.URLField(max_length=300)
+    descricao = models.CharField('Descrição', max_length=50)
+    url = models.CharField('Url', max_length=50)
     ordem = models.IntegerField('Ordem')
     id_menu_grupo = models.ForeignKey('MenuGrupo',
                                       on_delete=models.CASCADE)
@@ -21,7 +21,7 @@ class Menu(models.Model):
 
 class MenuGrupo(models.Model):
 
-    descricao = models.TextField('Descrição')
+    descricao = models.CharField('Descrição', max_length=50)
     ordem = models.IntegerField('Ordem')
 
     class Meta:

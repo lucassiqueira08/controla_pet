@@ -3,20 +3,29 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
 from django.shortcuts import render
 from django.views import View
 
+from core.models import Menu
 
-class ViewCadastroProcedimento(View):
 
-    template = 'cadastro_procedimento.html'
+class ViewCadastroServico(View):
+
+    template = 'cadastro_servico.html'
 
     def get(self, request):
-        return render(request, self.template)
+        context = {
+            'menu': Menu.objects.get(url= 'cadastro_servico')
+        }
+        return render(request, self.template, context)
 
 class ViewCadastroEstadia(View):
 
     template = 'cadastro_estadia.html'
 
     def get(self, request):
-        return render(request, self.template)
+
+        context = {
+            'menu': Menu.objects.get(url= 'cadastro_estadia')
+        }
+        return render(request, self.template, context)
 
 
 # Create your views here.

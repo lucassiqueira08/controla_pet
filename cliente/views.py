@@ -9,7 +9,10 @@ class ViewCadastrarCliente(BaseView):
     template = 'cadastro_cliente.html'
 
     def get(self, request):
-        return render(request, self.template)
+        context = {
+            'menu': Menu.objects.get(url= 'cadastro_estadia')
+        }
+        return render(request, self.template, context)
 
     def post(self, request):
         form = FormCliente(request.POST)
@@ -23,7 +26,10 @@ class ViewCadastrarAnimal(BaseView):
     template = 'cadastro_animal.html'
 
     def get(self, request):
-        return render(request, self.template)
+        context = {
+            'menu': Menu.objects.get(url= 'cadastro_estadia')
+        }
+        return render(request, self.template, context)
 
     def post(self, request):
         form = FormAnimal(request.POST)
@@ -37,4 +43,7 @@ class ViewVisualizacaoAnimal(BaseView):
     template = 'visualizar_animal.html'
 
     def get(self, request):
-        return render(request, self.template)
+        context = {
+            'menu': Menu.objects.get(url= 'visualizar_animal')
+        }
+        return render(request, self.template, context)

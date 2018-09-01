@@ -32,15 +32,3 @@ class ViewIndex(BaseView):
         }
         return render(request, self.template, context)
 
-
-class ViewBase(BaseView):
-
-    template = 'base_calendar.html'
-
-    def get(self, request):
-
-        context = {
-            'menu': Menu.objects.all().order_by('ordem'),
-            'MenuGrupo': MenuGrupo.objects.all().order_by('ordem')
-        }
-        return render(request, self.template, context)

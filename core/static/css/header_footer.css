@@ -54,14 +54,21 @@ header{
 	padding: 10px;
 	border: 0px;
 }
-
+.subMenuItem h5 a{
+	color:#fff;
+	font-weight: 800;
+}
 .item a, .subMenuItem a{
 	text-decoration: none;
 	color: black;
 }
-.item a:hover, .subMenuItem a:hover{
+.item h5 a:hover{
 	text-decoration: underline;
-	color: black;
+	color: #000;
+}
+.subMenuItem a:hover{
+	text-decoration: underline;
+	color: #fff;
 }
 .item img, .subMenuItem img{
 	grid-column-start: 1;

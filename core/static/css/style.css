@@ -101,16 +101,22 @@
 }
 .formCheckbox{
 	border:.5px solid #A9A9A9;
-	width: 250px;
+	width: auto;
 	height: 37px;
 	padding-left: 10px;	
 	display: flex;
 	justify-content: space-around;
-	align-items: flex-end;	
+	align-items: center;	
 }
-select..formCheckbox option:hover {
+.formCheckbox option:hover {
     box-shadow: 0 0 10px 100px #1882A8 inset;
 }
+
+.formCheckbox input{
+	width: 18px;
+	height: 18px;
+}
+
 .formCombo{
 	border:.5px solid #A9A9A9;
 	width: 250px;
@@ -275,14 +281,27 @@ select..formCheckbox option:hover {
 .formEtapasInput:focus{
 	border:1px solid rgba(255, 102, 0, 0.9);
 }
+.formEtapasRadio input{
+	width: 18px;
+	height: 18px;
+}
 .formEtapasRadio{
 	border:.5px solid #A9A9A9;
-	width: autp;
+	width: auto;
 	height: 37px;
 	padding-left: 10px;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+}
+.formCheckbox label, .formEtapasRadio label{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	margin-left:10px;
+	margin-right:10px; 
+	margin-bottom:0px!important; 
 }
 .formEtapasRadio label input{
 	margin-right: 5px;
@@ -367,12 +386,6 @@ select..formCheckbox option:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-.formEtapasRadio label{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: row;
 }
 @media (max-width: 700px) {
 	.formEtapasInput{

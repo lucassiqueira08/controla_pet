@@ -30,6 +30,7 @@ $(function(){
 
 $( function() {
   $( "#Data" ).datepicker();
+  $( "#Data2" ).datepicker();
 } );
 
 $("#formularioModal :input").prop('readonly', true);

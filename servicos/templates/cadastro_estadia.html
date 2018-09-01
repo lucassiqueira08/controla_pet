@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content_base %}
-<!--===========INSIRA AQUI SEU CONTEUDO===============-->
-
 <form class="formEtapas" action="submit">
-	<div class="formulario">			
+	<div class="formulario">	
+		<h2 class="tituloExtraGrande">{{menu.descricao}}</h2>
+		<p>Digite as informações da estadia!</p>	
 		<div class="dupla">
-			<label for="#" class="formLabel">Data de inicio</label>
-			<input class="formInput" type="date" name="datainicio">
-		</div>
+			<label for="#" class="formLabel">Id:</label>
+			<input id="ID" class="formInput" type="text" value="4610163" disabled>
+		</div>	
 		<div class="dupla">
-			<label for="#" class="formLabel">Data de fim</label>
-			<input class="formInput" type="date" name="datafim" >
+			<label for="Data" class="formLabel">Data de inicio</label>
+			<input id="Data" placeholder="__/__/____" maxlength="10"  class="formInput data" name="datainicio">
+		</div> 
+		<div class="dupla">
+			<label for="Data1" class="formLabel">Data de fim</label>
+			<input id="Data1" placeholder="__/__/____" maxlength="10" class="formInput data" name="datafim" >
 		</div>
 		<p>Obs</p>
 		<div class="formEtapasDupla">
@@ -20,30 +24,21 @@
 				<label><input type="radio" name="sexo" >Feminino</label>
 			</div>
 		</div>
-		<div class="dupla">
-			<label for="#" class="formLabel">obs</label>
+		<div class="dupla destacadoCimaBaixo">
+			<label for="#" class="formLabel">Obs</label>
 			<div class="formCheckbox">				
-				<input type="checkbox" name="chckbrinquedo" value="Bike">
-				<label>Brinquedos</label>	
-				<input type="checkbox" name="checkroupas" value="Bike">
-				<label>Roupas</label>	
-				<input type="checkbox" name="checkremedio" value="Bike">
-				<label>Remédios</label> 	
+				<input id="brinquedo" type="checkbox" name="chckbrinquedo" value="Bike">
+				<label for="brinquedo">Brinquedos</label>	
+				<input id="roupas" type="checkbox" name="checkroupas" value="Bike">
+				<label for="roupas">Roupas</label>	
+				<input id="remedios" type="checkbox" name="checkremedio" value="Bike">
+				<label for="remedios">Remédios</label> 	
 			</div>
 		</div>
+		<div class="containerBotoes centralizado linha">
+			<button class="btnPrincipal" type="submit"  onclick="aviso_acesso_sistema()">Salvar</button>
+			<button class="btnSecundario" type="reset">Limpar</button>
+		</div>
 	</div>
-
-	<div class="dupla">
-		<label for="#" class="formLabel">ID:</label>
-		<input id="ID" class="formInput" type="text" value="4610163" disabled>
-	</div>
-
-	<div class="containerBotoes centralizado linha">
-		<button class="btnPrincipal" type="submit"  onclick="aviso_acesso_sistema()">Salvar</button>
-		<button class="btnSecundario" type="reset">Limpar</button>
-	</div>
-
-</div>	
-
 </form>
 {% endblock %}

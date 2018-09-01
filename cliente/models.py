@@ -48,7 +48,8 @@ class Animal(models.Model):
     microchip = models.CharField(unique=True, max_length=50,
                                  blank=True, null=True)
     cpf_cliente = models.ForeignKey('Cliente', models.DO_NOTHING,
-                                    db_column='cpf_cliente')
+                                    db_column='cpf_cliente',
+                                    blank=True, null=True)
 
     class Meta:
         app_label = 'cliente'

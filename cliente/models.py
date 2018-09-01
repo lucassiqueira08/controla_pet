@@ -92,7 +92,7 @@ class TipoStatusAnimal(models.Model):
 
 class StatusAnimal(models.Model):
 
-    id_status = models.ForeignKey('TipoStatusAnimal', models.DO_NOTHING,
+    id_status = models.ForeignKey(TipoStatusAnimal, models.DO_NOTHING,
                                   db_column='id_status', primary_key=True)
     id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
                                   db_column='id_animal')

@@ -15,7 +15,7 @@
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3 class="tituloExtraGrande">
 		<p>Digite o CPF do Proprietario!</p>
-		<input type="search" class="formEtapasInput cpf" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..."/ maxlength="14" id="cpf" onkeydown="mascara_apenas_numeros(event);" onkeyup="mascara_cpf();">
+		<input type="text" class="formEtapasInput cpf" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..."/ maxlength="14" id="cpf" onkeydown="mascara_apenas_numeros(event);" onkeyup="mascara_cpf();">
 		<div class="containerBotoes">
 			<input type="submit" name="next" class="next acao btnPrincipal " value="Buscar"/>
 		</div>
@@ -25,11 +25,11 @@
 		<h2 class="tituloGrande">Dados cadastrais</h2 class="tituloGrande">
 		<p>Digite algumas informações do animal!</p>
 
-		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
 		<input type="text" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
 		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
 		<input type="text" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
 		<input type="text" id="Data" class="formEtapasInput" name="datanasc" placeholder="Data de Nascimento"/>
+        <input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
 		<p>Sexo</p>
 		<div class="formEtapasDupla">
 			<div class="formEtapasRadio">
@@ -50,8 +50,8 @@
 		<p>O animal está vivo?</p>
 		<div class="formEtapasDupla">
 			<div class="formEtapasRadio">
-				<label><input type="radio" name="name" value="Vivo">Sim</label>
-				<label><input type="radio" name="name" value="Morto">Não</label>
+				<label><input type="radio" name="status_animal" value="vivo">Sim</label>
+				<label><input type="radio" name="status_animal" value="morto">Não</label>
 			</div>
 		</div>
 		<div class="containerBotoes">
@@ -72,8 +72,8 @@
 	<fieldset>
 		<h2 class="tituloGrande">Responsáveis</h2 class="tituloGrande">
 		<p>Por favor, nos diga quais os responsáveis pelo animal</p>
-		<input type="search" class="formEtapasInput cpf" name="cpf" placeholder="Digite o CPF do Responsável..."/ maxlength="14">
-		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50">
+		<input type="search" class="formEtapasInput cpf" name="cpf_responsavel" placeholder="Digite o CPF do Responsável..."/ maxlength="14">
+		<input type="text" class="formEtapasInput" name="nome_responsavel" placeholder="Nome" maxlength="50">
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
             <button name="button" class="acao btnPrincipal">Enviar</button>

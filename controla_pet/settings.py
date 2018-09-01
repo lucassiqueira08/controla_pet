@@ -100,6 +100,22 @@ DATABASES = {
 }
 
 
+# #!!!!   BANCO LOCAL MYSQL   !!!!
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('DATABASE_LOCAL_NAME'),
+#         'USER': config('USER_LOCAL'),
+#         'PASSWORD': config('DATABASE_LOCAL_URL'),
+#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
+#      },
+#     'titles': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'titles',
+#     }
+# }
+
 #   !!!!    BANCO EM PRODUÇÃO   !!!!
 #DATABASES = {
 #    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),

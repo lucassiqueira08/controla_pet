@@ -1,6 +1,7 @@
 {% extends 'base_imports_calendar.html' %}
 {% load static %}
 {% block content %}
+
     <header>
          <img src="{% static 'img/logocontrolapetwhite.png' %}" class="logoHeader">
                  {% if user.is_authenticated %}
@@ -9,7 +10,6 @@
                  </div>
                  {% endif %}
     </header>
-
     <main class="main">
         <div class="menuLateralItens">
             <div class="menuLateralPerfil coluna">

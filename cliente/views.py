@@ -7,6 +7,7 @@ from core.views import BaseView
 from .forms import FormCliente
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal)
+from core.models import Menu
 
 
 class ViewCadastrarCliente(BaseView):

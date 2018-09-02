@@ -2,14 +2,18 @@
 {% load static %}
 {% block content %}
 	<header>
-		 <img src="{% static 'img/logocontrolapetwhite.png' %}" class="logoHeader" alt="Controla Pet">
+		 <img src="{% static 'img/logocontrolapetwhite.png' %}" class="logoHeader">
+         {% if user.is_authenticated %}
+         <a href="{% url 'logout' %}">Sair</a>
+         {% endif %}
 	</header>
-	<main class="main">			
+
+	<main class="main">
 		<div class="menuLateralItens">
 			<div class="menuLateralPerfil coluna">
 				<img class="perfilImg" src="{% static 'img/perfil.png' %}" alt="teste">
 				<h3 class="tituloExtraGrande">{{usuario_nome}}</h3 class="tituloExtraGrande">
-			</div>	
+			</div>
 			<button  class="item" type="button" data-toggle="collapse" data-target="#submenuAdministreSuaClinica" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/.png' %}" alt="calendario"><h5><a href ="#">Administre sua clínica</a></h5></button>
 			<div class="submenu collapse" id="submenuAdministreSuaClinica">
 				<div class="subMenuItem">
@@ -40,7 +44,7 @@
 				</div>
 			</div>
 			<button  class="item" type="button" data-toggle="collapse" data-target="#submenuConsulta" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/1.png' %}" alt="calendario"><h5><a href ="#">Consulta</a></h5></button>
-			
+
 			<div class="submenu collapse" id="submenuConsulta">
 				<div class="subMenuItem">
 					<img src="{% static 'img/2.png' %}" alt="ficha">
@@ -67,7 +71,7 @@
 			{% block content_base %}
 
 				<!--===========CONTEÚDO DA PÁGINA===============-->
-				
+
 			{% endblock %}
 
 		</div>

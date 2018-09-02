@@ -88,3 +88,10 @@ class ViewVisualizacaoAnimal(BaseView):
             'menu': Menu.objects.get(url= 'visualizar_animal')
         }
         return render(request, self.template, context)
+
+class ViewFichaAnimal(BaseView):
+
+    template = 'ficha_animal.html'
+
+    def get(self, request):
+        return render(request, self.template)

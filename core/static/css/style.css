@@ -1,5 +1,7 @@
 /**===========================Posicionamento===========================**/
+
 .esquerda{
+
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -54,9 +56,11 @@
 	margin-top:0!important;
 }
 .telaTamanhoFixo{
-	height: 452px;
+	height: 850px;
 }
+
 /**===========================Formularios===================**/
+
 .formulario{
 	width: 80%;
 	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
@@ -223,7 +227,9 @@
 		width: 210px;
 	}
 }
+
 /**===========================Formularios em Etapas===================**/
+
 .formEtapas{
 	display: flex;
 	justify-content: center;
@@ -454,7 +460,9 @@
 		width: 210px;
 	}
 }
+
 /**===========================Cards===========================**/
+
 .cardContorno{
 	height: 100%;
 	padding: 30px 0 30px 0;
@@ -497,7 +505,9 @@
 	}
 }
 
+
 /**===========================Modal-index===========================**/
+
 .footerModal{
 	height: 70px;
 	border-top: 1px solid #f2f2f2;
@@ -508,7 +518,9 @@
 .imgBoasVindas{
 	height: 370px;
 }
+
 /**===========================Específicos===========================**/
+
 #paginationActive a{
 	background-color: #ff6600!important;
 	border-color: #ff6600!important;
@@ -533,7 +545,10 @@
 		max-width: 50%!important;
 	}
 }
+
 /**===========================Tabela===========================**/
+
+
 table{
 	border:.5px solid black;
 }
@@ -544,7 +559,30 @@ table, td,th{
 .tituloTabela{
 	font-size: 18px;
 }
+
+/**===========================Login / Esqueci a senha===========================**/
+
+.formularioLogin{
+	width: 550px;
+	height: 600px;
+	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	position: relative;
+}
+.formularioEsqueciSenha{
+	width: 550px;
+	height: 500px;
+	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	position: relative;
+
+}
+
 /**===========================Textos===========================**/
+
+
 p{
 	text-align:left;
 	font-family: inherit;
@@ -579,10 +617,10 @@ p{
 	font-size: 30px;
 }
 .tituloMedio{
-	font-size: 24px;
+	font-size: 25px;
 }
 .tituloPequeno{
-	font-size: 18px;
+	font-size: 20px;
 }
 @media (max-width: 500px) {
 	.tituloGrande{

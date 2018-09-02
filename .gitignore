@@ -122,4 +122,5 @@ cliente/migrations/0*
 
 servicos/migrations/0*
 
-
+#Dumps
+dump-de-testes-08-2018.sql

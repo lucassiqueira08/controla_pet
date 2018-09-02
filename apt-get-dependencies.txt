@@ -1,3 +1,4 @@
+apt-utils
 default-libmysqlclient-dev
 build-essential
 default-libmysqlclient-dev

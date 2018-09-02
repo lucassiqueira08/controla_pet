@@ -6,3 +6,4 @@ locales-all
 libffi-dev
 libssl-dev
 swig
+apt-utils

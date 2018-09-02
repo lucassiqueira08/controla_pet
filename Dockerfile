@@ -20,10 +20,3 @@ RUN apt autoclean
 
 RUN pip install -r requirements-dev.txt
 RUN touch .env
-
-
-FROM mysql:5.7
-COPY . /app
-ADD dump-de-testes-08-2018.sql /app
-ENV MYSQL_DATABASE Morumbichos
-ENV MYSQL_ROOT_PASSWORD SysControlaPet2018

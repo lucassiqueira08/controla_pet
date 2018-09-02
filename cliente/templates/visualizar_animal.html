@@ -2,10 +2,8 @@
 {% load static %}
 {% block content_base %}
 <div class="titulo">
-	{%for animais in animal%}
-
-
-	<div class="container esquerda coluna">
+{%for animais in animal%}
+	<div class="container esquerda ">	
 		<!--===========ANIMAL===============-->
 		<a data-toggle="modal" data-target="#modal_1{{animais.nome}}">
 			<div class="linha esquerda cardContorno">
@@ -14,7 +12,6 @@
 				</div>
 				<div class="conteudoCard linha esquerda">
 					<div class="coluna destacadoEsquerdaDireita">
-
 						<div class="dupla">
 							<label for="#" class="formLabel">Nome:</label>
 							<input id="endereco" class="formInput" type="text" value="{{animais.nome}}" disabled>
@@ -23,25 +20,18 @@
 							<label for="#" class="formLabel">Raça:</label>
 							<input id="endereco" class="formInput" type="text" value="{{animais.raca}}" disabled>
 						</div>
-					
-		<!--			<div class="coluna destacadoEsquerdaDireita">-->
-<!--						<div class="dupla">
-							<label for="#" class="formLabel">Espécie:</label>
-							<input id="endereco" class="formInput" type="text" value="{{animais.nome}}" disabled>
-						</div>-->
-						<div class="dupla">
-							<label for="#" class="formLabel">Dono:</label>
-							<input id="endereco" class="formInput" type="text" value="Janete Samaritana" disabled>
-					</div>
 
 					</div>
-				<!--	</div>-->
+					<div class="coluna destacadoEsquerdaDireita">
+					
+					
+					</div>
 				</div>
 			</div>
 			<div class="containerBotoes centralizado linha">
 			</div>
 		</a>
-			</div>
+
 		<!-- Modal -->
 		<div class="modal fade" id="modal_1{{animais.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -60,25 +50,44 @@
 					</div>
 				</div>
 				<div class="dupla">
-					<label for="#" class="formLabel">Nome Serviço</label>
+					<label for="#" class="formLabel">Nome </label>
 					<input disabled class="formInput" type="text" value="{{animais.nome}}" autofocus name="nome" required>
 				</div>
 				<div class="dupla">
-					<label for="#" class="formLabel">Descrição</label>
-					<input disabled class="formInput" type="text" placeholder="Descrição" name="descricao" required>
+					<label for="#" class="formLabel">Sexo</label>
+					<input disabled class="formInput" type="text" value="{{animais.sexo}}" name="sexo" required>
 				</div>
 				<div class="dupla">
-					<label for="#" class="formLabel">Espécie</label>
-					<input disabled class="formInput" type="text" placeholder="Espécie" name="descricao" required>
+					<label for="#" class="formLabel">Raça</label>
+					<input disabled class="formInput" type="text" value="{{animais.raca}}" name="raca" required>
+				</div>
+
+				<div class="dupla">
+					<label for="#" class="formLabel">Cor</label>
+					<input disabled class="formInput" type="text" value="{{animais.cor}}" name="cor" required>
 				</div>
 				<div class="dupla">
-					<label for="#" class="formLabel">Preço</label>
-					<input disabled class="formInput" type="text" placeholder="Preço" name="descricao" required>
+					<label for="#" class="formLabel">Especie</label>
+					<input disabled class="formInput" type="text" value="{{animais.especie}}" name="especie" required>
+				</div>
+
+				<div class="dupla">
+
+					<label for="#" class="formLabel">Data de Nascimento</label>
+					<input disabled class="formInput" type="text" value="{{animais.datanasc}}" name="datanasc" required>
+				</div>
+
+				<div class="dupla">
+					<label for="#" class="formLabel">Observação</label>
+					<input disabled class="formInput" type="text" value="{{animais.observacao}}" name="obs" required>
 				</div>
 				<div class="dupla">
-					<label for="#" class="formLabel">Tipo Procedimento</label>
-					<input disabled class="formInput" type="text" placeholder="Tipo de Procedimento" name="descricao" required>
+					<label for="#" class="formLabel">Microchip</label>
+					<input disabled class="formInput" type="text" value="{{animais.microchip}}" name="microchip" required>
 				</div>
+
+
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
@@ -87,69 +96,13 @@
 				</div>
 			</div>
 		</div>
-				
+	</div>
 {%endfor%}
 		<!--===========ANIMAL===============-->
-		<div class="linha esquerda cardContorno">
-			<div class="imagemCard">
-				<img src="{% static 'img/gato_ficha_animal.jpg' %}" alt="Cachorrinho 1">
-			</div>
-			<div class="conteudoCard linha esquerda">
-				<div class="coluna destacadoEsquerdaDireita">
-					<div class="dupla">
-						<label for="#" class="formLabel">Nome:</label>
-						<input id="endereco" class="formInput" type="text" value="Xuxinha" disabled>
-					</div>
-					<div class="dupla">
-						<label for="#" class="formLabel">Raça:</label>
-						<input id="endereco" class="formInput" type="text" value="Gato" disabled>
-					</div>
-				</div>
-				<div class="coluna destacadoEsquerdaDireita">
-					<div class="dupla">
-						<label for="#" class="formLabel">Espécie:</label>
-						<input id="endereco" class="formInput" type="text" value="Árabe" disabled>
-					</div>
-					<div class="dupla">
-						<label for="#" class="formLabel">Dono:</label>
-						<input id="endereco" class="formInput" type="text" value="João Moraes" disabled>
-					</div>
-				</div>
-			</div>
-		</div>
 
-		<!--===========ANIMAL===============-->
-
-		<div class="linha esquerda cardContorno">
-			<div class="imagemCard">
-				<img src="{% static 'img/papagaio_ficha_animal.jpg' %}" alt="Cachorrinho 1">
-			</div>
-			<div class="conteudoCard linha esquerda">
-				<div class="coluna destacadoEsquerdaDireita">
-					<div class="dupla">
-						<label for="#" class="formLabel">Nome:</label>
-						<input id="endereco" class="formInput" type="text" value="Doritos" disabled>
-					</div>
-					<div class="dupla">
-						<label for="#" class="formLabel">Raça:</label>
-						<input id="endereco" class="formInput" type="text" value="Ave" disabled>
-					</div>
-				</div>
-				<div class="coluna destacadoEsquerdaDireita">
-					<div class="dupla">
-						<label for="#" class="formLabel">Espécie:</label>
-						<input id="endereco" class="formInput" type="text" value="Papagaio" disabled>
-					</div>
-					<div class="dupla">
-						<label for="#" class="formLabel">Dono:</label>
-						<input id="endereco" class="formInput" type="text" value="Francisca Dantas" disabled>
-					</div>
-				</div>
-			</div>
-		</div>
-
+		
 		<!--===========PAGINAÇÃO===============-->
-	</div>
+
 	<div class="centralizado destacadoCimaBaixo">
 		<nav aria-label="...">
 			<ul class="pagination">

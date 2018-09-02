@@ -466,6 +466,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
 }
 .imagemCardModal img {
     width: 350px;

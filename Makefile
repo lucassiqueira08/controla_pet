@@ -5,7 +5,7 @@ mysql-docker:
 	sudo docker exec -it mysql bash
 
 app-docker:
-	sudo docker exec -it app bash
+	sudo docker exec -it sys_controla_pet bash
 
 docker-admin-group:
 	sudo groupadd docker && sudo usermod -aG docker $USER

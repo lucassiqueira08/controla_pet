@@ -26,6 +26,21 @@ header{
 	-webkit-transition:  .3s;
 	transition:  .3s;
 }
+.logout{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.logout a{
+	color: #fff;
+	font-size: 18px;
+	margin-right: 25px;
+}
+.logout a:hover{
+	font-weight: 800;
+	color: #fff;
+}
 .perfilImg{
 	width: 100px;
 	height: 100px;

@@ -24,7 +24,6 @@ class Atendimento(models.Model):
     data_solicitacao = models.DateTimeField(blank=True, null=True)
     cpf_cliente = models.ForeignKey(Cliente,
                                     models.DO_NOTHING, db_column='cpf_cliente')
-
     id_orcamento = models.ForeignKey(
         Orcamento, models.DO_NOTHING, db_column='id_orcamento',
         blank=True, null=True

@@ -63,8 +63,11 @@ ROOT_URLCONF = 'controla_pet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['usuarios/templates',
-                 'core/templates', ],
+        'DIRS': [
+            'usuarios/templates',
+            'cliente/templates',
+            'core/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,6 +100,22 @@ DATABASES = {
 }
 
 # !!!!   BANCO LOCAL MYSQL   !!!!
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('DATABASE_LOCAL_NAME'),
+#         'USER': config('USER_LOCAL'),
+#         'PASSWORD': config('DATABASE_LOCAL_URL'),
+#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
+#      },
+#     'titles': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'titles',
+#     }
+# }
+
+# #!!!!   BANCO LOCAL MYSQL   !!!!
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -174,10 +193,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'usuarios/static',
     'core/static',
+    'cliente/static'
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # -----------------------------------
 
 AUTH_USER_MODEL = 'usuarios.User'
-INDEX_URL = 'login'
+INDEX_URL = 'index'
 LOGIN_REDIRECT_URL = INDEX_URL

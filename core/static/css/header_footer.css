@@ -1,7 +1,7 @@
 *{
 	margin: 0px;
 	padding: 0px;
-	/*font-family: ;*/
+	font-family: inherit;
 }
 .nav-toggle{
 	display: none!important;
@@ -16,22 +16,37 @@ header{
 	padding: 10px;
 }
 .logoHeader{
-    margin-left: 20px;
-    width: 60px;
+	margin-left: 20px;
+	width: 60px;
 }
 #menuLateral{
 	width: 300px;
 	height: auto;
 	background-color: #f2f2f2 ;
-    -webkit-transition:  .3s; /* Safari */
-    transition:  .3s;
+	-webkit-transition:  .3s;
+	transition:  .3s;
+}
+.logout{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.logout a{
+	color: #fff;
+	font-size: 18px;
+	margin-right: 25px;
+}
+.logout a:hover{
+	font-weight: 800;
+	color: #fff;
 }
 .perfilImg{
 	width: 100px;
 	height: 100px;
 }
 .menuLateralPerfil{
-	height: 100px;
+	height: auto;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -47,28 +62,28 @@ header{
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-  	background-color: transparent ;
-    border-style: none;
-    border-color: transparent;
-    border-image: unset;
-    padding: 10px;
-    border: 0px;
-
-
+	background-color: transparent ;
+	border-style: none;
+	border-color: transparent;
+	border-image: unset;
+	padding: 10px;
+	border: 0px;
 }
-
+.subMenuItem h5 a{
+	color:#fff;
+	font-weight: 800;
+}
 .item a, .subMenuItem a{
-
 	text-decoration: none;
 	color: black;
-
 }
-.item a:hover, .subMenuItem a:hover{
-
+.item h5 a:hover{
 	text-decoration: underline;
-	color: black;
-
-
+	color: #000;
+}
+.subMenuItem a:hover{
+	text-decoration: underline;
+	color: #fff;
 }
 .item img, .subMenuItem img{
 	grid-column-start: 1;
@@ -138,11 +153,15 @@ header{
 	height:27px;
 }
 footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
 	border-top:1px solid #ff6600;
 	color: #fff;
 	width: 100%;
 	height: 50px;
 	background-color: #212529;
+	z-index: 1000;
 }
 small{
 	height: 100%;
@@ -150,9 +169,6 @@ small{
 	justify-content: center;
 	align-items: center;
 }
-
-
-
 @media (min-width: 1301px){
 	#menuLateral{
 		margin-left:0px!important;

@@ -1,0 +1,61 @@
+	<!DOCTYPE html>
+	<html lang="pt-br">
+	{% load static %}
+	<head>
+		<meta charset="UTF-8">
+		<title>ControlaPet</title>
+		
+		<!--=========reset============-->
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!--=========CSS============-->
+		
+		<link rel="stylesheet" type="text/css" href="{% static 'css/header_footer.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/hamburguer_menu.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+		<link rel="icon" href="{% static 'img/logocontrolapetwhite.png' %}" type="image/x-icon">
+		
+		<!--=========BOOTSTRAP============-->
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+		<!--=========/BOOTSTRAP============-->
+
+		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui-1.12.1.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.structure.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.structure.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.theme.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.theme.min.css' %}">
+
+		<!--=========Full Calendar============-->
+
+		<link rel='stylesheet' href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.css'>
+		<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
+		<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/jquery.min.js'></script>
+		<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+		<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/gcal.min.js'></script>
+		<script  src="{% static 'js/calendar/calendaroperations.js' %}"></script>
+
+	</head>
+	<body>
+
+		{% block content %}
+		<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+
+
+		<!--===========FIMM===============-->
+		{% endblock %}
+		
+		<!--=========BOOTSTRAP============-->
+		
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+		<!--=========JS============-->
+		<script type="text/javascript" src="{% static 'js/hamburguer_menu.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/mascara_validacao.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
+
+	</body>
+	</html>

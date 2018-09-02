@@ -3,20 +3,17 @@
 	{% load static %}
 	<head>
 		<meta charset="UTF-8">
-		<title>Base</title>
+		<title>ControlaPet</title>
 		<!--=========reset============-->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!--=========CSS============-->
 		<link rel="stylesheet" type="text/css" href="{% static 'css/header_footer.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/hamburguer_menu.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-		<link rel="icon" href="{% static 'img/logoControlaPet.png' %}" type="image/x-icon">
+		<link rel="icon" href="{% static 'img/logocontrolapetwhite.png' %}" type="image/x-icon">
 		<!--=========BOOTSTRAP============-->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-		<!--=========/BOOTSTRAP============-->
-
-
-		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui-1.12.1.css' %}">
+		<!--=========JQUERY============-->	
 		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.min.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.structure.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.structure.min.css' %}">
@@ -24,9 +21,6 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.theme.min.css' %}">
 	</head>
 	<body>
-		<header>
-			<!-- <img src="{% static 'img/logocontrolapetwhite.png' %}" alt="Controla Pet"> -->
-		</header>
 
 				{% block content %}
 				<!--===========INSIRA AQUI SEU CONTEUDO===============-->
@@ -34,12 +28,6 @@
 
 				<!--===========FIMM===============-->
 				{% endblock %}
-
-		<footer>
-			<small>Controla Pet © 2018 Todos Diretos reservados. Termos e Uso e Política de Privacidade</small>
-		</footer>
-
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 		<!--=========BOOTSTRAP/JQUERY============-->
 
@@ -53,9 +41,12 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
 		<!--=========JS============-->
-		<script src="{% static 'js/hamburguer.js' %}"></script>
-		<script src="{% static 'js/mascara_validacao.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/hamburguer_menu.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/mascara_validacao.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
+
+        {% block add_js %}
+        {% endblock %}
 
 	</body>
 	</html>

@@ -25,6 +25,8 @@ services:
     environment:
       - MYSQL_DATABASE=Morumbichos
       - MYSQL_ROOT_PASSWORD=SysControlaPet2018
+    volumes:
+      - .:/app
     ports:
       - 3308:3306
     networks:

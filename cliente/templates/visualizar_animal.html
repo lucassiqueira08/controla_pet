@@ -8,7 +8,8 @@
 		<a data-toggle="modal" data-target="#modal_1{{animais.nome}}">
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
-					<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+			<!--		<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1" -->
+					<img src="../../static/img/{{animais.nome}}.jpg" alt="Cachorrinho 1">
 				</div>
 				<div class="conteudoCard linha esquerda">
 					<div class="coluna destacadoEsquerdaDireita">
@@ -45,7 +46,7 @@
 					<div class="modal-body">
 				<div class="centralizado">
 					<div class="imagemCardModal coluna">
-						<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+						<img src="../../static/img/{{animais.nome}}.jpg" class="destacadoCimaBaixo" alt="Cachorrinho 1">
 						<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
 					</div>
 				</div>

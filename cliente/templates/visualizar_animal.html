@@ -9,9 +9,11 @@
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
 			<!--		<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1" -->
+			<!-- alteração do caminho para imagem, para aplicar o modo dinamico ( tras a imagem com o nome do animao) Bruno 02.09.2019 -->
 					<img src="../../static/img/{{animais.nome}}.jpg" alt="Cachorrinho 1">
 				</div>
-				<div class="conteudoCard linha esquerda">
+<!-- Formulario trazendo os dados de cada animal do banco de dados -->
+			<div class="conteudoCard linha esquerda">
 					<div class="coluna destacadoEsquerdaDireita">
 						<div class="dupla">
 							<label for="#" class="formLabel">Nome:</label>
@@ -21,7 +23,10 @@
 							<label for="#" class="formLabel">Raça:</label>
 							<input id="endereco" class="formInput" type="text" value="{{animais.raca}}" disabled>
 						</div>
-
+					<div class="dupla">
+							<label for="#" class="formLabel">dono:</label>
+							<input id="endereco" class="formInput" type="text" value="{{animais.cpf_cliente}}" disabled>
+						</div>
 					</div>
 					<div class="coluna destacadoEsquerdaDireita">
 					
@@ -34,6 +39,7 @@
 		</a>
 
 		<!-- Modal -->
+		<!-- Modal consultando dados do banco Bruno 02.09.2018-->
 		<div class="modal fade" id="modal_1{{animais.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -99,7 +105,6 @@
 		</div>
 	</div>
 {%endfor%}
-		<!--===========ANIMAL===============-->
 
 		
 		<!--===========PAGINAÇÃO===============-->

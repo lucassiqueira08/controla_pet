@@ -2,41 +2,48 @@
 {% load static %}
 {% block content_base %}
 <div class="titulo">
+	{%for animais in animal%}
+
+
 	<div class="container esquerda coluna">
 		<!--===========ANIMAL===============-->
-		<a data-toggle="modal" data-target="#modal_1">
+		<a data-toggle="modal" data-target="#modal_1{{animais.nome}}">
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
 					<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
 				</div>
 				<div class="conteudoCard linha esquerda">
 					<div class="coluna destacadoEsquerdaDireita">
+
 						<div class="dupla">
 							<label for="#" class="formLabel">Nome:</label>
-							<input id="endereco" class="formInput" type="text" value="Luluzinho" disabled>
+							<input id="endereco" class="formInput" type="text" value="{{animais.nome}}" disabled>
 						</div>
 						<div class="dupla">
 							<label for="#" class="formLabel">Raça:</label>
-							<input id="endereco" class="formInput" type="text" value="Cachorro" disabled>
+							<input id="endereco" class="formInput" type="text" value="{{animais.raca}}" disabled>
 						</div>
-					</div>
-					<div class="coluna destacadoEsquerdaDireita">
-						<div class="dupla">
+					
+		<!--			<div class="coluna destacadoEsquerdaDireita">-->
+<!--						<div class="dupla">
 							<label for="#" class="formLabel">Espécie:</label>
-							<input id="endereco" class="formInput" type="text" value="Pitbull" disabled>
-						</div>
+							<input id="endereco" class="formInput" type="text" value="{{animais.nome}}" disabled>
+						</div>-->
 						<div class="dupla">
 							<label for="#" class="formLabel">Dono:</label>
 							<input id="endereco" class="formInput" type="text" value="Janete Samaritana" disabled>
-						</div>
 					</div>
+
+					</div>
+				<!--	</div>-->
 				</div>
 			</div>
 			<div class="containerBotoes centralizado linha">
 			</div>
 		</a>
+			</div>
 		<!-- Modal -->
-		<div class="modal fade" id="modal_1" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal fade" id="modal_1{{animais.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -54,7 +61,7 @@
 				</div>
 				<div class="dupla">
 					<label for="#" class="formLabel">Nome Serviço</label>
-					<input disabled class="formInput" type="text" placeholder="Nome do Serviço" autofocus name="nome" required>
+					<input disabled class="formInput" type="text" value="{{animais.nome}}" autofocus name="nome" required>
 				</div>
 				<div class="dupla">
 					<label for="#" class="formLabel">Descrição</label>
@@ -80,6 +87,8 @@
 				</div>
 			</div>
 		</div>
+				
+{%endfor%}
 		<!--===========ANIMAL===============-->
 		<div class="linha esquerda cardContorno">
 			<div class="imagemCard">
@@ -108,7 +117,9 @@
 				</div>
 			</div>
 		</div>
+
 		<!--===========ANIMAL===============-->
+
 		<div class="linha esquerda cardContorno">
 			<div class="imagemCard">
 				<img src="{% static 'img/papagaio_ficha_animal.jpg' %}" alt="Cachorrinho 1">
@@ -136,7 +147,6 @@
 				</div>
 			</div>
 		</div>
-
 
 		<!--===========PAGINAÇÃO===============-->
 	</div>

@@ -85,6 +85,7 @@ class ViewVisualizacaoAnimal(BaseView):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url= 'visualizar_animal')
+            'menu': Menu.objects.get(url= 'visualizar_animal'),
+             'animal': Animal.objects.all()
         }
         return render(request, self.template, context)

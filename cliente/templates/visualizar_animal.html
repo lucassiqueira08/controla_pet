@@ -25,7 +25,7 @@
 						</div>
 					<div class="dupla">
 							<label for="#" class="formLabel">dono:</label>
-							<input id="endereco" class="formInput" type="text" value="{{animais.cpf_cliente}}" disabled>
+							<input id="endereco" class="formInput" type="text" value="{{animais.cpf_cliente.}}" disabled>
 						</div>
 					</div>
 					<div class="coluna destacadoEsquerdaDireita">
@@ -51,6 +51,8 @@
 					</div>
 					<div class="modal-body">
 				<div class="centralizado">
+					<form method="post" class='formEtapas'>
+						{% csrf_token %}
 					<div class="imagemCardModal coluna">
 						<img src="../../static/img/{{animais.nome}}.jpg" class="destacadoCimaBaixo" alt="Cachorrinho 1">
 						<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
@@ -58,39 +60,39 @@
 				</div>
 				<div class="dupla">
 					<label for="#" class="formLabel">Nome </label>
-					<input disabled class="formInput" type="text" value="{{animais.nome}}" autofocus name="nome" required>
+					<input  class="formInput" type="text" value="{{animais.nome}}" autofocus name="nome" required>
 				</div>
 				<div class="dupla">
 					<label for="#" class="formLabel">Sexo</label>
-					<input disabled class="formInput" type="text" value="{{animais.sexo}}" name="sexo" required>
+					<input  class="formInput" type="text" value="{{animais.sexo}}" name="sexo" required>
 				</div>
 				<div class="dupla">
 					<label for="#" class="formLabel">Raça</label>
-					<input disabled class="formInput" type="text" value="{{animais.raca}}" name="raca" required>
+					<input  class="formInput" type="text" value="{{animais.raca}}" name="raca" required>
 				</div>
 
 				<div class="dupla">
 					<label for="#" class="formLabel">Cor</label>
-					<input disabled class="formInput" type="text" value="{{animais.cor}}" name="cor" required>
+					<input  class="formInput" type="text" value="{{animais.cor}}" name="cor" required>
 				</div>
 				<div class="dupla">
 					<label for="#" class="formLabel">Especie</label>
-					<input disabled class="formInput" type="text" value="{{animais.especie}}" name="especie" required>
+					<input  class="formInput" type="text" value="{{animais.especie}}" name="especie" required>
 				</div>
 
 				<div class="dupla">
 
 					<label for="#" class="formLabel">Data de Nascimento</label>
-					<input disabled class="formInput" type="text" value="{{animais.datanasc}}" name="datanasc" required>
+					<input  class="formInput" type="text" value="{{animais.datanasc}}" name="datanasc" required>
 				</div>
 
 				<div class="dupla">
 					<label for="#" class="formLabel">Observação</label>
-					<input disabled class="formInput" type="text" value="{{animais.observacao}}" name="obs" required>
+					<input  class="formInput" type="text" value="{{animais.observacao}}" name="obs" required>
 				</div>
 				<div class="dupla">
 					<label for="#" class="formLabel">Microchip</label>
-					<input disabled class="formInput" type="text" value="{{animais.microchip}}" name="microchip" required>
+					<input  class="formInput" type="text" value="{{animais.microchip}}" name=""microchip" required>
 				</div>
 
 
@@ -98,8 +100,11 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
-						<button type="button" class="btnPrincipal clearMarginTop" onclick="habilitaCampos();">Editar</button>
+						<button name="button" class="acao btnPrincipal " >Editar</button>
+					 <button name="button" class="acao btnPrincipal clearMarginTop">SALVAR</button>
+
 					</div>
+				</form>
 				</div>
 			</div>
 		</div>

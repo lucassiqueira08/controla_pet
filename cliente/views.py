@@ -61,7 +61,7 @@ class ViewCadastrarAnimal(BaseView):
         animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('observacao')
         animal.microchip = request.POST.get('microchip')
-        animal.cpf_cliente = cliente
+        animal.cpf_cliente = request.POST.get('microchip')
         animal.save()
 
         responde = Responde()
@@ -89,3 +89,22 @@ class ViewVisualizacaoAnimal(BaseView):
              'animal': Animal.objects.all()
         }
         return render(request, self.template, context)
+    def post(self, request):
+        animal = Animal()
+        animal.nome = request.POST.get('nome')
+        animal.sexo = request.POST.get('sexo')
+        animal.especie = request.POST.get('especie')
+        animal.raca = request.POST.get('raca')
+        animal.cor = request.POST.get('cor')
+        animal.observacao = request.POST.get('observacao')
+        animal.microchip = request.POST.get('microchip')
+
+        animal.update()
+        return render(request, self.template)
+
+class ViewFichaAnimal(BaseView):
+
+    template = 'ficha_animal.html'
+
+    def get(self, request):
+        return render(request, self.template)

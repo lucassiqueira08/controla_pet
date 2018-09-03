@@ -35,7 +35,7 @@ class Cliente(models.Model):
 
     def __str__(self):
         return self.nome
-
+    
 
 class Animal(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+<form method="post" class='formEtapas'>
+	{% csrf_token %}
+	<ul id="progress">
+		<li class="ativo"><label>Procurar Animal</label></li>
+		<li><label>Tela de confirmação</label></li>
+		<li><label>Diagnóstico</label></li>
+		<li><label>Diagnóstico Específico</label></li>
+	</ul>
+
+	<fieldset>	
+		<h3 class="tituloExtraGrande">Buscar Animal</h3>
+		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="100">
+		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+		<div class="containerBotoes">
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Confirmar animal</h2>
+		<div class="centralizado destacadoCimaBaixo">
+			<div class="imagemCardModal coluna">
+				<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+			</div>
+		</div>
+		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" />
+		<h2 class="tituloMedio destacadoCima">Esse é o bixinho certo?</h2>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Diagnóstico</h2>
+		<h3 class="tituloPequeno">Perguntas pré-definidas para preenchimento</h3>
+		<p>O animal apresenta cansaço?</p>
+		<div class="formEtapasDupla destacadoBaixo">
+			<div class="formEtapasRadio">
+				<label><input type="radio" value="V" name="cansaco">Verdadeiro</label>
+				<label><input type="radio" value="F" name="cansaco" checked>Falso</label>
+			</div>
+		</div>
+		<p>O animal apresenta diarreia?</p>
+		<div class="formEtapasDupla destacadoBaixo">
+			<div class="formEtapasRadio">
+				<label><input type="radio" value="V" name="diarreia">Verdadeiro</label>
+				<label><input type="radio" value="F" name="diarreia" checked>Falso</label>
+			</div>
+		</div>
+		<p>Precisa cadastrar novos diagnósticos?</p>
+		<div class="formEtapasDupla destacadoBaixo">
+			<div class="formEtapasRadio">
+				<label><input type="radio" value="V" name="diarreia" data-target="#modalNovoDiagnostio" data-toggle="modal">Verdadeiro</label>
+				<label><input type="radio" value="F" name="diarreia" checked>Falso</label>
+			</div>
+		</div>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+		</div>
+
+		<!--!!!!!!!!!!!! MODAL !!!!!!!!!!!!-->
+		<div class="modal fade" id="modalNovoDiagnostio" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Cadastrar novo diagnóstico</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="centralizado">
+							<div class="imagemCardModal coluna">
+								<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+							</div>
+						</div>
+						<div class="dupla">
+							<label class="formLabel">Diagnóstico</label>
+							<input class="formInput" type="text" placeholder="Digite o diagnóstico..." name="diagnostico" autofocus> 
+						</div>
+						<div class="cima linha">
+							<p>Tipo: </p>
+							<div class="coluna cima destacadoEsquerdaDireita">
+								<div class="linha">
+									<input type="checkbox" class="formInputCheckbox" name="sistema_reprodutor" value="sistema_reprodutor" id="sistema_reprodutor">
+									<label for="sistema_reprodutor">Sistema Reprodutor</label>
+								</div>
+								<div class="linha">
+									<input type="checkbox" class="formInputCheckbox" name="sistema_respiratorio" value="sistema_respiratorio" id="sistema_respiratorio">
+									<label for="sistema_respiratorio">Sistema Respiratório</label>								
+								</div>							
+								<div class="linha">
+									<input type="checkbox" class="formInputCheckbox" name="secrecao_nasal" value="secrecao_nasal" id="secrecao_nasal">
+									<label for="secrecao_nasal">Secreção Nasal</label>								
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
+						<button type="button" class="btnPrincipal clearMarginTop">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--!!!!!!!!!!!! FIM DO MODAL !!!!!!!!!!!!-->
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Disagnóstico específico</h2>
+		<textarea placeholder="Digite aqui seu diagnóstico..." class="formEtapasTextArea" name="diagnostico" maxlength="500"></textarea>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Salvar"/>
+		</div>
+	</fieldset>
+
+</form>
+<!--===========FIMM===============-->
+
+{% endblock %}

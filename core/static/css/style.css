@@ -570,40 +570,31 @@ table, td,th{
 
 /**===========================Login / Esqueci a senha===========================**/
 
-
-.formularioLogin{
-	height: 600px;
-}
-.formularioEsqueciSenha{
-	height: 500px;
-}
-
-.formularioLogin, .formularioEsqueciSenha{
+.formularioLoginEsqueciSenha{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 430px;
 	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
 	padding: 20px 30px;
 	box-sizing: border-box;
 	position: relative;
 }
-@media (max-width: 700px) {
-	.formularioLogin, .formularioEsqueciSenha{
-		width: 450px;
-		height:450px;
-	}
-}
 @media (max-width: 500px){
-	.formularioLogin, .formularioEsqueciSenha {
+	.formularioLoginEsqueciSenha{
     	width: 350px;
     }
-	.formularioLogin label, .formularioEsqueciSenha label {
+	.formularioLoginEsqueciSenha label{
     	width: 90px;
     	font-size: 13px;
     }
 }
 @media (max-width: 375px){
-	.formularioLogin, .formularioEsqueciSenha {
+	.formularioLoginEsqueciSenha{
     	width: 300px;
     }
-	.formularioLogin label, .formularioEsqueciSenha label {
+	.formularioLoginEsqueciSenha label{
     	width: 70px;
     	font-size: 11px;
     }

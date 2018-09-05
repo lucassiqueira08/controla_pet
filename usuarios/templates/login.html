@@ -1,22 +1,22 @@
 {% extends 'base_login_esqueci_senha.html' %}
 {% block content_base %}
-	<form class="centralizado coluna" method="post">
+        <h1 class="tituloExtraGrande">Seja Bem Vindo!</h1>
+    <div class="formularioLoginEsqueciSenha">
+    <p class="tituloPequeno">Digite seus dados abaixo:</p>
+        <div class="dupla">
+            <label class="formLabel">Usuário:</label>
+            <input id class="formInput" name="username"  placeholder="Digite seu usuário..." maxlength="100" autofocus required>
+        </div>
+        <div class="dupla">
+            <label class="formLabel">Senha:</label>
+            <input class="formInput" name="password" type="password" placeholder="Digite sua senha..." maxlength="100" required>
+        </div>
+        <div class="containerBotoes centralizado coluna">
+            <button class="btnPrincipal" name="button">Entrar</button>
+        </div>
+        <a href="../esqueceu_senha">Esqueceu a senha?</a>
+    </div>
+    <form class="centralizado coluna" method="post">
     {% csrf_token %}
-		<div class="formularioLogin centralizado coluna">
-			<h1 class="tituloExtraGrande">Seja Bem Vindo!</h1>
-			<p class="tituloPequeno">Digite seus dados abaixo:</p>			
-			<div class="dupla">
-				<label class="formLabel">Usuário:</label>
-				<input id class="formInput" name="username"  placeholder="Digite seu usuário..." maxlength="100" autofocus required>
-			</div>
-			<div class="dupla">
-				<label class="formLabel">Senha:</label>
-				<input class="formInput" name="password" type="password" placeholder="Digite sua senha..." maxlength="100" required>
-			</div>
-			<div class="containerBotoes centralizado coluna">
-                <button class="btnPrincipal" name="button">Entrar</button>
-			</div>
-			<a href="../esqueceu_senha">Esqueceu a senha?</a>
-		</div>
 	</form>
 {% endblock %}

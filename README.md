@@ -1,15 +1,15 @@
-ControlaPet
+ControlaPet :dog:
 --------------------------------------------------------------------------
 
 ControlaPet é um Sistema de Gerenciamento de PetShops e Clinicas Veterinarias  desenvolvido por:
 
 
-* Bruno Lima dos Santos  
+* Bruno Lima dos Santos
 * Isaque Felizardo
 * Lucas Alves Siqueira
 * Lucas Araujo de Oliveira
 * Nayara de Paula Muniz
-* Vitor Crepaldi Carlessi    
+* Vitor Crepaldi Carlessi
 
 
 
@@ -86,17 +86,11 @@ adicione as credenciais fornecidas pela **equipe de desenvolvimento**.
 ---
 #### Rodando o projeto com Docker Compose
 
-Docker é uma tecnologia que fornece containers que isolam processos, com a ajuda do Docker Compose é possível orquestrar containers e subir aplicações complexas com poucos comandos.  
+Docker é uma tecnologia que fornece containers que isolam processos, com a ajuda do Docker Compose é possível orquestrar containers e subir aplicações complexas com poucos comandos.
 
 Instalação do Docker no Windows: [https://docs.docker.com/docker-for-windows/install/](https://docs.docker.com/docker-for-windows/install/)
 
 Instalação do Docker Compose no Linux: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
-
-Para dar privilégios ao docker no Linux:
-
-```sh
-   sudo chmod 777 /var/run/docker.sock
-```
 
 **Iniciando o projeto**
 
@@ -111,14 +105,56 @@ Para iniciar o projeto:
 ```
 Ao rodar o projeto, o mysql será iniciado e, logo após, a app migrará para o banco de dados e irá subir o servidor.
 
+**Makefile**
 
+Através do make, é possível executar instruções nomeadas e contidas em um arquivo conhecido como Makefile.
+Para executar um comando make digite:
+
+```sh
+    make <comando_do_makefile>
+```
+Exemplo:
+
+```sh
+    make clean
+```
+**Comandos possíveis:**
+_clean_ - Limpa o repositorio local de todos os arquivos de cache
+
+_mysql-docker_ - Acessa o container do MYSQL
+
+_app-docker_ - Acessa o container da aplicação
+
+_docker-admin-group_ - Permissiona o docker colocando-o no grupo de admin do Linux
+
+_create-docker-network_ - Cria a network utilizada pelos containers
+
+_docker-clean_ - Apaga todas as imagens e containers do docker
+
+_container-dump-db_ - Popula o banco de dados
+
+_container-createsuperuser_ - Cria um super usuario no Django
+
+_container-drop-db_ - Derruba o banco de dados
+
+_container-create-db_ - Cria um novo banco de dados
+
+Fluxo:
+
+```sh
+    make container-drop-db
+    make container-create-db
+    docker-compose up mysql
+    docker-compose up app
+    make container-createsuperuser
+```
 
 **Informações adicionais:**
 
 Para acessar containers utilize:
 ```sh
     docker exec -it <container-name> bash
-    
+
     <Exemplo>
     docker exec -it sys_controla_pet bash
 

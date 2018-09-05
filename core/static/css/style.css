@@ -89,6 +89,9 @@
 	outline: none;
 	box-sizing: border-box;
 }
+.formInput:focus{
+	border:1px solid rgba(255, 102, 0, 0.9);
+}
 .formFileInput{
 	margin:-10px 0 20px 0;
 	width: 370px;
@@ -99,9 +102,6 @@
 	box-sizing: border-box;
 	font-size: 15px;
 	font-weight: 600;
-}
-.formInput:focus{
-	border:1px solid rgba(255, 102, 0, 0.9);
 }
 .formCheckbox{
 	border:.5px solid #A9A9A9;
@@ -194,6 +194,13 @@
 }
 .containerBotoes a{
 	margin:5px;
+}
+@media (max-width: 600px) {
+	.btnPrincipal{
+	    width: 200px;
+	    font-size: 15px;
+	}
+
 }
 @media (max-width: 500px) {
 	.formLabel{
@@ -563,24 +570,44 @@ table, td,th{
 
 /**===========================Login / Esqueci a senha===========================**/
 
+
 .formularioLogin{
-	width: 550px;
 	height: 600px;
-	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
-	padding: 20px 30px;
-	box-sizing: border-box;
-	position: relative;
 }
 .formularioEsqueciSenha{
-	width: 550px;
 	height: 500px;
+}
+
+.formularioLogin, .formularioEsqueciSenha{
 	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
 	padding: 20px 30px;
 	box-sizing: border-box;
 	position: relative;
-
 }
-
+@media (max-width: 700px) {
+	.formularioLogin, .formularioEsqueciSenha{
+		width: 450px;
+		height:450px;
+	}
+}
+@media (max-width: 500px){
+	.formularioLogin, .formularioEsqueciSenha {
+    	width: 350px;
+    }
+	.formularioLogin label, .formularioEsqueciSenha label {
+    	width: 90px;
+    	font-size: 13px;
+    }
+}
+@media (max-width: 375px){
+	.formularioLogin, .formularioEsqueciSenha {
+    	width: 300px;
+    }
+	.formularioLogin label, .formularioEsqueciSenha label {
+    	width: 70px;
+    	font-size: 11px;
+    }
+}
 /**===========================Textos===========================**/
 
 

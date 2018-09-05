@@ -20,7 +20,7 @@ header{
 	width: 60px;
 }
 #menuLateral{
-	width: 300px;
+	width: 230px;
 	height: auto;
 	background-color: #f2f2f2 ;
 	-webkit-transition:  .3s;
@@ -101,6 +101,11 @@ header{
 	padding-left: 30px;
 	background-color: #868686 ;
 }
+.mainLoginEsqueciSenha{
+	width: 100%;
+	height: auto;
+	padding: 100px;	
+}
 .main{
 	display: flex;
 	justify-content: flex-start;
@@ -179,7 +184,7 @@ small{
 		margin-left:-290px;
 		position: absolute;
 		z-index: 100;
-		width: 250px;
+		width: 200px;
 	}
 	.hamburger{
 		float: right;
@@ -232,4 +237,8 @@ small{
 	footer{
 		font-size: .6em;
 	}
+	.conteudo{
+		padding: 30px;
+	}
 }
+

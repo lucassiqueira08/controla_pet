@@ -62,7 +62,7 @@ class ViewCadastrarAnimal(BaseView):
         animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('observacao')
         animal.microchip = request.POST.get('microchip')
-        animal.cpf_cliente = request.POST.get('microchip')
+        animal.cpf_cliente = request.POST.get('cpf')
         animal.save()
 
         responde = Responde()

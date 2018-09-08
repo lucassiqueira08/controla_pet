@@ -79,15 +79,12 @@ class ViewCadastrarAnimal(BaseView):
         return render(request, self.template)
 
 
-class ViewVisualizacaoAnimal(BaseView):
+class ViewVisualizarAnimal(BaseView):
 
     template = 'visualizar_animal.html'
 
     def get(self, request):
-        context = {
-            'menu': Menu.objects.get(url= 'visualizar_animal')
-        }
-        return render(request, self.template, context)
+        return render(request, self.template)
 
 class ViewFichaAnimal(BaseView):
 

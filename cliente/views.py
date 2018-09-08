@@ -2,6 +2,7 @@ from datetime import datetime
 from pprint import pprint
 
 from django.shortcuts import render
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from core.views import BaseView
 from .forms import FormCliente
@@ -84,14 +85,29 @@ class ViewVisualizacaoAnimal(BaseView):
     template = 'visualizar_animal.html'
 
     def get(self, request):
+
+        animal_list = Animal.objects.all()
+        paginator = Paginator(animal_list, 10)
+
+        try:
+            page = int(request.GET.get('page', '1'))
+        except ValueError:
+            page = 1
+
+        try:
+            animais = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            animais = paginator.page(paginator.num_pages)
+
         context = {
             'menu': Menu.objects.get(url= 'visualizar_animal'),
-             'animal': Animal.objects.all()
+             'animal': animais
         }
         return render(request, self.template, context)
+
     def post(self, request):
-        c = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
-        animal = Animal.objects.get(cpf_cliente=c)
+        cpf_cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
+        animal = Animal.objects.get(cpf_cliente=cpf_cliente)
         animal.nome = request.POST.get('nome')
         animal.sexo = request.POST.get('sexo')
         animal.especie = request.POST.get('especie')
@@ -100,13 +116,13 @@ class ViewVisualizacaoAnimal(BaseView):
         animal.datanasc = '2009-01-01'
         animal.observacao = request.POST.get('obs')
         animal.microchip = request.POST.get('microchip')
-        animal.cpf_cliente = c        
+        animal.cpf_cliente = cpf_cliente
         animal.save()
         context = {
             'menu': Menu.objects.get(url= 'visualizar_animal'),
              'animal': Animal.objects.all()
         }
-        return render(request, self.template,context)
+        return render(request, self.template, context)
 
 class ViewFichaAnimal(BaseView):
 

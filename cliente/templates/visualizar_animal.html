@@ -2,18 +2,18 @@
 {% load static %}
 {% block content_base %}
 <div class="titulo">
-{%for animais in animal%}
-	<div class="container esquerda ">	
+	{% for animais in animal.object_list %}
+	<div class="container esquerda ">
 		<!--===========ANIMAL===============-->
 		<a data-toggle="modal" data-target="#modal_1{{animais.nome}}">
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
-			<!--		<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1" -->
-			<!-- alteração do caminho para imagem, para aplicar o modo dinamico ( tras a imagem com o nome do animao) Bruno 02.09.2019 -->
+					<!--		<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1" -->
+					<!-- alteração do caminho para imagem, para aplicar o modo dinamico ( tras a imagem com o nome do animao) Bruno 02.09.2019 -->
 					<img src="../../static/img/{{animais.nome}}.jpg" onerror="this.src='../../static/img/semfoto.jpeg';"  alt="Cachorrinho 1">
 				</div>
-<!-- Formulario trazendo os dados de cada animal do banco de dados -->
-			<div class="conteudoCard linha esquerda">
+				<!-- Formulario trazendo os dados de cada animal do banco de dados -->
+				<div class="conteudoCard linha esquerda">
 					<div class="coluna destacadoEsquerdaDireita">
 						<div class="dupla">
 							<label for="#" class="formLabel">Nome:</label>
@@ -23,12 +23,10 @@
 							<label for="#" class="formLabel">Raça:</label>
 							<input id="endereco" class="formInput" type="text" value="{{animais.raca}}" disabled>
 						</div>
-					<div class="dupla">
-							<label for="#" class="formLabel">dono:</label>
+						<div class="dupla">
+							<label for="#" class="formLabel">Dono:</label>
 							<input id="dono" class="formInput" type="text" value="{{animais.cpf_cliente}}" disabled>
 						</div>
-					</div>
-					<div class="coluna destacadoEsquerdaDireita">
 					</div>
 				</div>
 			</div>
@@ -47,86 +45,97 @@
 						</button>
 					</div>
 					<div class="modal-body">
-				<div class="centralizado">
-					<form method="post" class='formEtapas'>
-						{% csrf_token %}
-					<div class="imagemCardModal coluna">
-						<img src="../../static/img/{{animais.nome}}.jpg" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
-						<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
-					</div>
-				</div>
-				<div class="dupla">
-					<label for="#" class="formLabel">Nome </label>
-					<input  class="formInput" type="text" value="{{animais.nome}}" autofocus name="nome" required>
-				</div>
-				<div class="dupla">
-					<label for="#" class="formLabel">Sexo</label>
-					<input  class="formInput" type="text" value="{{animais.sexo}}" name="sexo" required>
-				</div>
-				<div class="dupla">
-					<label for="#" class="formLabel">Raça</label>
-					<input  class="formInput" type="text" value="{{animais.raca}}" name="raca" required>
-				</div>
+						<div class="centralizado">
+							<form method="post" class='formEtapas'>
+								{% csrf_token %}
+								<div class="imagemCardModal coluna">
+									<img src="../../static/img/{{animais.nome}}.jpg" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+									<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
+								</div>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Nome </label>
+								<input  class="formInput" type="text" value="{{animais.nome}}" autofocus name="nome" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Sexo</label>
+								<input  class="formInput" type="text" value="{{animais.sexo}}" name="sexo" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Raça</label>
+								<input  class="formInput" type="text" value="{{animais.raca}}" name="raca" required>
+							</div>
 
-				<div class="dupla">
-					<label for="#" class="formLabel">Cor</label>
-					<input  class="formInput" type="text" value="{{animais.cor}}" name="cor" required>
-				</div>
-				<div class="dupla">
-					<label for="#" class="formLabel">Especie</label>
-					<input  class="formInput" type="text" value="{{animais.especie}}" name="especie" required>
-				</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Cor</label>
+								<input  class="formInput" type="text" value="{{animais.cor}}" name="cor" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Especie</label>
+								<input  class="formInput" type="text" value="{{animais.especie}}" name="especie" required>
+							</div>
 
-				<div class="dupla">
+							<div class="dupla">
 
-					<label for="#" class="formLabel">Data de Nascimento</label>
-					<input  class="formInput" type="text" value="{{animais.datanasc}}" name="datanasc" required>
-				</div>
+								<label for="#" class="formLabel">Data de Nascimento</label>
+								<input  class="formInput" type="text" value="{{animais.datanasc}}" name="datanasc" required>
+							</div>
 
-				<div class="dupla">
-					<label for="#" class="formLabel">Observação</label>
-					<input  class="formInput" type="text" value="{{animais.observacao}}" name="obs" required>
-				</div>
-				<div class="dupla">
-					<label for="#" class="formLabel">Microchip</label>
-					<input  class="formInput" type="text" value="{{animais.microchip}}" name="microchip" required>
-				</div>
-				<div class="dupla">
-					<input  class="formInput" type="hidden" value="{{animais.cpf_cliente.cpf}}" name="cpf_cliente"  >
-				</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
-					 <button name="button" class="acao btnPrincipal clearMarginTop">SALVAR</button>
+							<div class="dupla">
+								<label for="#" class="formLabel">Observação</label>
+								<input  class="formInput" type="text" value="{{animais.observacao}}" name="obs" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Microchip</label>
+								<input  class="formInput" type="text" value="{{animais.microchip}}" name="microchip" required>
+							</div>
+							<div class="dupla">
+								<input  class="formInput" type="hidden" value="{{animais.cpf_cliente.cpf}}" name="cpf_cliente"  >
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
+							<button name="button" class="acao btnPrincipal clearMarginTop">SALVAR</button>
 
-					</div>
-				</form>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-{%endfor%}
+	{%endfor%}
 
-		
-		<!--===========PAGINAÇÃO===============-->
 
+	<!--===========PAGINAÇÃO===============-->
+{% if animal.has_other_pages %}
 	<div class="centralizado destacadoCimaBaixo">
 		<nav aria-label="...">
 			<ul class="pagination">
-				<li class="page-item disabled">
-					<a class="page-link" href="#" tabindex="-1">Anterior</a>
-				</li>
-				<li class="page-item" id="paginationActive">
-					<a class="page-link" href="#">1</a>
-				</li>
+				{% if animal.has_previous %}
+					<li class="page-item">
+						<a class="page-link" href="?page={{ animal.previous_page_number }}">Anterior</a>
+					</li>
+				{% endif %}
+				{% for page in animal.paginator.page_range %}
+					{% if animal.number == page %}
+						<li class="page-item" id="paginationActive">
+							<a class="page-link" href="#">{{ page }}</a>
+						</li>
+					{% else %}
+						<li class="page-item">
+							<a class="page-link" href="?page={{ page }}">{{ page }}</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+
+				{% if animal.has_next %}
 				<li class="page-item">
-					<a class="page-link" href="#">2 </a>
+					<a class="page-link" href="?page={{ animal.next_page_number }}">Próxima</a>
 				</li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item">
-					<a class="page-link" href="#">Próxima</a>
-				</li>
+				{% else %}
+				{% endif %}
 			</ul>
 		</nav>
 	</div>
+	{% endif %}
 {% endblock %}

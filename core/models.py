@@ -22,6 +22,7 @@ class Menu(models.Model):
 class MenuGrupo(models.Model):
 
     descricao = models.CharField('Descrição', max_length=50)
+    url = models.CharField('Url', max_length=50)
     ordem = models.IntegerField('Ordem')
 
     class Meta:

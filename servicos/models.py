@@ -224,8 +224,8 @@ class Estadia(models.Model):
     data_fim = models.DateTimeField()
     data_solicitacao = models.DateField()
     valor_diaria = models.DecimalField(max_digits=10, decimal_places=2)
-    cpf_cliente = models.ForeignKey(Cliente, models.DO_NOTHING,
-                                    db_column='cpf_cliente')
+    id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
+                                    db_column='id_animal')
 
     class Meta:
         app_label = 'servicos'

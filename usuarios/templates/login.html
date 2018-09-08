@@ -1,8 +1,11 @@
 {% extends 'base_login_esqueci_senha.html' %}
 {% block content_base %}
-        <h1 class="tituloExtraGrande">Seja Bem Vindo!</h1>
+
+<form class="centralizado coluna" method="post">
+    {% csrf_token %}
+    <h1 class="tituloExtraGrande">Seja Bem Vindo!</h1>
     <div class="formularioLoginEsqueciSenha">
-    <p class="tituloPequeno">Digite seus dados abaixo:</p>
+        <p class="tituloPequeno">Digite seus dados abaixo:</p>
         <div class="dupla">
             <label class="formLabel">Usuário:</label>
             <input id class="formInput" name="username"  placeholder="Digite seu usuário..." maxlength="100" autofocus required>
@@ -16,7 +19,5 @@
         </div>
         <a href="../esqueceu_senha">Esqueceu a senha?</a>
     </div>
-    <form class="centralizado coluna" method="post">
-    {% csrf_token %}
-	</form>
+</form>
 {% endblock %}

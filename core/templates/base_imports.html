@@ -15,19 +15,15 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 		<!--=========JQUERY============-->	
 		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.min.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.structure.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.structure.min.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.theme.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-1.12.1/jquery-ui.theme.min.css' %}">
 	</head>
 	<body>
 
-				{% block content %}
-				<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+		{% block content %}
+		<!--===========INSIRA AQUI SEU CONTEUDO===============-->
 
 
-				<!--===========FIMM===============-->
-				{% endblock %}
+		<!--===========FIMM===============-->
+		{% endblock %}
 
 		<!--=========BOOTSTRAP/JQUERY============-->
 
@@ -45,8 +41,8 @@
 		<script type="text/javascript" src="{% static 'js/mascara_validacao.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
 
-        {% block add_js %}
-        {% endblock %}
+		{% block add_js %}
+		{% endblock %}
 
 	</body>
 	</html>

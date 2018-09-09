@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+<form method="post" class='formEtapas'>
+	{% csrf_token %}
+
+	<ul id="progress">
+		<li class="ativo"><label>Procurar Animal</label></li>
+		<li><label>Tela de confirmação</label></li>
+		<li><label>Diagnóstico</label></li>
+		<li><label>Diagnóstico Específico</label></li>
+		<li><label>Salvar</label></li>
+	</ul>
+
+	<fieldset>
+		<h3 class="tituloExtraGrande">Procurar Animal</h3 class="tituloExtraGrande">
+			<p>Procure um animal para diagnosticar aqui: </p>
+			wdo animal..."/>
+			<div class="containerBotoes linha centralizado">
+				<input type="submit" name="next" class="next acao btnprincipal center" value="Procurar"/>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<h2 class="tituloGrande">Tela de confirmação</h2 class="tituloGrande">
+				<p>Esse é o animal que deseja diagnosticar?</p>
+				<div class="centralizado destacadoCimaBaixo">
+					<div class="imagemCardModal coluna">
+						<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+					</div>
+				</div>
+				<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" />
+				<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+				<input type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" />
+
+				<div class="containerBotoes linha centralizado">
+					<input type="submit" name="prev" class="prev acao btnprincipal" value="Não"/>
+					<input type="submit" name="next" class="next acao btnprincipal" value="Sim"/>
+				</div>
+			</fieldset>		
+
+			<fieldset>
+				<h2 class="tituloGrande">Diagnósticos</h2 class="tituloGrande">
+					
+					<p>Perguntas pré-definidas para preenchimento</p>
+					<p>O animal apresenta cansaço?</p>
+					<div class="formEtapasDupla">
+						<div class="formEtapasRadio">
+							<label><input type="radio" name="cansaco">Verdadeiro</label>
+							<label><input type="radio" name="cansaco" checked>Falso</label>
+						</div>
+					</div>
+					<p class="pEspaco">O animal apresenta diarreia?</p>
+					<div class="formEtapasDupla">
+						<div class="formEtapasRadio">
+							<label><input type="radio" name="diarreia">Verdadeiro</label>
+							<label><input type="radio" checked name="diarreia">Falso</label>
+						</div>
+					</div>
+					<p class="pEspaco">Precisa cadastrar novos diagnósticos?</p>
+					<div class="formEtapasDupla">
+						<div class="formEtapasRadio">
+							<label><input class="btn  btn-lg" data-toggle="modal" data-target="#myModal" type="radio" name="diagnosticos">Verdadeiro</label>
+							<label><input type="radio" name="diagnosticos" checked>Falso</label>
+						</div>
+					</div>
+
+					<!--MODAL-->
+					<div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+
+									<h4 class="modal-title tituloGrande">Cadastrar Novo Diagnóstico: </h4>
+								</div>
+								<div class="modal-body">
+									<input type="text" class="formEtapasInput2" name="nome" placeholder="Digite o diagnóstico..." maxlength="50" />
+									<p class="pModal">Tipo:</p>
+									<input type="checkbox" class="pEspaco" name="sistema_reprodutor" value="sistema_reprodutor">Sistema Reprodutor<br>
+									<input type="checkbox" class="pEspaco" name="sistema_respiratorio" value="sistema_respiratorio">Sistema Respiratório<br>
+									<input type="checkbox" class="pEspaco" name="secrecao_nasal" value="secrecao_nasal">Secreção Nasal<br>
+
+									<div class="containerBotoes linha centralizado">
+										<input type="submit" name="prev" class="acao btnprincipal" value="Cadastrar"/>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default btnSecundario" data-dismiss="modal">Fechar</button>
+								</div>
+							</div>
+						</div> 
+
+						<!--MODAL-->
+					</div>
+					<div class="containerBotoes">
+						<input type="submit" name="prev" class="prev acao btnprincipal" value="Anterior"/>
+						<input type="submit" name="next" class="next acao btnprincipal" value="Proximo"/>
+					</div>
+				</fieldset>	
+
+				<fieldset>
+					<h2 class="tituloGrande">Diagnóstico Específico</h2 class="tituloGrande">
+						<textarea placeholder="Digite aqui sua Observação..." class="formEtapasTextArea" name="message" maxlength="200"></textarea>
+						<div class="containerBotoes">
+							<input type="submit" name="prev" class="prev acao btnprincipal" value="Anterior"/>
+							<input type="submit" name="next" class="next acao btnprincipal" value="Proximo"/>	
+						</div>				
+					</fieldset>		
+
+					<fieldset>
+						<h2 class="tituloGrande">Salvar</h2 class="tituloGrande">
+							<p>Dseja salvar esse diagnóstico?</p>
+							<div class="containerBotoes">
+								<input type="submit" name="prev" class="prev acao btnprincipal" value="Não"/>
+								<input type="submit" name="fim'" class="acao btnprincipal" value="Sim"/>
+							</div>
+
+						</fieldset>
+
+					</form>
+					{% endblock %}

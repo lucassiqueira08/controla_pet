@@ -124,3 +124,7 @@ servicos/migrations/0*
 
 #Dumps
 dump-de-testes-08-2018.sql
+
+#Google
+token.json
+credentials.json

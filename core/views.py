@@ -18,7 +18,8 @@ class ViewIndexBemVindo(BaseView):
     
     def get(self, request):
         context = {
-            'usuario_nome': request.user.primeiro_nome.title()
+            'usuario_nome': request.user.primeiro_nome.title(),
+            'menu': Menu.objects.get(url= 'index')
         }
         return render(request, self.template, context)
         
@@ -27,5 +28,8 @@ class ViewIndex(BaseView):
     template = 'index.html'
 
     def get(self, request):
-        return render(request, self.template)
+        context = {
+            'menu': Menu.objects.get(url= 'index')
+        }
+        return render(request, self.template, context)
 

@@ -17,7 +17,7 @@ class ViewCadastrarCliente(BaseView):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url= 'cadastro_estadia')
+            'menu': Menu.objects.get(url= 'cadastro_cliente')
         }
         return render(request, self.template, context)
 
@@ -34,7 +34,7 @@ class ViewCadastrarAnimal(BaseView):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url= 'cadastro_estadia')
+            'menu': Menu.objects.get(url= 'cadastro_animal')
         }
         return render(request, self.template, context)
 
@@ -85,7 +85,6 @@ class ViewVisualizarAnimal(BaseView):
     template = 'visualizar_animal.html'
 
     def get(self, request):
-
         animal_list = Animal.objects.all()
         paginator = Paginator(animal_list, 10)
 
@@ -129,4 +128,7 @@ class ViewFichaAnimal(BaseView):
     template = 'ficha_animal.html'
 
     def get(self, request):
-        return render(request, self.template)
+        context = {
+            'menu': Menu.objects.get(url= 'ficha_animal')
+        }
+        return render(request, self.template, context)

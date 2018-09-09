@@ -34,6 +34,12 @@
 	display: flex;
 	flex-direction: column;
 }
+.espacoEmVolta{
+	justify-content: space-around;
+}
+.espacoEntre{
+	justify-content: space-between;		
+}
 .destacadoCima{
 	margin-top: 30px!important;
 }
@@ -47,13 +53,16 @@
 	margin-right: 30px!important;
 }
 .destacadoCimaBaixo{
-	margin: 30px 0 30px 0 !important;
+	margin: 20px 0 20px 0 !important;
 }
 .destacadoEsquerdaDireita{
 	margin: 0 20px 0 20px !important;
 }
 .clearMarginTop{
 	margin-top:0!important;
+}
+.clearMargin{
+	margin:0!important;
 }
 .telaTamanhoFixo{
 	height: 850px;
@@ -113,7 +122,7 @@
 	align-items: center;	
 }
 .formCheckbox option:hover {
-    box-shadow: 0 0 10px 100px #1882A8 inset;
+	box-shadow: 0 0 10px 100px #1882A8 inset;
 }
 
 .formInputCheckbox{
@@ -152,23 +161,23 @@
 	align-items:flex-start;
 }
 .btnPrincipal{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 37px;
-    background-color: #ff6600;
-    color: #fff;
-    font-weight: 600;
-    border:1px solid #fff;
-    border-radius: 3px;
-    margin: 25px 10px 0 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 250px;
+	height: 37px;
+	background-color: #ff6600;
+	color: #fff;
+	font-weight: 600;
+	border:1px solid #fff;
+	border-radius: 3px;
+	margin: 25px 10px 0 10px;
 }
 .btnPrincipal:hover{
-    text-decoration: none;
-    background: #c14e01;
-    color: #fff;
-    cursor: pointer;
+	text-decoration: none;
+	background: #c14e01;
+	color: #fff;
+	cursor: pointer;
 }
 .btnSecundario{
 	width: 250px;
@@ -197,8 +206,8 @@
 }
 @media (max-width: 600px) {
 	.btnPrincipal{
-	    width: 200px;
-	    font-size: 15px;
+		width: 200px;
+		font-size: 15px;
 	}
 
 }
@@ -241,8 +250,8 @@
 .formEtapas{
 	display: flex;
 	justify-content: center;
-    align-items: center;
-    flex-direction: column;
+	align-items: center;
+	flex-direction: column;
 	width: 100%;
 	text-align: center;
 	position: relative;
@@ -290,334 +299,348 @@
 	outline: 1px dotted #000;
 	outline: -webkit-focus-ring-color auto 5px;
 	cursor: pointer;
-}*/
+	}*/
 
-.formEtapasInput:focus{
-	border:1px solid rgba(255, 102, 0, 0.9);
-}
-.formEtapasRadio input{
-	width: 18px;
-	height: 18px;
-}
-.formEtapasRadio{
-	border:.5px solid #A9A9A9;
-	width: auto;
-	height: 37px;
-	padding-left: 10px;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-.formCheckbox label, .formEtapasRadio label{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: row;
-	margin-left:10px;
-	margin-right:10px; 
-	margin-bottom:0px!important; 
-}
-.formEtapasRadio label input{
-	margin-right: 5px;
-}
-.formEtapas p{
-	text-align: center;
-}
-.formEtapas input, .formEtapas textarea{
-	color: rgba(255, 102, 0)
-}
-.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
-	width: 170px;
-	height: 37px;
-	background-color: #ff6600;
-	color: #fff;
-	font-weight: 600;
-	border:1px solid #fff;
-	border-radius: 3px;
-	margin-top: 25px;
-}
-.formEtapas input.acao:hover{
-	background: #c14e01;
-	cursor: pointer;
-}
-#progress{
-	display: flex;
-	justify-content: center;
-    align-items: center;
-	width: 100%;
-	margin: 30px 0;
-	overflow: hidden;
-	counter-reset: step;
-}
-#progress li{
-	width: 15%;
-	height: 100px;
-	list-style-type: none;
-	color: rgba(134,134,134);
-	font-weight: bold;
-	text-transform: uppercase;
-	font-size: 11px;
-	float: left;
-	position: relative;
-}
-#progress li:before{
-	content:counter(step);
-	counter-increment: step;
-	font-size: 15px;
-	width: 40px;
-	display: block;
-	line-height: 40px;
-	background: rgba(134,134,134);
-	color: white;
-	border-radius:30px;
-	-moz-border-radius:30px;
-	-webkit-border-radius:40px;
-	margin: 0 auto 10px auto;
-}
-#progress li:after{
-	content: '';
-	width: 100%;
-	background: rgba(134,134,134);
-	height: 2px;
-	position: absolute;
-	top: 17px;
-	left: -50%;
-	z-index: -1;
-}
-#progress li:first-child:after{
-	content: none;
-}
-#progress li.ativo:before, #progress li.ativo:after{
-	background: #ff6600;
-	color: white;
-	text-shadow: 0 1px 0;
-}
-#progress li.ativo{
-	color: #ff6600;
-}
-.formEtapasDupla{
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-@media (max-width: 700px) {
-	.formEtapasInput{
-		margin: 5px;
+	.formEtapasInput:focus{
+		border:1px solid rgba(255, 102, 0, 0.9);
 	}
-	.formEtapasTextArea{
-		width: 	95%;
-		height: 200px;
-	}
-	.formEtapas fieldset{
-		width: 400px
-	}
-	.formEtapas fieldset .containerBotoes{
-		width: 	100%;
-		margin:0px;
-		flex-direction: row;
-	}
-
-	.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
-		width: 	150px;
-		margin-top: 15px;
-	}
-	#progress li label{
-		display: none;
-	}
-	#progress li{
-		height: 50px;
-	}
-	.formEtapas fieldset h3{
-		font-size: 30px;
-	}
-	.formEtapas fieldset p{
-		font-size: 18px;
-	}
-}
-@media (max-width: 500px) {
-	.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
-		width: 	110px;
-	}
-	.formEtapas fieldset{
-		width: 290px
-	}
-	.formEtapas fieldset h3{
-		font-size: 25px;
-	}
-	.formEtapas fieldset p{
-		font-size: 14px;
-	}
-	.formEtapasInput{
-		font-size: 12px;
+	.formEtapasRadio input{
+		width: 18px;
+		height: 18px;
 	}
 	.formEtapasRadio{
-		font-size: 13px;
+		border:.5px solid #A9A9A9;
+		width: auto;
+		height: 37px;
+		padding-left: 10px;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
 	}
-}
-@media (max-width: 425px) {
-	#progress li{
-		margin-right: 12px;
+	.formCheckbox label, .formEtapasRadio label{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+		margin-left:10px;
+		margin-right:10px; 
+		margin-bottom:0px!important; 
 	}
-	.formEtapasInput, .formEtapasRadio{
-		width: 220px;
+	.formEtapasRadio label input{
+		margin-right: 5px;
 	}
-}
-@media (max-width: 375px) {
-	.formEtapasInput, .formEtapasRadio{
-		width: 210px;
+	.formEtapas p{
+		text-align: center;
 	}
-}
-
-/**===========================Cards===========================**/
-
-.cardContorno{
-	height: 100%;
-	padding: 30px 0 30px 0;
-	border-top: 1px dashed #333333 !important;
-}
-.imagemCard, .imagemCardModal{
-	width: auto;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.imagemCardModal img {
-    width: 350px;
-    border-radius: 3px;
-}
-.imagemCard img {
-    width: 250px;
-    border-radius: 3px;
-}
-@media (max-width: 1100px) {
-	.conteudoCard{
-		flex-direction: column!important;
+	.formEtapas input, .formEtapas textarea{
+		color: rgba(255, 102, 0)
 	}
-	.imagemCard{
-		width: 270px;
-		height: 200px;
+	.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
+		width: 170px;
+		height: 37px;
+		background-color: #ff6600;
+		color: #fff;
+		font-weight: 600;
+		border:1px solid #fff;
+		border-radius: 3px;
+		margin-top: 25px;
 	}
-	.imagemCard img{
+	.formEtapas input.acao:hover{
+		background: #c14e01;
+		cursor: pointer;
+	}
+	#progress{
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		width: 100%;
-		height: 100%;
+		margin: 30px 0;
+		overflow: hidden;
+		counter-reset: step;
 	}
-}
-@media (max-width: 800px) {
+	#progress li{
+		width: 15%;
+		height: 100px;
+		list-style-type: none;
+		color: rgba(134,134,134);
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 11px;
+		float: left;
+		position: relative;
+	}
+	#progress li:before{
+		content:counter(step);
+		counter-increment: step;
+		font-size: 15px;
+		width: 40px;
+		display: block;
+		line-height: 40px;
+		background: rgba(134,134,134);
+		color: white;
+		border-radius:30px;
+		-moz-border-radius:30px;
+		-webkit-border-radius:40px;
+		margin: 0 auto 10px auto;
+	}
+	#progress li:after{
+		content: '';
+		width: 100%;
+		background: rgba(134,134,134);
+		height: 2px;
+		position: absolute;
+		top: 17px;
+		left: -50%;
+		z-index: -1;
+	}
+	#progress li:first-child:after{
+		content: none;
+	}
+	#progress li.ativo:before, #progress li.ativo:after{
+		background: #ff6600;
+		color: white;
+		text-shadow: 0 1px 0;
+	}
+	#progress li.ativo{
+		color: #ff6600;
+	}
+	.formEtapasDupla{
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	@media (max-width: 700px) {
+		.formEtapasInput{
+			margin: 5px;
+		}
+		.formEtapasTextArea{
+			width: 	95%;
+			height: 200px;
+		}
+		.formEtapas fieldset{
+			width: 400px
+		}
+		.formEtapas fieldset .containerBotoes{
+			width: 	100%;
+			margin:0px;
+			flex-direction: row;
+		}
+
+		.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
+			width: 	150px;
+			margin-top: 15px;
+		}
+		#progress li label{
+			display: none;
+		}
+		#progress li{
+			height: 50px;
+		}
+		.formEtapas fieldset h3{
+			font-size: 30px;
+		}
+		.formEtapas fieldset p{
+			font-size: 18px;
+		}
+	}
+	@media (max-width: 500px) {
+		.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
+			width: 	110px;
+		}
+		.formEtapas fieldset{
+			width: 290px
+		}
+		.formEtapas fieldset h3{
+			font-size: 25px;
+		}
+		.formEtapas fieldset p{
+			font-size: 14px;
+		}
+		.formEtapasInput{
+			font-size: 12px;
+		}
+		.formEtapasRadio{
+			font-size: 13px;
+		}
+	}
+	@media (max-width: 425px) {
+		#progress li{
+			margin-right: 12px;
+		}
+		.formEtapasInput, .formEtapasRadio{
+			width: 220px;
+		}
+	}
+	@media (max-width: 375px) {
+		.formEtapasInput, .formEtapasRadio{
+			width: 210px;
+		}
+	}
+
+	/**===========================Cards===========================**/
+
 	.cardContorno{
+		height: 100%;
+		padding: 30px 0 30px 0;
+		border-top: 1px dashed #333333 !important;
+	}
+	.imagemCard, .imagemCardModal{
+		width: auto;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.imagemCardModal img {
+		width: 350px;
+		border-radius: 3px;
+	}
+	.imagemCard img {
+		width: 250px;
+		border-radius: 3px;
+	}
+	@media (max-width: 1100px) {
+		.conteudoCard{
+			flex-direction: column!important;
+		}
+		.imagemCard{
+			width: 270px;
+			height: 200px;
+		}
+		.imagemCard img{
+			width: 100%;
+			height: 100%;
+		}
+	}
+	@media (max-width: 800px) {
+		.cardContorno{
+			flex-direction: column;
+		}
+		.imagemCard{
+			margin-bottom: 25px;
+		}
+	}
+
+
+	/**===========================Modal-index===========================**/
+
+	.footerModal{
+		height: 70px;
+		border-top: 1px solid #f2f2f2;
+	}
+	.modal-body{
+		height: auto;
+	}
+	.imgBoasVindas{
+		height: 370px;
+	}
+	.headerListaProdutos{
+		margin-top: 15px;
+	}
+	.headerListaProdutos p{
+		font-weight: 800;
+		font-size: 22px!important;
+	}
+	.listaProdutos{
+		display: flex;
+		justify-content: flex-start;
+		align-items: space-around;
 		flex-direction: column;
+		border-top: 3px dashed #e9ecef;
 	}
-	.imagemCard{
-		margin-bottom: 25px;
+
+	/**===========================Específicos===========================**/
+
+	#paginationActive a{
+		background-color: #ff6600!important;
+		border-color: #ff6600!important;
+		color: #fff!important;
 	}
-}
-
-
-/**===========================Modal-index===========================**/
-
-.footerModal{
-	height: 70px;
-	border-top: 1px solid #f2f2f2;
-}
-.modal-body{
-	height: auto;
-}
-.imgBoasVindas{
-	height: 370px;
-}
-
-/**===========================Específicos===========================**/
-
-#paginationActive a{
-	background-color: #ff6600!important;
-	border-color: #ff6600!important;
-	color: #fff!important;
-}
-.close{
-	-webkit-appearance: none!important;
-}
-.page-item a{
-	color: #ff6600!important;
-}
-.container{
-	padding: 0;
-	margin: 0;
-}
-#calendar {
-  max-width: 900px;
-  margin: 40px auto;
-}
-@media (min-width: 992px) {
-	#caixaCep{
-		max-width: 50%!important;
+	.close{
+		-webkit-appearance: none!important;
 	}
-}
+	.page-item a{
+		color: #ff6600!important;
+	}
+	.container{
+		padding: 0;
+		margin: 0;
+	}
+	#calendar {
+		max-width: 900px;
+		margin: 40px auto;
+	}
+	@media (min-width: 992px) {
+		#caixaCep{
+			max-width: 50%!important;
+		}
+	}
 
-/**===========================Tabela===========================**/
+	/**===========================Tabela===========================**/
 
 
-table{
-	border:.5px solid black;
-}
-table, td,th{
-	padding: 5px;
-	text-align: left;
-}
-.tituloTabela{
-	font-size: 18px;
-}
+	table{
+		border:.5px solid black;
+	}
+	table, td,th{
+		padding: 5px;
+		text-align: left;
+	}
+	.tituloTabela{
+		font-size: 18px;
+	}
 
-/**===========================Login / Esqueci a senha===========================**/
+	/**===========================Login / Esqueci a senha===========================**/
 
-.formularioLoginEsqueciSenha{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	height: 430px;
-	box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
-	padding: 20px 30px;
-	box-sizing: border-box;
-	position: relative;
-}
-@media (max-width: 500px){
 	.formularioLoginEsqueciSenha{
-    	width: 350px;
-    }
-	.formularioLoginEsqueciSenha label{
-    	width: 90px;
-    	font-size: 13px;
-    }
-}
-@media (max-width: 375px){
-	.formularioLoginEsqueciSenha{
-    	width: 300px;
-    }
-	.formularioLoginEsqueciSenha label{
-    	width: 70px;
-    	font-size: 11px;
-    }
-}
-/**===========================Textos===========================**/
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		height: 430px;
+		box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
+		padding: 20px 30px;
+		box-sizing: border-box;
+		position: relative;
+	}
+	@media (max-width: 500px){
+		.formularioLoginEsqueciSenha{
+			width: 350px;
+		}
+		.formularioLoginEsqueciSenha label{
+			width: 90px;
+			font-size: 13px;
+		}
+	}
+	@media (max-width: 375px){
+		.formularioLoginEsqueciSenha{
+			width: 300px;
+		}
+		.formularioLoginEsqueciSenha label{
+			width: 70px;
+			font-size: 11px;
+		}
+	}
+	/**===========================Textos===========================**/
 
 
-p{
-	text-align:left;
-	font-family: inherit;
-	font-size:20px;
-	margin-top:25px;
-}
-.dadosCabecalho{
-	height: 250px;
-}
-.pDadosCabecalho{
-	text-align: left!important;
-	font-size: 16px!important;
-}
-.tituloGrande, .tituloExtraGrande{
-	color: #000;	
-}
+	p{
+		text-align:left;
+		font-family: inherit;
+		font-size:20px;
+		margin-top:25px;
+	}
+	.dadosCabecalho{
+		height: 250px;
+	}
+	.pDadosCabecalho{
+		text-align: left!important;
+		font-size: 16px!important;
+	}
+	.tituloGrande, .tituloExtraGrande{
+		color: #000;	
+	}
 /*
 .tituloMedio, .tituloPequeno{
 	color: #ff6600;	

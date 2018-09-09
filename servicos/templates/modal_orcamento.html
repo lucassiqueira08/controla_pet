@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+<form class="formEtapas" action="submit">
+	<a data-toggle="modal" data-target="#modal_1{{animais.nome}}">teste</a>
+	<div class="modal fade" id="modal_1{{animais.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal_1Label">Orçamento</h5>
+
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				
+				<div class="modal-body">
+					<div class="centralizado">
+						<table>
+							<tr>
+								<th colspan="2" class="tituloTabela">Animal</th>
+								<th colspan="2" class="tituloTabela">Proprietário</th>
+							</tr>
+							<tr>
+								<th>Nome:</th>
+								<td>Xuxuzinho</td>
+								<th>Nome:</th>
+								<td>Lucas Araujo de Oliveira</td>
+							</tr>
+							<tr>
+								<th>Cor:</th>
+								<td>Marrom</td>
+								<th>Cpf:</th>
+								<td>447.459.088-06</td>
+							</tr>
+							<tr>
+								<th>Sexo:</th>
+								<td>Masculino</td>
+								<th>Endereço:</th>
+								<td>Av. Manoel Pedro Pimentel, 465 - Pq. Continental</td>
+							</tr>
+							<tr>
+								<th></th>
+								<td></td>
+								<th>Telefone:</th>
+								<td>(11)9775-0209</td>
+							</tr>
+						</table>
+					</div>
+					<div class="headerListaProdutos linha espacoEmVolta">
+						<p class="clearMargin">Produto</p>
+						<p class="clearMargin">Preço</p>
+					</div>
+					<div class="listaProdutos">
+						<div class="linha espacoEmVolta">
+							<p class="clearMargin">Banho</p>
+							<p class="clearMargin">R$ 70,00</p>
+						</div>
+						<div class="linha espacoEmVolta">
+							<p class="clearMargin">Tosa</p>
+							<p class="clearMargin">R$ 20,00</p>
+						</div>
+						<div class="linha espacoEmVolta">
+							<p class="clearMargin">Cirurgia</p>
+							<p class="clearMargin">R$ 2.350,00</p>
+						</div>
+					</div>
+					<div class="destacadoCima linha espacoEntre">
+						<p class="clearMargin">Valor total</p>
+						<p class="clearMargin">R$ 3.200,00</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
+						<button name="button" class="acao btnPrincipal clearMarginTop">Salvar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</form>
+{% endblock %}

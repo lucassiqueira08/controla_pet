@@ -80,7 +80,7 @@ class ViewCadastrarAnimal(BaseView):
         return render(request, self.template)
 
 
-class ViewVisualizacaoAnimal(BaseView):
+class ViewVisualizarAnimal(BaseView):
 
     template = 'visualizar_animal.html'
 

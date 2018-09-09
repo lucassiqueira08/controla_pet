@@ -63,7 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class FuncionarioAbstrato(models.Model):
-    cpf = models.CharField('CPF', max_length=11, unique=True, null=False)
+    cpf = models.CharField('CPF', max_length=14, unique=True, null=False)
     data_nasc = models.DateField('Data de nascimento', null=False)
     equipe_sistema = models.BooleanField('tem acesso ao sistema?')
 

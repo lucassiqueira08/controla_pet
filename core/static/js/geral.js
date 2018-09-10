@@ -78,10 +78,3 @@ FileInputBtn.addEventListener("change", function(){
 		fileInputSpan.innerHTML = "Nenhum arquivo selecionado...";
 	}
 });
-
-//=====================cheboxoesEstadia=======================
-function checkboxesEstadia() { 
-				if (document.getElementById('brinquedo').checked || document.getElementById('roupas').checked || document.getElementById('remedios').checked)    
-					{ document.getElementById('obscheckbox').disabled = false; } 
-				else 
-					{ document.getElementById('obscheckbox').disabled = true; } } 

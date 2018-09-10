@@ -7,7 +7,7 @@
 		<li class="ativo"><label>Buscar Cliente</label></li>
 		<li><label>Tela de escolha de animal</label></li>
 		<li><label>Estadia</label></li>
-		<li><label>Observações Estadia</label></li>
+		<li><label>Observações</label></li>
 	</ul>
 
 	<fieldset>	
@@ -48,9 +48,13 @@
 			<label for="Data1" class="formLabel">Data de fim:</label>
 			<input id="Data1" placeholder="__/__/____" maxlength="10" class="formInput data" name="datafim" >
 		</div>
+		<div class="dupla">
+			<label for="Data" class="formLabel">Valor da Diária:</label>
+			<input id="Data"  placeholder="Digite o valor da diária..." maxlength="10"  type="number" class="formInput" name="valordiaria">
+		</div> 
 		<div class="dupla destacadoCimaBaixo">
 			<label for="#" class="formLabel">Obs:</label>
-			<div class="formCheckbox" onclick="checkboxesEstadia()">				
+			<div class="formCheckbox">				
 				<input id="brinquedo" type="checkbox" name="checkbrinquedo" value="brinquedo">
 				<label for="brinquedo">Brinquedos</label>	
 				<input id="roupas" type="checkbox" name="checkroupas" value="roupas">
@@ -59,19 +63,14 @@
 				<label for="remedios">Remédios</label> 
 			</div>
 		</div>
-		<div class="">
-			<div class="dupla destacadoCimaBaixo">				
-						<textarea placeholder="Digite aqui a observação das opções que escolheu a cima..." class="formEtapasTextArea"  id="obscheckbox" maxlength="500" disabled=""></textarea>
-			</div>
-		</div>
 		<div class="containerBotoes centralizado linha">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior">
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Próxima"/><br>
 		</div>
 	</fieldset>
 	<fieldset>
-		<h2 class="tituloGrande">Outras Observações</h2>
-		<textarea placeholder="Digite aqui outras observações..." class="formEtapasTextArea" name="diagnostico" maxlength="500"></textarea>
+		<h2 class="tituloGrande">Observações</h2>
+		<textarea placeholder="Digite aqui as observações..." class="formEtapasTextArea" name="diagnostico" maxlength="500"></textarea>
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>

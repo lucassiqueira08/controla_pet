@@ -2,7 +2,7 @@
 {% load static %}
 {% block content_base %}
 <div class="titulo">
-	{% for animais in animal.object_list %}
+	{% for animal in animal.object_list %}
 	<div class="container esquerda ">
 		<!--===========ANIMAL===============-->
 		<a data-toggle="modal" data-target="#modal_1{{animais.nome}}">
@@ -10,22 +10,22 @@
 				<div class="imagemCard">
 					<!--		<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1" -->
 					<!-- alteração do caminho para imagem, para aplicar o modo dinamico ( tras a imagem com o nome do animao) Bruno 02.09.2019 -->
-					<img src="../../static/img/{{animais.nome}}.jpg" onerror="this.src='../../static/img/semfoto.jpeg';"  alt="Cachorrinho 1">
+					<img src="../../static/img/{{animal.nome}}.jpg" onerror="this.src='../../static/img/semfoto.jpeg';"  alt="Cachorrinho 1">
 				</div>
 				<!-- Formulario trazendo os dados de cada animal do banco de dados -->
 				<div class="conteudoCard linha esquerda">
 					<div class="coluna destacadoEsquerdaDireita">
 						<div class="dupla">
 							<label for="#" class="formLabel">Nome:</label>
-							<input id="endereco" class="formInput" type="text" value="{{animais.nome}}" disabled>
+							<input id="endereco" class="formInput" type="text" value="{{animal.nome}}" disabled>
 						</div>
 						<div class="dupla">
 							<label for="#" class="formLabel">Raça:</label>
-							<input id="endereco" class="formInput" type="text" value="{{animais.raca}}" disabled>
+							<input id="endereco" class="formInput" type="text" value="{{animal.raca}}" disabled>
 						</div>
 						<div class="dupla">
 							<label for="#" class="formLabel">Dono:</label>
-							<input id="dono" class="formInput" type="text" value="{{animais.cpf_cliente}}" disabled>
+							<input id="dono" class="formInput" type="text" value="{{animal.cpf_cliente}}" disabled>
 						</div>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 		</a>
 		<!-- Modal -->
 		<!-- consultando dados do banco Bruno 02.09.2018-->
-		<div class="modal fade" id="modal_1{{animais.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal fade" id="modal_1{{animal.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -49,48 +49,48 @@
 							<form method="post" class='formEtapas'>
 								{% csrf_token %}
 								<div class="imagemCardModal coluna">
-									<img src="../../static/img/{{animais.nome}}.jpg" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+									<img src="../../static/img/{{animal.nome}}.jpg" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
 									<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
 								</div>
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Nome </label>
-								<input  class="formInput" type="text" value="{{animais.nome}}" autofocus name="nome" required>
+								<input  class="formInput" type="text" value="{{animal.nome}}" autofocus name="nome" required>
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Sexo</label>
-								<input  class="formInput" type="text" value="{{animais.sexo}}" name="sexo" required>
+								<input  class="formInput" type="text" value="{{animal.sexo}}" name="sexo" required>
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Raça</label>
-								<input  class="formInput" type="text" value="{{animais.raca}}" name="raca" required>
+								<input  class="formInput" type="text" value="{{animal.raca}}" name="raca" required>
 							</div>
 
 							<div class="dupla">
 								<label for="#" class="formLabel">Cor</label>
-								<input  class="formInput" type="text" value="{{animais.cor}}" name="cor" required>
+								<input  class="formInput" type="text" value="{{animal.cor}}" name="cor" required>
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Especie</label>
-								<input  class="formInput" type="text" value="{{animais.especie}}" name="especie" required>
+								<input  class="formInput" type="text" value="{{animal.especie}}" name="especie" required>
 							</div>
 
 							<div class="dupla">
 
 								<label for="#" class="formLabel">Data de Nascimento</label>
-								<input  class="formInput" type="text" value="{{animais.datanasc}}" name="datanasc" required>
+								<input  class="formInput" type="text" value="{{animal.datanasc}}" name="datanasc" required>
 							</div>
 
 							<div class="dupla">
 								<label for="#" class="formLabel">Observação</label>
-								<input  class="formInput" type="text" value="{{animais.observacao}}" name="obs" required>
+								<input  class="formInput" type="text" value="{{animal.observacao}}" name="obs" required>
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Microchip</label>
-								<input  class="formInput" type="text" value="{{animais.microchip}}" name="microchip" required>
+								<input  class="formInput" type="text" value="{{animal.microchip}}" name="microchip" required>
 							</div>
 							<div class="dupla">
-								<input  class="formInput" type="hidden" value="{{animais.cpf_cliente.cpf}}" name="cpf_cliente"  >
+								<input  class="formInput" type="hidden" value="{{animal.cpf_cliente.cpf}}" name="cpf_cliente"  >
 							</div>
 						</div>
 						<div class="modal-footer">

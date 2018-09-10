@@ -106,7 +106,7 @@ class ViewVisualizarAnimal(BaseView):
         return render(request, self.template, context)
 
     def post(self, request):
-        c = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
+        cpf_cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
         animal = Animal.objects.get(microchip=request.POST.get('microchip') )
         animal.nome = request.POST.get('nome')
         animal.sexo = request.POST.get('sexo')
@@ -117,7 +117,7 @@ class ViewVisualizarAnimal(BaseView):
         animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('obs')
         animal.microchip = request.POST.get('microchip')
-        animal.cpf_cliente = c     
+        animal.cpf_cliente = cpf_cliente     
         if request.POST.get('button') == 'del':
             animal.delete()
         if request.POST.get('button')  == 'save':

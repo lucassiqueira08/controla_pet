@@ -107,7 +107,7 @@ class ViewVisualizarAnimal(BaseView):
 
     def post(self, request):
         cpf_cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
-        animal = Animal.objects.get(microchip=request.POST.get('microchip') )
+        animal = Animal.objects.get(cpf_cliente= cpf_cliente,microchip=request.POST.get('microchip') )
         animal.nome = request.POST.get('nome')
         animal.sexo = request.POST.get('sexo')
         animal.especie = request.POST.get('especie')

@@ -116,7 +116,7 @@ class ViewVisualizarAnimal(BaseView):
         animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('obs')
         animal.microchip = request.POST.get('microchip')
-        animal.cpf_cliente = cpf_cliente     
+        animal.cpf_cliente = cpf_cliente  
         if request.POST.get('button') == 'del':
             animal.delete()
         if request.POST.get('button')  == 'save':

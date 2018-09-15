@@ -17,7 +17,7 @@ class ViewCadastrarCliente(BaseView):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url= 'cadastro_estadia')
+            'menu': Menu.objects.get(url= 'cadastro_cliente')
         }
         return render(request, self.template, context)
 
@@ -34,7 +34,7 @@ class ViewCadastrarAnimal(BaseView):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url= 'cadastro_estadia')
+            'menu': Menu.objects.get(url= 'cadastro_animal')
         }
         return render(request, self.template, context)
 
@@ -85,7 +85,6 @@ class ViewVisualizarAnimal(BaseView):
     template = 'visualizar_animal.html'
 
     def get(self, request):
-
         animal_list = Animal.objects.all()
         paginator = Paginator(animal_list, 10)
 
@@ -107,20 +106,36 @@ class ViewVisualizarAnimal(BaseView):
 
     def post(self, request):
         cpf_cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
-        animal = Animal.objects.get(cpf_cliente=cpf_cliente)
+        animal = Animal.objects.get(cpf_cliente= cpf_cliente,microchip=request.POST.get('microchip') )
         animal.nome = request.POST.get('nome')
         animal.sexo = request.POST.get('sexo')
         animal.especie = request.POST.get('especie')
         animal.raca = request.POST.get('raca')
         animal.cor = request.POST.get('cor')
-        animal.datanasc = '2009-01-01'
+        datanasc = request.POST.get('datanasc')
+        animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('obs')
         animal.microchip = request.POST.get('microchip')
         animal.cpf_cliente = cpf_cliente
-        animal.save()
+        if request.POST.get('button') == 'del':
+            animal.delete()
+        if request.POST.get('button')  == 'save':
+            animal.save()
+
+        animal_list = Animal.objects.all()
+        paginator = Paginator(animal_list, 10)
+        try:
+            page = int(request.GET.get('page', '1'))
+        except ValueError:
+            page = 1
+
+        try:
+            animais = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            animais = paginator.page(paginator.num_pages)
         context = {
             'menu': Menu.objects.get(url= 'visualizar_animal'),
-             'animal': Animal.objects.all()
+             'animal':animais
         }
         return render(request, self.template, context)
 
@@ -129,4 +144,7 @@ class ViewFichaAnimal(BaseView):
     template = 'ficha_animal.html'
 
     def get(self, request):
-        return render(request, self.template)
+        context = {
+            'menu': Menu.objects.get(url= 'ficha_animal')
+        }
+        return render(request, self.template, context)

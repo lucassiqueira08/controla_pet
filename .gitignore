@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 controla_pet/__pycache__/
@@ -128,3 +129,5 @@ dump-de-testes-08-2018.sql
 #Google
 token.json
 credentials.json
+gdstorage/.credentials/google-drive-credentials.json
+

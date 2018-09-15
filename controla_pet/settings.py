@@ -135,6 +135,7 @@ DATABASE_APPS_MAPPING = {
     'django': 'default',
     'admin': 'default',
     'servicos': 'default',
+    'gdstorage': 'default',
 }
 
 

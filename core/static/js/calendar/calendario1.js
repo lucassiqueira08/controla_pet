@@ -16,8 +16,9 @@
       navLinks: true, //Permite navegar entre o dia e a semana.
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-	selectable : true,	  
-	  	  
+	selectable : true,
+
+	 googleCalendarApiKey: 'AIzaSyCj753IljI6MYJ0T0JCCsAALvCROE_Zweo',
 	   eventClick: function(events) {
 	   $('#visualizar #Nome').text(events.title);
 	   $('#visualizar #NomeAnimal').val(events.title);

@@ -7,7 +7,6 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 from apiclient.http import MediaFileUpload, MediaIoBaseDownload
-from apiclient import errors
 
 try:
     import argparse

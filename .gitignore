@@ -130,4 +130,4 @@ dump-de-testes-08-2018.sql
 token.json
 credentials.json
 gdstorage/.credentials/google-drive-credentials.json
-
+gdstorage/.*

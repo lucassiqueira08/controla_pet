@@ -10,7 +10,7 @@
 	<img src="{% static 'img/logocontrolapetwhite.png' %}" class="logoHeader">
 	{% endif %}
 	{% if user.is_authenticated %}
-	<div class="logout">
+	<div class="logout">	
 		<a href="{% url 'logout' %}">Sair</a>
 	</div>
 	{% endif %}

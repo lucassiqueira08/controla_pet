@@ -38,6 +38,7 @@ class Cliente(models.Model):
 
 
 class Animal(models.Model):
+    url_foto = models.CharField(max_length=500, blank=True, null=True)
     nome = models.CharField(max_length=50, blank=True, null=True)
     sexo = models.CharField(max_length=1, blank=True, null=True)
     especie = models.CharField(max_length=50)

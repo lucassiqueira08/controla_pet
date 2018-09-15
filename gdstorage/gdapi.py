@@ -7,6 +7,8 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 from apiclient.http import MediaFileUpload, MediaIoBaseDownload
+from apiclient import errors
+
 try:
     import argparse
     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
@@ -36,14 +38,16 @@ class GdApi:
             for item in items:
                 print('{0} ({1})'.format(item['name'], item['id']))
 
-    def upload_file(self, filename, filepath, mimetype):
+    def upload_file(self, filename, mimetype, filepath):
         file_metadata = {'name': filename}
+
         media = MediaFileUpload(filepath,
                                 mimetype=mimetype)
+
         file = self.drive_service.files().create(body=file_metadata,
-                                            media_body=media,
-                                            fields='id').execute()
-        print('File ID: %s' % file.get('id'))
+                                                 media_body=media,
+                                                 fields='id').execute()
+        return file.get('id')
 
     def download_file(self, file_id, filepath):
         request = self.drive_service.files().get_media(fileId=file_id)
@@ -57,27 +61,64 @@ class GdApi:
             fh.seek(0)
             f.write(fh.read())
 
-    def create_folder(self, name):
-        file_metadata = {
-            'name': name,
-            'mimeType': 'application/vnd.google-apps.folder'
-        }
-        file = self.drive_service.files().create(body=file_metadata,
-                                                 fields='id').execute()
-        print('Folder ID: %s' % file.get('id'))
+    def search_folder_by_name(self, name):
+        response = []
+        results = self.drive_service.files().list(
+            pageSize=1000, fields="nextPageToken, files(id, name)").execute()
+        items = results.get('files', [])
 
-    def search_file(self, size, query):
+        for item in items:
+            if item['name'] == name:
+                response.append(item)
+
+        if not response:
+            return []
+        else:
+            return response
+
+    def create_folder(self, name):
+        folder_exist = self.search_folder_by_name(name)
+
+        if folder_exist == []:
+
+            file_metadata = {
+                'name': name,
+                'mimeType': 'application/vnd.google-apps.folder',
+                'parents': 'Morumbichos'
+            }
+
+            folder = self.drive_service.files().create(body=file_metadata,
+                                              fields='id').execute()
+            return folder['id']
+        else:
+            return 'Diretório existente'
+
+
+    def search_file_by_name(self, query, size=1000):
         results = self.drive_service.files().list(pageSize=size,
-                                                  fields="nextPageToken, files(id, name, kind, mimeType)",
-                                                  q=query).execute()
+                                                  fields="nextPageToken, files(id, name)",
+                                                  q="name contains '%s'" % query).execute()
         items = results.get('files', [])
         if not items:
-            print('No files found.')
+            return []
         else:
-            print('Files:')
-            for item in items:
-                print(item)
-                print('{0} ({1})'.format(item['name'], item['id']))
+            return items
+
+    def get_file_by_id(self, file_id):
+        file = self.drive_service.files().get(fileId=file_id).execute()
+
+        if file == {}:
+            return {}
+        else:
+            return file
+
+    def get_src_image(self, file_id):
+        file = self.get_file_by_id(file_id)
+        url = "https://drive.google.com/uc" + "?id=" + file_id + "&export=download"
+        return url
+
+
+
 
 
 gdapi = GdApi(scopes='https://www.googleapis.com/auth/drive',

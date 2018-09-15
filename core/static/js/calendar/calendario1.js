@@ -3,7 +3,9 @@
 
     $('#calendar').fullCalendar({
 
-	
+     theme: true,    
+      themeSystem:'bootstrap4',
+
       header: {
         left: 'prev,next today',
         center: 'title',
@@ -81,11 +83,27 @@
         },
         {
           title: 'Pretinho',
-          start: '2018-05-12T17:30:00'
+          start: '2018-09-12T17:30:00'
+        },
+         {
+          title: 'Pretinho',
+          start: '2018-09-12T17:30:00'
+        },
+         {
+          title: 'Pretinho',
+          start: '2018-09-12T17:30:00'
+        },
+         {
+          title: 'Pretinho',
+          start: '2018-09-12T17:30:00'
+        },
+         {
+          title: 'Pretinho',
+          start: '2018-09-12T17:30:00'
         },
         {
           title: 'lala',
-          start: '2018-05-12T20:00:00'
+          start: '2018-09-12T20:00:00'
         },
         {
           title: 'Lucas',
@@ -94,7 +112,7 @@
         {
           title: 'Lucas siqueira',
           url: 'http://google.com/',
-          start: '2018-05-28'
+          start: '2018-09-28'
         }
       ]
     });

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content_base %}
-<form class="formEtapas" action="submit">
 	<a data-toggle="modal" data-target="#modal_1{{animais.nome}}">teste</a>
 	<div class="modal fade" id="modal_1{{animais.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -65,6 +64,13 @@
 							<p class="clearMargin">Cirurgia</p>
 							<p class="clearMargin">R$ 2.350,00</p>
 						</div>
+						<div class="containerMais">
+							<div class="centralizado">
+								<input type="text" class="inputProduto" name="produto0"> &nbsp; &nbsp;
+								<input type="text" class="inputValor dinheiro" name="valor0">
+								<a class="btnAdd"><img class="icone" src="{% static 'img/plus.png' %}" alt="Adicionar"></a>
+							</div>
+						</div>
 					</div>
 					<div class="destacadoCima linha espacoEntre">
 						<p class="clearMargin">Valor total</p>
@@ -79,5 +85,4 @@
 			</div>
 		</div>
 	</div>
-</form>
 {% endblock %}

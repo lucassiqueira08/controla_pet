@@ -67,7 +67,9 @@
 .telaTamanhoFixo{
 	height: 850px;
 }
-
+.invis{
+	display:none!important;
+}
 /**===========================Formularios===================**/
 
 .formulario{
@@ -622,6 +624,18 @@
 			font-size: 11px;
 		}
 	}
+	/**===========================Container adicionar===========================**/
+
+	.icone{
+		width:30px;
+	}
+	.inputValor{
+		width: 100px;
+		
+	}
+	.inputProduto{
+		width: 200px;
+	}
 	/**===========================Textos===========================**/
 
 
@@ -646,33 +660,33 @@
 	color: #ff6600;	
 }
 */
-.tituloExtraGrande, .tituloGrande, .tituloMedio, .tituloPequeno{
-	width: 100%;
-	text-align: center;
-	margin-top: 10px;
-	margin-bottom: 25px;
-}
-.tituloExtraGrande{
-	font-size: 34px;
-}
-.tituloGrande{
-	font-size: 30px;
-}
-.tituloMedio{
-	font-size: 25px;
-}
-.tituloPequeno{
-	font-size: 20px;
-}
-@media (max-width: 500px) {
+	.tituloExtraGrande, .tituloGrande, .tituloMedio, .tituloPequeno{
+		width: 100%;
+		text-align: center;
+		margin-top: 10px;
+		margin-bottom: 25px;
+	}
+	.tituloExtraGrande{
+		font-size: 34px;
+	}
 	.tituloGrande{
-		font-size: 28px;
+		font-size: 30px;
 	}
 	.tituloMedio{
-		font-size: 20px;
+		font-size: 25px;
 	}
 	.tituloPequeno{
-		font-size: 16px;
+		font-size: 20px;
 	}
+	@media (max-width: 500px) {
+		.tituloGrande{
+			font-size: 28px;
+		}
+		.tituloMedio{
+			font-size: 20px;
+		}
+		.tituloPequeno{
+			font-size: 16px;
+		}
 
-}
+	}

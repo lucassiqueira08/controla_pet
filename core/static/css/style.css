@@ -195,6 +195,7 @@
 .containerBotoes a{
 	margin:5px;
 }
+
 @media (max-width: 600px) {
 	.btnPrincipal{
 	    width: 200px;

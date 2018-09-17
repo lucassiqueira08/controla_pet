@@ -26,5 +26,12 @@ class ViewCadastroEstadia(View):
         }
         return render(request, self.template, context)
 
+class ViewModal(View):
+
+    template = 'modal_orcamento.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
 
 # Create your views here.

@@ -1,19 +1,12 @@
 from django.shortcuts import render
 
-from core.views import BaseView
+from gdstorage.gdapi import GdApi
 
-from gdstorage.gdapi import gdapi
-
-
-class ViewUploadImages(BaseView):
-
-    def upload_animal_images(self, animal_id, filepath):
-        image_id = gdapi.upload_file(filename=animal_id, mimetype='image/jpeg', filepath=filepath)
-        url = gdapi.get_src_image(image_id)
-        context = {
-            'url': url
-        }
-        return context
+gdapi = GdApi()
 
 
-upload_images = ViewUploadImages()
+def upload_animal_images(animal_id, filepath):
+    image_id = gdapi.upload_file(filename=animal_id, mimetype='image/jpeg', filepath=filepath)
+    url = gdapi.get_src_image(image_id)
+
+    return url

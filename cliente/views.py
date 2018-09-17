@@ -9,7 +9,8 @@ from .forms import FormCliente
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal)
 from core.models import Menu
-
+from gdstorage.views import upload_animal_images
+from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
 
 class ViewCadastrarCliente(BaseView):
 
@@ -106,7 +107,7 @@ class ViewVisualizarAnimal(BaseView):
 
     def post(self, request):
         cpf_cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
-        animal = Animal.objects.get(cpf_cliente= cpf_cliente,microchip=request.POST.get('microchip') )
+        animal = Animal.objects.get(cpf_cliente=cpf_cliente, microchip=request.POST.get('microchip'))
         animal.nome = request.POST.get('nome')
         animal.sexo = request.POST.get('sexo')
         animal.especie = request.POST.get('especie')
@@ -116,10 +117,20 @@ class ViewVisualizarAnimal(BaseView):
         animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('obs')
         animal.microchip = request.POST.get('microchip')
-        animal.cpf_cliente = cpf_cliente     
+        animal.cpf_cliente = cpf_cliente
+        arquivo = request.FILES['url_foto']
+
+        temp_arquivo = TemporaryUploadedFile(name=arquivo.name,
+                                          content_type=arquivo.content_type,
+                                          size=arquivo.size,
+                                          charset=arquivo.charset)
+
+        temp_path = temp_arquivo.temporary_file_path()
+
+        animal.url_foto = upload_animal_images(animal.pk, temp_path)
         if request.POST.get('button') == 'del':
             animal.delete()
-        if request.POST.get('button')  == 'save':
+        if request.POST.get('button') == 'save':
             animal.save()
 
         animal_list = Animal.objects.all()

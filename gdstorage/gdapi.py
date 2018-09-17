@@ -7,24 +7,23 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 from apiclient.http import MediaFileUpload, MediaIoBaseDownload
+from googleapiclient.discovery import build
+from httplib2 import Http
+from oauth2client import file, client, tools
 
-try:
-    import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-except ImportError:
-    flags = None
-import gdstorage.auth as auth
+scopes = 'https://www.googleapis.com/auth/drive'
+client_secret_file = '../credentials.json'
+application_name = 'Drive API Python'
+
 
 class GdApi:
 
-    def __init__(self, scopes, client_secret_file, application_name):
-        self.scopes = scopes
-        self.client_secret_file = client_secret_file
-        self.application_name = application_name
-        self.auth_inst = auth.auth(self.scopes, self.client_secret_file, self.application_name)
-        self.credentials = self.auth_inst.getCredentials()
-        self.http = self.credentials.authorize(httplib2.Http())
-        self.drive_service = discovery.build('drive', 'v3', http=self.http)
+    store = file.Storage('gdstorage/token.json')
+    creds = store.get()
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets(client_secret_file, scopes)
+        creds = tools.run_flow(flow, store)
+    drive_service = build('drive', 'v3', http=creds.authorize(Http()))
 
     def list_files(self, size):
         results = self.drive_service.files().list(
@@ -92,7 +91,6 @@ class GdApi:
         else:
             return 'Diretório existente'
 
-
     def search_file_by_name(self, query, size=1000):
         results = self.drive_service.files().list(pageSize=size,
                                                   fields="nextPageToken, files(id, name)",
@@ -115,11 +113,3 @@ class GdApi:
         file = self.get_file_by_id(file_id)
         url = "https://drive.google.com/uc" + "?id=" + file_id + "&export=download"
         return url
-
-
-
-
-
-gdapi = GdApi(scopes='https://www.googleapis.com/auth/drive',
-              client_secret_file='../credentials.json',
-              application_name='Drive API Python')

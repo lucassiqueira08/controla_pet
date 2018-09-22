@@ -8,9 +8,8 @@
 		<a data-toggle="modal" data-target="#modal_1{{animal.nome}}">
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
-					<!--		<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1" -->
 					<!-- alteração do caminho para imagem, para aplicar o modo dinamico ( tras a imagem com o nome do animao) Bruno 02.09.2019 -->
-					<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';"  alt="Cachorrinho 1">
+					<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{animal.nome}} - ID: {{animal.id}}">
 				</div>
 	<!-- Formulario trazendo os dados de cada animal do banco de dados -->
 				<div class="conteudoCard linha esquerda">

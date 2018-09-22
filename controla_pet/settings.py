@@ -89,32 +89,32 @@ WSGI_APPLICATION = 'controla_pet.wsgi.application'
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
 # !!!! BANCO DOCKER !!!!
-# DATABASES = {
-#    'default': config(
-#         'DOCKER_DATABASE',
-#         cast=dburl
-#     ),
-#    'titles': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': 'titles',
-#    }
-# }
-
-#!!!!   BANCO LOCAL MYSQL   !!!!
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_LOCAL_NAME'),
-        'USER': config('DATABASE_LOCAL_USER'),
-        'PASSWORD': config('DATABASE_LOCAL_PASSWORD'),
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-     },
-    'titles': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'titles',
-    }
+   'default': config(
+        'DOCKER_DATABASE',
+        cast=dburl
+    ),
+   'titles': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': 'titles',
+   }
 }
+
+# #!!!!   BANCO LOCAL MYSQL   !!!!
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('DATABASE_LOCAL_NAME'),
+#         'USER': config('DATABASE_LOCAL_USER'),
+#         'PASSWORD': config('DATABASE_LOCAL_PASSWORD'),
+#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
+#      },
+#     'titles': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'titles',
+#     }
+# }
 
 #!!!!    BANCO EM PRODUÇÃO   !!!!
 #DATABASES = {

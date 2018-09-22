@@ -37,15 +37,36 @@ class GdApi:
                 print('{0} ({1})'.format(item['name'], item['id']))
 
     def upload_file(self, filename, mimetype, filepath):
-        file_metadata = {'name': filename}
+        if mimetype == 'image/jpeg':
+            folder_id = self.create_folder("Images")
+        else:
+            folder_id = self.create_folder("Documentos")
+
+        file_metadata = {'name': 'animal' + '-' + str(filename) + '.jpeg',
+                         'parents': folder_id}
 
         media = MediaFileUpload(filepath,
-                                mimetype=mimetype)
+                                mimetype=mimetype,
+                                resumable=True)
 
         file = self.drive_service.files().create(body=file_metadata,
                                                  media_body=media,
-                                                 fields='id').execute()
+                                                 fields='id, parents').execute()
+        self.move_files_between_folders(file.get('id'), folder_id)
+
         return file.get('id')
+
+    def move_files_between_folders(self, file_id, folder_id):
+        # Retrieve the existing parents to remove
+        file = self.drive_service.files().get(fileId=file_id,
+                                              fields='parents').execute()
+        previous_parents = ",".join(file.get('parents'))
+
+        # Move the file to the new folder
+        file = self.drive_service.files().update(fileId=file_id,
+                                                 addParents=folder_id,
+                                                 removeParents=previous_parents,
+                                                 fields='id, parents').execute()
 
     def download_file(self, file_id, filepath):
         request = self.drive_service.files().get_media(fileId=file_id)
@@ -78,18 +99,18 @@ class GdApi:
         folder_exist = self.search_folder_by_name(name)
 
         if folder_exist == []:
-
+            folder_id = '164t7EFFY3R4MKNmOsYt4TuOtroIgUfFr'
             file_metadata = {
                 'name': name,
                 'mimeType': 'application/vnd.google-apps.folder',
-                'parents': 'Morumbichos'
+                'parents': folder_id
             }
 
             folder = self.drive_service.files().create(body=file_metadata,
-                                              fields='id').execute()
+                                                       fields='id').execute()
             return folder['id']
         else:
-            return 'Diretório existente'
+            return folder_exist[0]['id']
 
     def search_file_by_name(self, query, size=1000):
         results = self.drive_service.files().list(pageSize=size,
@@ -113,3 +134,6 @@ class GdApi:
         file = self.get_file_by_id(file_id)
         url = "https://drive.google.com/uc" + "?id=" + file_id + "&export=download"
         return url
+
+    def delete_file_by_id(self, file_id):
+        self.drive_service.files().delete(fileId=file_id).execute()

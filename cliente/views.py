@@ -3,14 +3,15 @@ from pprint import pprint
 
 from django.shortcuts import render
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
 
 from core.views import BaseView
 from .forms import FormCliente
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal)
 from core.models import Menu
-from gdstorage.views import upload_animal_images
-from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
+from gdstorage.app import upload_animal_images
+
 
 class ViewCadastrarCliente(BaseView):
 
@@ -121,13 +122,19 @@ class ViewVisualizarAnimal(BaseView):
         arquivo = request.FILES['url_foto']
 
         temp_arquivo = TemporaryUploadedFile(name=arquivo.name,
-                                          content_type=arquivo.content_type,
-                                          size=arquivo.size,
-                                          charset=arquivo.charset)
+                                             content_type=arquivo.content_type,
+                                             size=arquivo.size,
+                                             charset=arquivo.charset)
 
         temp_path = temp_arquivo.temporary_file_path()
 
+        destination = open(temp_path, 'wb+')
+        for chunk in arquivo.chunks():
+            destination.write(chunk)
+        destination.close()
+
         animal.url_foto = upload_animal_images(animal.pk, temp_path)
+
         if request.POST.get('button') == 'del':
             animal.delete()
         if request.POST.get('button') == 'save':
@@ -146,7 +153,7 @@ class ViewVisualizarAnimal(BaseView):
             animais = paginator.page(paginator.num_pages)
         context = {
             'menu': Menu.objects.get(url= 'visualizar_animal'),
-             'animal':animais
+            'animal': animais
         }
         return render(request, self.template, context)
 

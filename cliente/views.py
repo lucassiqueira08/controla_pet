@@ -118,6 +118,7 @@ class ViewVisualizarAnimal(BaseView):
         animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('obs')
         animal.microchip = request.POST.get('microchip')
+
         animal.cpf_cliente = cpf_cliente
         arquivo = request.FILES['url_foto']
 
@@ -134,6 +135,7 @@ class ViewVisualizarAnimal(BaseView):
         destination.close()
 
         animal.url_foto = upload_animal_images(animal.pk, temp_path)
+
 
         if request.POST.get('button') == 'del':
             animal.delete()

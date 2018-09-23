@@ -177,7 +177,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'usuarios/static',
     'core/static',
-    'cliente/static'
+    'cliente/static',
+    'bower_components',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # -----------------------------------

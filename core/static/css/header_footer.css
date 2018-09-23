@@ -3,9 +3,17 @@
 	padding: 0px;
 	font-family: inherit;
 }
+/*========ESPECÍFICO========*/
 .nav-toggle{
 	display: none!important;
 }
+.dropdown-item{
+	color: #000!important;
+}
+.dropdown-menu{
+	margin-right: 30px;
+}
+/*==========================*/
 header{
 	width: 100%;
 	height: 80px;
@@ -27,20 +35,63 @@ header{
 	-webkit-transition:  .3s;
 	transition:  .3s;
 }
-.logout{
+.elementosFuncionais{
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 }
-.logout a{
+.elementosFuncionais a{
 	color: #fff;
 	font-size: 18px;
 	margin-right: 25px;
 }
-.logout a:hover{
+.elementosFuncionais a:hover{
 	font-weight: 800;
 	color: #fff;
+}
+#notificacoes{
+	position: absolute;
+	width: auto;
+	height: 450px;
+	background-color: #f2f2f2;
+	margin-top: 520px;
+	overflow: auto;
+	z-index: 1000;
+	-webkit-transition:  .3s;
+	transition:  .3s;
+}
+.notificacao{
+	border-bottom: 1px dashed #a0a0a0;
+	list-style: none;
+}
+#sinoNotificacao{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 360px;
+}
+#sinoNotificacao img{
+	object-fit: cover;
+}
+#ckbSino{
+	display: none;
+}
+.sinoNotificacaoAtivo, #sinoNotificacao:hover {
+    background-color: #f2f2f2;
+		cursor: pointer;
+}
+.show{
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+.hide{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
 }
 .perfilImg{
 	width: 100px;
@@ -106,11 +157,6 @@ header{
 	padding-left: 30px;
 	background-color: #868686 ;
 }
-.mainLoginEsqueciSenha{
-	width: 100%;
-	height: auto;
-	padding: 30px;
-}
 .main{
 	display: flex;
 	justify-content: flex-start;
@@ -118,6 +164,15 @@ header{
 	flex-direction: row;
 	width: 100%;
 	height: auto;
+}
+.mainLoginEsqueciSenha{
+	width: 100%;
+	height: auto;
+	padding: 30px;
+}
+.icone{
+	margin:5px 0 5px 0;
+	width:40px;
 }
 .conteudo{
 	width: 100%;
@@ -196,7 +251,6 @@ small{
 		display: flex!important;
 		justify-content: flex-end;
 		align-items: flex-start;
-		padding: 0!important;
 	}
 	.conteudo{
 		padding: 30px;
@@ -244,4 +298,3 @@ small{
 		padding: 30px;
 	}
 }
-

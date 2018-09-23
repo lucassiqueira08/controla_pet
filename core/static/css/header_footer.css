@@ -55,15 +55,51 @@ header{
 	width: auto;
 	height: 450px;
 	background-color: #f2f2f2;
-	margin-top: 520px;
 	overflow: auto;
 	z-index: 1000;
 	-webkit-transition:  .3s;
 	transition:  .3s;
 }
+@media screen and (-webkit-min-device-pixel-ratio:0){
+	#notificacoes{
+		margin-top:  270px;
+	}
+}
+@-moz-document url-prefix() {
+	#notificacoes{
+	margin-top: 520px;
+	}
+}
+@media (max-width: 800px){
+	.notificacaoHorario,	.notificacaoBichinho,	.notificacaoProcedimento{
+		font-size: 17px;
+	}
+}
+@media (max-width: 600px){
+	#notificacoes{
+		width: 95%;
+	}
+	.notificacaoHorario,	.notificacaoBichinho,	.notificacaoProcedimento{
+		font-size: 15px;
+	}
+}
 .notificacao{
 	border-bottom: 1px dashed #a0a0a0;
 	list-style: none;
+}
+.notificacao{
+	display: grid;
+	grid-template-columns: 20% 30% 50%;
+}
+.notificacaoHorario{
+	grid-column: 1;
+}
+
+.notificacaoBichinho{
+	grid-column: 2;
+}
+.notificacaoProcedimento{
+	grid-column: 3;
 }
 #sinoNotificacao{
 	display: flex;

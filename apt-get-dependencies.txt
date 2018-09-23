@@ -7,3 +7,4 @@ locales-all
 libffi-dev
 libssl-dev
 swig
+curl

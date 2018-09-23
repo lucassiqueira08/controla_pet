@@ -6,8 +6,8 @@ services:
     build:
       context: .
     command: >
-      bash -c "find /app -name '000*.py' -delete && python manage.py makemigrations && python manage.py migrate 
-      && python manage.py runserver 0.0.0.0:8000"
+      bash -c "find /app -name '000*.py' -delete && python manage.py makemigrations && python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000 && bower install --allow-root"
     volumes:
       - .:/app
     ports:

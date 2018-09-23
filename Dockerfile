@@ -20,3 +20,8 @@ RUN apt autoclean
 
 RUN pip install -r requirements-dev.txt
 RUN touch .env
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt install nodejs --assume-yes
+RUN npm -v
+RUN npm install -g bower

@@ -1,0 +1,189 @@
+{% extends 'base_acompanhe_sua_clinica.html' %}
+{% load static %}
+{% block content_base %}
+
+<div id='cssmenu'>
+<ul>
+   <li><a href='acompanhe_sua_clinica'>Acompanhe sua Clinica</a></li>
+   <li class='active'><a href='animais_hospedados'>Animais Hospedados</a></li>
+   <li><a href='animais_em_aberto'>Pagamentos Pendentes</a></li>
+</ul>
+</div>
+
+<thead>
+  <tr>
+    <th>Status</th>
+    <th>Bichinho</th>
+    <th>Data Check in</th>
+    <th>Data Check out</th>
+  </tr>
+</thead>
+
+  <tbody>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_1{{animais.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal_1Label">Mudar Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="centralizado">
+              <form method="post" class='formEtapas'>
+                {% csrf_token %}
+
+            <div class="centralizado">
+            <div class="dupla">
+            <label for="#" class="formLabel">Status</label>
+            <select id="Status" class="formInput" required>
+              <option value="passeando">Passeando</option>
+              <option value="descansando">Descansando</option>
+              <option value="em-atendimento">Em Atendimento</option>
+              <option value="em-petshop">Em PetShop</option>
+              <option value="finalizado">Finalizado</option>
+            </select>
+        </div>
+        </div>
+      </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
+          <button name="button" class="acao btnPrincipal clearMarginTop">Salvar</button>
+
+        </div>
+      </form>
+        </div>
+        </div>
+        </div>
+
+
+    <tr>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        <img src="{% static 'img/atendimento.png' %}" alt="cruz_vermelha" class="item_table">
+        Bichinho em Atendimento
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          Layla
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/03/2018
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/09/2018
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        <img src="{% static 'img/passeando.png' %}" alt="cachorro_passeando" class="item_table">
+        Bichinho Passeando
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">Layla
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/03/2018
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/09/2018
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        <img src="{% static 'img/petshop.png' %}" alt="cachorro_tomando_banho" class="item_table">
+        Bichinho em PetShop
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          Layla
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/03/2018
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/09/2018
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        <img src="{% static 'img/descansando.png' %}" alt="icone_de_sono" class="item_table">
+        Bichinho Descansando
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        Layla
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/03/2018
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/09/2018
+        </a>
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        <img src="{% static 'img/finalizado.png' %}" alt="seta" class="item_table">
+        Finalizado
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          Layla
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/03/2018
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          12/09/2018
+        </a>
+      </td>
+    </tr>
+
+
+</tbody>
+</table>
+
+{% endblock %}

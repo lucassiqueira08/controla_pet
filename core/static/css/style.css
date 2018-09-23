@@ -107,10 +107,10 @@
 	border:.5px solid #A9A9A9;
 	width: auto;
 	height: 37px;
-	padding-left: 10px;	
+	padding-left: 10px;
 	display: flex;
 	justify-content: space-around;
-	align-items: center;	
+	align-items: center;
 }
 .formCheckbox option:hover {
     box-shadow: 0 0 10px 100px #1882A8 inset;
@@ -126,11 +126,11 @@
 	border:.5px solid #A9A9A9;
 	width: 250px;
 	height: 37px;
-	padding-left: 10px;	
+	padding-left: 10px;
 	background-color: #fff;
 	display: flex;
 	justify-content: space-around;
-	align-items: center;	
+	align-items: center;
 	margin-right: 0px!important;
 }
 .formRadio{
@@ -314,8 +314,8 @@
 	align-items: center;
 	flex-direction: row;
 	margin-left:10px;
-	margin-right:10px; 
-	margin-bottom:0px!important; 
+	margin-right:10px;
+	margin-bottom:0px!important;
 }
 .formEtapasRadio label input{
 	margin-right: 5px;
@@ -469,6 +469,156 @@
 	}
 }
 
+/**===========================Tabela===========================**/
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #FF6600;
+	cursor: pointer;
+
+}
+thead {
+  background: #ccc url(https://www.devfuria.com.br/html-css/tabelas/bar.gif) repeat-x left center;
+  border-top: 1px solid #a5a5a5;
+  border-bottom: 1px solid #FF6600;
+
+
+}
+tr:hover {
+  background-color: transparent;
+	border-bottom: 1px solid #FF6600;
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+
+}
+thead tr:hover {
+  background-color: #f2f2f2;
+	box-shadow: 0px 0px 0px rgba(0,0,0,0);
+  color: inherit;
+	border-bottom: 1px solid #FF6600;
+}
+
+tr:nth-child(even) {
+    background: #ccc url(https://www.devfuria.com.br/html-css/tabelas/bar.gif) repeat-x left center;
+		border-bottom: 1px solid #FF6600;
+}
+th {
+
+  font-weight: normal;
+  text-align: left;
+	border-bottom: 2px solid #FF6600;
+}
+th, td {
+  padding: 0.1em 1em;
+	border-bottom: 1px solid #FF6600;
+}
+.item_table{
+	width:30px;
+	height: 30px;
+}
+
+/**===========================Menu horizontal pagina acompanhe_sua_clinica===========================**/
+
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+#cssmenu,
+#cssmenu ul,
+#cssmenu ul li,
+#cssmenu ul li a {
+  margin-top: 2%;
+	margin-bottom: auto;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  line-height: 1;
+  display: block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#cssmenu:after,
+#cssmenu > ul:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+#cssmenu {
+  width: auto;
+  border-bottom: 3px solid #212529;
+  line-height: 1;
+}
+#cssmenu ul {
+  background: #ffffff;
+}
+#cssmenu > ul > li {
+  float: left;
+}
+#cssmenu.align-center > ul {
+  font-size: 0;
+  text-align: center;
+}
+#cssmenu.align-center > ul > li {
+  display: inline-block;
+  float: none;
+}
+#cssmenu.align-right > ul > li {
+  float: right;
+}
+#cssmenu.align-right > ul > li > a {
+  margin-right: 0;
+  margin-left: -4px;
+}
+#cssmenu > ul > li > a {
+  z-index: 2;
+  padding: 18px 25px 12px 25px;
+  font-size: 15px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #444444;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  margin-right: -4px;
+}
+#cssmenu > ul > li.active > a,
+#cssmenu > ul > li:hover > a,
+#cssmenu > ul > li > a:hover {
+  color: #ffffff;
+}
+#cssmenu > ul > li > a:after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  width: 100%;
+  height: 120%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  content: "";
+  -webkit-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  -webkit-transform: perspective(5px) rotateX(2deg);
+  -webkit-transform-origin: bottom;
+  -moz-transform: perspective(5px) rotateX(2deg);
+  -moz-transform-origin: bottom;
+  transform: perspective(5px) rotateX(2deg);
+  transform-origin: bottom;
+}
+#cssmenu > ul > li.active > a:after,
+#cssmenu > ul > li:hover > a:after,
+#cssmenu > ul > li > a:hover:after {
+  background: #212529;
+}
+
+
 /**===========================Cards===========================**/
 
 .cardContorno{
@@ -616,11 +766,11 @@ p{
 	font-size: 16px!important;
 }
 .tituloGrande, .tituloExtraGrande{
-	color: #000;	
+	color: #000;
 }
 /*
 .tituloMedio, .tituloPequeno{
-	color: #ff6600;	
+	color: #ff6600;
 }
 */
 .tituloExtraGrande, .tituloGrande, .tituloMedio, .tituloPequeno{

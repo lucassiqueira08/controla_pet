@@ -20,5 +20,29 @@ class ViewCadastroEstadia(View):
     def get(self, request):
         return render(request, self.template)
 
+class ViewAcompanheSuaClinica(View):
+
+    template = 'acompanhe_sua_clinica.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
+class ViewAnimaisEmAberto(View):
+
+    template = 'animais_em_aberto.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
+class ViewAnimaisHospedados(View):
+
+    template = 'animais_hospedados.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
+
+
+
 
 # Create your views here.

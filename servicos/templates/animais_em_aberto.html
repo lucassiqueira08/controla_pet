@@ -1,0 +1,184 @@
+{% extends 'base_acompanhe_sua_clinica.html' %}
+{% load static %}
+{% block content_base %}
+
+<div id='cssmenu'>
+<ul>
+   <li><a href='acompanhe_sua_clinica'>Acompanhe sua Clinica</a></li>
+   <li><a href='animais_hospedados'>Animais Hospedados</a></li>
+   <li class='active'><a href='animais_em_aberto'>Pagamentos Pendentes</a></li>
+</ul>
+</div>
+
+<thead>
+  <tr>
+    <th>Tipo Cliente</th>
+    <th>Bichinho</th>
+    <th>Valor em Aberto</th>
+    <th>Ultimo Atendimento</th>
+    <th>Status</th>
+  </tr>
+</thead>
+  <tbody>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_1{{animais.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal_1Label">Mudar Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="centralizado">
+              <form method="post" class='formEtapas'>
+                {% csrf_token %}
+
+            <div class="dupla centralizado">
+            <label for="#" class="formLabel">Status</label>
+            <select id="Status" class="formInput" required>
+              <option value="aguardando-pagto">Aguardando Pagamento</option>
+              <option value="pago">Pago</option>
+            </select>
+        </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
+          <button name="button" class="acao btnPrincipal clearMarginTop">Salvar</button>
+
+        </div>
+      </form>
+        </div>
+        </div>
+        </div>
+
+    <tr>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        <img src="{% static 'img/mensal.png' %}" alt="calendario" class="item_table">
+        Mensal
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          Layla
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          R$200,00
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          25/12/2013
+        </a>
+      </td>
+    <td>
+      <a data-toggle="modal" data-target="#modal_1">
+        Aguardando Pagamento
+      </a>
+    </td>
+  </tr>
+
+    <tr>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        <img src="{% static 'img/eventual.png'  %}" alt="exclamação" class="item_table">
+        Eventual
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          Layla
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          R$200,00
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          25/12/2013
+        </a>
+      </td>
+
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          Aguardando Pagamento
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        <img src="{% static 'img/mensal.png' %}" alt="mensal" class="item_table">
+        Mensal
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          Layla
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          R$200,00
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          25/12/2013
+        </a>
+      </td>
+
+    <td>
+      <a data-toggle="modal" data-target="#modal_1">
+        Aguardando Pagamento
+      </a>
+    </td>
+  </tr>
+
+
+    <tr>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+        <img src="{% static 'img/eventual.png' %}" alt="carro" class="item_table">
+        Eventual
+      </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          Layla
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          R$200,00
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          25/12/2013
+        </a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#modal_1">
+          Aguardando Pagamento
+        </a>
+      </td>
+    </tr>
+
+
+
+
+
+</tbody>
+</table>
+
+{% endblock %}

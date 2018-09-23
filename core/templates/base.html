@@ -10,7 +10,7 @@
 	<img src="{% static 'img/logocontrolapetwhite.png' %}" class="logoHeader">
 	{% endif %}
 	{% if user.is_authenticated %}
-	<div class="logout">	
+	<div class="logout">
 		<a href="{% url 'logout' %}">Sair</a>
 	</div>
 	{% endif %}
@@ -27,6 +27,10 @@
 			<div class="subMenuItem">
 				<img src="{% static 'img/cadastro_procedimento.png' %}" alt="ficha">
 				<h5><a href ="{% url 'cadastro_procedimento' %}">Cadastro de procedimento</a></h5>
+			</div>
+			<div class="subMenuItem">
+				<img src="{% static 'img/acompanhe.png' %}" alt="prancheta">
+				<h5><a href ="{% url 'acompanhe_sua_clinica' %}">Acompanhe sua clínica</a></h5>
 			</div>
 		</div>
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuAgenda" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/agenda.png' %}" alt="Agenda"><h5>Agenda</h5></button>

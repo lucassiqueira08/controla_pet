@@ -1,6 +1,8 @@
 from django.urls import path
 
+
 from .views import ViewCadastroProcedimento, ViewCadastroEstadia, ViewAcompanheSuaClinica, ViewAnimaisEmAberto, ViewAnimaisHospedados
+
 
 urlpatterns = [
     path(
@@ -12,6 +14,7 @@ urlpatterns = [
         name='cadastro_estadia'
     ),
     path(
+
         'acompanhe_sua_clinica', ViewAcompanheSuaClinica.as_view(),
         name='acompanhe_sua_clinica'
     ),
@@ -22,6 +25,11 @@ urlpatterns = [
     path(
         'animais_hospedados', ViewAnimaisHospedados.as_view(),
         name='animais_hospedados'
+    ),
+
+=======
+        'modal', ViewModal.as_view(),
+        name='modal'
     ),
 
 ]

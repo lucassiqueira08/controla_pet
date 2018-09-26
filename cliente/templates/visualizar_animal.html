@@ -8,9 +8,8 @@
 		<a data-toggle="modal" data-target="#modal_1{{animal.nome}}">
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
-					<!--		<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1" -->
 					<!-- alteração do caminho para imagem, para aplicar o modo dinamico ( tras a imagem com o nome do animao) Bruno 02.09.2019 -->
-					<img src="../../static/img/{{animal.nome}}.jpg" onerror="this.src='../../static/img/semfoto.jpeg';"  alt="Cachorrinho 1">
+					<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{animal.nome}} - ID: {{animal.id}}">
 				</div>
 	<!-- Formulario trazendo os dados de cada animal do banco de dados -->
 				<div class="conteudoCard linha esquerda">
@@ -46,11 +45,11 @@
 					</div>
 					<div class="modal-body">
 						<div class="centralizado">
-							<form method="post" class='formEtapas'>
+							<form method="post" class='formEtapas' enctype="multipart/form-data">
 								{% csrf_token %}
 								<div class="imagemCardModal coluna">
-									<img src="../../static/img/{{animal.nome}}.jpg" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
-									<input type="file" name="arquivos" class="formFileInput esquerda"  accept="image/png, image/jpeg"  multiple />
+									<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+									<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
 								</div>
 							</div>
 							<div class="dupla">

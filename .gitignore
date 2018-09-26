@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 controla_pet/__pycache__/
@@ -124,3 +125,10 @@ servicos/migrations/0*
 
 #Dumps
 dump-de-testes-08-2018.sql
+dump-de-testes-09-2018.sql
+
+#Google
+token.json
+credentials.json
+gdstorage/.credentials/google-drive-credentials.json
+gdstorage/.*

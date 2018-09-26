@@ -10,7 +10,32 @@
 	<img src="{% static 'img/logocontrolapetwhite.png' %}" class="logoHeader">
 	{% endif %}
 	{% if user.is_authenticated %}
-	<div class="logout">
+	<div class="elementosFuncionais">
+		<div class="collapse hide notificacoes" id="notificacoes">
+		  <div class="card card-body">
+		    <ul>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Araujo</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Nayarinha da silva sauro</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Cenoura</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Vitor papagaio</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Isake beiço</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Araujo</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Nayarinha da silva sauro</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Cenoura</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Vitor papagaio</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Isake beiço</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Araujo</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Nayarinha da silva sauro</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Cenoura</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Vitor papagaio</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Isake beiço</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
+				</ul>
+		  </div>
+		</div>
+		<input type="checkbox" id="ckbSino">
+	  <a id="sinoNotificacao" onclick="fadeInOut();" class="sinoNotificacaoInativo">
+	    <img class="icone" src="{% static 'img/notification.png' %}" alt="Notificações">
+	  </a>
 		<a href="{% url 'logout' %}">Sair</a>
 	</div>
 	{% endif %}
@@ -36,22 +61,22 @@
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuAgenda" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/agenda.png' %}" alt="Agenda"><h5>Agenda</h5></button>
 		<div class="submenu collapse" id="submenuAgenda">
 			<div class="subMenuItem">
-				<img src="{% static 'img/calendar.png' %}" alt="Calendario">
+				<img src="{% static 'img/index.png' %}" alt="Calendario">
 				<h5><a href ="{% url 'index' %}">Calendário</a></h5>
 			</div>
 		</div>
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuCadastro" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/cadastro.png' %}" alt="Cadastro"><h5>Cadastro</h5></button>
 		<div class="submenu collapse" id="submenuCadastro">
 			<div class="subMenuItem">
-				<img src="{% static 'img/cadastrar_animal.png' %}" alt="Cadastrar Animal">
+				<img src="{% static 'img/cadastro_animal.png' %}" alt="Cadastrar Animal">
 				<h5><a href ="{% url 'cadastrar_animal' %}">Cadastro de animal</a></h5>
 			</div>
 			<div class="subMenuItem">
-				<img src="{% static 'img/cadastrar_cliente.png' %}" alt="Cadastrar Cliente">
+				<img src="{% static 'img/cadastro_cliente.png' %}" alt="Cadastrar Cliente">
 				<h5><a href ="{% url 'cadastrar_cliente' %}">Cadastro de cliente</a></h5>
 			</div>
 			<div class="subMenuItem">
-				<img src="{% static 'img/cadastrar_estadia.png' %}" alt="Cadastrar Estadia">
+				<img src="{% static 'img/cadastro_estadia.png' %}" alt="Cadastrar Estadia">
 				<h5><a href ="{% url 'cadastro_estadia' %}">Cadastro de estadia</a></h5>
 			</div>
 		</div>
@@ -59,7 +84,7 @@
 
 		<div class="submenu collapse" id="submenuConsulta">
 			<div class="subMenuItem">
-				<img src="{% static 'img/visualiza_animal.png' %}" alt="visualiza Animal">
+				<img src="{% static 'img/visualizar_animal.png' %}" alt="visualiza Animal">
 				<h5><a href ="{% url 'visualizar_animal' %}">Visualizar animal</a></h5>
 			</div>
 		</div>
@@ -67,16 +92,16 @@
 	<div class="conteudo">
 		<input type="checkbox" id="navicon">
 		<div class="nav-toggle">
-			<label for="navicon" class="hamburger" onclick="menuSlide();">
-				<span></span>
-				<span></span>
-				<span></span>
-			</label>
+				<label for="navicon" class="hamburger" onclick="menuSlide();">
+					<span></span>
+					<span></span>
+					<span></span>
+				</label>
 		</div>
 		<div class="titulo destacadoCimaBaixo clearMarginTop">
 			<div class="itensTitulo">
 				<div class="circulo">
-					<img src="{% static 'img/{{menu.url}}.png' %}" alt="Logo">
+					<img src="../static/img/{{menu.url}}.png" alt="{{menu.descricao}}">
 				</div>
 			</div>
 		</div>

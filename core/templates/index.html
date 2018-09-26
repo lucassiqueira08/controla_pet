@@ -1,5 +1,201 @@
 {% extends 'base_calendar.html' %}
 {% block content_base %}
 {% load static %}
-	<div id='calendar'></div>
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#calendar').fullCalendar({
+
+     theme: true,    
+      themeSystem:'bootstrap4',
+
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay,listWeek'
+      },
+      defaultDate: Date() ,
+    locale:'pt-br',
+      navLinks: true, //Permite navegar entre o dia e a semana.
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+  selectable : true,
+
+   googleCalendarApiKey: 'AIzaSyCj753IljI6MYJ0T0JCCsAALvCROE_Zweo',
+     eventClick: function(events) {
+     $('#visualizar #Nome').text(events.title);
+     $('#visualizar #NomeAnimal').val(events.title);
+     $('#visualizar #DataInicio').text(events.start.format('DD/MM/YYYY HH:mm:ss'));
+     
+     $('#visualizar #datahora').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
+       $('#visualizar').modal('show');
+     return false;     
+    },
+      selectHelper: true,
+        select:function(start,end){
+    $('#cadastrar #dataAtendimento').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+    $('#cadastrar #end').val(moment(end).format('DD/MM/YYYY HH:mm:ss'));
+    $('#cadastrar').modal('show');
+    },
+    
+      events : [
+      {% for atendimento in Atendimentos %}
+      
+        {
+          title:"{{atendimento.data_solicitacao}}" ,
+          
+          start: "{{atendimento.data_solicitacao}}"
+        },
+      {% endfor %}
+
+      ]
+
+    });
+
+  });
+
+</script>
+
+<div clss="container">
+	<div id='calendar'>
+		
+	</div>
+	<div class="modal fade" id="visualizar" tabindex="-1"
+  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+  
+        <h5 class="modal-title text-center" ></h5>
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>	  
+	<div class="modal-body">
+	<div class="visualizar">
+	
+	
+		<dl Class = "dl-horizontal">			
+			<dt>Observação:</dt>
+			<dd id="Nome"></dd>
+             <dt>Data:</dt>
+			<dd id="DataInicio"></dd>
+		</dl>
+     </div>
+     
+	 <div class="modal-footer">
+		<button type="button" name="fecha" id="fecha" class="btn btn-canc-vis btn-warning"  onclick="Mudar('edit')"   >Editar</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
+		 </div>
+
+		<div class="formModal" id="edit" name="edit"  style= "display :none">
+	<div class="form-group">
+    <label for="exampleInputName">Observação</label>
+    <input type="text" class="form-control" id="exampleInputName" name="obs" placeholder="Nome">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName">Data/hora</label>
+    <input type="datetime" class="form-control" name ="dataAtendimento" id="dataatendimento" >
+  </div>
+  
+   <div class="form-group">
+    <label for="exampleInputName">CPF:</label>
+    <input type="text" class="form-control"  name="cpf" id="cpf">
+  </div>
+				
+				<button type="button" class="btn btn-canc-edit btn-primary clearMarginTop" onclick="Mudar('edit') ">Cancelar</button>
+  <button name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
+		</div>
+     
+      </div>
+    </div>
+  </div>
+</div>
+
+   <div class="modal fade" id="cadastrar" tabindex="-1"
+  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" >Cadastrar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>	  
+	<div class="modal-body">
+<!-- Usa o form para criar alimentar o evento para gravar dados na google agenda -->	
+		<form method="post" class='formEtapas'>
+        {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleInputName">Observação</label>
+    <input type="text" class="form-control" id="exampleInputName" name="obs" placeholder="Nome">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName">Data/hora</label>
+    <input type="datetime" class="form-control" name ="dataAtendimento" id="dataAtendimento" >
+  </div>
+  
+   <div class="form-group">
+    <label for="exampleInputName">CPF:</label>
+    <input type="text" class="form-control"  name="cpf" id="cpf">
+  </div>
+  <div class="dupla">
+  <button name="button" value = "save" class="acao btn btnPrincipal clearMarginTop">SALVAR</button>
+   <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
+    </div>
+     
+</form>
+     </div>
+     
+	 <div class="modal-footer">
+
+       
+      </div>
+    </div>
+  </div>
+</div>
+  
+   <div class="modal fade" id="cadastrar" tabindex="-1"
+  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" >Cadastrar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>	  
+	<div class="modal-body">
+		<form>
+  <div class="form-group">
+    <label for="exampleInputName">Nome Dono</label>
+    <input type="text" class="form-control" id="exampleInputName" placeholder="Nome">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName">Nome Do animal</label>
+    <input type="text" class="form-control" id="exampleInputAnimal" placeholder="Name do Animal">
+  </div>
+  
+   <div class="form-group">
+    <label for="exampleInputName">Data e hora :</label>
+    <input type="text" class="form-control"  name="start" id="start">
+   
+</form>
+     </div>
+     
+	 <div class="modal-footer">
+
+        <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+		</div>		
+	</div>
 {% endblock %}

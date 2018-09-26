@@ -35,6 +35,7 @@ class FormAnimal(forms.ModelForm):
             'observacao',
             'microchip',
             'cpf_cliente',
+            'url_foto',
         ]
 
 

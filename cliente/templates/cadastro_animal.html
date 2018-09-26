@@ -2,7 +2,7 @@
 {% block content_base %}
 
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
-<form method="post" class='formEtapas'>
+<form method="post" class='formEtapas' enctype="multipart/form-data">
 {% csrf_token %}
 	<ul id="progress">
 		<li class="ativo"><label>Buscar Animal</label></li>

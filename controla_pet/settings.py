@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'cliente',
     'core',
     'servicos',
+    'gdstorage',
 ]
 
 MIDDLEWARE = [
@@ -99,7 +100,7 @@ DATABASES = {
    }
 }
 
-#!!!!   BANCO LOCAL MYSQL   !!!!
+# #!!!!   BANCO LOCAL MYSQL   !!!!
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -135,6 +136,7 @@ DATABASE_APPS_MAPPING = {
     'django': 'default',
     'admin': 'default',
     'servicos': 'default',
+    'gdstorage': 'default',
 }
 
 

@@ -122,7 +122,7 @@ function fadeInOut(){
 		document.getElementById("notificacoes").className = "hide";
 	}
 
-});
+};
 
 function Mudar(el){
 	var display = document.getElementById(el).style.display;

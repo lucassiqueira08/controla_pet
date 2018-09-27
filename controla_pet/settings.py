@@ -28,8 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['systemcontrolapet.herokuapp.com']
+ALLOWED_HOSTS = ['systemcontrolapet.herokuapp.com']
 
 
 
@@ -89,16 +88,16 @@ WSGI_APPLICATION = 'controla_pet.wsgi.application'
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
 # !!!! BANCO DOCKER !!!!
-DATABASES = {
-   'default': config(
-        'DOCKER_DATABASE',
-        cast=dburl
-    ),
-   'titles': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': 'titles',
-   }
-}
+# DATABASES = {
+#    'default': config(
+#         'DOCKER_DATABASE',
+#         cast=dburl
+#     ),
+#    'titles': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': 'titles',
+#    }
+# }
 
 # #!!!!   BANCO LOCAL MYSQL   !!!!
 # DATABASES = {
@@ -117,13 +116,13 @@ DATABASES = {
 # }
 
 #!!!!    BANCO EM PRODUÇÃO   !!!!
-#DATABASES = {
-#    'default': config('AWS_DATABASE_URL', default=default_dburl, cast=dburl),
-#    'titles': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': 'titles',
-#    }
-#}
+DATABASES = {
+   'default': config('AWS_DATABASE_URL', default=default_dburl, cast=dburl),
+   'titles': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': 'titles',
+   }
+}
 
 
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']
@@ -173,7 +172,7 @@ USE_TZ = True
 
 DATE_FORMAT = 'j/n/Y'
 
-DATETIME_FORMAT = 'Y-m-d h:i' 
+DATETIME_FORMAT = 'Y-m-d h:i'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'

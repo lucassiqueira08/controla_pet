@@ -1,45 +1,254 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+ControlaPet :dog:
+--------------------------------------------------------------------------
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+ControlaPet é um Sistema de Gerenciamento de PetShops e Clinicas Veterinarias  desenvolvido por:
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
 
----
+* Bruno Lima dos Santos
+* Isaque Felizardo
+* Lucas Alves Siqueira
+* Lucas Araujo de Oliveira
+* Nayara de Paula Muniz
+* Vitor Crepaldi Carlessi
 
-## Edit a file
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
 
----
-
-## Create a file
-
-Next, you’ll add a new file to this repository.
-
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
-
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+### Quickstart
 
 ---
 
-## Clone a repository
+#### Clone este repositório:
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+```sh
+    git clone https://github.com/ControlaPet/controla_pet.git
+```
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+---
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+
+#### Fluxo de Desenvolvimento da equipe
+
+* **master** - Branch utilizado somente para funcionalidades já testadas e aprovadas pelo cliente
+* **develop** - Branch que consiste no desenvolvimento atual da equipe
+
+* **features** - Demais funcionalidades que estão sendo desenvolvidas
+
+
+![alt text](https://www.bitbull.it/blog/git-flow-come-funziona/gitflow-1.png "GitFlow")
+__fonte__: https://www.bitbull.it/blog/git-flow-come-funziona/gitflow-1.png
+
+**SEMPRE**:
+* Para novas funcionalidades utilize: feature/nome_da_func
+* Para melhorias no codigo: bugfix/nome_da_correcao
+
+---
+
+
+
+
+#### Trabalhe na branch correta
+
+Para visualizar todas as branches:
+```sh
+    git branch -a
+```
+
+
+Utilize uma branch já existente:
+```sh
+    git checkout <nome_da_branch>
+```
+
+Ou crie uma nova para a sua funcionalidade:
+```sh
+    git checkout -b <nome_da_branch>
+
+    <Exemplo>
+    git checkout -b DBconnection
+```
+
+Certifique-se de que sua branch está atualizada:
+```sh
+    git pull origin <nome_da_branch_mais_att>
+
+    <Exemplo>
+    git pull origin develop
+```
+---
+
+
+#### Adicione suas credenciais
+Para trabalhar com o projeto ControlaPet, crie um arquivo chamado .env na raiz do diretorio, e
+adicione as credenciais fornecidas pela **equipe de desenvolvimento**.
+
+
+---
+#### Rodando o projeto com Docker Compose
+
+Docker é uma tecnologia que fornece containers que isolam processos, com a ajuda do Docker Compose é possível orquestrar containers e subir aplicações complexas com poucos comandos.
+
+Instalação do Docker no Windows: [https://docs.docker.com/docker-for-windows/install/](https://docs.docker.com/docker-for-windows/install/)
+
+Instalação do Docker Compose no Linux: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+
+**Iniciando o projeto**
+
+Atualize o repositorio local
+```sh
+    git pull origin develop
+```
+Para iniciar o projeto:
+
+```sh
+    docker-compose up
+```
+Ao rodar o projeto, o mysql será iniciado e, logo após, a app migrará para o banco de dados e irá subir o servidor.
+
+**Makefile**
+
+Através do make, é possível executar instruções nomeadas e contidas em um arquivo conhecido como Makefile.
+Para executar um comando make digite:
+
+```sh
+    make <comando_do_makefile>
+```
+Exemplo:
+
+```sh
+    make clean
+```
+**Comandos possíveis:**
+_clean_ - Limpa o repositorio local de todos os arquivos de cache
+
+_mysql-docker_ - Acessa o container do MYSQL
+
+_app-docker_ - Acessa o container da aplicação
+
+_docker-admin-group_ - Permissiona o docker colocando-o no grupo de admin do Linux
+
+_create-docker-network_ - Cria a network utilizada pelos containers
+
+_docker-clean_ - Apaga todas as imagens e containers do docker
+
+_container-dump-db_ - Popula o banco de dados
+
+_container-createsuperuser_ - Cria um super usuario no Django
+
+_container-drop-db_ - Derruba o banco de dados
+
+_container-create-db_ - Cria um novo banco de dados
+
+Fluxo:
+
+```sh
+    make container-drop-db
+    make container-create-db
+    docker-compose up mysql
+    docker-compose up app
+    make container-createsuperuser
+```
+
+**Informações adicionais:**
+
+Para acessar containers utilize:
+```sh
+    docker exec -it <container-name> bash
+
+    <Exemplo>
+    docker exec -it sys_controla_pet bash
+
+```
+Para derrubar containers:
+```sh
+    docker-compose down
+```
+
+**Não esqueça:**
+* Sem as credenciais (.env), o projeto não será iniciado
+* Sem privilegios de administrador talvez algum erro seja exibido
+* O MYSQL estará rodando na porta 3308, para evitar conflitos com a porta padrão do mysql local, portanto ao optar por softwares como Mysql Workbench utilize:
+    * Host: localhost
+    * Port: 3308
+    * User: root
+    * Password: (A mesma da credencial)
+
+---
+#### Rodando o projeto sem docker
+
+*Obs:* O MYSQL deve estar instalado.
+
+Apaga todos os arquivos da pasta migrations, exceto init.py, de cada APP, em seguida execute o comando a seguir para identificar migrações:
+```sh
+    python manage.py makemigrations
+```
+
+Em seguida, digite o comando abaixo para realizar as migrações para o banco de dados:
+
+```sh
+    python manage.py migrate
+```
+
+Ao editar arquivos, digite o comando abaixo para identificar erros:
+```sh
+    python manage.py check
+```
+
+Para criar um usuario que acesse a pagina administrativa utilize:
+```sh
+    python manage.py createsuperuser
+```
+
+Para rodar o projeto digite:
+```sh
+    python manage.py runserver
+```
+Por padrão o servidor é iniciado no endereço: [http://localhost:8000/](http://localhost:8000/)
+
+
+---
+
+
+#### Subindo alterações
+Certifique-se novamente de que está utilizando a versão mais atual do cógido:
+
+```sh
+    git pull origin <nome_da_branch_mais_att>
+
+    <Exemplo>
+    git pull origin develop
+```
+
+
+Para verificar o situação atual do repositório
+```sh
+    git status
+```
+Se houver alterações a serem commitadas **NÃO** utilizar **" git add ."**, digite:
+```sh
+    git add <nome_do_arquivo_alterado>
+```
+
+Para commitar as alterações por favor digite uma **MENSAGEM COERENTE** com o que foi desenvolvido:
+```sh
+    git commit -m "Mensagem Coerente"
+
+    <Exemplo>
+    git commit -m "Conexao com o Banco de Dados remoto"
+```
+
+Para subir suas alterações ao GitHub, digite:
+
+```sh
+    git push origin <nome_da_sua_branch>
+
+    <Exemplo>
+    git push origin DBconnection
+```
+**JAMAIS**:
+* Dê push direto no develop e master
+* Utilize o develop/master como branch para desenvolver
+* Digite mensagens em commits sem sentido
+* Force um commit com conflitos
+
+---

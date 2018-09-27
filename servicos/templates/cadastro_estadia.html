@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+<form method="post" class='formEtapas'>
+	{% csrf_token %}
+	<ul id="progress">
+		<li class="ativo"><label>Buscar Cliente</label></li>
+		<li><label>Tela de escolha de animal</label></li>
+		<li><label>Estadia</label></li>
+		<li><label>Observações</label></li>
+	</ul>
+
+	<fieldset>	
+		<h3 class="tituloExtraGrande">Buscar Cliente</h3>
+		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Cliente..." maxlength="14">
+		<div class="containerBotoes">
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Escolher Animal</h2>
+		<div class="centralizado destacadoCimaBaixo">
+			<div class="imagemCardModal coluna">
+				<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+			</div>
+		</div>
+		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" disabled/>
+		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" disabled/>
+		<input type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" disabled/>
+		<h2 class="tituloMedio destacadoCima">Esse é o bixinho certo?</h2>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Estadia</h2>	
+		<h2 class="tituloExtraGrande">{{menu.descricao}}</h2>
+		<p>Digite as informações da estadia!</p>	
+		
+		<div class="dupla">
+			<label for="Data" class="formLabel">Data de inicio:</label>
+			<input id="Data" placeholder="__/__/____" maxlength="10"  class="formInput data" name="datainicio">
+		</div> 
+		<div class="dupla">
+			<label for="Data1" class="formLabel">Data de fim:</label>
+			<input id="Data1" placeholder="__/__/____" maxlength="10" class="formInput data" name="datafim" >
+		</div>
+		<div class="dupla">
+			<label for="Data" class="formLabel">Valor da Diária:</label>
+			<input id="Data"  placeholder="Digite o valor da diária..." maxlength="10"  type="number" class="formInput" name="valordiaria">
+		</div> 
+
+		<div class="containerBotoes centralizado linha">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior">
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Próxima"/><br>
+		</div>
+	</fieldset>
+	<fieldset>
+		<h2 class="tituloGrande">Observações</h2>
+		<textarea placeholder="Digite aqui as observações..." class="formEtapasTextArea" name="diagnostico" maxlength="500"></textarea>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>
+		</div>
+	</fieldset>
+</form>
+{% endblock %}

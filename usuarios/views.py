@@ -1,5 +1,10 @@
 from django.shortcuts import render
+from django.views import View
 
 
-def view_esqueceu_senha(request):
-    return render(request, 'esqueceu_senha.html')
+class ViewEsqueceuSenha(View):
+
+    template = 'esqueceu_senha.html'
+
+    def get(self, request):
+        return render(request, self.template)

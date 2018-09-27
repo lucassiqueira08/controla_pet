@@ -1,0 +1,18 @@
+{% extends 'base_imports.html' %}
+{% load static %}
+{% block content %}
+	<header>
+		 <img src="{% static 'img/logocontrolapetwhite.png' %}" class="logoHeader">
+	</header>
+
+	<main class="mainLoginEsqueciSenha">			
+		{% block content_base %}
+
+			<!--===========CONTEÚDO DA PÁGINA===============-->
+
+		{% endblock %}
+	</main>
+	<footer>
+		<small>Controla Pet © 2018 Todos Diretos reservados. Termos e Uso e Política de Privacidade</small>
+	</footer>
+{% endblock %}

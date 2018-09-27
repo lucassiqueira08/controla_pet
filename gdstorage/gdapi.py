@@ -12,7 +12,7 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 
 scopes = 'https://www.googleapis.com/auth/drive'
-client_secret_file = '../credentials.json'
+client_secret_file = 'credentials.json'
 application_name = 'Drive API Python'
 
 

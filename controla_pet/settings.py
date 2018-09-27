@@ -175,7 +175,7 @@ DATE_FORMAT = 'j/n/Y'
 DATETIME_FORMAT = 'Y-m-d h:i'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     'usuarios/static',

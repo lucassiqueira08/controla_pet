@@ -64,7 +64,7 @@ class ViewCadastrarAnimal(BaseView):
         animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('observacao')
         animal.microchip = request.POST.get('microchip')
-        animal.cpf_cliente = request.POST.get('cpf')
+        animal.cpf_cliente = cliente
         animal.save()
 
         responde = Responde()
@@ -135,7 +135,6 @@ class ViewVisualizarAnimal(BaseView):
         destination.close()
 
         animal.url_foto = upload_animal_images(animal.pk, temp_path)
-
 
         if request.POST.get('button') == 'del':
             animal.delete()

@@ -1,6 +1,3 @@
-from django.shortcuts import render
-
-
 from gdstorage.gdapi import GdApi
 
 gdapi = GdApi()

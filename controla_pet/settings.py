@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'core',
     'servicos',
     'gdstorage',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [

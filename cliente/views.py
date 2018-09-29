@@ -10,7 +10,6 @@ from .forms import FormCliente
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal)
 from core.models import Menu
-from gdstorage.app import upload_animal_images
 
 
 class ViewCadastrarCliente(BaseView):

@@ -1,11 +1,7 @@
 from __future__ import print_function
-import httplib2
-import os, io
 
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
+import io
+
 from apiclient.http import MediaFileUpload, MediaIoBaseDownload
 from googleapiclient.discovery import build
 from httplib2 import Http
@@ -36,14 +32,15 @@ class GdApi:
             for item in items:
                 print('{0} ({1})'.format(item['name'], item['id']))
 
-    def upload_file(self, filename, mimetype, filepath):
+    def upload_file(self, filename, mimetype, filepath, upload_mimeType):
         if mimetype == 'image/jpeg':
             folder_id = self.create_folder("Images")
         else:
             folder_id = self.create_folder("Documentos")
 
-        file_metadata = {'name': 'animal' + '-' + str(filename) + '.jpeg',
-                         'parents': folder_id}
+        file_metadata = {'name': str(filename),
+                         'parents': folder_id,
+                         'mimeType': upload_mimeType}
 
         media = MediaFileUpload(filepath,
                                 mimetype=mimetype,
@@ -130,10 +127,32 @@ class GdApi:
         else:
             return file
 
-    def get_src_image(self, file_id):
-        file = self.get_file_by_id(file_id)
-        url = "https://drive.google.com/uc" + "?id=" + file_id + "&export=download"
-        return url
+    def get_src_file(self, file_id, mimetype):
+        if mimetype == 'image/jpeg':
+            url = "https://drive.google.com/uc" + "?id=" + file_id + "&export=download"
+            return url
+
+        elif mimetype == 'plan/text' or mimetype == 'application/pdf':
+            url = "https://drive.google.com/uc" + "?id=" + file_id + "&export=download"
+            return url
+
+        elif mimetype == 'text/docx':
+            url = 'https://docs.google.com/document/d/' + file_id + '/export?format=pdf'
+            return url
+
+        elif mimetype == 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+            url = 'https://docs.google.com/presentation/d/' + file_id + '/export/pdf'
+            return url
+
+        elif mimetype == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+            url = 'https://docs.google.com/spreadsheets/d/' + file_id + '/export?format=pdf'
+            return url
+        else:
+            try:
+                url = "https://drive.google.com/uc" + "?id=" + file_id + "&export=download"
+                return url
+            except Exception:
+                return "Arquivo inexistente"
 
     def delete_file_by_id(self, file_id):
         self.drive_service.files().delete(fileId=file_id).execute()

@@ -136,7 +136,7 @@ function Mudar(el){
 
 
 
-  function OpenMenu(evt, menuName) {
+  function OpenMenu(evt, menuName, tabela = false) {
     var i, x, tablinks;
     x = document.getElementsByClassName("menuOpcoes");
     for (i = 0; i < x.length; i++) {
@@ -146,9 +146,15 @@ function Mudar(el){
     for (i = 0; i < x.length; i++) {
        tablinks[i].className = tablinks[i].className.replace(" border-orange", "");
     }
-    document.getElementById(menuName).style.display = "flex";
+		if (tabela) {
+    	document.getElementById(menuName).style.display = "table";
+		}
+		else {
+    	document.getElementById(menuName).style.display = "flex";
+		}
     evt.currentTarget.firstElementChild.className += " border-orange";
   }
+
 
 
 

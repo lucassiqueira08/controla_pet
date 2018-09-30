@@ -1,11 +1,6 @@
 from __future__ import print_function
-import httplib2
-import os, io
 
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
+import io
 from apiclient.http import MediaFileUpload, MediaIoBaseDownload
 from googleapiclient.discovery import build
 from httplib2 import Http
@@ -18,7 +13,7 @@ application_name = 'Drive API Python'
 
 class GdApi:
 
-    store = file.Storage('gdstorage/token.json')
+    store = file.Storage('token.json')
     creds = store.get()
     if not creds or creds.invalid:
         flow = client.flow_from_clientsecrets(client_secret_file, scopes)

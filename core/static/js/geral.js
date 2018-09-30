@@ -131,3 +131,38 @@ function Mudar(el){
 	 else
 	 	document.getElementById(el).style.display ='none';
 }
+
+// ============== Func MenuOpções ==============
+
+
+
+  function OpenMenu(evt, menuName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("menuOpcoes");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+       tablinks[i].className = tablinks[i].className.replace(" border-orange", "");
+    }
+    document.getElementById(menuName).style.display = "flex";
+    evt.currentTarget.firstElementChild.className += " border-orange";
+  }
+
+
+
+
+
+
+
+function HideShow(show, hide1, hide2=null, hide3=null, hide4=null){
+	document.getElementById(show).style.display  = "block";
+	document.getElementById(hide1).style.display = "none";
+	if(hide2 != null)
+		document.getElementById(hide2).style.display = "none";
+	if(hide3 != null)
+		document.getElementById(hide3).style.display = "none";
+	if(hide4 != null)
+		document.getElementById(hide4).style.display = "none";
+}

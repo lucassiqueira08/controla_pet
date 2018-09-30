@@ -38,7 +38,7 @@
 	justify-content: space-around;
 }
 .espacoEntre{
-	justify-content: space-between;		
+	justify-content: space-between;
 }
 .destacadoCima{
 	margin-top: 30px!important;
@@ -118,10 +118,10 @@
 	border:.5px solid #A9A9A9;
 	width: auto;
 	height: 37px;
-	padding-left: 10px;	
+	padding-left: 10px;
 	display: flex;
 	justify-content: space-around;
-	align-items: center;	
+	align-items: center;
 }
 .formCheckbox option:hover {
 	box-shadow: 0 0 10px 100px #1882A8 inset;
@@ -137,11 +137,11 @@
 	border:.5px solid #A9A9A9;
 	width: 250px;
 	height: 37px;
-	padding-left: 10px;	
+	padding-left: 10px;
 	background-color: #fff;
 	display: flex;
 	justify-content: space-around;
-	align-items: center;	
+	align-items: center;
 	margin-right: 0px!important;
 }
 .formRadio{
@@ -326,8 +326,8 @@
 		align-items: center;
 		flex-direction: row;
 		margin-left:10px;
-		margin-right:10px; 
-		margin-bottom:0px!important; 
+		margin-right:10px;
+		margin-bottom:0px!important;
 	}
 	.formEtapasRadio label input{
 		margin-right: 5px;
@@ -616,7 +616,12 @@
 		max-width: 50%!important;
 
 	}
-
+/**===========================MenuOpções;===========================**/
+.tablink{
+	color: #000;
+	font-weight: 800;
+	
+}
 	/**===========================Tabela===========================**/
 
 
@@ -669,7 +674,7 @@
 	}
 	.inputValor{
 		width: 100px;
-		
+
 	}
 	.inputProduto{
 		width: 200px;
@@ -691,11 +696,11 @@
 		font-size: 16px!important;
 	}
 	.tituloGrande, .tituloExtraGrande{
-		color: #000;	
+		color: #000;
 	}
 /*
 .tituloMedio, .tituloPequeno{
-	color: #ff6600;	
+	color: #ff6600;
 }
 */
 	.tituloExtraGrande, .tituloGrande, .tituloMedio, .tituloPequeno{

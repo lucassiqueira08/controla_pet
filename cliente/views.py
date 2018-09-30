@@ -167,3 +167,9 @@ class ViewFichaAnimal(BaseView):
             'menu': Menu.objects.get(url= 'ficha_animal')
         }
         return render(request, self.template, context)
+class ViewAcompanheSuaClinica(BaseView):
+
+    template = 'acompanhe_sua_clinica.html'
+
+    def get(self, request):
+        return render(request, self.template)

@@ -10,7 +10,10 @@ from .forms import FormCliente
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal)
 from core.models import Menu
+
+
 from cloudinary_api.app import cloudyapi
+
 
 
 class ViewCadastrarCliente(BaseView):

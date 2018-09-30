@@ -16,6 +16,7 @@ class ViewCadastroProcedimento(View):
         }
         return render(request, self.template, context)
 
+
 class ViewCadastroEstadia(View):
 
     template = 'cadastro_estadia.html'
@@ -25,6 +26,7 @@ class ViewCadastroEstadia(View):
             'menu': Menu.objects.get(url= 'cadastro_estadia')
         }
         return render(request, self.template, context)
+
 
 class ViewModal(View):
 

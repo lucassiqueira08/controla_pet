@@ -10,7 +10,10 @@ from .forms import FormCliente
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal)
 from core.models import Menu
-from gdstorage.app import upload_animal_images
+
+
+from cloudinary_api.app import cloudyapi
+
 
 
 class ViewCadastrarCliente(BaseView):
@@ -102,7 +105,7 @@ class ViewVisualizarAnimal(BaseView):
 
         context = {
             'menu': Menu.objects.get(url= 'visualizar_animal'),
-             'animal': animais
+            'animal': animais
         }
         return render(request, self.template, context)
 
@@ -120,21 +123,14 @@ class ViewVisualizarAnimal(BaseView):
         animal.microchip = request.POST.get('microchip')
 
         animal.cpf_cliente = cpf_cliente
-        arquivo = request.FILES['url_foto']
+        try:
+            arquivo = request.FILES['url_foto']
+        except Exception:
+            arquivo = None
 
-        temp_arquivo = TemporaryUploadedFile(name=arquivo.name,
-                                             content_type=arquivo.content_type,
-                                             size=arquivo.size,
-                                             charset=arquivo.charset)
-
-        temp_path = temp_arquivo.temporary_file_path()
-
-        destination = open(temp_path, 'wb+')
-        for chunk in arquivo.chunks():
-            destination.write(chunk)
-        destination.close()
-
-        animal.url_foto = upload_animal_images(animal.pk, temp_path)
+        if arquivo is not None and animal.pk is not None:
+            foto = cloudyapi.upload_animal_image(arquivo, animal.pk)
+            animal.url_foto = foto['url']
 
         if request.POST.get('button') == 'del':
             animal.delete()
@@ -158,6 +154,7 @@ class ViewVisualizarAnimal(BaseView):
         }
         return render(request, self.template, context)
 
+
 class ViewFichaAnimal(BaseView):
 
     template = 'ficha_animal.html'
@@ -167,3 +164,9 @@ class ViewFichaAnimal(BaseView):
             'menu': Menu.objects.get(url= 'ficha_animal')
         }
         return render(request, self.template, context)
+class ViewAcompanheSuaClinica(BaseView):
+
+    template = 'acompanhe_sua_clinica.html'
+
+    def get(self, request):
+        return render(request, self.template)

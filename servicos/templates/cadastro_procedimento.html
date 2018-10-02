@@ -1,124 +1,62 @@
-	{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content_base %}
 
-<form method="post" class='formEtapas'>
+					<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+	<div class="container">
+	  <div class="row">
+	    <div class="col">
+	    </div>
+	    <div class="col-8">
+				<div class="w3-row">
+					<a href="javascript:void(0)" onclick="OpenMenu(event, 'Estetico');">
+						<div class=" border-orange w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Procedimento Estético</div>
+					</a>
+					<a href="javascript:void(0)" onclick="OpenMenu(event, 'Clinico');">
+						<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Procedimento Clínico</div>
+					</a>
+				</div>
+	    </div>
+	    <div class="col">
+	    </div>
+	  </div>
+	</div>
+	<form method="post" class='formEtapas menuOpcoes' id="Estetico">
 	{% csrf_token %}
-	<ul id="progress">
-		<li class="ativo"><label>Buscar Animal</label></li>
-		<li><label>Confirmação</label></li>
-		<li><label>Tipo do Serviço</label></li>
-	</ul>
+		<fieldset id="estetico">
+			<h2 class="tituloGrande">Procedimento Estético</h2 class="tituloGrande">
+			<p>Digite algumas informações do procedimento!</p>
 
-	<fieldset>	
-		<h3 class="tituloExtraGrande">Buscar Animal</h3 class="tituloExtraGrande">
-		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="100">
-		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14">
-		<div class="containerBotoes">
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
-		</div>
-	</fieldset>
+				<input type="text" class="formEtapasInput" 					name="descricao" 	placeholder="Descrição" maxlength="500" />
+				<input type="text" class="formEtapasInput" 					name="nome" 			placeholder="Nome" 			maxlength="500" />
+				<input type="text" class="formEtapasInput dinheiro" name="preco" 			placeholder="Preço" 		maxlength="500" />
+				<input type="text" class="formEtapasInput" 				  name="especie" 		placeholder="Espécie" 	maxlength="500" />
 
-	<fieldset>
-		<h2 class="tituloGrande">Confirmar animal</h2>
-		<div class="centralizado">
-			<table>
-				<tr>
-					<th colspan="2" class="tituloTabela">Animal</th>
-					<th colspan="2" class="tituloTabela">Proprietário</th>
-				</tr>
-				<tr>
-					<th>Nome:</th>
-					<td>Xuxuzinho</td>
-					<th>Nome:</th>
-					<td>Lucas Araujo de Oliveira</td>
-				</tr>
-				<tr>
-					<th>Cor:</th>
-					<td>Marrom</td>
-					<th>Cpf:</th>
-					<td>447.459.088-06</td>
-				</tr>
-				<tr>
-					<th>Sexo:</th>
-					<td>Masculino</td>
-					<th>Endereço:</th>
-					<td>Av. Manoel Pedro Pimentel, 465 - Pq. Continental</td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-					<th>Telefone:</th>
-					<td>(11)9775-0209</td>
-				</tr>
-			</table>
-		</div>
-		<h2 class="tituloMedio destacadoCima">Esse é o bixinho certo?</h2>
-		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
-		</div>
-	</fieldset>
+				<div class="containerBotoes linha centralizado">
+			        <button  class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
+				</div>
+		</fieldset>
+	</form>
 
-	<fieldset>
-		<h2 class="tituloGrande">Tipo do serviço</h2>
-		<div class="centralizado">
-			<table>
-				<tr>
-					<th colspan="2" class="tituloTabela">Animal</th>
-					<th colspan="2" class="tituloTabela">Proprietário</th>
-				</tr>
-				<tr>
-					<th>Nome:</th>
-					<td>Xuxuzinho</td>
-					<th>Nome:</th>
-					<td>Lucas Araujo de Oliveira</td>
-				</tr>
-				<tr>
-					<th>Cor:</th>
-					<td>Marrom</td>
-					<th>Cpf:</th>
-					<td>447.459.088-06</td>
-				</tr>
-				<tr>
-					<th>Sexo:</th>
-					<td>Masculino</td>
-					<th>Endereço:</th>
-					<td>Av. Manoel Pedro Pimentel, 465 - Pq. Continental</td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-					<th>Telefone:</th>
-					<td>(11)9775-0209</td>
-				</tr>
-			</table>
-		</div>
+	<form method="post" class='formEtapas menuOpcoes' id="Clinico" style="display:none;">
+	{% csrf_token %}
+		<fieldset id="clinico">
+			<h2 class="tituloGrande">Procedimento Clínico</h2 class="tituloGrande">
+			<p>Digite algumas informações do procedimento!</p>
 
-		<p class="destacadoCima">Tipo</p>	 
-		<div class="centralizado">
-			<div class="formEtapasRadio">
-				<label class="destacadoEsquerdaDireita"><input type="radio" name="sexo" >Procedimento clínico</label>
-				<label class="destacadoEsquerdaDireita"><input type="radio" name="sexo" >Procedimento estético</label>
+			<input type="text" class="formEtapasInput" 					name="descricao" 	placeholder="Descrição" maxlength="500" />
+			<input type="text" class="formEtapasInput" 					name="nome" 			placeholder="Nome" 			maxlength="500" />
+			<input type="text" class="formEtapasInput dinheiro" name="preco" 			placeholder="Preço" 		maxlength="500" />
+			<input type="text" class="formEtapasInput" 				  name="especie" 		placeholder="Espécie" 	maxlength="500" />
+			<p>Autorização:</p>
+			<input type="file" class="formFileInput esquerda"   name="url_autorizacao" multiple />
+			<div class="containerBotoes linha centralizado">
+						<button  class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
 			</div>
-		</div>
-		<p class="destacadoCima">Procedimento</p>	
-		<div class="centralizado">
-			<select class="formCombo">
-				<option value="">Escolha o Procedimento...</option>
-				<option value="banho">Banho</option>
-				<option value="tosahigienica">Tosa Higiênica</option>
-				<option value="tosaraca">Tosa Raça</option>
-				<option value="tosanatesoura">Tosa na Tesoura</option>
-				<option value="higieneoral">Higiêne Oral</option>
-			</select>
-		</div>
+		</fieldset>
+	</form>
+{% endblock %}
 
-		<h3 class="tituloMedio direita destacadoCima">Preço atual: R$00,00</h3>
-		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
-		</div>
-	</fieldset>
-</form>
+{% block add_js %}
+    <script src="{% static 'js/cadastro_cliente.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+					<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+	<div class="container">
+	  <div class="row">
+	    <div class="col">
+	    </div>
+	    <div class="col-8">
+				<div class="w3-row">
+					<a href="javascript:void(0)" onclick="OpenMenu(event, 'AcompanheSuaClinica', true);">
+						<div class=" border-orange w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Acompanhe sua Clínica</div>
+					</a>
+					<a href="javascript:void(0)" onclick="OpenMenu(event, 'AnimaisHospedados', true);">
+						<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Animais Hospedados</div>
+					</a>
+					<a href="javascript:void(0)" onclick="OpenMenu(event, 'PagamentosPendentes', true);">
+						<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Pagamentos Pendentes</div>
+					</a>
+				</div>
+	    </div>
+	    <div class="col">
+	    </div>
+	  </div>
+	</div>
+	<!-- TABELA ACOMPANHE SUA CLINICA -->
+
+		<table class="tabelaResponsiva menuOpcoes" id="AcompanheSuaClinica">
+			<thead>
+				<tr class="table100-head">
+					<th class="column1">Status</th>
+					<th class="column2">Bichinho</th>
+					<th class="column3">Horário</th>
+					<th class="colunaEscondida">Acompanhe sua Clínica</th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<td class="column1">Bichinho encaminhado</td>
+						<td class="column2">Lucas</td>
+						<td class="column3">22:40</td>
+					</tr>
+					<tr>
+						<td class="column1">Bichinho aguardando</td>
+						<td class="column2">Nayara</td>
+						<td class="column3">14:20</td>
+					</tr>
+					<tr>
+						<td class="column1">Bichinho encaminhado</td>
+						<td class="column2">Lucas</td>
+						<td class="column3">22:40</td>
+					</tr>
+					<tr>
+						<td class="column1">Bichinho aguardando</td>
+						<td class="column2">Nayara</td>
+						<td class="column3">14:20</td>
+					</tr>
+			</tbody>
+		</table>
+
+	<!-- TABELA ANIMAIS HOSPEDADOS -->
+
+		<table class="tabelaResponsiva menuOpcoes" id="AnimaisHospedados" style="display:none;">
+			<thead>
+				<tr class="table100-head">
+					<th class="column1">Status</th>
+					<th class="column2">Bichinho</th>
+					<th class="column3">Data Check In</th>
+					<th class="column4">Data Check Out</th>
+					<th class="colunaEscondida">Animais Hospedados</th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<td class="column1">Bichinho encaminhado</td>
+						<td class="column2">Lucas</td>
+						<td class="column3">13/09/2018</td>
+						<td class="column4">22/09/2018</td>
+					</tr>
+					<tr>
+						<td class="column1">Bichinho aguardando</td>
+						<td class="column2">Nayara</td>
+						<td class="column3">02/09/2018</td>
+						<td class="column4">11/09/2018</td>
+					</tr>
+					<tr>
+						<td class="column1">Bichinho encaminhado</td>
+						<td class="column2">Lucas</td>
+						<td class="column3">13/09/2018</td>
+						<td class="column4">22/09/2018</td>
+					</tr>
+					<tr>
+						<td class="column1">Bichinho aguardando</td>
+						<td class="column2">Nayara</td>
+						<td class="column3">02/09/2018</td>
+						<td class="column4">11/09/2018</td>
+					</tr>
+			</tbody>
+		</table>
+
+		<!-- TABELA PAGAMENTOS PENDENTES -->
+
+			<table class="tabelaResponsiva menuOpcoes" id="PagamentosPendentes" style="display:none;">
+				<thead>
+					<tr class="table100-head">
+						<th class="column1">Tipo Cliente</th>
+						<th class="column2">Bichinho</th>
+						<th class="column3">Valor em Aberto</th>
+						<th class="column4">Último Atendimento</th>
+						<th class="column5">Status</th>
+						<th class="colunaEscondida">Pagamentos Pendentes</th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr>
+							<td class="column1">Mensal</td>
+							<td class="column2">Lucas</td>
+							<td class="column3">R$123,00</td>
+							<td class="column4">11/09/2018</td>
+							<td class="column5">Aguardando Pagamento</td>
+						</tr>
+						<tr>
+							<td class="column1">Eventual</td>
+							<td class="column2">Nayara</td>
+							<td class="column3">R$50,00</td>
+							<td class="column4">23/08/2018</td>
+							<td class="column5">Aguardando Pagamento</td>
+						</tr>
+						<tr>
+							<td class="column1">Mensal</td>
+							<td class="column2">Lucas</td>
+							<td class="column3">R$123,00</td>
+							<td class="column4">11/09/2018</td>
+							<td class="column5">Aguardando Pagamento</td>
+						</tr>
+						<tr>
+							<td class="column1">Eventual</td>
+							<td class="column2">Nayara</td>
+							<td class="column3">R$50,00</td>
+							<td class="column4">23/08/2018</td>
+							<td class="column5">Aguardando Pagamento</td>
+						</tr>
+				</tbody>
+			</table>
+
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/cadastro_cliente.js' %}"></script>
+{% endblock %}

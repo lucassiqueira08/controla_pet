@@ -12,9 +12,10 @@ class ViewCadastroProcedimento(View):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url= 'cadastro_procedimento')
+            
         }
         return render(request, self.template, context)
+
 
 class ViewCadastroEstadia(View):
 
@@ -25,6 +26,7 @@ class ViewCadastroEstadia(View):
             'menu': Menu.objects.get(url= 'cadastro_estadia')
         }
         return render(request, self.template, context)
+
 
 class ViewModal(View):
 

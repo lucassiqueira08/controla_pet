@@ -10,10 +10,13 @@
 		<!--=========CSS============-->
 		<link rel="stylesheet" type="text/css" href="{% static 'css/header_footer.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+		<!--=========TOAST MESSAGE============-->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/ToastMessage/jquery.toast.min.css' %}">
+		<!--=========LOGO CONTROLAPET============-->
 		<link rel="stylesheet" type="text/css" href="{% static 'css/w3-css.css' %}">
 		<!--=========TABELA RESPONSIVA============-->
 		<link rel="stylesheet" type="text/css" href="{% static 'css/table_responsive/tabela_responsiva.css' %}">
-
+    <!--=========ÍCONE DO NAVEGADOR============-->
 		<link rel="icon" href="{% static 'img/logocontrolapetwhite.png' %}" type="image/x-icon">
 		<!--=========BOOTSTRAP============-->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -44,10 +47,14 @@
 		<script type="text/javascript" src="{% static 'js/hamburguer_menu.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/mascara_validacao.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
+		<!--=========TOAST MESSAGE============-->
+		<script type="text/javascript" src="{% static 'js/ToastMessage/jquery.toast.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/ToastMessage/toast_message.js' %}"></script>
 		<!--=========TABELA RESPONSIVA============-->
 		<script src="{% static 'js/table_responsive/tabela_responsiva.js' %}"></script>
-		{% block add_js %}
-		{% endblock %}
+    
+	{% block add_js %}
+	{% endblock %}
 
 	</body>
 	</html>

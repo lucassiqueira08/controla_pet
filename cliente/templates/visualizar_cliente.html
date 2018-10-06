@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+<div class="titulo">
+	{% for cliente in cliente.object_list %}
+	<div class="container esquerd a ">
+		<!--===========cliente===============-->
+		<a data-toggle="modal" data-target="#modal_1{{cliente.nome}}">
+			<div class="linha esquerda cardContorno">
+				<div class="imagemCard">
+					<!-- alteração do caminho para imagem, para aplicar o modo dinamico ( tras a imagem com o nome do animao) Bruno 02.09.2019 -->
+					<img src="{{cliente.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{cliente.nome}} - ID: {{cliente.id}}">
+				</div>
+	<!-- Formulario trazendo os dados de cada cliente do banco de dados -->
+				<div class="conteudoCard linha esquerda">
+					<div class="coluna destacadoEsquerdaDireita">
+						<div class="dupla">
+							<label for="#" class="formLabel">Nome:</label>
+							<input id="nome" class="formInput" type="text" value="{{cliente.nome}}" disabled>
+						</div>
+						<div class="dupla">
+							<label for="#" class="formLabel">CPF:</label>
+							<input id="cpf" class="formInput" type="text" value="{{cliente.cpf}}" disabled>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="containerBotoes centralizado linha">
+			</div>
+		</a>
+		<!-- Modal -->
+		<!-- consultando dados do banco Bruno 02.09.2018-->
+		<div class="modal fade" id="modal_1{{cliente.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modal_1Label">Cadastrar um cliente</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="centralizado">
+							<form method="post" class='formEtapas' enctype="multipart/form-data">
+								{% csrf_token %}
+								<div class="imagemCardModal coluna">
+									<img src="{{cliente.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+									<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
+								</div>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Nome</label>
+								<input  class="formInput" type="text" value="{{cliente.nome}}" autofocus name="nome" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">CPF</label>
+								<input  class="formInput" type="text" value="{{cliente.cpf}}" name="cpf" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Email</label>
+								<input  class="formInput" type="text" value="{{cliente.email}}" name="email" required>
+							</div>
+
+							<div class="dupla">
+								<label for="#" class="formLabel">CEP</label>
+								<input  class="formInput" type="text" value="{{cliente.cep}}" name="cep" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Logradouro</label>
+								<input  class="formInput" type="text" value="{{cliente.logradouro}}" name="logradouro" required>
+							</div>
+
+							<div class="dupla">
+
+								<label for="#" class="formLabel">Número</label>
+								<input  class="formInput" type="text" value="{{cliente.numero}}" name="numero" required>
+							</div>
+
+							<div class="dupla">
+								<label for="#" class="formLabel">Cidade</label>
+								<input  class="formInput" type="text" value="{{cliente.cidade}}" name="cidade" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Bairro</label>
+								<input  class="formInput" type="text" value="{{cliente.bairro}}" name="bairro" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Complemento</label>
+								<input  class="formInput" type="text" value="{{cliente.complemento}}" name="complemento" required>
+							</div>
+							<div class="dupla">
+								<label for="#" class="formLabel">Tipo de cliente</label>
+								<input  class="formInput" type="text" value="{{cliente.id_tipo_cliente}}" name="id_tipo_cliente" required>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
+							<button name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
+
+							 <button name="button" value="del" class=" acao btnPrincipal btn-danger clearMarginTop">Deletar</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	{%endfor%}
+
+
+	<!--===========PAGINAÇÃO===============-->
+{% if cliente.has_other_pages %}
+	<div class="centralizado destacadoCimaBaixo">
+		<nav aria-label="...">
+			<ul class="pagination">
+				{% if cliente.has_previous %}
+					<li class="page-item">
+						<a class="page-link" href="?page={{ cliente.previous_page_number }}">Anterior</a>
+					</li>
+				{% endif %}
+				{% for page in cliente.paginator.page_range %}
+					{% if cliente.number == page %}
+						<li class="page-item" id="paginationActive">
+							<a class="page-link" href="#">{{ page }}</a>
+						</li>
+					{% else %}
+						<li class="page-item">
+							<a class="page-link" href="?page={{ page }}">{{ page }}</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+
+				{% if cliente.has_next %}
+				<li class="page-item">
+					<a class="page-link" href="?page={{ cliente.next_page_number }}">Próxima</a>
+				</li>
+				{% else %}
+				{% endif %}
+			</ul>
+		</nav>
+	</div>
+	{% endif %}
+{% endblock %}

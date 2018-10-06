@@ -104,6 +104,8 @@ class Veterinario(FuncionarioAbstrato):
     ultimo_nome = models.CharField('Último nome', max_length=50)
     crmv = models.CharField('CRMV', max_length=50, unique=True)
     estado_emissor = models.CharField('Estado Emissor', max_length=2)
+    id_funcionario = models.ForeignKey(Funcionario, models.DO_NOTHING,
+                                db_column='id_funcionario')
 
     class Meta:
         app_label = 'usuarios'

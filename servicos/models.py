@@ -281,7 +281,8 @@ class FeitoPor(models.Model):
 
 
 class FichaDiagnostico(models.Model):
-    id_diagnostico = models.IntegerField(primary_key=True)
+    id_diagnostico = models.ForeignKey(DiagnosticoAnimal, models.DO_NOTHING,
+                                db_column='id_diagnostico', primary_key=True)
     id_ficha = models.ForeignKey(FichaAnimal, models.DO_NOTHING,
                                  db_column='id_ficha')
 

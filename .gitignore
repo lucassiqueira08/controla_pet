@@ -126,6 +126,8 @@ servicos/migrations/0*
 #Dumps
 dump-de-testes-08-2018.sql
 dump-de-testes-09-2018.sql
+dump-de-testes-10-2018.sql
+dump-de-testes-clean.sql
 
 #Google
 token.json

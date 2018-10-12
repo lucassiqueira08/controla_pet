@@ -9,8 +9,12 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-
+#biblioteca Python
 import os
+
+#biblioteca de terceiro
+import raven
+import sentry_sdk
 
 from decouple import config
 from dj_database_url import parse as dburl
@@ -48,6 +52,7 @@ INSTALLED_APPS = [
     'servicos',
     'gdstorage',
     'cloudinary',
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +86,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'controla_pet.wsgi.application'
 
@@ -174,7 +180,7 @@ USE_TZ = True
 
 DATE_FORMAT = 'j/n/Y'
 
-DATETIME_FORMAT = 'Y-m-d h:i' 
+DATETIME_FORMAT = 'Y-m-d h:i'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'

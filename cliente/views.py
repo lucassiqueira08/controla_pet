@@ -24,6 +24,8 @@ class ViewCadastrarCliente(BaseView):
         context = {
             'menu': Menu.objects.get(url= 'cadastro_cliente')
         }
+        
+
         return render(request, self.template, context)
 
     def post(self, request):
@@ -38,9 +40,13 @@ class ViewCadastrarAnimal(BaseView):
     template = 'cadastro_animal.html'
 
     def get(self, request):
+        animal_list = Animal.objects.all()
+        
+
         context = {
             'menu': Menu.objects.get(url= 'cadastro_animal')
         }
+        
         return render(request, self.template, context)
 
     def post(self, request):
@@ -82,7 +88,27 @@ class ViewCadastrarAnimal(BaseView):
         status_animal.id_status = status
         status_animal.id_animal = animal
         status_animal.save()
-        return render(request, self.template)
+
+        try:
+            arquivo = request.FILES['url_foto']
+        except Exception:
+            arquivo = None
+
+        if arquivo is not None and animal.pk is not None:
+            foto = cloudyapi.upload_animal_image(arquivo, animal.pk)
+            animal.url_foto = foto['url']
+
+        if request.POST.get('button') == 'del':
+            animal.url_foto.delete()
+        if request.POST.get('button') == 'save':
+            animal.url_foto.save()
+
+
+        context = {
+            'menu': Menu.objects.get(url= 'cadastrar_animal')
+        }
+
+        return render(request, self.template, context)
 
 
 class ViewVisualizarAnimal(BaseView):

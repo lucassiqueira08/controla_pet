@@ -27,10 +27,10 @@ $(function(){
 
 //=====================Campo data=======================
 
-// $( function() {
-//   $( "#Data" ).datepicker();
-//   $( "#Data2" ).datepicker();
-// });
+$( function() {
+  $( "#Data" ).datepicker();
+  $( "#Data2" ).datepicker();
+});
 
 $("#formularioModal :input").prop('readonly', true);
 $('.btnEditar').click(function(){
@@ -44,9 +44,9 @@ $('#FormModal').on('shown.bs.modal', function () {
   $('#FormModal').trigger('focus')
 })
 
-// $(window).on('load',function(){
-//     $('#modalBemVindo').modal('show');
-// });
+$(window).on('load',function(){
+    $('#modalBemVindo').modal('show');
+});
 
 
 
@@ -172,8 +172,9 @@ function verifica_horario_notificacao(){
 
   for (var item in dataJson) {
     var hora  = (dataJson[item]['data/hora']).substring(11,19);
+    var dono  = dataJson[item]['dono'];
     if (hora == hora_atual) {
-      alerta("ta na hora!","aviso",7000);
+      alerta("Hora de fazer um atendimento ao Bixinho do " + dono,"aviso",7000);
     }
 
   }

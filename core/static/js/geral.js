@@ -132,6 +132,9 @@ function Mudar(el){
 	 else
 	 	document.getElementById(el).style.display ='none';
 }
+function change(elemento){
+	document.getElementById(elemento).className.replace("invis", "");
+}
 
 $.get('/get_notificacao', function(data){
   var notificacoes = $('#notificacoes')
@@ -160,7 +163,8 @@ $.get('/get_notificacao', function(data){
     var status_atendimento    = dataJson[item]['status_atendimento'];
 
     var procedimento          = dataJson[item]['procedimento_clinico'] != null ? dataJson[item]['procedimento_clinico'] : dataJson[item]['procedimento_estetico'] != null ? dataJson[item]['procedimento_estetico'] : "Sem procedimento!";
-    var final                 = notificacao.replace("##hora", hora).replace("##bichinho",dono).replace("##procedimento",procedimento);
+    var final                 = notificacao.replace("##hora", hora).replace("##bi
+     tablinks[i].className = tablinks[i].className.replace(" border-orange", "");chinho",dono).replace("##procedimento",procedimento);
 
     notificacoes.append(final)
   }

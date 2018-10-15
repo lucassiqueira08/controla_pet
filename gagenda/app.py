@@ -26,7 +26,7 @@ class GCalGoogle():
         self.service.events().delete(calendarId='primary', eventId=id).execute()
 
     def atualizar(self,id,sumary,start,end):
-        event = service.events().get(calendarId='primary', eventId=id).execute()
+        event = self.service.events().get(calendarId='primary', eventId=id).execute()
         event['summary'] = sumary
         event['start']['dateTime'] = start #'2018-10-08T13:00:00-03:00'
         event['end']['dateTime'] = end #'2018-10-09T14:10:00-03:00'

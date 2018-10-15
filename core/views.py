@@ -61,14 +61,13 @@ class ViewIndex(BaseView):
 
             #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
               'start': {
-                'dateTime':  data+'-03:00',
+                'dateTime':  data+'-03:00', # Adição da hora com o fusorario
                 'timeZone': 'America/Sao_Paulo',
               },
               'end': {
                 'dateTime':  data+'-03:00',
                 'timeZone': 'America/Sao_Paulo',
             #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
-
 
               },
 
@@ -96,10 +95,18 @@ class ViewIndex(BaseView):
             atendimento = Atendimento.objects.get(id = request.POST.get('IdEvento'))
             atendimento.observacao = request.POST.get('obsedit')
             atendimento.data_solicitacao = request.POST.get('DataInicioedit')
+            data = request.POST.get('DataInicioedit')
+            data = data[0:10]+'T'+data[11:] 
+            google= GCalGoogle()
+            IdGoogle = atendimento.id_google_agenda
+            coment = request.POST.get('obsedit')
+            google.atualizar(IdGoogle,coment ,  data , data)
             atendimento.save()
 
          if botao == 'del':
             atendimento = Atendimento.objects.get(id = request.POST.get('IdEvento')) 
+            google= GCalGoogle()
+            google.deletar(atendimento.id_google_agenda)
             feito = FeitoPor.objects.get(id_atendimento= request.POST.get('IdEvento'))
             feito.delete() 
             atendimento.delete()

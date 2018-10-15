@@ -51,10 +51,11 @@ class ViewIndex(BaseView):
          if botao == 'save':
             data = request.POST.get('dataAtendimento')
             data = data[0:10]+'T'+data[11:] 
+            obssumary = request.POST.get('obs')
             event = {
 
 #-------------------------------CRIA O EVENTO--------------------------------
-              'summary': data,
+              'summary': obssumary,
               'location': 'Av. Dr. Alberto de Oliveira Lima, 254 - Real Parque, São Paulo',
               'description': 'A chance to hear more about Google\'s developer products.',
             #-------------------------------/CRIA O EVENTO--------------------------------

@@ -174,7 +174,7 @@
 <p>Funcionario</p>
   <select id="funcionarios" class="formInput destacadoCimaBaixo clearMarginTop" name="funcionarios" required>
  {% for Funcionario in Funcionarios %}
-    <option value="{{ Funcionario }}">{{ Funcionario.primeiro_nome }}</option>
+    <option value="{{ Funcionario.cpf }}">{{ Funcionario.primeiro_nome }}</option>
   
  
  {% endfor %}

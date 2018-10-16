@@ -34,13 +34,12 @@ class ViewIndex(BaseView):
   
     def get(self, request):
         atendimento = Atendimento.objects.all()    
-        funcionarios = Funcionario.objects.all()    
+        funcionarios = Funcionario.objects.all()
         context = {
             'menu': Menu.objects.get(url= 'index'),
             'Atendimentos': atendimento,
             'Funcionarios': funcionarios,
-          
-           
+
         }
         return render(request, self.template, context)
 
@@ -52,14 +51,12 @@ class ViewIndex(BaseView):
             data = request.POST.get('dataAtendimento')
             data = data[0:10]+'T'+data[11:] 
             obssumary = request.POST.get('obs')
+            #dicionario molde para o calendar
             event = {
-
-#-------------------------------CRIA O EVENTO--------------------------------
+        #-------------------------------CRIA O EVENTO--------------------------------
               'summary': obssumary,
               'location': 'Av. Dr. Alberto de Oliveira Lima, 254 - Real Parque, São Paulo',
-              'description': 'A chance to hear more about Google\'s developer products.',
-            #-------------------------------/CRIA O EVENTO--------------------------------
-
+              'description': obssumary,
             #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
               'start': {
                 'dateTime':  data+'-03:00', # Adição da hora com o fusorario
@@ -69,7 +66,6 @@ class ViewIndex(BaseView):
                 'dateTime':  data+'-03:00',
                 'timeZone': 'America/Sao_Paulo',
             #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
-
               },
 
             }
@@ -81,12 +77,14 @@ class ViewIndex(BaseView):
             atendimento = Atendimento() 
             atendimento.observacao = request.POST.get('obs')
             atendimento.data_solicitacao = request.POST.get('dataAtendimento')
+
             atendimento.cpf_cliente = cliente
-            teste = Funcionario.objects.get(id=2)
+
+            Responsavel = Funcionario.objects.get(cpf= request.POST.get('funcionarios'))
             atendimento.id_google_agenda = gid
             atendimento.save()
             feito.id_atendimento= atendimento
-            feito.id_funcionario = teste
+            feito.id_funcionario = Responsavel
             feito.save()
             atendimento = ''
             cliente = ''
@@ -101,7 +99,7 @@ class ViewIndex(BaseView):
             google= GCalGoogle()
             IdGoogle = atendimento.id_google_agenda
             coment = request.POST.get('obsedit')
-            google.atualizar(IdGoogle,coment ,  data , data)
+            google.atualizar(IdGoogle,coment,data,data)
             atendimento.save()
 
          if botao == 'del':

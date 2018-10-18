@@ -223,3 +223,27 @@ function HideShow(show, hide1, hide2=null, hide3=null, hide4=null){
 	if(hide4 != null)
 		document.getElementById(hide4).style.display = "none";
 }
+
+
+//TESTE AJAX
+$("#login").change(function () {
+});
+
+$("#login").change(function () {
+
+  var username = $(this).val();
+	console.log(username)
+  $.ajax({
+    url: '/cliente/valida_usuario/',
+    data: {
+      'username': username
+    },
+    dataType: 'json',
+    success: function (data) {
+      if (data.is_taken) {
+        alert("Usuario correto!");
+      }
+    }
+  });
+	console.log('username')
+});

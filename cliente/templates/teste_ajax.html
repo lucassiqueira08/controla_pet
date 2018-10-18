@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+					<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+
+<form method="post" class='formEtapas'>
+{% csrf_token %}
+  <fieldset>
+    <h2 class="tituloGrande">Dados Gerais</h2 class="tituloGrande">
+    <p>Digite algumas informações do animal!</p>
+
+    <input type="text" class="formEtapasInput" id="login" name="login" placeholder="login" maxlength="100" />
+  	<input type="text" class="formEtapasInput" id="senha" name="senha" placeholder="senha" maxlength="100" />
+
+    <div class="containerBotoes">
+      <button type="button" name="button" class="next acao btnPrincipal">Enviar</button>
+    </div>
+  </
+  fieldset>
+</form>
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/cadastro_cliente.js' %}"></script>
+{% endblock %}

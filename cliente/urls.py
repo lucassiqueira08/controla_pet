@@ -1,7 +1,8 @@
 from django.urls import path
 
-from .views import ViewCadastrarAnimal, ViewVisualizarAnimal, ViewCadastrarCliente, ViewFichaAnimal, ViewAcompanheSuaClinica, ViewBuscarAnimal, ViewCadastrarDiagnostico
+from .views import ViewCadastrarAnimal, ViewVisualizarAnimal, ViewCadastrarCliente, ViewFichaAnimal, ViewAcompanheSuaClinica, ViewBuscarAnimal, ViewCadastrarDiagnostico, Viewteste_ajax, valida_usuario
 from .actions import get_cliente
+from django.conf.urls import url
 
 urlpatterns = [
     path(
@@ -35,5 +36,13 @@ urlpatterns = [
     path(
         'cadastrar_diagnostico', ViewCadastrarDiagnostico.as_view(),
         name='cadastrar_diagnostico'
+    ),
+    path(
+        'teste_ajax', Viewteste_ajax.as_view(),
+        name='teste_ajax'
+    ),
+    url(
+        r'^valida_usuario/$', valida_usuario,
+        name='valida_usuario'
     ),
 ]

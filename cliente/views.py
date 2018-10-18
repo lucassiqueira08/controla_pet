@@ -10,8 +10,10 @@ from .forms import FormCliente
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal)
 from core.models import Menu
-
-
+#------------------------------------
+#TESTE AJAX
+from django.http import JsonResponse
+#------------------------------------
 from cloudinary_api.app import cloudyapi
 
 
@@ -191,3 +193,22 @@ class ViewAcompanheSuaClinica(BaseView):
 
     def get(self, request):
         return render(request, self.template)
+
+class Viewteste_ajax(BaseView):
+
+    template = 'teste_ajax.html'
+
+    def get(self, request):
+        return render(request, self.template)
+
+def valida_usuario(request):
+
+    username = request.GET.get('username', None)
+    if username == 'lucas':
+        resposta = True
+    else:
+        resposta = False
+    data = {
+        'is_taken': resposta
+    }
+    return JsonResponse(data)

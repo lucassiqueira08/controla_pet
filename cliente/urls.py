@@ -45,4 +45,4 @@ urlpatterns = [
         r'^valida_usuario/$', valida_usuario,
         name='valida_usuario'
     ),
-]
+]   

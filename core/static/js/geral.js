@@ -227,9 +227,6 @@ function HideShow(show, hide1, hide2=null, hide3=null, hide4=null){
 
 //TESTE AJAX
 $("#login").change(function () {
-});
-
-$("#login").change(function () {
 
   var username = $(this).val();
 	console.log(username)
@@ -241,7 +238,7 @@ $("#login").change(function () {
     dataType: 'json',
     success: function (data) {
       if (data.is_taken) {
-        alert("Usuario correto!");
+		    alerta("Usuario correto!","erro",7000);
       }
     }
   });

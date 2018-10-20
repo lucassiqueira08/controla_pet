@@ -187,9 +187,30 @@ class ViewFichaAnimal(BaseView):
 
     def get(self, request):
         context = {
-            
+
         }
         return render(request, self.template, context)
+
+class ViewCadastrarDiagnostico(BaseView):
+
+    template = 'cadastrar_diagnostico.html'
+
+    def get(self, request):
+        context = {
+
+        }
+        return render(request, self.template, context)
+
+class ViewBuscarAnimal(BaseView):
+
+    template = 'buscar_animal.html'
+
+    def get(self, request):
+        context = {
+
+        }
+        return render(request, self.template, context)
+
 class ViewAcompanheSuaClinica(BaseView):
 
     template = 'acompanhe_sua_clinica.html'

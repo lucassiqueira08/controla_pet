@@ -1,0 +1,110 @@
+/* Import */
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700|Oswald:400,300,700);
+/* Variables */
+/* Base */
+#content {
+  margin-top: 50px;
+  text-align: center;
+}
+/* Timeline */
+.timeline {
+  border-left: 4px solid #ff6600;;
+  margin-top: 50px;
+  letter-spacing: 0.5px;
+  position: relative;
+  line-height: 1.4em;
+  padding: 50px;
+  list-style: none;
+  font-weight: 100;
+  width: 70%;
+  margin-left: 20%;
+}
+.timeline p{
+  font-size: 15px;
+  text-align: left;
+
+}
+.timeline h1,
+.timeline h2,
+.timeline h3 {
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  font-size: 19px!important;
+  margin-top: 25px;
+  text-align: left;
+  color: #ff6600;
+}
+.timeline .event {
+  padding-bottom: 25px;
+  margin-bottom: 50px;
+  position: relative;
+}
+.timeline .event:last-of-type {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border: none;
+}
+.timeline .event:before,
+.timeline .event:after {
+  position: absolute;
+  display: block;
+  top: 0;
+}
+.timeline .event:before {
+  left: -217.5px;
+  content: attr(data-date);
+  text-align: right;
+  font-weight: 100;
+  font-size: 1em;
+  min-width: 120px;
+}
+.timeline .event:after {
+  box-shadow: 0 0 0 4px #ff6600;
+  /*content: url('../../img/diagnostico.png')!important;*/
+  left: -57.85px;
+  background: #fff;
+  border-radius: 50%;
+  height: 11px;
+  width: 11px;
+  content: "";
+  top: 5px;
+}
+.arquivo{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: row;
+  margin-bottom: 15px;
+}
+@media (max-width: 700px) {
+  .timeline {
+    width: 280px!important;
+    padding: 20px;
+  }
+  .timeline .event:before {
+    left: -180px;
+  }
+  .timeline .event:after {
+    left: -27.85px;
+  }
+  .timeline p{
+    font-size: 12px!important;
+  }
+  .timeline h1,
+  .timeline h2,
+  .timeline h3 {
+    font-size: 17px!important;
+  }
+}
+@media (max-width: 500px) {
+  .timeline {
+    width: 220px!important;
+    padding: 20px;
+  }
+  .timeline .event:before {
+    left: -160px;
+  }
+  .timeline p{
+    font-size: 11px!important;
+  }
+}

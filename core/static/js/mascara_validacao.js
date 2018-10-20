@@ -8,7 +8,7 @@ function aviso_acessoAoSistema(){
   })
   .then((willDelete) => {
     if (willDelete) {
-      swal("Acesso adicionado com sucesso!", 
+      swal("Acesso adicionado com sucesso!",
       {
         icon: "success",
       }
@@ -30,12 +30,12 @@ function preenche_endereco(){
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
   xhr.send();
-  
+
   xhr.onreadystatechange = processRequest;
   function processRequest(e) {
     if (xhr.readyState == 4 && xhr.status == 200) {
       var response = JSON.parse(xhr.responseText);
-      document.getElementById("endereco").value = response.logradouro;
+      document.getElementById("logradouro").value = response.logradouro;
       document.getElementById("bairro").value = response.bairro;
       document.getElementById("cidade").value = response.cidade;
       document.getElementById("estado").value = response.estado;

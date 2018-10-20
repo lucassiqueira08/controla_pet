@@ -1,0 +1,242 @@
+ul, li {
+	margin: 0px;
+	list-style-type: none;
+}
+/*//////////////////////////////////////////////////////////////////
+[ .tabelaResponsiva ]*/
+.colunaEscondida{
+  display: none;
+  padding: 20px;
+}
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-table100 {
+  width: 100%;
+  min-height: 100vh;
+  background: #c850c0;
+  background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
+  background: -o-linear-gradient(45deg, #4158d0, #c850c0);
+  background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
+  background: linear-gradient(45deg, #4158d0, #c850c0);
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 33px 30px;
+}
+
+.wrap-table100 {
+  width: 1170px;
+}
+
+.tabelaResponsiva {
+  margin-top: 30px!important;
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.tabelaResponsiva * {
+  position: relative;
+}
+.tabelaResponsiva td, .tabelaResponsiva th {
+  padding-left: 8px;
+}
+.tabelaResponsiva thead tr {
+  height: 60px;
+  background: #ff6600;
+  font-weight: 800;
+}
+.tabelaResponsiva tbody tr {
+  height: 50px;
+}
+.tabelaResponsiva tbody tr:last-child {
+  border: 0;
+}
+.tabelaResponsiva td, .tabelaResponsiva th {
+  text-align: left;
+}
+.tabelaResponsiva td.l, .tabelaResponsiva th.l {
+  text-align: right;
+}
+.tabelaResponsiva td.c, .tabelaResponsiva th.c {
+  text-align: center;
+}
+.tabelaResponsiva td.r, .tabelaResponsiva th.r {
+  text-align: center;
+}
+
+
+.table100-head th{
+  font-family: OpenSans-Regular;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr {
+  font-family: OpenSans-Regular;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+tbody tr:hover {
+  color: #000;
+  font-weight: 700;
+  background-color: #c9c9c9;
+  cursor: pointer;
+}
+
+.column1 {
+  width: 260px;
+  padding-left: 40px;
+}
+
+.column2 {
+  width: 160px;
+}
+
+.column3 {
+  width: 245px;
+}
+
+.column4 {
+  width: 110px;
+  text-align: right;
+}
+
+.column5 {
+  width: 170px;
+  text-align: right;
+}
+
+.column6 {
+  width: 222px;
+  text-align: right;
+  padding-right: 62px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .tabelaResponsiva thead tr th {
+    display: none;
+  }
+  .colunaEscondida{
+    display: block!important;
+  }
+  .tabelaResponsiva thead tr th:nth-child(1):before {
+    content: "Status";
+  }
+  .tabelaResponsiva > *, .tabelaResponsiva tr, .tabelaResponsiva td, .tabelaResponsiva th {
+    display: block;
+  }
+  .tabelaResponsiva tbody tr {
+    height: auto;
+    padding: 37px 0;
+  }
+  .tabelaResponsiva tbody tr td {
+    padding-left: 50% !important;
+    margin-bottom: 24px;
+  }
+  .tabelaResponsiva tbody tr td:last-child {
+    margin-bottom: 0;
+  }
+  .tabelaResponsiva tbody tr td:before {
+    font-family: OpenSans-Regular;
+    font-size: 14px;
+    color: #999999;
+    line-height: 1.2;
+    font-weight: unset;
+    position: absolute;
+    width: 40%;
+    left: 30px;
+    top: 0;
+  }
+
+  .column4,
+  .column5,
+  .column6 {
+    text-align: left;
+  }
+
+  .column4,
+  .column5,
+  .column6,
+  .column1,
+  .column2,
+  .column3 {
+    width: 100%;
+  }
+
+  tbody tr {
+    font-size: 14px;
+  }
+
+  /* RESPONSIVIDADE ACOMPANHE SUA CLÍNICA */
+  #AcompanheSuaClinica tbody tr td:nth-child(1):before {
+    content: "Status";
+  }
+  #AcompanheSuaClinica tbody tr td:nth-child(2):before {
+    content: "Bichinho";
+  }
+  #AcompanheSuaClinica tbody tr td:nth-child(3):before {
+    content: "Horário";
+  }
+
+  /* RESPONSIVIDADE ANIMAIS HOSPEDADOS */
+  #AnimaisHospedados tbody tr td:nth-child(1):before {
+    content: "Status";
+  }
+  #AnimaisHospedados tbody tr td:nth-child(2):before {
+    content: "Bichinho";
+  }
+  #AnimaisHospedados tbody tr td:nth-child(3):before {
+    content: "Data Check In";
+  }
+  #AnimaisHospedados tbody tr td:nth-child(4):before {
+    content: "Data Check Out";
+  }
+
+  /* RESPONSIVIDADE PAGAMENTOS PENDENTES */
+  #PagamentosPendentes tbody tr td:nth-child(1):before {
+    content: "Tipo Cliente";
+  }
+  #PagamentosPendentes tbody tr td:nth-child(2):before {
+    content: "Bichinho";
+  }
+  #PagamentosPendentes tbody tr td:nth-child(3):before {
+    content: "Valor em Aberto";
+  }
+  #PagamentosPendentes tbody tr td:nth-child(4):before {
+    content: "Último Atendimento";
+  }
+  #PagamentosPendentes tbody tr td:nth-child(5):before {
+    content: "Status";
+  }
+}
+
+@media (max-width: 576px) {
+  .container-table100 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

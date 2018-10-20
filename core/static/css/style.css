@@ -70,6 +70,10 @@
 .invis{
 	display:none!important;
 }
+.hide{
+	display:none;
+}
+
 /**===========================Formularios===================**/
 
 .formulario{
@@ -162,6 +166,46 @@
 	justify-content: center;
 	align-items:flex-start;
 }
+.btnGrande{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 60px!important;
+	background-color: #ff6600;
+	color: #fff;
+	font-weight: 600;
+	border:1px solid #fff;
+	border-radius: 3px;
+	font-size: 17px;
+	width: 270px !important;
+	margin: 10px;
+}
+.btnGrande:hover{
+	text-decoration: none;
+	background: #c14e01;
+	color: #fff;
+	cursor: pointer;
+}
+.btnPequeno{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 30px;
+	background-color: #ff6600;
+	color: #fff;
+	font-weight: 600;
+	border:1px solid #fff;
+	border-radius: 3px;
+	font-size: 13px;
+	width: 100px;
+
+}
+.btnPequeno:hover{
+	text-decoration: none;
+	background: #c14e01;
+	color: #fff;
+	cursor: pointer;
+}
 .btnPrincipal{
 	display: flex;
 	justify-content: center;
@@ -195,7 +239,7 @@
 	background: #333;
 	cursor: pointer;
 }
-.containerBotoes{
+.containerBotoes,.containerBotoesGrandes{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -207,6 +251,11 @@
 	margin:5px;
 }
 
+@media (max-width: 700px) {
+	.btnSecundario{
+		width: 150px;
+	}
+}
 @media (max-width: 600px) {
 	.btnPrincipal{
 		width: 200px;
@@ -338,15 +387,17 @@
 	.formEtapas input, .formEtapas textarea{
 		color: rgba(255, 102, 0)
 	}
-	.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
-		width: 170px;
-		height: 37px;
+
+	.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao,.acao{
+		width: 170px!important;
+		height: 37px!important;
 		background-color: #ff6600;
 		color: #fff;
 		font-weight: 600;
 		border:1px solid #fff;
 		border-radius: 3px;
-		margin-top: 25px;
+		margin-top: 25px!important;
+		margin-bottom: 0px !important;
 	}
 	.formEtapas input.acao:hover{
 		background: #c14e01;
@@ -430,7 +481,7 @@
 			flex-direction: row;
 		}
 
-		.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
+		.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao,.acao{
 			width: 	150px;
 			margin-top: 15px;
 		}
@@ -448,7 +499,7 @@
 		}
 	}
 	@media (max-width: 500px) {
-		.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao{
+		.formEtapas input.acao, .formEtapas input.next.acao, .formEtapas input.prev.acao,.acao{
 			width: 	110px;
 		}
 		.formEtapas fieldset{
@@ -554,7 +605,9 @@
 	}
 
 	/**===========================Específicos===========================**/
-
+	.w3-padding{
+		color: #000;
+	}
 	#paginationActive a{
 		background-color: #ff6600!important;
 		border-color: #ff6600!important;
@@ -620,7 +673,7 @@
 .tablink{
 	color: #000;
 	font-weight: 800;
-	
+
 }
 	/**===========================Tabela===========================**/
 
@@ -646,7 +699,7 @@
 		height: 430px;
 		box-shadow: 0 0 15px 1px rgba(0,0,0,0.4);
 		padding: 20px 30px;
-		box-sizing: border-box;
+		box-sizing: border-box;hide
 		position: relative;
 	}
 	@media (max-width: 500px){
@@ -731,7 +784,6 @@
 		.tituloPequeno{
 			font-size: 16px;
 		}
-
 	}
 
 

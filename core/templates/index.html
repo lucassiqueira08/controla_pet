@@ -6,7 +6,7 @@
 
     $('#calendar').fullCalendar({
 
-     theme: true,    
+     theme: true,
       themeSystem:'bootstrap4',
 
       header: {
@@ -30,10 +30,9 @@
      $('#visualizar #DataInicioedit').val(events.start.format('YYYY/MM/DD HH:mm:ss'));
      $('#visualizar #obsedit').val((events.title));
      $('#visualizar #DataInicio').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
-     
      $('#visualizar #datahora').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
        $('#visualizar').modal('show');
-     return false;     
+     return false;
     },
       selectHelper: true,
         select:function(start,end){
@@ -41,7 +40,7 @@
     $('#cadastrar #end').val(moment(end).format('DD/MM/YYYY HH:mm:ss'));
     $('#cadastrar').modal('show');
     },
-    
+
       events : [
       {% for atendimento in Atendimentos %}
       
@@ -49,7 +48,6 @@
           id:"{{atendimento.id}}" ,
 
           title:"{{atendimento.observacao}}" ,
-          
           start: "{{atendimento.data_solicitacao}}"
         },
       {% endfor %}
@@ -75,26 +73,26 @@
 
 <div clss="container">
 	<div id='calendar'>
-		
+
 	</div>
 	<div class="modal fade" id="visualizar" tabindex="-1"
   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
+
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-  
+
         <h5 class="modal-title text-center" ></h5>
-        
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>	  
+      </div>
 	<div class="modal-body">
 	<div class="visualizar">
-	
-	
-		<dl Class = "dl-horizontal">			
+
+
+		<dl Class = "dl-horizontal">
 			<dt>Observação:</dt>
 			<dd id="Nome"></dd>
              <dt>Data:</dt>
@@ -103,7 +101,7 @@
 
 		</dl>
      </div>
-     
+
 	 <div class="modal-footer">
 		<button type="button" name="fecha" id="fecha" class="btn btn-canc-vis btn-warning"  onclick="Mudar('edit')"   >Editar</button>
         <button type="button" class="btn btn-success" onclick="Mudar('edit')"  data-dismiss="modal">Fechar</button>
@@ -133,9 +131,8 @@
 				<button name="button" value = "del" class="acao btn btn-danger btn-primary clearMarginTop" ">Deletar</button>
 
 </div>
-
 		</div>
-     
+
       </div>
     </form>
     </div>
@@ -144,7 +141,7 @@
 
    <div class="modal fade" id="cadastrar" tabindex="-1"
   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
+
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -152,9 +149,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>	  
+      </div>
 	<div class="modal-body">
-<!-- Usa o form para criar alimentar o evento para gravar dados na google agenda -->	
+<!-- Usa o form para criar alimentar o evento para gravar dados na google agenda -->
 		<form method="post" class='formEtapas'>
         {% csrf_token %}
   <div class="form-group">
@@ -165,7 +162,7 @@
     <label for="exampleInputName">Data/hora</label>
     <input type="datetime" class="form-control" name ="dataAtendimento" id="dataAtendimento" >
   </div>
-  
+
    <div class="form-group">
     <label for="exampleInputName">CPF:</label>
     <input type="text" class="form-control"  name="cpf" id="cpf">
@@ -191,18 +188,18 @@
      </div>
 </form>
      </div>
-     
+
 	 <div class="modal-footer">
 
-       
+
       </div>
     </div>
   </div>
 </div>
-  
+
    <div class="modal fade" id="cadastrar" tabindex="-1"
   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
+
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -210,7 +207,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>	  
+      </div>
 	<div class="modal-body">
 		<form>
   <div class="form-group">
@@ -221,14 +218,14 @@
     <label for="exampleInputName">Nome Do animal</label>
     <input type="text" class="form-control" id="exampleInputAnimal" placeholder="Name do Animal">
   </div>
-  
+
    <div class="form-group">
     <label for="exampleInputName">Data e hora :</label>
     <input type="text" class="form-control"  name="start" id="start">
-   
+
 </form>
      </div>
-     
+
 	 <div class="modal-footer">
 
         <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
@@ -236,9 +233,9 @@
     </div>
   </div>
 </div>
-  
 
-		</div>		
+
+		</div>
 	</div>
 
 {% endblock %}

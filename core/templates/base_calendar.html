@@ -14,25 +14,11 @@
 
 	<div class="elementosFuncionais">
 		<div class="collapse hide notificacoes" id="notificacoes">
-		  <div class="card card-body">
-		    <ul>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Araujo</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Nayarinha da silva sauro</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Cenoura</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Vitor papagaio</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Isake beiço</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Araujo</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Nayarinha da silva sauro</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Cenoura</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Vitor papagaio</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Isake beiço</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Araujo</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Nayarinha da silva sauro</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Lucas Cenoura</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Vitor papagaio</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-					<li class="notificacao"><p class="notificacaoHorario">22:10</p><p class="notificacaoBichinho">Isake beiço</p><p class="notificacaoProcedimento">Vacinação da costeleta esquerda</p></li>
-				</ul>
-		  </div>
+			<div class="collapse hide notificacoes" id="notificacoes">
+
+				<!-- AQUI ESTÁ TODAS AS NOTIFICAÇÕES -->
+
+			</div>
 		</div>
 		<input type="checkbox" id="ckbSino">
 	  <a id="sinoNotificacao" onclick="fadeInOut();" class="sinoNotificacaoInativo">
@@ -52,11 +38,15 @@
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuAdministreSuaClinica" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/admin_clinica.png' %}" alt="calendario"><h5>Administre sua clínica</h5></button>
 		<div class="submenu collapse" id="submenuAdministreSuaClinica">
 			<div class="subMenuItem">
-				<img src="{% static 'img/cadastro_procedimento.png' %}" alt="ficha">
+				<img src="{% static 'img/cadastro_atendimento.png' %}" alt="Cadastro de atendimento">
+				<h5><a href ="{% url 'cadastro_atendimento' %}">Cadastro de atendimento</a></h5>
+			</div>
+			<div class="subMenuItem">
+				<img src="{% static 'img/cadastro_procedimento.png' %}" alt="Cadastro de procedimento">
 				<h5><a href ="{% url 'cadastro_procedimento' %}">Cadastro de procedimento</a></h5>
 			</div>
 			<div class="subMenuItem">
-				<img src="{% static 'img/acompanhe_sua_clinica.png' %}" alt="ficha">
+				<img src="{% static 'img/acompanhe_sua_clinica.png' %}" alt="Acompanhe sua Clínica">
 				<h5><a href ="{% url 'acompanhe_sua_clinica' %}">Acompanhe sua Clínica</a></h5>
 			</div>
 		</div>
@@ -81,6 +71,10 @@
 				<img src="{% static 'img/cadastro_estadia.png' %}" alt="Cadastrar Estadia">
 				<h5><a href ="{% url 'cadastro_estadia' %}">Cadastro de estadia</a></h5>
 			</div>
+			<div class="subMenuItem">
+				<img src="{% static 'img/cadastrar_diagnostico.png' %}" alt="Cadastrar Diagnóstico">
+				<h5><a href ="{% url 'cadastrar_diagnostico' %}">Cadastro de Diagnóstico</a></h5>
+			</div>
 		</div>
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuConsulta" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/consulta.png' %}" alt="Consulta"><h5>Consulta</h5></button>
 
@@ -88,6 +82,10 @@
 			<div class="subMenuItem">
 				<img src="{% static 'img/visualizar_animal.png' %}" alt="visualiza Animal">
 				<h5><a href ="{% url 'visualizar_animal' %}">Visualizar animal</a></h5>
+			</div>
+			<div class="subMenuItem">
+				<img src="{% static 'img/ficha_animal.png' %}" alt="Ficha do Animal">
+				<h5><a href ="{% url 'buscar_animal' %}">Ficha do Animal</a></h5>
 			</div>
 		</div>
 	</div>

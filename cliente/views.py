@@ -1,11 +1,12 @@
 from datetime import datetime
 from pprint import pprint
+import json
 
 from django.shortcuts import render
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 from core.views import BaseView
 from .forms import FormCliente
@@ -24,7 +25,7 @@ class ViewCadastrarCliente(BaseView):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url= 'cadastro_cliente')
+            'menu': Menu.objects.get(url='cadastro_cliente')
         }
 
         return render(request, self.template, context)
@@ -33,17 +34,23 @@ class ViewCadastrarCliente(BaseView):
         cliente = Cliente()
 
         try:
-            cliente.cpf = request.POST.get('cpf')
+            cliente.cpf = request.POST.get('cpf_cliente')
             resposta = valida_cpf(cliente.cpf)
 
             if resposta['error'] is True:
+                # TODO VALIDAR NULO
                 raise InvalidCPFError(resposta['msg'])
 
         except InvalidCPFError as e:
-            return JsonResponse({'tipo': 'erro', 'mensagem': str(e), 'time': 7000})
+            context = {
+                'tipo': 'erro',
+                'mensagem': str(e),
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
-        cliente.nome = request.POST.get('nome')
-        cliente.email = request.POST.get('email')
+        cliente.nome = request.POST.get('nome_cliente')
+        cliente.email = request.POST.get('email_cliente')
         cliente.logradouro = request.POST.get('logradouro')
         cliente.bairro = request.POST.get('bairro')
         cliente.cidade = request.POST.get('cidade')
@@ -64,17 +71,24 @@ class ViewCadastrarCliente(BaseView):
             foto = cloudyapi.upload_cliente_imagem(foto, cliente.pk)
             cliente.url_foto = foto['url']
 
-        cliente.save()
-
-        context = {'menu': ''}
 
         try:
-            context['menu'] = Menu.objects.get(url='cadastro_cliente')
+            cliente.save()
+        except Exception as e:
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Ops! Não foi possível cadastrar este cliente',
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
-        except ObjectDoesNotExist:
-            context['menu'] = Menu.objects.get(url='index')
+        context = {
+            'tipo': 'ok',
+            'mensagem': 'Cliente cadastrado com sucesso',
+            'time': 5000
+        }
 
-        return render(request, self.template, context)
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 class ViewCadastrarAnimal(BaseView):

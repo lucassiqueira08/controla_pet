@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+<form method="post" class='formEtapas'>
+	{% csrf_token %}
+	<ul id="progress">
+		<li class="ativo"><label>Procurar Animal</label></li>
+		<li><label>Tela de confirmação</label></li>
+		<li><label>Ficha do animal</label></li>
+	</ul>
+
+	<fieldset>
+		<h3 class="tituloExtraGrande">Buscar Animal</h3>
+		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="100">
+		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+		<div class="containerBotoes">
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<h2 class="tituloGrande">Confirmar animal</h2>
+		<div class="centralizado destacadoCimaBaixo">
+			<div class="imagemCardModal coluna">
+				<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+			</div>
+		</div>
+		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" />
+		<h2 class="tituloMedio destacadoCima">Esse é o bixinho certo?</h2>
+		<div class="containerBotoes">
+			<input type="submit" name="prev" class="prev acao" value="Não!"/>
+			<a class="next acao btnPrincipal" href="{% url 'ficha_animal' %}">Sim!</a>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<div class="linha centralizado">
+			<div class="lds-css ng-scope">
+				<div class="lds-spinner" style="100%;height:100%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+				<style type="text/css">@keyframes lds-spinner {
+					0% {
+						opacity: 1;
+					}
+					100% {
+						opacity: 0;
+					}
+				}
+				@-webkit-keyframes lds-spinner {
+					0% {
+						opacity: 1;
+					}
+					100% {
+						opacity: 0;
+					}
+				}
+				.lds-spinner {
+					position: relative;
+				}
+				.lds-spinner div {
+					left: 94px;
+					top: 48px;
+					position: absolute;
+					-webkit-animation: lds-spinner linear 1s infinite;
+					animation: lds-spinner linear 1s infinite;
+					background: #ff6600;
+					width: 12px;
+					height: 24px;
+					border-radius: 40%;
+					-webkit-transform-origin: 6px 52px;
+					transform-origin: 6px 52px;
+				}
+				.lds-spinner div:nth-child(1) {
+					-webkit-transform: rotate(0deg);
+					transform: rotate(0deg);
+					-webkit-animation-delay: -0.916666666666667s;
+					animation-delay: -0.916666666666667s;
+				}
+				.lds-spinner div:nth-child(2) {
+					-webkit-transform: rotate(30deg);
+					transform: rotate(30deg);
+					-webkit-animation-delay: -0.833333333333333s;
+					animation-delay: -0.833333333333333s;
+				}
+				.lds-spinner div:nth-child(3) {
+					-webkit-transform: rotate(60deg);
+					transform: rotate(60deg);
+					-webkit-animation-delay: -0.75s;
+					animation-delay: -0.75s;
+				}
+				.lds-spinner div:nth-child(4) {
+					-webkit-transform: rotate(90deg);
+					transform: rotate(90deg);
+					-webkit-animation-delay: -0.666666666666667s;
+					animation-delay: -0.666666666666667s;
+				}
+				.lds-spinner div:nth-child(5) {
+					-webkit-transform: rotate(120deg);
+					transform: rotate(120deg);
+					-webkit-animation-delay: -0.583333333333333s;
+					animation-delay: -0.583333333333333s;
+				}
+				.lds-spinner div:nth-child(6) {
+					-webkit-transform: rotate(150deg);
+					transform: rotate(150deg);
+					-webkit-animation-delay: -0.5s;
+					animation-delay: -0.5s;
+				}
+				.lds-spinner div:nth-child(7) {
+					-webkit-transform: rotate(180deg);
+					transform: rotate(180deg);
+					-webkit-animation-delay: -0.416666666666667s;
+					animation-delay: -0.416666666666667s;
+				}
+				.lds-spinner div:nth-child(8) {
+					-webkit-transform: rotate(210deg);
+					transform: rotate(210deg);
+					-webkit-animation-delay: -0.333333333333333s;
+					animation-delay: -0.333333333333333s;
+				}
+				.lds-spinner div:nth-child(9) {
+					-webkit-transform: rotate(240deg);
+					transform: rotate(240deg);
+					-webkit-animation-delay: -0.25s;
+					animation-delay: -0.25s;
+				}
+				.lds-spinner div:nth-child(10) {
+					-webkit-transform: rotate(270deg);
+					transform: rotate(270deg);
+					-webkit-animation-delay: -0.166666666666667s;
+					animation-delay: -0.166666666666667s;
+				}
+				.lds-spinner div:nth-child(11) {
+					-webkit-transform: rotate(300deg);
+					transform: rotate(300deg);
+					-webkit-animation-delay: -0.083333333333333s;
+					animation-delay: -0.083333333333333s;
+				}
+				.lds-spinner div:nth-child(12) {
+					-webkit-transform: rotate(330deg);
+					transform: rotate(330deg);
+					-webkit-animation-delay: 0s;
+					animation-delay: 0s;
+				}
+				.lds-spinner {
+					width: 101px !important;
+					height: 101px !important;
+					-webkit-transform: translate(-50.5px, -50.5px) scale(0.505) translate(50.5px, 50.5px);
+					transform: translate(-50.5px, -50.5px) scale(0.505) translate(50.5px, 50.5px);
+				}
+				</style></div>
+				<p>Carregando...</p>
+			</div>
+		</fieldset>
+
+	</form>
+	<!--===========FIMM===============-->
+
+	{% endblock %}

@@ -22,7 +22,8 @@ class Cliente(models.Model):
     logradouro = models.CharField(max_length=50)
     bairro = models.CharField(max_length=50)
     cidade = models.CharField(max_length=50)
-    cep = models.CharField(max_length=8, blank=True, null=True)
+    estado = models.CharField(max_length=50, blank=True, null=True)
+    cep = models.CharField(max_length=9, blank=True, null=True)
     numero = models.SmallIntegerField()
     complemento = models.CharField(max_length=100, blank=True, null=True)
     id_tipo_cliente = models.ForeignKey('TipoCliente', models.DO_NOTHING,

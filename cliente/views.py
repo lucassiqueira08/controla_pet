@@ -5,13 +5,15 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import JsonResponse
 
 from core.views import BaseView
 from .forms import FormCliente
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal, TipoCliente)
 from core.models import Menu
-
+from cliente.exceptions import InvalidCPFError
+from cliente.actions import valida_cpf
 
 from cloudinary_api.app import cloudyapi
 
@@ -29,7 +31,17 @@ class ViewCadastrarCliente(BaseView):
 
     def post(self, request):
         cliente = Cliente()
-        cliente.cpf = request.POST.get('cpf')
+
+        try:
+            cliente.cpf = request.POST.get('cpf')
+            resposta = valida_cpf(cliente.cpf)
+
+            if resposta['error'] is True:
+                raise InvalidCPFError(resposta['msg'])
+
+        except InvalidCPFError as e:
+            return JsonResponse({'tipo': 'erro', 'mensagem': str(e), 'time': 7000})
+
         cliente.nome = request.POST.get('nome')
         cliente.email = request.POST.get('email')
         cliente.logradouro = request.POST.get('logradouro')
@@ -78,6 +90,8 @@ class ViewCadastrarAnimal(BaseView):
         return render(request, self.template, context)
 
     def post(self, request):
+        context = {'menu': '', 'error': []}
+
         cpf_cliente = request.POST.get('cpf_cliente')
         cliente = Cliente.objects.get(cpf=cpf_cliente)
 
@@ -101,11 +115,7 @@ class ViewCadastrarAnimal(BaseView):
         animal.cor = request.POST.get('cor')
         animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('observacao')
-
-        try:
-            animal.microchip = request.POST.get('microchip')
-        except:
-            pass
+        animal.microchip = request.POST.get('microchip')
 
         animal.cpf_cliente = cliente
         animal.save()
@@ -132,8 +142,6 @@ class ViewCadastrarAnimal(BaseView):
             foto = cloudyapi.upload_animal_image(arquivo, animal.pk)
             animal.url_foto = foto['url']
             animal.save()
-
-        context = {'menu': ''}
 
         try:
             context['menu'] = Menu.objects.get(url='cadastro_animal')

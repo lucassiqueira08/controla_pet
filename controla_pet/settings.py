@@ -28,8 +28,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
+
 ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['systemcontrolapet.herokuapp.com']
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS')
 
 
 
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'servicos',
     'gdstorage',
     'cloudinary',
+    'gagenda',
 ]
 
 MIDDLEWARE = [
@@ -138,6 +140,7 @@ DATABASE_APPS_MAPPING = {
     'admin': 'default',
     'servicos': 'default',
     'gdstorage': 'default',
+    'gagenda': 'default',
 }
 
 
@@ -170,11 +173,11 @@ USE_I18N = True
 
 USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
 
 DATE_FORMAT = 'j/n/Y'
 
-DATETIME_FORMAT = 'Y-m-d h:i' 
+DATETIME_FORMAT = 'Y-m-d h:i'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'
@@ -190,3 +193,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 AUTH_USER_MODEL = 'usuarios.User'
 INDEX_URL = 'index'
 LOGIN_REDIRECT_URL = INDEX_URL
+

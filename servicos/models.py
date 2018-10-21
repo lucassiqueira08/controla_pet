@@ -20,6 +20,7 @@ class Orcamento(models.Model):
 class Atendimento(models.Model):
 
     observacao = models.CharField(max_length=100, blank=True, null=True)
+    id_google_agenda = models.CharField(max_length=28, blank=True, null=True)
     data_solicitacao = models.DateTimeField(blank=True, null=True)
     cpf_cliente = models.ForeignKey(Cliente,
                                     models.DO_NOTHING, db_column='cpf_cliente')

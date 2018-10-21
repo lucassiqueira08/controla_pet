@@ -28,7 +28,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['systemcontrolapet.herokuapp.com']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS')
 
 
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'servicos',
     'gdstorage',
     'cloudinary',
+    'gagenda',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +139,7 @@ DATABASE_APPS_MAPPING = {
     'admin': 'default',
     'servicos': 'default',
     'gdstorage': 'default',
+    'gagenda': 'default',
 }
 
 
@@ -189,3 +192,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 AUTH_USER_MODEL = 'usuarios.User'
 INDEX_URL = 'index'
 LOGIN_REDIRECT_URL = INDEX_URL
+

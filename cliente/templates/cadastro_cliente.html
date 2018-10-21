@@ -7,18 +7,18 @@
 {% csrf_token %}
 <fieldset>
 <h2 class="tituloGrande">Dados Gerais</h2 class="tituloGrande">
-<p>Digite algumas informações do animal!</p>
+<p>Digite algumas informações do cliente!</p>
 
-	<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
-	<input type="text" class="formEtapasInput cpf" name="cpf" placeholder="CPF" maxlength="50" />
+	<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" required />
+	<input type="text" class="formEtapasInput cpf" name="cpf" placeholder="CPF" maxlength="50" required />
 	<input type="text" class="formEtapasInput  email" name="email" placeholder="Email" maxlength="50" />
-	<input type="text" class="formEtapasInput cep" id="cep" name="cep" placeholder="CEP" maxlength="50" onfocusout="preenche_endereco(this)" />
-	<input type="text" class="formEtapasInput" id="logradouro" name="logradouro" placeholder="logradouro" maxlength="50" />
-	<input type="text" class="formEtapasInput" id="numero" name="numero" placeholder="numero" maxlength="50" onkeydown="mascara_apenas_numeros(event);" />
-	<input type="text" class="formEtapasInput" id="cidade" name="cidade" placeholder="cidade" maxlength="50" />
-	<input type="text" class="formEtapasInput" id="bairro" name="bairro" placeholder="bairro" maxlength="50" />
+	<input type="text" class="formEtapasInput cep" id="cep" name="cep" placeholder="CEP" maxlength="9" onfocusout="preenche_endereco(this)" required />
+	<input type="text" class="formEtapasInput" id="logradouro" name="logradouro" placeholder="logradouro" maxlength="50" required />
+	<input type="text" class="formEtapasInput" id="numero" name="numero" placeholder="numero" maxlength="50" onkeydown="mascara_apenas_numeros(event);" required />
+	<input type="text" class="formEtapasInput" id="cidade" name="cidade" placeholder="cidade" maxlength="50" required />
+	<input type="text" class="formEtapasInput" id="bairro" name="bairro" placeholder="bairro" maxlength="50" required />
 	<input type="text" class="formEtapasInput" id="estado" name="estado" placeholder="estado" maxlength="50" />
-	<input type="text" class="formEtapasInput" id="complemento" name="complemento" placeholder="complemento" maxlength="50" />
+	<input type="text" class="formEtapasInput" id="complemento" name="complemento" placeholder="complemento" maxlength="100" />
 
 
 	<p>Tipo de cliente</p>

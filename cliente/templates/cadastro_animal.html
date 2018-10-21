@@ -25,8 +25,8 @@
 		<h2 class="tituloGrande">Dados cadastrais</h2>
 		<p>Digite algumas informações do animal!</p>
 
-		<input type="text" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" required />
+		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" required />
 		<input type="text" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
 		<input type="text" id="Data" class="formEtapasInput data" name="datanasc" placeholder="Data de Nascimento"/>
         <input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
@@ -72,8 +72,8 @@
 	<fieldset>
 		<h2 class="tituloGrande">Responsáveis</h2>
 		<p>Por favor, nos diga quais os responsáveis pelo animal</p>
-		<input type="search" class="formEtapasInput cpf" name="cpf_responsavel" placeholder="Digite o CPF do Responsável..."/ maxlength="14">
-		<input type="text" class="formEtapasInput" name="nome_responsavel" placeholder="Nome" maxlength="50">
+		<input type="search" class="formEtapasInput cpf" name="cpf_responsavel" placeholder="Digite o CPF do Responsável..."/ maxlength="14" required>
+		<input type="text" class="formEtapasInput" name="nome_responsavel" placeholder="Nome" maxlength="50" required >
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
             <button name="button" class="acao btnPrincipal">Enviar</button>

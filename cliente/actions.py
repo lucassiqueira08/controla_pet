@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.core import serializers
 
-from .models import TipoCliente, Cliente
+from .models import TipoCliente, Cliente, Animal
 
 def get_cliente(request):
     cliente = TipoCliente.objects.all()
@@ -12,6 +12,12 @@ def get_cliente(request):
 def valida_cpf(cpf):
     cliente = Cliente.objects.filter(cpf=cpf)
     if cliente:
-        return {'error': True, 'msg': 'CPF já cadastrado'}
+        return {'cpf': True, 'msg': 'CPF já cadastrado'}
+    return {'cpf': False}
 
-    return {'error': False}
+
+def valida_microchip(microchip):
+    animal = Animal.objects.filter(microchip=microchip)
+    if animal:
+        return {'microchip': True, 'msg': 'Microchip já cadastrado'}
+    return {'microchip': False}

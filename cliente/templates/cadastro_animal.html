@@ -2,7 +2,7 @@
 {% block content_base %}
 
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
-<form method="post" class='formEtapas' enctype="multipart/form-data">
+<form id="formcadastroanimal" method="post" class='formEtapas' enctype="multipart/form-data">
 {% csrf_token %}
 	<ul id="progress">
 		<li class="ativo"><label>Buscar Animal</label></li>
@@ -15,7 +15,7 @@
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
 		<p>Digite o CPF do Proprietario!</p>
-		<input type="text" class="formEtapasInput cpf" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+		<input id="animal_cpf" type="text" class="formEtapasInput cpf" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14">
 		<div class="containerBotoes">
 			<input type="submit" name="next" class="next acao btnPrincipal " value="Buscar"/>
 		</div>
@@ -26,7 +26,7 @@
 		<p>Digite algumas informações do animal!</p>
 
 		<div class="imagemCard">
-			<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
+			<input id="animal_url_foto" type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
 		</div>
 
 		<div class="modal fade" id="modal_1{{animal.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
@@ -59,10 +59,10 @@
 				</div>
 			</div>
 
-		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
+		<input type="text" id="animal_nome" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
+		<input type="text" id="animal_especie" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
+		<input type="text" id="animal_raca" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+		<input type="text" id="animal_cor" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
 		<input type="text" id="Data" class="formEtapasInput data" name="datanasc" placeholder="Data de Nascimento"/>
 		<p>Sexo</p>
 		<div class="formEtapasDupla">
@@ -80,11 +80,11 @@
 	<fieldset>
 		<h2 class="tituloGrande">Informações Complementares</h2>
 		<p>Estamos quase lá! Se preferir, digite algumas informações complementares</p>
-		<input type="text" class="formEtapasInput" name="microchip" placeholder="Microchip" maxlength="50" />
+		<input id="animal_microchip" type="text" class="formEtapasInput" name="microchip" placeholder="Microchip" maxlength="50" />
 		<p>O animal está vivo?</p>
 		<div class="formEtapasDupla">
 			<div class="formEtapasRadio">
-				<label><input type="radio" name="status_animal" value="vivo">Sim</label>
+				<label><input type="radio" name="status_animal" value="vivo" checked>Sim</label>
 				<label><input type="radio" name="status_animal" value="morto">Não</label>
 			</div>
 		</div>
@@ -96,7 +96,7 @@
 
 	<fieldset>
 		<h2 class="tituloGrande">Observações</h2>
-		<textarea placeholder="Digite aqui sua Observação..." class="formEtapasTextArea" name="observacao" maxlength="200"></textarea>
+		<textarea id="animal_obs" placeholder="Digite aqui sua Observação..." class="formEtapasTextArea" name="observacao" maxlength="200"></textarea>
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>

@@ -41,10 +41,10 @@ class Cliente(models.Model):
 
 class Animal(models.Model):
     url_foto = models.CharField(max_length=500, blank=True, null=True)
-    nome = models.CharField(max_length=50, blank=True, null=True)
+    nome = models.CharField(max_length=50)
     sexo = models.CharField(max_length=1, blank=True, null=True)
     especie = models.CharField(max_length=50)
-    raca = models.CharField(max_length=50)
+    raca = models.CharField(max_length=50, blank=True, null=True)
     cor = models.CharField(max_length=50, blank=True, null=True)
     datanasc = models.DateField(blank=True, null=True)
     observacao = models.CharField(max_length=200, blank=True, null=True)

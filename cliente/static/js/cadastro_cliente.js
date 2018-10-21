@@ -35,3 +35,32 @@ $('#formcadastrocliente').on('submit', function (e) {
           },
       })
 })
+$('#formcadastroanimal').on('submit', function (e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+          type: "POST",
+          url: '/cliente/cadastrar_animal',
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{
+            cpf_cliente: $('#animal_cpf').val(),
+            url_foto: $('#animal_url_foto').val(),
+            nome: $('#animal_nome').val(),
+            especie: $('#animal_especie').val(),
+            raca: $('#animal_raca').val(),
+            cor: $('#animal_cor').val(),
+            datanasc: $('#datanasc').val(),
+            sexo: $('#sexo').val(),
+            microchip: $('#animal_microchip').val(),
+            status_animal: $('#status_animal').val(),
+            observacao: $('#animal_obs').val(),
+            cpf_responsavel: $('#cpf_responsavel').val(),
+            nome_responsavel: $('#nome_responsavel').val()
+          },
+          success: function (data) {
+            alerta(data.mensagem, data.tipo, data.time)
+          },
+      })
+})

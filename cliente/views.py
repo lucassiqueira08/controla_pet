@@ -38,7 +38,6 @@ class ViewCadastrarCliente(BaseView):
             resposta = valida_cpf(cliente.cpf)
 
             if resposta['error'] is True:
-                # TODO VALIDAR NULO
                 raise InvalidCPFError(resposta['msg'])
 
         except InvalidCPFError as e:

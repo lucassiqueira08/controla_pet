@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from django.core import serializers
 
 from .models import TipoCliente, Cliente
-from .exceptions import InvalidCPFError
 
 def get_cliente(request):
     cliente = TipoCliente.objects.all()

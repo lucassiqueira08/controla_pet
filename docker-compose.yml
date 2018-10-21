@@ -5,15 +5,40 @@ services:
     image: controlapet:develop
     build:
       context: .
-    command: >
-      bash -c "find /app -name '000*.py' -delete && python manage.py makemigrations && python manage.py migrate 
-      && python manage.py runserver 0.0.0.0:8000"
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
       - 8000:8000
     links:
-      - mysql:aquelea01
+      - mysql:mysql
+    networks:
+      - controlapet
+    depends_on:
+      - migration
+      - mysql
+
+  collectstatic:
+    container_name: collectstatic
+    image: controlapet:develop
+    build:
+      context: .
+    command: python manage.py collectstatic --noinput
+    volumes:
+      - .:/app
+    networks:
+      - controlapet
+    depends_on:
+      - mysql
+
+  migration:
+    container_name: migration
+    image: controlapet:develop
+    build:
+      context: .
+    command: python manage.py migrate
+    volumes:
+      - .:/app
     networks:
       - controlapet
     depends_on:

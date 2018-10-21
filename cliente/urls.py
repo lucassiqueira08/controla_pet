@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import ViewCadastrarAnimal, ViewVisualizarAnimal, ViewCadastrarCliente, ViewFichaAnimal, ViewAcompanheSuaClinica, ViewBuscarAnimal, ViewCadastrarDiagnostico
+from .views import (ViewCadastrarAnimal, ViewVisualizarAnimal, ViewCadastrarCliente,ViewFichaAnimal,
+                    ViewAcompanheSuaClinica, ViewBuscarAnimal, ViewCadastrarDiagnostico, ViewVisualizarCliente)
 
 from .actions import get_cliente
 

@@ -79,13 +79,13 @@
 
 		<div class="submenu collapse" id="submenuConsulta">
 			<div class="subMenuItem">
+				<img src="{% static 'img/visualizar_cliente.png' %}" alt="Visualizar Cliente">
+				<h5><a href ="{% url 'visualizar_cliente' %}">Visualizar Cliente</a></h5>
+			</div>
+			<div class="subMenuItem">
 				<img src="{% static 'img/visualizar_animal.png' %}" alt="visualiza Animal">
 				<h5><a href ="{% url 'visualizar_animal' %}">Visualizar animal</a></h5>
 			</div>
-			<div class="subMenuItem">
-				<img src="{% static 'img/visualizar_cliente.png' %}" alt="visualiza Cliente">
-				<h5><a href ="{% url 'visualizar_cliente' %}">Visualizar cliente</a></h5>
-  		</div>      
 			<div class="subMenuItem">
 				<img src="{% static 'img/ficha_animal.png' %}" alt="Ficha do Animal">
 				<h5><a href ="{% url 'buscar_animal' %}">Ficha do Animal</a></h5>

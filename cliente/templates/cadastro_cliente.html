@@ -3,25 +3,23 @@
 {% block content_base %}
 
 					<!--===========INSIRA AQUI SEU CONTEUDO===============-->
-<form method="post" class='formEtapas'>
+<form method="post" class='formEtapas' enctype="multipart/form-data">
 {% csrf_token %}
 <fieldset>
 <h2 class="tituloGrande">Dados Gerais</h2 class="tituloGrande">
 <p>Digite algumas informações do cliente!</p>
-	
-		    <!--===========VITOR===============-->		
-		<a data-toggle="modal" data-target="#modal_1{{animal.nome}}">
-		<div class="imagemCard">
-			<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{animal.nome}} - ID: {{animal.id}}">
+
+		<div class="imagemCard coluna">
+			<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
 		</div>
-		</a>
+
 
 		<div class="modal fade" id="modal_1{{animal.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
-			
+
 			<div class="modal-dialog" role="document">
-			
+
 				<div class="modal-content">
-				
+
 					<div class="modal-header">
 						<h5 class="modal-title" id="modal_1Label">Cadastrar um cliente</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -29,7 +27,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-					
+
 						<div class="centralizado">
 							<form method="post" class='formEtapas' enctype="multipart/form-data">
 								{% csrf_token %}
@@ -38,22 +36,20 @@
 									<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
 								</div>
 						</div>
-							
-							
+
+
 
 						</div>
 					 </div>
 				</div>
 			</div>
 
-		<!--===========VITOR===============-->
-
 
 	<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
 	<input type="text" class="formEtapasInput cpf" name="cpf" placeholder="CPF" maxlength="50" />
 	<input type="text" class="formEtapasInput  email" name="email" placeholder="E-mail" maxlength="50" />
 	<input type="text" class="formEtapasInput cep" id="cep" name="cep" placeholder="CEP" maxlength="50" onfocusout="preenche_endereco(this)" />
-	<input type="text" class="formEtapasInput" id="logradouro" name="Logradouro" placeholder="Logradouro" maxlength="50" />
+	<input type="text" class="formEtapasInput" id="logradouro" name="logradouro" placeholder="Logradouro" maxlength="50" />
 	<input type="text" class="formEtapasInput" id="numero" name="numero" placeholder="Número" maxlength="50" onkeydown="mascara_apenas_numeros(event);" />
 	<input type="text" class="formEtapasInput" id="cidade" name="cidade" placeholder="Cidade" maxlength="50" />
 	<input type="text" class="formEtapasInput" id="bairro" name="bairro" placeholder="Bairro" maxlength="50" />

@@ -8,12 +8,14 @@ class FormCliente(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = [
+            'url_foto',
             'cpf',
             'nome',
             'email',
             'logradouro',
             'bairro',
             'cidade',
+            'estado',
             'cep',
             'numero',
             'complemento',

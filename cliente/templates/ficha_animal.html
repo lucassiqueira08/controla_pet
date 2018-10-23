@@ -33,21 +33,24 @@
 
 			<div class="centralizado destacadoCimaBaixo">
 				<div class="imagemCardModal coluna">
-					<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+						<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{animal.nome}} - ID: {{animal.id}}">
 				</div>
 			</div>
-
-			<input type="text" class="formEtapasInput" 					name="proprietario" 	 placeholder="Nome do proprietário" maxlength="500"/>
-			<input type="text" class="formEtapasInput"  				name="logradouro" 		 placeholder="Logradouro" 					maxlength="500"/>
-			<input type="text" class="formEtapasInput cpf" 			name="cpf" 						 placeholder="CPF" 									maxlength="14"/>
-			<input type="text" class="formEtapasInput"  				name="nome_animal" 		 placeholder="Nome do Animal" 			maxlength="500"/>
-			<input type="text" class="formEtapasInput"  				name="pelagem" 				 placeholder="Pelagem" 							maxlength="500"/>
-			<input type="text" class="formEtapasInput"  				name="data_nascimento" placeholder="Data de Nascimento"		maxlength="500"/>
-			<input type="text" class="formEtapasInput"  				name="sexo" 					 placeholder="Sexo" 								maxlength="500"/>
-			<input type="text" class="formEtapasInput"  				name="especie" 				 placeholder="Espécie" 							maxlength="500"/>
-			<input type="text" class="formEtapasInput"  				name="raca" 					 placeholder="Raça" 								maxlength="500"/>
+  	
+			<input type="text" class="formEtapasInput" 					name="proprietario" 	value="{{cliente.nome}}"maxlength="500"
+			disabled />
+	
+			<input type="text" class="formEtapasInput"  				name="logradouro" 		value="{{cliente.logradouro}}"					maxlength="500"  disabled />
+			<input type="text" class="formEtapasInput cpf" 			name="cpf" 						value="{{cliente.cpf}}"								maxlength="14" disabled />
+			<input type="text" class="formEtapasInput"  				name="nome_animal" 		 value="{{animal.nome}}"			maxlength="500" disabled="" />
+			<input type="text" class="formEtapasInput"  				name="pelagem" 				 value="{{animal.cor}}" 				maxlength="500" disabled />
+			<input type="text" class="formEtapasInput"  				name="data_nascimento" value="{{animal.datanasc}}"		maxlength="500" disabled />
+			<input type="text" class="formEtapasInput"  				name="sexo" 					 value="{{animal.sexo}}" 								maxlength="500" disabled= />
+			<input type="text" class="formEtapasInput"  				name="especie" 				 value="{{animal.especie}}" 							maxlength="500" disabled />
+			<input type="text" class="formEtapasInput"  				name="raca" 					value="{{animal.raca}}"								maxlength="500" disabled />
 			<h2 class="tituloMedio">Descrição</h2>
-			<textarea placeholder="Digite aqui sua Descrição..." class="formEtapasTextArea" name="descricao" maxlength="500"></textarea>
+			<textarea placeholder="Digite aqui sua Descrição..." class="formEtapasTextArea" name="descricao" maxlength="500" disabled>{{ficha.descricao}}
+			</textarea>
 
 		</fieldset>
 	</form>
@@ -140,37 +143,20 @@
 				<p>Aqui você tem a visão de todos os Exames do animal!</p>
 
 				<ul class="timeline">
-					<li class="event" data-date="12/10">
-						<h3>Exame de sangue Hospital São Luiz</h3>
+						{% for exame in exames %}
+					<li class="event" data-date="{{exame.data_realizacao}}">
+					
+						<h3>{{exame.nome}}</h3>
 						<div class="arquivo">
 							<img src="{% static 'img/file.png' %}" alt="testes">
-							<a href="{% static 'arquivo_teste.pdf' %}" target="_blank">Ficha do animal.pdf</a>
+							<a href="{% static exame.link_doc %}" target="_blank">{{exame.link_doc}}</a>
 						</div>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
+						<p><h3>{{exame.nome}}</h3></p>
+                       
 
-						<h3>Raio X Clinica Pereira</h3>
-						<div class="arquivo">
-							<img src="{% static 'img/file.png' %}" alt="testes">
-							<a href="{% static 'arquivo_teste.pdf' %}" target="_blank">Ficha do animal.pdf</a>
-						</div>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-
-						<h3>Fotos do tumor</h3>
-						<div class="arquivo">
-							<img src="{% static 'img/file.png' %}" alt="testes">
-							<a href="{% static 'arquivo_teste.pdf' %}" target="_blank">Ficha do animal.pdf</a>
-						</div>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
 
 					</li>
-					<li class="event" data-date="15/10">
-						<h3>Arquivo do Exame tal</h3>
-						<div class="arquivo">
-							<img src="{% static 'img/file.png' %}" alt="testes">
-							<a href="{% static 'arquivo_teste.pdf' %}" target="_blank">Ficha do animal.pdf</a>
-						</div>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-					</li>
+					 {%endfor%}
 				</ul>
 				</fieldset>
 			</form>

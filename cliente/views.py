@@ -7,8 +7,9 @@ from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
 
 from core.views import BaseView
 from .forms import FormCliente
+from servicos.models import Exame
 from .models import (Animal, Cliente, Responsavel, Responde,
-                     TipoStatusAnimal, StatusAnimal)
+                     TipoStatusAnimal, StatusAnimal, FichaAnimal)
 from core.models import Menu
 
 
@@ -157,11 +158,11 @@ class ViewVisualizarAnimal(BaseView):
 
 class ViewFichaAnimal(BaseView):
 
-    template = 'ficha_animal.html'
+    template = 'ficha_animal.html'  
+ 
 
     def get(self, request):
-        context = {
-
+        context = {   
         }
         return render(request, self.template, context)
 
@@ -172,13 +173,29 @@ class ViewCadastrarDiagnostico(BaseView):
     def get(self, request):
         context = {
 
+
         }
         return render(request, self.template, context)
 
 class ViewBuscarAnimal(BaseView):
+    templateficha = 'ficha_animal.html'
+     
 
+
+    def post(self, request):
+        cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
+        animal = Animal.objects.get(cpf_cliente=cliente, nome=request.POST.get('nome_animal'))
+        ficha = FichaAnimal.objects.get(id_animal=animal)
+        exames = Exame.objects.filter(id_animal=animal)
+
+        context = {
+            'cliente':cliente,  
+            'animal': animal,
+            'ficha':ficha,
+            'exames':exames
+        }
+        return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'
-
     def get(self, request):
         context = {
 

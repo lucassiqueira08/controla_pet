@@ -13,10 +13,10 @@
 
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
-		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="100">
-		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" id="nome_animal" name="nome_animal" placeholder="Digite o nome do Animal..." maxlength="100">
+		<input type="search" class="formEtapasInput cpf " id="cpf_cliente" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14">
 		<div class="containerBotoes">
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
+			<input id ="achar_animal" type="submit" name="next" class="acao next btnPrincipal" value="Buscar"/>
 		</div>
 	</fieldset>
 
@@ -24,16 +24,16 @@
 		<h2 class="tituloGrande">Confirmar animal</h2>
 		<div class="centralizado destacadoCimaBaixo">
 			<div class="imagemCardModal coluna">
-				<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+					<img src="" id="foto_animal"  >
 			</div>
 		</div>
-		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" />
+		<input type="text" class="formEtapasInput" id="nome" name="nome" value="" maxlength="50" />
+		<input type="text" class="formEtapasInput" id="raca" name="raca"  maxlength="50" />
+		<input type="text" class="formEtapasInput" id ="dono" name="dono" maxlength="50" />
 		<h2 class="tituloMedio destacadoCima">Esse é o bixinho certo?</h2>
 		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao" value="Não!"/>
-			<a class="next acao btnPrincipal" href="{% url 'ficha_animal' %}">Sim!</a>
+			<input type="submit" id = "voltar" name="voltar" class="prev acao" value="Não!"/>
+			<button class="acao btnPrincipal" href="{% url 'ficha_animal' %}">Sim!</button>
 		</div>
 	</fieldset>
 
@@ -158,5 +158,4 @@
 
 	</form>
 	<!--===========FIMM===============-->
-
 	{% endblock %}

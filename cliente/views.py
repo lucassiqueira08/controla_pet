@@ -13,6 +13,7 @@ from cliente.exceptions import InvalidCPFError, DateError, MicrochipError
 from cliente.actions import valida_cpf, valida_microchip
 
 from cloudinary_api.app import cloudyapi
+from raven.contrib.django.raven_compat.models import client
 
 
 class ViewCadastrarCliente(BaseView):
@@ -37,6 +38,7 @@ class ViewCadastrarCliente(BaseView):
                 raise InvalidCPFError(resposta['msg'])
 
         except InvalidCPFError as e:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': str(e),
@@ -69,6 +71,7 @@ class ViewCadastrarCliente(BaseView):
         try:
             cliente.save()
         except Exception as e:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': 'Ops! Não foi possível cadastrar este cliente',
@@ -113,6 +116,7 @@ class ViewCadastrarAnimal(BaseView):
             cliente = Cliente.objects.get(cpf=cpf_cliente)
 
         except InvalidCPFError as e:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': str(e),
@@ -123,6 +127,13 @@ class ViewCadastrarAnimal(BaseView):
         try:
             cpf_responsavel = request.POST.get('cpf_responsavel')
             responsavel = Responsavel.objects.get(cpf=cpf_responsavel)
+            #TODO precisa aparecer as mensagens assincronamente para habilitar este codigo
+            # context = {
+            #     'tipo': 'informacao',
+            #     'mensagem': "Animal associado ao responsável %s" % responsavel.nome,
+            #     'time': 3000
+            # }
+            # return HttpResponse(json.dumps(context), content_type='application/json')
 
         except Exception:
             responsavel = Responsavel()
@@ -130,11 +141,18 @@ class ViewCadastrarAnimal(BaseView):
             responsavel.nome = request.POST.get('nome_responsavel')
             responsavel.cpf = cpf_responsavel
             responsavel.save()
+            context = {
+                'tipo': 'ok',
+                'mensagem': 'Responsável cadastrado com sucesso',
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
         try:
             datanasc = request.POST.get('datanasc')
             animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         except DateError as e:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': str(e),
@@ -150,6 +168,7 @@ class ViewCadastrarAnimal(BaseView):
                 raise MicrochipError(resposta['msg'])
 
         except MicrochipError as e:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': str(e),
@@ -168,6 +187,7 @@ class ViewCadastrarAnimal(BaseView):
         try:
             animal.save()
         except Exception:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': 'Ops! Não foi possível cadastrar este animal',
@@ -231,6 +251,7 @@ class ViewVisualizarAnimal(BaseView):
 
     def post(self, request):
         cpf_cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
+        # TODO Quando se cadastra mais de um animal para o mesmo cliente o codigo quebra, pois nem todos os animais tem microchip
         animal = Animal.objects.get(cpf_cliente=cpf_cliente, microchip=request.POST.get('microchip'))
         animal.nome = request.POST.get('nome')
         animal.sexo = request.POST.get('sexo')

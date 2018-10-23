@@ -32,10 +32,23 @@ $('#formcadastrocliente').on('submit', function (e) {
           },
           success: function (data) {
             alerta(data.mensagem, data.tipo, data.time)
+            if (data.tipo=='ok') {
+              $('#nome_cli').val('')
+              $('#cpf_cli').val('')
+              $('#email_cli').val('')
+              $('#cep').val('')
+              $('#logradouro').val('')
+              $('#numero').val('')
+              $('#cidade').val('')
+              $('#bairro').val('')
+              $('#estado').val('')
+              $('#complemento').val('')
+              $('#tipoCliente').val('')
+            }
           },
       })
 })
-$('#formcadastroanimal').on('submit', function (e) {
+$('#animal_botao').on('click', function (e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
@@ -52,12 +65,12 @@ $('#formcadastroanimal').on('submit', function (e) {
             raca: $('#animal_raca').val(),
             cor: $('#animal_cor').val(),
             datanasc: $('#datanasc').val(),
-            sexo: $('#sexo').val(),
+            sexo: $("input[name='sexo']").val(),
             microchip: $('#animal_microchip').val(),
-            status_animal: $('#status_animal').val(),
+            status_animal: $("input[name='status_animal']").val(),
             observacao: $('#animal_obs').val(),
-            cpf_responsavel: $('#cpf_responsavel').val(),
-            nome_responsavel: $('#nome_responsavel').val()
+            cpf_responsavel: $('#animal_cpf_responsavel').val(),
+            nome_responsavel: $('#animal_nome_responsavel').val()
           },
           success: function (data) {
             alerta(data.mensagem, data.tipo, data.time)

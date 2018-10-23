@@ -34,11 +34,11 @@
 		</a>
 		<!-- Modal -->
 		<!-- consultando dados do banco Bruno 02.09.2018-->
-		<div class="modal fade" id="modal_1{{animal.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal fade" id="modal_{{animal.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="modal_1Label">Cadastrar um animal</h5>
+						<h5 class="modal-title" id="modal_Label">Cadastrar um animal</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -67,7 +67,7 @@
 
 							<div class="dupla">
 								<label for="#" class="formLabel">Cor</label>
-								<input  class="formInput" type="text" value="{{animal.cor}}" name="cor" required>
+								<input  class="formInput" type="text" value="{{animal.cor}}" name="cor">
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Especie</label>
@@ -77,16 +77,16 @@
 							<div class="dupla">
 
 								<label for="#" class="formLabel">Data de Nascimento</label>
-								<input  class="formInput" type="text" value="{{animal.datanasc}}" name="datanasc" required>
+								<input  class="formInput" type="text" value="{{animal.datanasc}}" name="datanasc">
 							</div>
 
 							<div class="dupla">
 								<label for="#" class="formLabel">Observação</label>
-								<input  class="formInput" type="text" value="{{animal.observacao}}" name="obs" required>
+								<input  class="formInput" type="text" value="{{animal.observacao}}" name="obs">
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Microchip</label>
-								<input  class="formInput" type="text" value="{{animal.microchip}}" name="microchip" required>
+								<input  class="formInput" type="text" value="{{animal.microchip}}" name="microchip">
 							</div>
 							<div class="dupla">
 								<input  class="formInput" type="hidden" value="{{animal.cpf_cliente.cpf}}" name="cpf_cliente"  >

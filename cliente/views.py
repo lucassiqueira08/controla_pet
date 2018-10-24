@@ -10,7 +10,7 @@ from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal, TipoCliente)
 from core.models import Menu
 from cliente.exceptions import InvalidCPFError, DateError, MicrochipError
-from cliente.actions import valida_cpf, valida_microchip
+from cliente.actions import valida_cpf, valida_microchip, valida_cpf_responsavel
 
 from cloudinary_api.app import cloudyapi
 from raven.contrib.django.raven_compat.models import client
@@ -103,9 +103,10 @@ class ViewCadastrarAnimal(BaseView):
     def post(self, request):
 
         animal = Animal()
-        responde = Responde()
         status_animal = StatusAnimal()
+        responde = Responde()
 
+        # Cliente
         try:
             cpf_cliente = request.POST.get('cpf_cliente')
             resposta = valida_cpf(cpf_cliente)
@@ -124,30 +125,7 @@ class ViewCadastrarAnimal(BaseView):
             }
             return HttpResponse(json.dumps(context), content_type='application/json')
 
-        try:
-            cpf_responsavel = request.POST.get('cpf_responsavel')
-            responsavel = Responsavel.objects.get(cpf=cpf_responsavel)
-            #TODO precisa aparecer as mensagens assincronamente para habilitar este codigo
-            # context = {
-            #     'tipo': 'informacao',
-            #     'mensagem': "Animal associado ao responsável %s" % responsavel.nome,
-            #     'time': 3000
-            # }
-            # return HttpResponse(json.dumps(context), content_type='application/json')
-
-        except Exception:
-            responsavel = Responsavel()
-            cpf_responsavel = request.POST.get('cpf_responsavel')
-            responsavel.nome = request.POST.get('nome_responsavel')
-            responsavel.cpf = cpf_responsavel
-            responsavel.save()
-            context = {
-                'tipo': 'ok',
-                'mensagem': 'Responsável cadastrado com sucesso',
-                'time': 7000
-            }
-            return HttpResponse(json.dumps(context), content_type='application/json')
-
+        # Animal
         try:
             datanasc = request.POST.get('datanasc')
             animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
@@ -195,17 +173,7 @@ class ViewCadastrarAnimal(BaseView):
             }
             return HttpResponse(json.dumps(context), content_type='application/json')
 
-        responde.cpf_responsavel = responsavel
-        responde.id_animal = animal
-        responde.save()
-
-        status_get = request.POST.get('status_animal')
-        status = TipoStatusAnimal.objects.get(nome=status_get)
-
-        status_animal.id_status = status
-        status_animal.id_animal = animal
-        status_animal.save()
-
+        # Animal Foto
         try:
             arquivo = request.FILES['url_foto']
         except Exception:
@@ -216,11 +184,66 @@ class ViewCadastrarAnimal(BaseView):
             animal.url_foto = foto['url']
             animal.save()
 
-        context = {
+        context_animal = {
             'tipo': 'ok',
             'mensagem': 'Animal cadastrado com sucesso',
-            'time': 5000
+            'time': 7000
         }
+
+        # Responsavel
+        try:
+            cpf_responsavel = request.POST.get('cpf_responsavel')
+            responsavel = Responsavel.objects.get(cpf=cpf_responsavel)
+            resposta_responsavel = valida_cpf_responsavel(cpf_responsavel)
+        except:
+            cpf_responsavel = request.POST.get('cpf_responsavel')
+            responsavel = Responsavel()
+            resposta_responsavel = valida_cpf_responsavel(cpf_responsavel)
+
+        if cpf_responsavel != '' and resposta_responsavel['cpf'] is True:
+            responde.cpf_responsavel = responsavel
+            responde.id_animal = animal
+            responde.save()
+
+            context_responsavel = {
+                'tipo': 'informacao',
+                'mensagem': "Animal associado ao responsável %s" % responsavel.nome,
+                'time': 5000
+            }
+        else:
+            try:
+                responsavel.nome = request.POST.get('nome_responsavel')
+                responsavel.cpf = cpf_responsavel
+                responsavel.save()
+
+                responde.cpf_responsavel = responsavel
+                responde.id_animal = animal
+                responde.save()
+
+                context = {
+                    'tipo': 'ok',
+                    'mensagem': 'Responsável cadastrado com sucesso',
+                    'time': 7000
+                }
+                context_responsavel = context
+            except:
+                context = {
+                    'tipo': 'erro',
+                    'mensagem': 'Não foi possivel cadastrar o Responsável',
+                    'time': 7000
+                }
+                context_responsavel = context
+
+        # Status Animal
+        status_get = request.POST.get('status_animal')
+        status = TipoStatusAnimal.objects.get(nome=status_get)
+
+        status_animal.id_status = status
+        status_animal.id_animal = animal
+        status_animal.save()
+
+        context = {'dic_animal': context_animal,
+                   'dic_responsavel': context_responsavel}
 
         return HttpResponse(json.dumps(context), content_type='application/json')
 
@@ -306,6 +329,7 @@ class ViewFichaAnimal(BaseView):
         }
         return render(request, self.template, context)
 
+
 class ViewCadastrarDiagnostico(BaseView):
 
     template = 'cadastrar_diagnostico.html'
@@ -316,6 +340,7 @@ class ViewCadastrarDiagnostico(BaseView):
         }
         return render(request, self.template, context)
 
+
 class ViewBuscarAnimal(BaseView):
 
     template = 'buscar_animal.html'
@@ -325,6 +350,7 @@ class ViewBuscarAnimal(BaseView):
 
         }
         return render(request, self.template, context)
+
 
 class ViewAcompanheSuaClinica(BaseView):
 

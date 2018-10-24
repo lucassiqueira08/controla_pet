@@ -74,6 +74,27 @@ $('#animal_botao').on('click', function (e) {
           },
           success: function (data) {
             alerta(data.mensagem, data.tipo, data.time)
+            alerta(data.dic_responsavel.mensagem, data.dic_responsavel.tipo, data.dic_responsavel.time)
+            alerta(data.dic_animal.mensagem, data.dic_animal.tipo, data.dic_animal.time)
+            if (data.dic_animal.tipo=='ok') {
+              $('#animal_cpf').val('')
+              $('#animal_url_foto').val('')
+              $('#animal_nome').val('')
+              $('#animal_especie').val('')
+              $('#animal_raca').val('')
+              $('#animal_cor').val('')
+              $('#datanasc').val('')
+              $("input[name='sexo']").val('')
+              $('#animal_microchip').val('')
+              $("input[name='status_animal']").val('')
+              $('#animal_obs').val('')
+              $('#animal_cpf_responsavel').val('')
+              $('#animal_nome_responsavel').val('')
+              $('#botaoPrev_5').click()
+              $('#botaoPrev_4').click()
+              $('#botaoPrev_3').click()
+              $('#botaoPrev_2').click()
+            }
           },
       })
 })

@@ -1,12 +1,9 @@
 from django.urls import path
 
-from .views import ViewCadastroProcedimento, ViewCadastroEstadia, ViewModal,ViewCadastroAtendimento
+from .views import ViewCadastroAtendimento, ViewCadastroEstadia, ViewModal
+from .actions import get_procedimento
 
 urlpatterns = [
-    path(
-        'cadastro_procedimento', ViewCadastroProcedimento.as_view(),
-        name='cadastro_procedimento'
-    ),
     path(
         'cadastro_estadia', ViewCadastroEstadia.as_view(),
         name='cadastro_estadia'
@@ -19,4 +16,8 @@ urlpatterns = [
         'cadastro_atendimento', ViewCadastroAtendimento.as_view(),
         name='cadastro_atendimento'
     ),
+    path(
+        'get_procedimento', get_procedimento,
+        name='get_procedimento'
+    )
 ]

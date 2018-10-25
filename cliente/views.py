@@ -2,6 +2,7 @@ from datetime import datetime
 from pprint import pprint
 
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
 from django.core.exceptions import ObjectDoesNotExist
@@ -22,7 +23,7 @@ class ViewCadastrarCliente(BaseView):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url= 'cadastro_cliente')
+            'menu': Menu.objects.get(url='cadastro_cliente')
         }
 
         return render(request, self.template, context)

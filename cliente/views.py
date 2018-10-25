@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponse
 

@@ -1,7 +1,9 @@
-from django.http import HttpResponse
 from django.core import serializers
+from django.http import HttpResponse
+
 
 from .models import TipoCliente, Cliente, Animal, Responsavel
+
 
 def get_cliente(request):
     cliente = TipoCliente.objects.all()
@@ -28,3 +30,4 @@ def valida_cpf_responsavel(cpf):
     if responsavel:
         return {'cpf': True, 'msg': 'Responsável já cadastrado'}
     return {'cpf': False}
+

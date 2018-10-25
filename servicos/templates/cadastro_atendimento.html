@@ -1,21 +1,20 @@
-	{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content_base %}
-
-<form method="post" class='formEtapas'>
-	{% csrf_token %}
+<form id="sendForm" class='formEtapas'>{% csrf_token %}
 	<ul id="progress">
 		<li class="ativo"><label>Buscar Animal</label></li>
 		<li><label>Confirmação</label></li>
 		<li><label>Tipo do Serviço</label></li>
+		<li><label>Funcionário</label></li>
 	</ul>
 
-	<fieldset>	
+	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3 class="tituloExtraGrande">
-		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="100">
-		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+		<input type="text" class="formEtapasInput destacadoCimaBaixo clearMarginTop" id="nome_animal" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="100">
+		<input type="text" id="cpf" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14">
 		<div class="containerBotoes">
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
+			<input type="submit" id="Buscar" name="next" class="next acao btnPrincipal" value="Buscar"/>
 		</div>
 	</fieldset>
 
@@ -29,21 +28,21 @@
 				</tr>
 				<tr>
 					<th>Nome:</th>
-					<td>Xuxuzinho</td>
+					<td class="nome_animal_table"></td>
 					<th>Nome:</th>
-					<td>Lucas Araujo de Oliveira</td>
+					<td class="nome_cliente"></td>
 				</tr>
 				<tr>
 					<th>Cor:</th>
-					<td>Marrom</td>
+					<td class="cor_animal"></td>
 					<th>Cpf:</th>
-					<td>447.459.088-06</td>
+					<td class="cpf_cliente"></td>
 				</tr>
 				<tr>
 					<th>Sexo:</th>
-					<td>Masculino</td>
+					<td class="sexo_animal"></td>
 					<th>Endereço:</th>
-					<td>Av. Manoel Pedro Pimentel, 465 - Pq. Continental</td>
+					<td class="logradouro"></td>
 				</tr>
 				<tr>
 					<th></th>
@@ -69,22 +68,22 @@
 					<th colspan="2" class="tituloTabela">Proprietário</th>
 				</tr>
 				<tr>
+					<th >Nome:</th>
+					<td class="nome_animal_table"></td>
 					<th>Nome:</th>
-					<td>Xuxuzinho</td>
-					<th>Nome:</th>
-					<td>Lucas Araujo de Oliveira</td>
+					<td class="nome_cliente"></td>
 				</tr>
 				<tr>
 					<th>Cor:</th>
-					<td>Marrom</td>
+					<td class="cor_animal"></td>
 					<th>Cpf:</th>
-					<td>447.459.088-06</td>
+					<td class="cpf_cliente"></td>
 				</tr>
 				<tr>
 					<th>Sexo:</th>
-					<td>Masculino</td>
+					<td class="sexo_animal"></td>
 					<th>Endereço:</th>
-					<td>Av. Manoel Pedro Pimentel, 465 - Pq. Continental</td>
+					<td class="logradouro"></td>
 				</tr>
 				<tr>
 					<th></th>
@@ -95,30 +94,61 @@
 			</table>
 		</div>
 
-		<p class="destacadoCima">Tipo</p>	 
+		<p class="destacadoCima">Tipo</p>
 		<div class="centralizado">
 			<div class="formEtapasRadio">
-				<label class="destacadoEsquerdaDireita"><input type="radio" name="sexo" >Procedimento clínico</label>
-				<label class="destacadoEsquerdaDireita"><input type="radio" name="sexo" >Procedimento estético</label>
+				<label id="procedimento" class="destacadoEsquerdaDireita">
+                    <input type="radio" value="clinico" name="procedimento" >Procedimento clínico
+                    <input type="radio" value="estetico" name="procedimento" >Procedimento estético
+                </label>
 			</div>
 		</div>
-		<p class="destacadoCima">Procedimento</p>	
+        <div class="centralizado" id="clinicoAutorizacao">
+
+        </div>
+		<p class="destacadoCima">Procedimento</p>
 		<div class="centralizado">
-			<select class="formCombo">
+			<select class="formCombo" id="escolherProcedimento">
 				<option value="">Escolha o Procedimento...</option>
-				<option value="banho">Banho</option>
-				<option value="tosahigienica">Tosa Higiênica</option>
-				<option value="tosaraca">Tosa Raça</option>
-				<option value="tosanatesoura">Tosa na Tesoura</option>
-				<option value="higieneoral">Higiêne Oral</option>
 			</select>
 		</div>
 
-		<h3 class="tituloMedio direita destacadoCima">Preço atual: R$00,00</h3>
+        <table id="procedimentoSelecionados">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Descrição</td>
+                    <td>Preço</td>
+                    <td>link</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+		<h3 class="tituloMedio direita destacadoCima">Preço atual</h3>
+        <p class="direita" id="precoTotal"></p>
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
+            <input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
 		</div>
 	</fieldset>
+
+    <fieldset>
+		<h3 class="tituloExtraGrande">Funcionário</h3 class="tituloExtraGrande">
+        <div class="centralizado">
+            <select class="formCombo" id="escolherFuncionario">
+				<option value="">Escolha o Funcionário...</option>
+			</select>
+        </div>
+
+        <div class="containerBotoes">
+            <button class="btnPrincipal">Enviar</button>
+        </div>
+	</fieldset>
 </form>
+{% endblock %}
+{% block add_js %}
+    <script src="{% static 'js/cadastro_atendimento.js' %}"></script>
 {% endblock %}

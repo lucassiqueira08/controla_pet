@@ -11,6 +11,18 @@ def get_cliente(request):
     return HttpResponse(cliente_json, content_type='application/json')
 
 
+def get_animal(request, cpf_cliente, nome_animal):
+
+    cliente = Cliente.objects.get(cpf=cpf_cliente)
+    animal = Animal.objects.get(cpf_cliente=cliente, nome=nome_animal)
+
+    data_json = serializers.serialize(
+        "json", [cliente, animal], ensure_ascii=False
+    )
+
+    return HttpResponse(data_json, content_type='application/json')
+
+
 def valida_cpf(cpf):
     cliente = Cliente.objects.filter(cpf=cpf)
     if cliente:

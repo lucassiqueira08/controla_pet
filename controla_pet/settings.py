@@ -184,7 +184,7 @@ DATETIME_FORMAT = 'Y-m-d h:i'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    'usuarios/static',
+    'servicos/static',
     'core/static',
     'cliente/static'
 ]

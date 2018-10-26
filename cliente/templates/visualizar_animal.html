@@ -5,7 +5,7 @@
 	{% for animal in animal.object_list %}
 	<div class="container centralizado ">
 		<!--===========ANIMAL===============-->
-		<a data-toggle="modal" data-target="#modal_1{{animal.nome}}">
+		<a data-toggle="modal" data-target="#modal_{{animal.id}}">
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
 					<!-- alteração do caminho para imagem, para aplicar o modo dinamico ( tras a imagem com o nome do animao) Bruno 02.09.2019 -->

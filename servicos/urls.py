@@ -16,6 +16,10 @@ urlpatterns = [
         name='cadastro_atendimento'
     ),
     path(
+        'cadastro_procedimento', ViewCadastroProcedimento.as_view(),
+        name='cadastro_procedimento'
+    ),
+    path(
         'get_tipo_procedimento', get_tipo_procedimento,
         name='get_tipo_procedimento'
     ),

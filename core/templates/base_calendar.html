@@ -28,7 +28,6 @@
 	</div>
 	{% endif %}
 </header>
-
 <main class="main">
 	<div id="menuLateral">
 		<div class="menuLateralPerfil coluna">
@@ -68,8 +67,12 @@
 				<h5><a href ="{% url 'cadastro_estadia' %}">Cadastro de estadia</a></h5>
 			</div>
 			<div class="subMenuItem">
-				<img src="{% static 'img/cadastrar_diagnostico.png' %}" alt="Cadastrar Diagnóstico">
+				<img src="{% static 'img/cadastro_diagnostico.png' %}" alt="Cadastrar Diagnóstico">
 				<h5><a href ="{% url 'cadastrar_diagnostico' %}">Cadastro de Diagnóstico</a></h5>
+			</div>
+			<div class="subMenuItem">
+				<img src="{% static 'img/cadastro_procedimento.png' %}" alt="Cadastrar Procedimento">
+				<h5><a href ="{% url 'cadastro_procedimento' %}">Cadastro de Procedimento</a></h5>
 			</div>
 		</div>
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuConsulta" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/consulta.png' %}" alt="Consulta"><h5>Consulta</h5></button>

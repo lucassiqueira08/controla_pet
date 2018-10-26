@@ -1,20 +1,20 @@
 from datetime import datetime
-from pprint import pprint
+import json
 
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
-from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 
 from core.views import BaseView
-from .forms import FormCliente
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal, TipoCliente)
 from core.models import Menu
-
+from cliente.exceptions import InvalidCPFError, DateError, MicrochipError
+from cliente.actions import valida_cpf, valida_microchip, valida_cpf_responsavel
 
 from cloudinary_api.app import cloudyapi
+from raven.contrib.django.raven_compat.models import client
 
 
 class ViewCadastrarCliente(BaseView):
@@ -30,9 +30,25 @@ class ViewCadastrarCliente(BaseView):
 
     def post(self, request):
         cliente = Cliente()
-        cliente.cpf = request.POST.get('cpf')
-        cliente.nome = request.POST.get('nome')
-        cliente.email = request.POST.get('email')
+
+        try:
+            cliente.cpf = request.POST.get('cpf_cliente')
+            resposta = valida_cpf(cliente.cpf)
+
+            if resposta['cpf'] is True:
+                raise InvalidCPFError(resposta['msg'])
+
+        except InvalidCPFError as e:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': str(e),
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        cliente.nome = request.POST.get('nome_cliente')
+        cliente.email = request.POST.get('email_cliente')
         cliente.logradouro = request.POST.get('logradouro')
         cliente.bairro = request.POST.get('bairro')
         cliente.cidade = request.POST.get('cidade')
@@ -53,17 +69,24 @@ class ViewCadastrarCliente(BaseView):
             foto = cloudyapi.upload_cliente_imagem(foto, cliente.pk)
             cliente.url_foto = foto['url']
 
-        cliente.save()
-
-        context = {'menu': ''}
-
         try:
-            context['menu'] = Menu.objects.get(url='cadastro_cliente')
+            cliente.save()
+        except Exception as e:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Ops! Não foi possível cadastrar este cliente',
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
-        except ObjectDoesNotExist:
-            context['menu'] = Menu.objects.get(url='index')
+        context = {
+            'tipo': 'ok',
+            'mensagem': 'Cliente cadastrado com sucesso',
+            'time': 5000
+        }
 
-        return render(request, self.template, context)
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 class ViewCadastrarAnimal(BaseView):
@@ -79,51 +102,79 @@ class ViewCadastrarAnimal(BaseView):
         return render(request, self.template, context)
 
     def post(self, request):
-        cpf_cliente = request.POST.get('cpf_cliente')
-        cliente = Cliente.objects.get(cpf=cpf_cliente)
 
-        cpf_responsavel = request.POST.get('cpf_responsavel')
+        animal = Animal()
+        status_animal = StatusAnimal()
+        responde = Responde()
+
+        # Cliente
+        try:
+            cpf_cliente = request.POST.get('cpf_cliente')
+            resposta = valida_cpf(cpf_cliente)
+
+            if resposta['cpf'] is False:
+                raise InvalidCPFError("Cliente inexistente")
+
+            cliente = Cliente.objects.get(cpf=cpf_cliente)
+
+        except InvalidCPFError as e:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': str(e),
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        # Animal
+        try:
+            datanasc = request.POST.get('datanasc')
+            animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
+        except DateError as e:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': str(e),
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
         try:
-            responsavel = Responsavel.objects.get(cpf=cpf_responsavel)
+            animal.microchip = request.POST.get('microchip')
+            resposta = valida_microchip(animal.microchip)
 
-        except Exception:
-            responsavel = Responsavel()
-            responsavel.nome = request.POST.get('nome_responsavel')
-            responsavel.cpf = cpf_responsavel
-            responsavel.save()
+            if resposta['microchip'] is True:
+                raise MicrochipError(resposta['msg'])
 
-        datanasc = request.POST.get('datanasc')
-        animal = Animal()
+        except MicrochipError as e:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': str(e),
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
         animal.nome = request.POST.get('nome')
         animal.sexo = request.POST.get('sexo')
         animal.especie = request.POST.get('especie')
         animal.raca = request.POST.get('raca')
         animal.cor = request.POST.get('cor')
-        animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
         animal.observacao = request.POST.get('observacao')
+        animal.cpf_cliente = cliente
 
         try:
-            animal.microchip = request.POST.get('microchip')
-        except:
-            pass
+            animal.save()
+        except Exception:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Ops! Não foi possível cadastrar este animal',
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
-        animal.cpf_cliente = cliente
-        animal.save()
-
-        responde = Responde()
-        responde.cpf_responsavel = responsavel
-        responde.id_animal = animal
-        responde.save()
-
-        status_get = request.POST.get('status_animal')
-        status = TipoStatusAnimal.objects.get(nome=status_get)
-
-        status_animal = StatusAnimal()
-        status_animal.id_status = status
-        status_animal.id_animal = animal
-        status_animal.save()
-
+        # Animal Foto
         try:
             arquivo = request.FILES['url_foto']
         except Exception:
@@ -134,15 +185,68 @@ class ViewCadastrarAnimal(BaseView):
             animal.url_foto = foto['url']
             animal.save()
 
-        context = {'menu': ''}
+        context_animal = {
+            'tipo': 'ok',
+            'mensagem': 'Animal cadastrado com sucesso',
+            'time': 7000
+        }
 
+        # Responsavel
         try:
-            context['menu'] = Menu.objects.get(url='cadastro_animal')
+            cpf_responsavel = request.POST.get('cpf_responsavel')
+            responsavel = Responsavel.objects.get(cpf=cpf_responsavel)
+            resposta_responsavel = valida_cpf_responsavel(cpf_responsavel)
+        except:
+            cpf_responsavel = request.POST.get('cpf_responsavel')
+            responsavel = Responsavel()
+            resposta_responsavel = valida_cpf_responsavel(cpf_responsavel)
 
-        except ObjectDoesNotExist:
-            context['menu'] = Menu.objects.get(url='index')
+        if cpf_responsavel != '' and resposta_responsavel['cpf'] is True:
+            responde.cpf_responsavel = responsavel
+            responde.id_animal = animal
+            responde.save()
 
-        return render(request, self.template, context)
+            context_responsavel = {
+                'tipo': 'informacao',
+                'mensagem': "Animal associado ao responsável %s" % responsavel.nome,
+                'time': 5000
+            }
+        else:
+            try:
+                responsavel.nome = request.POST.get('nome_responsavel')
+                responsavel.cpf = cpf_responsavel
+                responsavel.save()
+
+                responde.cpf_responsavel = responsavel
+                responde.id_animal = animal
+                responde.save()
+
+                context = {
+                    'tipo': 'ok',
+                    'mensagem': 'Responsável cadastrado com sucesso',
+                    'time': 7000
+                }
+                context_responsavel = context
+            except:
+                context = {
+                    'tipo': 'erro',
+                    'mensagem': 'Não foi possivel cadastrar o Responsável',
+                    'time': 7000
+                }
+                context_responsavel = context
+
+        # Status Animal
+        status_get = request.POST.get('status_animal')
+        status = TipoStatusAnimal.objects.get(nome=status_get)
+
+        status_animal.id_status = status
+        status_animal.id_animal = animal
+        status_animal.save()
+
+        context = {'dic_animal': context_animal,
+                   'dic_responsavel': context_responsavel}
+
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 class ViewVisualizarAnimal(BaseView):
@@ -171,6 +275,7 @@ class ViewVisualizarAnimal(BaseView):
 
     def post(self, request):
         cpf_cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
+        # TODO Quando se cadastra mais de um animal para o mesmo cliente o codigo quebra, pois nem todos os animais tem microchip
         animal = Animal.objects.get(cpf_cliente=cpf_cliente, microchip=request.POST.get('microchip'))
         animal.nome = request.POST.get('nome')
         animal.sexo = request.POST.get('sexo')
@@ -225,6 +330,7 @@ class ViewFichaAnimal(BaseView):
         }
         return render(request, self.template, context)
 
+
 class ViewCadastrarDiagnostico(BaseView):
 
     template = 'cadastrar_diagnostico.html'
@@ -235,6 +341,7 @@ class ViewCadastrarDiagnostico(BaseView):
         }
         return render(request, self.template, context)
 
+
 class ViewBuscarAnimal(BaseView):
 
     template = 'buscar_animal.html'
@@ -244,6 +351,7 @@ class ViewBuscarAnimal(BaseView):
 
         }
         return render(request, self.template, context)
+
 
 class ViewAcompanheSuaClinica(BaseView):
 

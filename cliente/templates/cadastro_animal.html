@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content_base %}
 
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
-<form method="post" class='formEtapas' enctype="multipart/form-data">
+<form id="formcadastroanimal" method="post" class='formEtapas' enctype="multipart/form-data">
 {% csrf_token %}
 	<ul id="progress">
 		<li class="ativo"><label>Buscar Animal</label></li>
@@ -15,7 +16,7 @@
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
 		<p>Digite o CPF do Proprietario!</p>
-		<input type="text" class="formEtapasInput cpf" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+		<input id="animal_cpf" type="text" class="formEtapasInput cpf" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14">
 		<div class="containerBotoes">
 			<input type="submit" name="next" class="next acao btnPrincipal " value="Buscar"/>
 		</div>
@@ -26,17 +27,17 @@
 		<p>Digite algumas informações do animal!</p>
 
 		<div class="imagemCard">
-			<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
+			<input id="animal_url_foto" type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
 		</div>
 
-		<div class="modal fade" id="modal_1{{animal.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal fade" id="modal_{{animal.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 
 			<div class="modal-dialog" role="document">
 
 				<div class="modal-content">
 
 					<div class="modal-header">
-						<h5 class="modal-title" id="modal_1Label">Cadastrar um animal</h5>
+						<h5 class="modal-title" id="modal_Label">Cadastrar um animal</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -59,11 +60,11 @@
 				</div>
 			</div>
 
-		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
-		<input type="date" class="formEtapasInput" name="datanasc" placeholder="Data de Nascimento"/>
+		<input type="text" id="animal_nome" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
+		<input type="text" id="animal_especie" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
+		<input type="text" id="animal_raca" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+		<input type="text" id="animal_cor" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
+		<input type="text" id="datanasc" class="formEtapasInput data" name="datanasc" placeholder="Data de Nascimento"/>
 		<p>Sexo</p>
 		<div class="formEtapasDupla">
 			<div class="formEtapasRadio">
@@ -72,7 +73,7 @@
 			</div>
 		</div>
 		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input id="botaoPrev_2" type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
 		</div>
 	</fieldset>
@@ -80,25 +81,25 @@
 	<fieldset>
 		<h2 class="tituloGrande">Informações Complementares</h2>
 		<p>Estamos quase lá! Se preferir, digite algumas informações complementares</p>
-		<input type="text" class="formEtapasInput" name="microchip" placeholder="Microchip" maxlength="50" />
+		<input id="animal_microchip" type="text" class="formEtapasInput" name="microchip" placeholder="Microchip" maxlength="50" />
 		<p>O animal está vivo?</p>
 		<div class="formEtapasDupla">
 			<div class="formEtapasRadio">
-				<label><input type="radio" name="status_animal" value="vivo">Sim</label>
+				<label><input type="radio" name="status_animal" value="vivo" checked>Sim</label>
 				<label><input type="radio" name="status_animal" value="morto">Não</label>
 			</div>
 		</div>
 		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input id="botaoPrev_3" type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
 		</div>
 	</fieldset>
 
 	<fieldset>
 		<h2 class="tituloGrande">Observações</h2>
-		<textarea placeholder="Digite aqui sua Observação..." class="formEtapasTextArea" name="observacao" maxlength="200"></textarea>
+		<textarea id="animal_obs" placeholder="Digite aqui sua Observação..." class="formEtapasTextArea" name="observacao" maxlength="200"></textarea>
 		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+			<input id="botaoPrev_4" type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
 		</div>
 	</fieldset>
@@ -106,16 +107,19 @@
 	<fieldset>
 		<h2 class="tituloGrande">Responsáveis</h2>
 		<p>Por favor, nos diga quais os responsáveis pelo animal</p>
-		<input type="search" class="formEtapasInput cpf" name="cpf_responsavel" placeholder="Digite o CPF do Responsável..."/ maxlength="14">
-		<input type="text" class="formEtapasInput" name="nome_responsavel" placeholder="Nome" maxlength="50">
+		<input id="animal_cpf_responsavel" type="search" class="formEtapasInput cpf" name="cpf_responsavel" placeholder="Digite o CPF do Responsável..."/ maxlength="14">
+		<input id="animal_nome_responsavel" type="text" class="formEtapasInput" name="nome_responsavel" placeholder="Nome" maxlength="50">
 		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
-            <button name="button" class="acao btnPrincipal">Enviar</button>
+			<input id="botaoPrev_5" type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+      <button id="animal_botao" name="button" class="acao btnPrincipal">Enviar</button>
 		</div>
 
 	</fieldset>
 
 </form>
 <!--===========FIMM===============-->
+{% endblock %}
 
+{% block add_js %}
+    <script src="{% static 'js/cadastro_cliente.js' %}"></script>
 {% endblock %}

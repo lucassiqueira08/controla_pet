@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'gdstorage',
     'cloudinary',
     'gagenda',
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
@@ -193,3 +194,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 AUTH_USER_MODEL = 'usuarios.User'
 INDEX_URL = 'index'
 LOGIN_REDIRECT_URL = INDEX_URL
+
+RAVEN_CONFIG = {
+    'dsn': config('SENTRY_DSN'),
+}

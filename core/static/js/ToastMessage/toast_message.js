@@ -21,7 +21,7 @@ function alerta(mensagem, tipoMensagem, tempo){
     case 'erro':
       //ERRO
       $.toast({
-          heading: 'Erro...',
+          heading: 'Ocorreu um erro...',
           text: mensagem,
           showHideTransition: 'fade',
           position: 'top-right',

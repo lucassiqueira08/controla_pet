@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+	<div class="container">
+	  <div class="row">
+	    <div class="col">
+	    </div>
+	    <div class="col-8">
+				<div class="w3-row">
+					<a href="javascript:void(0)" onclick="OpenMenu(event, 'FormCadastroProcedimentoEstetico');">
+						<div class=" border-orange w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Procedimento Estético</div>
+					</a>
+					<a href="javascript:void(0)" onclick="OpenMenu(event, 'FormCadastroProcedimentoClinico');">
+						<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Procedimento Clínico</div>
+					</a>
+				</div>
+	    </div>
+	    <div class="col">
+	    </div>
+	  </div>
+	</div>
+	<form method="post" class='formEtapas menuOpcoes' id="FormCadastroProcedimentoEstetico">
+	{% csrf_token %}
+		<fieldset id="estetico">
+			<h2 class="tituloGrande">Procedimento Estético</h2 class="tituloGrande">
+			<p>Digite algumas informações do procedimento!</p>
+
+				<input type="text" id="E_nome"								   class="formEtapasInput" 					name="nome" 			placeholder="Nome" 			maxlength="500" required />
+				<input type="text" id="E_descricao"						   class="formEtapasInput" 					name="descricao" 	placeholder="Descrição" maxlength="500" />
+				<input type="text" id="E_preco"								   class="formEtapasInput dinheiro" name="preco" 			placeholder="Preço" 		maxlength="500" required />
+				<input type="text" id="E_especie"							   class="formEtapasInput" 				  name="especie" 		placeholder="Espécie" 	maxlength="500" required id="teste" />
+
+				<div class="containerBotoes linha centralizado">
+		        <button  class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
+				</div>
+		</fieldset>
+	</form>
+
+	<form method="post" class='formEtapas menuOpcoes' id="FormCadastroProcedimentoClinico" style="display:none;">
+	{% csrf_token %}
+		<fieldset id="clinico">
+			<h2 class="tituloGrande">Procedimento Clínico</h2 class="tituloGrande">
+			<p>Digite algumas informações do procedimento!</p>
+
+			<input type="text" id="C_nome"                  class="formEtapasInput" 					name="nome" 			placeholder="Nome" 			maxlength="500" required />
+			<input type="text" id="C_descricao"             class="formEtapasInput" 					name="descricao" 	placeholder="Descrição" maxlength="500" />
+			<input type="text" id="C_preco"                 class="formEtapasInput dinheiro"  name="preco" 			placeholder="Preço" 		maxlength="500" required />
+			<input type="text" id="C_especie"               class="formEtapasInput" 				  name="especie" 		placeholder="Espécie" 	maxlength="500" required />
+			<p>Autorização:</p>
+			<input type="file" class="formFileInput esquerda" name="url_autorizacao" multiple />
+			<p>Tipo de procedimento</p>
+			<select id="C_tipoProcedimento" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_procedimento" required>
+				<option value=""></option>
+			</select>
+
+			<div class="containerBotoes linha centralizado">
+					<button  class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
+			</div>
+		</fieldset>
+	</form>
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/cadastro_procedimento.js' %}"></script>
+{% endblock %}

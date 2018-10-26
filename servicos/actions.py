@@ -1,16 +1,9 @@
-from django.core import serializers
 from django.http import HttpResponse
+from django.core import serializers
 
-from .models import (ProcedimentoEstetico, ProcedimentoClinico)
+from servicos.models import TipoProcedimento
 
-
-def get_procedimento(request):
-    procedimento_clinico = ProcedimentoClinico.objects.all()
-    procedimento_estetico = ProcedimentoEstetico.objects.all()
-
-    all_objects = list(ProcedimentoClinico.objects.all()) + list(ProcedimentoEstetico.objects.all())
-
-    data_json = serializers.serialize(
-        "json", all_objects
-    )
-    return HttpResponse(data_json, content_type='application/json')
+def get_tipo_procedimento(request):
+    tipo_procedimento        = TipoProcedimento.objects.all()
+    tipo_procedimento_json   = serializers.serialize("json", tipo_procedimento)
+    return HttpResponse(tipo_procedimento_json, content_type='application/json')

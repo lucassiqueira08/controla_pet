@@ -33,10 +33,6 @@ class ViewCadastroProcedimento(View):
         especie               = request.POST.get('especie')
         aba_procedimento      = request.POST.get('aba_procedimento')
 
-
-        print('******************************')
-        print(aba_procedimento)
-
         if aba_procedimento == 'clinico':
             tipo_procedimento = request.POST.get('tipo_procedimento')
 

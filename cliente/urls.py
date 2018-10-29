@@ -3,7 +3,7 @@ from django.urls import path
 from .views import (ViewCadastrarAnimal, ViewVisualizarAnimal,
                     ViewCadastrarCliente, ViewFichaAnimal,
                     ViewAcompanheSuaClinica, ViewBuscarAnimal,
-                    ViewCadastrarDiagnostico)
+                    ViewCadastrarDiagnostico,ViewCadastroFuncionario)
 from .actions import get_cliente, get_animal
 
 urlpatterns = [
@@ -44,5 +44,9 @@ urlpatterns = [
     ),
     path(
         'get_animal/<str:cpf_cliente>/<str:nome_animal>', get_animal
+    ),
+    path(
+        'cadastro_funcionario', ViewCadastroFuncionario.as_view(),
+        name='cadastro_funcionario'
     ),
 ]

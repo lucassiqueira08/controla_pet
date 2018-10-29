@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+	<form method="post" class='formEtapas' id="FormCadastroFuncionario">
+	{% csrf_token %}
+		<fieldset>
+			<h2 class="tituloGrande">Cadastro de funcionário</h2 class="tituloGrande">
+			<p>Digite algumas informações do procedimento!</p>
+
+			<input type="text" id="nome"        class="formEtapasInput" 		name="nome" 			placeholder="Nome" 								maxlength="500" required/>
+			<input type="text" id="apelido"     class="formEtapasInput" 		name="apelido" 	  placeholder="Apelido"  			  		maxlength="500" required/>
+			<input type="text" id="cpf"     	  class="formEtapasInput cpf" name="cpf" 				placeholder="Cpf" 					  		maxlength="500" />
+			<input type="text" id="data_nasc"   class="formEtapasInput data"name="data_nasc" 	placeholder="Data de nascimento" 	maxlength="500" />
+			<p>Situação</p>
+			<select id="situacao" class="formInput destacadoCimaBaixo clearMarginTop" name="situacao" required>
+				<option value="ativo">Ativo</option>
+				<option value="inativo">Inativo</option>
+			</select>
+
+			<p>Utilizará o sistema?</p>
+			<select id="equipe_sistema" class="formInput destacadoCimaBaixo clearMarginTop" name="equipe_sistema" required>
+				<option value="sim">Sim</option>
+				<option value="nao">Não</option>
+			</select>
+
+			<div class="containerBotoes linha centralizado">
+					<button  class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
+			</div>
+		</fieldset>
+	</form>
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/cadastro.js' %}"></script>
+{% endblock %}

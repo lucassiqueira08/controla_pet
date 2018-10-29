@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from core.views import BaseView
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal, TipoCliente)
+from usuarios.models import (Funcionario, FuncionarioAbstrato)
 from core.models import Menu
 from cliente.exceptions import InvalidCPFError, DateError, MicrochipError
 from cliente.actions import valida_cpf, valida_microchip, valida_cpf_responsavel
@@ -359,3 +360,49 @@ class ViewAcompanheSuaClinica(BaseView):
 
     def get(self, request):
         return render(request, self.template)
+
+class ViewCadastroFuncionario(BaseView):
+
+    template = 'cadastro_funcionario.html'
+
+    def get(self, request):
+
+        context = {'menu': ''}
+
+        try:
+            context['menu'] = Menu.objects.get(url='cadastro_animal')
+
+        except ObjectDoesNotExist:
+            context['menu'] = Menu.objects.get(url='index')
+
+        return render(request, self.template, context)
+
+    def post(self, request):
+        apelido             = request.POST.get('apelido')
+        cpf                 = request.POST.get('cpf')
+        data_nasc           = request.POST.get('data_nasc')
+        equipe_sistema      = request.POST.get('equipe_sistema')
+        situacao            = request.POST.get('situacao')
+        print("***************************")
+        print("apelido-->   "         + apelido)
+        print("cpf-->   "             + cpf)
+        print("data_nasc-->   "       + data_nasc)
+        print("equipe_sistema-->   "  + equipe_sistema)
+        print("situacao-->   "        + situacao)
+        funcionario                = Funcionario()
+        funcionario.apelido        = apelido
+        funcionario.situacao       = situacao
+        funcionario.save()
+        funcionario_abstrato                = FuncionarioAbstrato()
+        funcionario_abstrato.cpf            = cpf.replace(".","").replace("-","")
+        funcionario_abstrato.data_nasc      = data_nasc
+        funcionario_abstrato.equipe_sistema = equipe_sistema
+        funcionario_abstrato.save()
+
+        context = {
+            'tipo': 'ok',
+            'mensagem': 'Funcionário cadastrado com sucesso',
+            'time': 5000
+        }
+
+        return HttpResponse(json.dumps(context), content_type='application/json')

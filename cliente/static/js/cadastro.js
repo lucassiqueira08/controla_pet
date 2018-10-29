@@ -1,3 +1,4 @@
+//----------------CADASTRO DE CLIENTE-------------------
 $.getJSON('/cliente/get_cliente', function (data) {
     var selectCliente = $('#tipoCliente')
     var clientes = data
@@ -8,6 +9,7 @@ $.getJSON('/cliente/get_cliente', function (data) {
         selectCliente.append(option)
     }
 })
+
 $('#formcadastrocliente').on('submit', function (e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -48,6 +50,7 @@ $('#formcadastrocliente').on('submit', function (e) {
           },
       })
 })
+//----------------CADASTRO DE ANIMAL-------------------
 $('#animal_botao').on('click', function (e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -94,6 +97,34 @@ $('#animal_botao').on('click', function (e) {
               $('#botaoPrev_4').click()
               $('#botaoPrev_3').click()
               $('#botaoPrev_2').click()
+            }
+          },
+      })
+})
+
+//----------------CADASTRO DE FUNCIONÁRIO-------------------
+$('#FormCadastroFuncionario').on('submit', function (e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+          type: "POST",
+          url: '/cliente/cadastro_funcionario',
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{
+            nome           = $('#nome').val(),
+            apelido        = $('#apelido').val(),
+            cpf            = $('#cpf').val(),
+            data_nasc      = $('#data_nasc').val(),
+            equipe_sistema = $('#equipe_sistema').val(),
+            situacao       = $('#situacao').val(),
+          },
+          success: function (data) {
+            alerta(data.mensagem, data.tipo, data.time)
+            if (data.tipo=='ok') {
+              $('.formEtapasInput').val('')
+              $('.formInput').val('')
             }
           },
       })

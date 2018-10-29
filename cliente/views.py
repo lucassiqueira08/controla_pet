@@ -383,18 +383,21 @@ class ViewCadastroFuncionario(BaseView):
         data_nasc           = request.POST.get('data_nasc')
         equipe_sistema      = request.POST.get('equipe_sistema')
         situacao            = request.POST.get('situacao')
-        print("***************************")
-        print("apelido-->   "         + apelido)
-        print("cpf-->   "             + cpf)
-        print("data_nasc-->   "       + data_nasc)
-        print("equipe_sistema-->   "  + equipe_sistema)
-        print("situacao-->   "        + situacao)
+        if equipe_sistema == 'Sim':
+            equipe_sistema = True
+        if equipe_sistema == 'Não':
+            equipe_sistema = False
+
         funcionario                = Funcionario()
         funcionario.apelido        = apelido
-        funcionario.situacao       = situacao
+        funcionario.situacao_func  = situacao
         funcionario.save()
+
         funcionario_abstrato                = FuncionarioAbstrato()
         funcionario_abstrato.cpf            = cpf.replace(".","").replace("-","")
+        print("******************************************************")
+        print("******************************************************")
+        print(data_nasc)
         funcionario_abstrato.data_nasc      = data_nasc
         funcionario_abstrato.equipe_sistema = equipe_sistema
         funcionario_abstrato.save()

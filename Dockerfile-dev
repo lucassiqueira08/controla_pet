@@ -1,5 +1,4 @@
 FROM python:3.6.6-slim-stretch
-LABEL maintainer controlapet-prod
 COPY . /app
 WORKDIR /app
 
@@ -18,7 +17,3 @@ RUN apt autoclean
 
 RUN pip install -r requirements-dev.txt
 RUN touch .env
-
-# Run the app.  CMD is required to run on Heroku
-# $PORT is set by Heroku
-CMD python manage.py runserver 0.0.0.0:$PORT

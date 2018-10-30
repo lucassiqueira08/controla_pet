@@ -14,6 +14,7 @@ import os
 
 from decouple import config
 from dj_database_url import parse as dburl
+import dj_database_url
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -101,19 +102,13 @@ WSGI_APPLICATION = 'controla_pet.wsgi.application'
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
 # !!!! BANCO DOCKER !!!!
-DATABASES = {
-   'default': config(
-        'DOCKER_DATABASE',
-        cast=dburl,
-        conn_max_age=500,
-        ssl_require=True
-    ),
-
-   'titles': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': 'titles',
-   }
-}
+# DATABASES = {
+#     'default': dj_database_url.parse(config('DOCKER_DATABASE'), conn_max_age=600),
+#     'titles': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': 'titles',
+#    }
+# }
 
 # !!!!   BANCO LOCAL MYSQL   !!!!
 # DATABASES = {
@@ -133,13 +128,14 @@ DATABASES = {
 # }
 
 # !!!!    BANCO EM PRODUÇÃO   !!!!
-#DATABASES = {
-#    'default': config('AWS_DATABASE_URL', default=default_dburl, cast=dburl, conn_max_age=600, ssl_require=True),
-#    'titles': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': 'titles',
-#    }
-#}
+DATABASES = {
+  'default': dj_database_url.parse(config('AWS_DATABASE_URL'), conn_max_age=600),
+  'titles': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': 'titles',
+   }
+}
+
 
 # -----------------------------------
 

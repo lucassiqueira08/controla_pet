@@ -197,9 +197,9 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [
-    'usuarios/static',
     'core/static',
-    'cliente/static'
+    'cliente/static',
+    'servicos/static',
 ]
 # Whitenoise - Simplified static file serving.
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

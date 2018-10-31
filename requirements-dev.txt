@@ -19,6 +19,7 @@ pyasn1==0.4.4
 pyasn1-modules==0.2.2
 python-decouple==3.1
 pytz==2018.4
+raven==6.9.0
 rsa==3.4.2
 six==1.11.0
 static3==0.7.0

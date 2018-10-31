@@ -3,7 +3,7 @@
 {% block content_base %}
 
 					<!--===========INSIRA AQUI SEU CONTEUDO===============-->
-<form method="post" class='formEtapas' enctype="multipart/form-data">
+<form method="post" id="formcadastrocliente" class='formEtapas' enctype="multipart/form-data">
 {% csrf_token %}
 <fieldset>
 <h2 class="tituloGrande">Dados Gerais</h2 class="tituloGrande">
@@ -14,14 +14,14 @@
 		</div>
 
 
-		<div class="modal fade" id="modal_1{{animal.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal fade" id="modal_{{animal.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 
 			<div class="modal-dialog" role="document">
 
 				<div class="modal-content">
 
 					<div class="modal-header">
-						<h5 class="modal-title" id="modal_1Label">Cadastrar um cliente</h5>
+						<h5 class="modal-title" id="modal_Label">Cadastrar um cliente</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -45,9 +45,9 @@
 			</div>
 
 
-	<input type="text" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
-	<input type="text" class="formEtapasInput cpf" name="cpf" placeholder="CPF" maxlength="50" />
-	<input type="text" class="formEtapasInput  email" name="email" placeholder="E-mail" maxlength="50" />
+	<input type="text" class="formEtapasInput" id="nome_cli" name="nome" placeholder="Nome" maxlength="50" required/>
+	<input type="text" class="formEtapasInput cpf" id="cpf_cli" name="cpf" placeholder="CPF" maxlength="50" required/>
+	<input type="text" class="formEtapasInput  email" id="email_cli" name="email" placeholder="E-mail" maxlength="50" />
 	<input type="text" class="formEtapasInput cep" id="cep" name="cep" placeholder="CEP" maxlength="50" onfocusout="preenche_endereco(this)" />
 	<input type="text" class="formEtapasInput" id="logradouro" name="logradouro" placeholder="Logradouro" maxlength="50" />
 	<input type="text" class="formEtapasInput" id="numero" name="numero" placeholder="Número" maxlength="50" onkeydown="mascara_apenas_numeros(event);" />
@@ -62,7 +62,7 @@
 		<option value=""></option>
 	</select>
 	<div class="containerBotoes linha centralizado">
-        <button  class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
+        <button  type="submit" class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
 	</div>
 </fieldset>
 </form>

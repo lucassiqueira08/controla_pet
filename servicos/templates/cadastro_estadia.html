@@ -10,7 +10,7 @@
 		<li><label>Observações</label></li>
 	</ul>
 
-	<fieldset>	
+	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Cliente</h3>
 		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Cliente..." maxlength="14">
 		<div class="containerBotoes">
@@ -36,22 +36,22 @@
 	</fieldset>
 
 	<fieldset>
-		<h2 class="tituloGrande">Estadia</h2>	
+		<h2 class="tituloGrande">Estadia</h2>
 		<h2 class="tituloExtraGrande">{{menu.descricao}}</h2>
-		<p>Digite as informações da estadia!</p>	
-		
+		<p>Digite as informações da estadia!</p>
+
 		<div class="dupla">
 			<label for="Data" class="formLabel">Data de inicio:</label>
-			<input id="Data" placeholder="__/__/____" maxlength="10"  class="formInput data" name="datainicio">
-		</div> 
+			<input type="date" placeholder="__/__/____" maxlength="10"  class="formInput" name="datainicio">
+		</div>
 		<div class="dupla">
 			<label for="Data1" class="formLabel">Data de fim:</label>
-			<input id="Data1" placeholder="__/__/____" maxlength="10" class="formInput data" name="datafim" >
+			<input type="date" placeholder="__/__/____" maxlength="10" class="formInput" name="datafim" >
 		</div>
 		<div class="dupla">
 			<label for="Data" class="formLabel">Valor da Diária:</label>
-			<input id="Data"  placeholder="Digite o valor da diária..." maxlength="10"  type="number" class="formInput" name="valordiaria">
-		</div> 
+			<input  placeholder="Digite o valor da diária..." maxlength="10"  type="number" class="formInput dinheiro" name="valordiaria">
+		</div>
 
 		<div class="containerBotoes centralizado linha">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior">

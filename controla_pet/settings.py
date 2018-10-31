@@ -102,13 +102,13 @@ WSGI_APPLICATION = 'controla_pet.wsgi.application'
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
 # !!!! BANCO DOCKER !!!!
-# DATABASES = {
-#     'default': dj_database_url.parse(config('DOCKER_DATABASE'), conn_max_age=600),
-#     'titles': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': 'titles',
-#    }
-# }
+DATABASES = {
+    'default': dj_database_url.parse(config('DOCKER_DATABASE'), conn_max_age=600),
+    'titles': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': 'titles',
+   }
+}
 
 # !!!!   BANCO LOCAL MYSQL   !!!!
 # DATABASES = {
@@ -128,13 +128,13 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 # }
 
 # !!!!    BANCO EM PRODUÇÃO   !!!!
-DATABASES = {
-  'default': dj_database_url.parse(config('AWS_DATABASE_URL'), conn_max_age=600),
-  'titles': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': 'titles',
-   }
-}
+# DATABASES = {
+#   'default': dj_database_url.parse(config('AWS_DATABASE_URL'), conn_max_age=600),
+#   'titles': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': 'titles',
+#    }
+# }
 
 
 # -----------------------------------

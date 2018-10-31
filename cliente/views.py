@@ -268,7 +268,7 @@ class ViewVisualizarAnimal(BaseView):
             animais = paginator.page(paginator.num_pages)
 
         context = {
-            'menu': Menu.objects.get(url= 'visualizar_animal'),
+            'menu': Menu.objects.get(url='visualizar_animal'),
             'animal': animais
         }
         return render(request, self.template, context)
@@ -339,7 +339,7 @@ class ViewVisualizarCliente(BaseView):
             clientes = paginator.page(paginator.num_pages)
 
         context = {
-            'menu': Menu.objects.get(url= 'visualizar_cliente'),
+            'menu': Menu.objects.get(url='visualizar_cliente'),
             'cliente': clientes
         }
         return render(request, self.template, context)

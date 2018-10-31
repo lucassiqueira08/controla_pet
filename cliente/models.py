@@ -16,7 +16,7 @@ class TipoCliente(models.Model):
 
 class Cliente(models.Model):
     url_foto = models.CharField(max_length=500, blank=True, null=True)
-    cpf = models.CharField(primary_key=True, max_length=14)
+    cpf = models.CharField(unique=True, max_length=14)
     nome = models.CharField(max_length=50)
     email = models.CharField(max_length=50, blank=True, null=True)
     logradouro = models.CharField(max_length=50, blank=True, null=True)
@@ -149,7 +149,7 @@ class Responde(models.Model):
 
 
 class Responsavel(models.Model):
-    cpf = models.CharField(primary_key=True, max_length=14)
+    cpf = models.CharField(unique=True, max_length=14)
     nome = models.CharField(max_length=50)
 
     class Meta:

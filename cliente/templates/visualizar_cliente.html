@@ -3,9 +3,9 @@
 {% block content_base %}
 <div class="titulo">
 	{% for cliente in cliente.object_list %}
-	<div class="container esquerda ">
+	<div class="container centralizado ">
 		<!--===========cliente===============-->
-		<a data-toggle="modal" data-target="#modal_1{{cliente.nome}}">
+		<a data-toggle="modal" data-target="#modal_{{cliente.id}}">
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
 					<img src="{{cliente.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{cliente.nome}} - ID: {{cliente.id}}">
@@ -28,11 +28,11 @@
 		</a>
 		<!-- Modal -->
 		<!-- consultando dados do banco Bruno 02.09.2018-->
-		<div class="modal fade" id="modal_1{{cliente.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal fade" id="modal_{{cliente.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="modal_1Label">Cadastrar um cliente</h5>
+						<h5 class="modal-title" id="modal_Label">Cadastrar um cliente</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>

@@ -1,9 +1,10 @@
 from django.urls import path
 
 from .views import (ViewCadastrarAnimal, ViewVisualizarAnimal,
-                    ViewCadastrarCliente, ViewFichaAnimal,
-                    ViewAcompanheSuaClinica, ViewBuscarAnimal,
-                    ViewCadastrarDiagnostico)
+                    ViewCadastrarCliente, ViewVisualizarCliente,
+                    ViewFichaAnimal, ViewAcompanheSuaClinica,
+                    ViewBuscarAnimal, ViewCadastrarDiagnostico)
+                    
 from .actions import get_cliente, get_animal
 
 urlpatterns = [
@@ -18,6 +19,10 @@ urlpatterns = [
     path(
         'visualizar_animal', ViewVisualizarAnimal.as_view(),
         name='visualizar_animal'
+    ),
+    path(
+        'visualizar_cliente', ViewVisualizarCliente.as_view(),
+        name='visualizar_cliente'
     ),
     path(
         'get_cliente', get_cliente

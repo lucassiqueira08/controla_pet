@@ -35,8 +35,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cliente',
             fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('url_foto', models.CharField(blank=True, max_length=500, null=True)),
-                ('cpf', models.CharField(max_length=14, primary_key=True, serialize=False)),
+                ('cpf', models.CharField(max_length=14, unique=True, serialize=False)),
                 ('nome', models.CharField(max_length=50)),
                 ('email', models.CharField(blank=True, max_length=50, null=True)),
                 ('logradouro', models.CharField(max_length=50)),
@@ -69,7 +70,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Responsavel',
             fields=[
-                ('cpf', models.CharField(max_length=14, primary_key=True, serialize=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('cpf', models.CharField(max_length=14, unique=True, serialize=False)),
                 ('nome', models.CharField(max_length=50)),
             ],
             options={

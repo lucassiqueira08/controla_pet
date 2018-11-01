@@ -268,7 +268,7 @@ class ViewVisualizarAnimal(BaseView):
             animais = paginator.page(paginator.num_pages)
 
         context = {
-            'menu': Menu.objects.get(url= 'visualizar_animal'),
+            'menu': Menu.objects.get(url='visualizar_animal'),
             'animal': animais
         }
         return render(request, self.template, context)
@@ -316,6 +316,78 @@ class ViewVisualizarAnimal(BaseView):
         context = {
             'menu': Menu.objects.get(url= 'visualizar_animal'),
             'animal': animais
+        }
+        return render(request, self.template, context)
+
+
+class ViewVisualizarCliente(BaseView):
+
+    template = 'visualizar_cliente.html'
+
+    def get(self, request):
+        cliente_list = Cliente.objects.all()
+        paginator = Paginator(cliente_list, 10)
+
+        try:
+            page = int(request.GET.get('page', '1'))
+        except ValueError:
+            page = 1
+
+        try:
+            clientes = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            clientes = paginator.page(paginator.num_pages)
+
+        context = {
+            'menu': Menu.objects.get(url='visualizar_cliente'),
+            'cliente': clientes
+        }
+        return render(request, self.template, context)
+
+    def post(self, request):
+        cliente = Cliente()
+        id_tipo_cliente = TipoCliente.objects.get(id=request.POST.get('id_tipo_cliente'))
+        cliente.nome = request.POST.get('nome')
+        cliente.nome = request.POST.get('nome')
+        cliente.cpf = request.POST.get('cpf')
+        cliente.email = request.POST.get('email')
+        cliente.cep = request.POST.get('cep')
+        cliente.logradouro = request.POST.get('logradouro')
+        cliente.numero = request.POST.get('numero')
+        cliente.cidade = request.POST.get('cidade')
+        cliente.bairro = request.POST.get('bairro')
+        cliente.complemento = request.POST.get('complemento')
+        cliente.id_tipo_cliente = id_tipo_cliente.pk
+
+        try:
+            arquivo = request.FILES['url_foto']
+        except Exception:
+            arquivo = None
+
+        if arquivo is not None and cliente.pk is not None:
+            foto = cloudyapi.upload_cliente_imagem(arquivo, cliente.pk)
+            cliente.url_foto = foto['url']
+
+        if request.POST.get('button') == 'del':
+            cliente.delete()
+        if request.POST.get('button') == 'save':
+            cliente.save()
+
+        cliente_list = Animal.objects.all()
+        paginator = Paginator(cliente_list, 10)
+        try:
+            page = int(request.GET.get('page', '1'))
+        except ValueError:
+            page = 1
+
+        try:
+            clientes = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            clientes = paginator.page(paginator.num_pages)
+
+        context = {
+            'menu': Menu.objects.get(url='visualizar_animal'),
+            'cliente': clientes
         }
         return render(request, self.template, context)
 

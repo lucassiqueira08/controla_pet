@@ -5,6 +5,7 @@ services:
     image: controlapet:develop
     build:
       context: .
+      dockerfile: Dockerfile-dev
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
@@ -23,6 +24,7 @@ services:
     image: controlapet:develop
     build:
       context: .
+      dockerfile: Dockerfile-dev
     command: python manage.py collectstatic --noinput
     volumes:
       - .:/app
@@ -36,6 +38,7 @@ services:
     image: controlapet:develop
     build:
       context: .
+      dockerfile: Dockerfile-dev
     command: python manage.py migrate
     volumes:
       - .:/app

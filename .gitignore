@@ -18,7 +18,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+#lib/
 lib64/
 parts/
 sdist/
@@ -113,16 +113,6 @@ venv.bak/
 
 #modelos.py
 
-core/migrations/0*
-
-funcionarios/migrations/0*
-
-usuarios/migrations/0*
-
-cliente/migrations/0*
-
-servicos/migrations/0*
-
 #Dumps
 dump-de-testes-08-2018.sql
 dump-de-testes-09-2018.sql
@@ -133,4 +123,6 @@ dump-de-testes-clean.sql
 token.json
 credentials.json
 gdstorage/.credentials/google-drive-credentials.json
-gdstorage/.*
+
+
+staticfiles/

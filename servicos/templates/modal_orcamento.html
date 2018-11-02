@@ -2,18 +2,18 @@
 {% load static %}
 {% block content_base %}
 	<a data-toggle="modal" data-target="#modal_1{{animais.nome}}">teste</a>
-	<div class="modal fade" id="modal_1{{animais.nome}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+	<div class="modal fade" id="modal_{{animais.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				
+
 				<div class="modal-header">
-					<h5 class="modal-title" id="modal_1Label">Orçamento</h5>
+					<h5 class="modal-title" id="modal_Label">Orçamento</h5>
 
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				
+
 				<div class="modal-body">
 					<div class="centralizado">
 						<table>

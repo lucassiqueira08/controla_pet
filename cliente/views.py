@@ -7,11 +7,15 @@ from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
 
 from core.views import BaseView
 from .forms import FormCliente
-from servicos.models import Exame
+from servicos.models import Exame , Atendimento , AtendimentoProcClinico , ProcedimentoClinico
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal, FichaAnimal)
 from core.models import Menu
+from django.db import connection
+from core.actions import dictfetchall
+import json
 
+from django.core.serializers.json import DjangoJSONEncoder
 
 from cloudinary_api.app import cloudyapi
 
@@ -188,11 +192,40 @@ class ViewBuscarAnimal(BaseView):
         ficha = FichaAnimal.objects.get(id_animal=animal)
         exames = Exame.objects.filter(id_animal=animal)
 
+        query = """
+            SELECT
+
+                *
+
+            FROM
+                ATENDIMENTO AS ATEND
+            INNER JOIN
+                ATENDIMENTO_PROC_CLINICO AS ATE_CL ON (ATEND.id = ATE_CL.id_atendimento)
+            INNER JOIN
+                PROCEDIMENTO_CLINICO AS PC ON (PC.id = ATE_CL.id_proc_clinico)   
+            WHERE
+                ATEND.id_animal = '1'
+        """
+
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            row = dictfetchall(cursor)
+
+        linhas= row
+
+        historicos = json.dumps(
+             linhas,
+            sort_keys=True,
+            indent=1,
+            cls=DjangoJSONEncoder
+        )
+
         context = {
             'cliente':cliente,  
             'animal': animal,
             'ficha':ficha,
-            'exames':exames
+            'exames':exames,
+            'historico':linhas[0],
         }
         return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'

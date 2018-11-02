@@ -62,18 +62,19 @@
 				<p>Aqui você tem a visão de todo o Histórico do animal!</p>
 
 				<ul class="timeline">
-					<li class="event" data-date="12/10">
+           
+					<li class="event" data-date="">
+        
+              
+						<h3>{{historico.id}}</h3>
 
-						<h3>Vacina anti-pulga</h3>
 						<p>Get here on time, it's first come first serve. Be late, get turned away.</p>
 						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
+                            
 					</li>
+       
+
+					<!--
 					<li class="event" data-date="15/10">
 						<h3>Exame de sangue</h3>
 						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
@@ -128,7 +129,7 @@
 						<h3>Vacina de Tétano</h3>
 						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
 						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
+					</li> -->
 
 				</ul>
 
@@ -151,7 +152,7 @@
 							<img src="{% static 'img/file.png' %}" alt="testes">
 							<a href="{% static exame.link_doc %}" target="_blank">{{exame.link_doc}}</a>
 						</div>
-						<p><h3>{{exame.nome}}</h3></p>
+						<p><h3>{{exame.descricao}}</h3></p>
                        
 
 

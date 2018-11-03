@@ -41,10 +41,6 @@
 				<h5><a href ="{% url 'cadastro_atendimento' %}">Cadastro de atendimento</a></h5>
 			</div>
 			<div class="subMenuItem">
-				<img src="{% static 'img/cadastro_procedimento.png' %}" alt="Cadastro de procedimento">
-				<h5><a href ="{% url 'cadastro_procedimento' %}">Cadastro de procedimento</a></h5>
-			</div>
-			<div class="subMenuItem">
 				<img src="{% static 'img/acompanhe_sua_clinica.png' %}" alt="Acompanhe sua Clínica">
 				<h5><a href ="{% url 'acompanhe_sua_clinica' %}">Acompanhe sua Clínica</a></h5>
 			</div>
@@ -71,13 +67,21 @@
 				<h5><a href ="{% url 'cadastro_estadia' %}">Cadastro de estadia</a></h5>
 			</div>
 			<div class="subMenuItem">
-				<img src="{% static 'img/cadastrar_diagnostico.png' %}" alt="Cadastrar Diagnóstico">
+				<img src="{% static 'img/cadastro_diagnostico.png' %}" alt="Cadastrar Diagnóstico">
 				<h5><a href ="{% url 'cadastrar_diagnostico' %}">Cadastro de Diagnóstico</a></h5>
+			</div>
+			<div class="subMenuItem">
+				<img src="{% static 'img/cadastro_procedimento.png' %}" alt="Cadastrar Procedimento">
+				<h5><a href ="{% url 'cadastro_procedimento' %}">Cadastro de Procedimento</a></h5>
 			</div>
 		</div>
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuConsulta" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/consulta.png' %}" alt="Consulta"><h5>Consulta</h5></button>
 
 		<div class="submenu collapse" id="submenuConsulta">
+			<div class="subMenuItem">
+				<img src="{% static 'img/visualizar_cliente.png' %}" alt="Visualizar Cliente">
+				<h5><a href ="{% url 'visualizar_cliente' %}">Visualizar Cliente</a></h5>
+			</div>
 			<div class="subMenuItem">
 				<img src="{% static 'img/visualizar_animal.png' %}" alt="visualiza Animal">
 				<h5><a href ="{% url 'visualizar_animal' %}">Visualizar animal</a></h5>

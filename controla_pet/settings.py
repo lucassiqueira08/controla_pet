@@ -14,6 +14,8 @@ import os
 
 from decouple import config
 from dj_database_url import parse as dburl
+import dj_database_url
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,20 +30,23 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['systemcontrolapet.herokuapp.com']
 
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # Whitenoise - Disable Django static file handling and allow White Noise to take over
+    'whitenoise.runserver_nostatic',
+    # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # My Apps
     'usuarios',
     'cliente',
     'core',
@@ -49,9 +54,12 @@ INSTALLED_APPS = [
     'gdstorage',
     'cloudinary',
     'gagenda',
+    # Raven - Logging
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
+    # Django Middlewares
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -59,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Whitenoise - Simplified static file serving.
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'controla_pet.urls'
@@ -88,21 +98,19 @@ WSGI_APPLICATION = 'controla_pet.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite')
 
 # !!!! BANCO DOCKER !!!!
 DATABASES = {
-   'default': config(
-        'DOCKER_DATABASE',
-        cast=dburl
-    ),
-   'titles': {
+    'default': dj_database_url.parse(config('DOCKER_DATABASE'), conn_max_age=600),
+    'titles': {
        'ENGINE': 'django.db.backends.sqlite3',
        'NAME': 'titles',
    }
 }
 
-# #!!!!   BANCO LOCAL MYSQL   !!!!
+# !!!!   BANCO LOCAL MYSQL   !!!!
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -111,6 +119,7 @@ DATABASES = {
 #         'PASSWORD': config('DATABASE_LOCAL_PASSWORD'),
 #         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
 #         'PORT': '3306',
+#         'CONN_MAX_AGE': 500,
 #      },
 #     'titles': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -118,15 +127,17 @@ DATABASES = {
 #     }
 # }
 
-#!!!!    BANCO EM PRODUÇÃO   !!!!
-#DATABASES = {
-#    'default': config('AWS_DATABASE_URL', default=default_dburl, cast=dburl),
-#    'titles': {
+# !!!!    BANCO EM PRODUÇÃO   !!!!
+# DATABASES = {
+#   'default': dj_database_url.parse(config('AWS_DATABASE_URL'), conn_max_age=600),
+#   'titles': {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': 'titles',
 #    }
-#}
+# }
 
+
+# -----------------------------------
 
 DATABASE_ROUTERS = ['controla_pet.router.DatabaseAppsRouter']
 
@@ -160,36 +171,47 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
-
-LANGUAGE_CODE = 'pt-br'
-
-TIME_ZONE = 'America/Sao_Paulo'
-
-USE_I18N = True
-
-USE_L10N = False
-
-USE_TZ = False
-
-DATE_FORMAT = 'j/n/Y'
-
-DATETIME_FORMAT = 'Y-m-d h:i'
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    'usuarios/static',
-    'core/static',
-    'cliente/static'
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # -----------------------------------
 
+# Login
 AUTH_USER_MODEL = 'usuarios.User'
 INDEX_URL = 'index'
 LOGIN_REDIRECT_URL = INDEX_URL
+# -----------------------------------
 
+# Internationalization and dates
+# https://docs.djangoproject.com/en/2.0/topics/i18n/
+LANGUAGE_CODE = 'pt-br'
+TIME_ZONE = 'America/Sao_Paulo'
+USE_I18N = True
+USE_L10N = False
+USE_TZ = False
+DATE_FORMAT = 'j/n/Y'
+DATETIME_FORMAT = 'Y-m-d h:i'
+# ------------------------------------
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = [
+    'core/static',
+    'cliente/static',
+    'servicos/static',
+]
+# Whitenoise - Simplified static file serving.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# -----------------------------------
+
+#Logging
+RAVEN_CONFIG = {
+    'dsn': config('SENTRY_DSN'),
+}
+# -----------------------------------
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
+# -----------------------------------

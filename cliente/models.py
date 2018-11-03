@@ -16,14 +16,15 @@ class TipoCliente(models.Model):
 
 class Cliente(models.Model):
     url_foto = models.CharField(max_length=500, blank=True, null=True)
-    cpf = models.CharField(primary_key=True, max_length=14)
+    cpf = models.CharField(unique=True, max_length=14)
     nome = models.CharField(max_length=50)
     email = models.CharField(max_length=50, blank=True, null=True)
-    logradouro = models.CharField(max_length=50)
-    bairro = models.CharField(max_length=50)
-    cidade = models.CharField(max_length=50)
-    cep = models.CharField(max_length=8, blank=True, null=True)
-    numero = models.SmallIntegerField()
+    logradouro = models.CharField(max_length=50, blank=True, null=True)
+    bairro = models.CharField(max_length=50, blank=True, null=True)
+    cidade = models.CharField(max_length=50, blank=True, null=True)
+    estado = models.CharField(max_length=50, blank=True, null=True)
+    cep = models.CharField(max_length=9, blank=True, null=True)
+    numero = models.SmallIntegerField(blank=True, null=True)
     complemento = models.CharField(max_length=100, blank=True, null=True)
     id_tipo_cliente = models.ForeignKey('TipoCliente', models.DO_NOTHING,
                                         db_column='id_tipo_cliente')
@@ -40,10 +41,10 @@ class Cliente(models.Model):
 
 class Animal(models.Model):
     url_foto = models.CharField(max_length=500, blank=True, null=True)
-    nome = models.CharField(max_length=50, blank=True, null=True)
+    nome = models.CharField(max_length=50)
     sexo = models.CharField(max_length=1, blank=True, null=True)
     especie = models.CharField(max_length=50)
-    raca = models.CharField(max_length=50)
+    raca = models.CharField(max_length=50, blank=True, null=True)
     cor = models.CharField(max_length=50, blank=True, null=True)
     datanasc = models.DateField(blank=True, null=True)
     observacao = models.CharField(max_length=200, blank=True, null=True)
@@ -148,7 +149,7 @@ class Responde(models.Model):
 
 
 class Responsavel(models.Model):
-    cpf = models.CharField(primary_key=True, max_length=14)
+    cpf = models.CharField(unique=True, max_length=14)
     nome = models.CharField(max_length=50)
 
     class Meta:

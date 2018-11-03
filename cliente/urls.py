@@ -1,7 +1,12 @@
 from django.urls import path
 
-from .views import ViewCadastrarAnimal, ViewVisualizarAnimal, ViewCadastrarCliente, ViewFichaAnimal, ViewAcompanheSuaClinica, ViewBuscarAnimal, ViewCadastrarDiagnostico
-from .actions import get_cliente , get_ficha_animal
+from .views import (ViewCadastrarAnimal, ViewVisualizarAnimal,
+                    ViewCadastrarCliente, ViewVisualizarCliente,
+                    ViewFichaAnimal, ViewAcompanheSuaClinica,
+                    ViewBuscarAnimal, ViewCadastrarDiagnostico)
+                    
+from .actions import get_cliente, get_animal
+>>>>>>> 630ce0ac8a16e1f650c5b009e64a211d5ed81d75
 
 urlpatterns = [
     path(
@@ -12,10 +17,13 @@ urlpatterns = [
         'cadastrar_animal', ViewCadastrarAnimal.as_view(),
         name='cadastrar_animal'
     ),
-
     path(
         'visualizar_animal', ViewVisualizarAnimal.as_view(),
         name='visualizar_animal'
+    ),
+    path(
+        'visualizar_cliente', ViewVisualizarCliente.as_view(),
+        name='visualizar_cliente'
     ),
     path(
         'get_cliente', get_cliente
@@ -39,5 +47,12 @@ urlpatterns = [
     path(
         'get_ficha_animal/<str:cpf_cliente>/<str:nome_animal>', get_ficha_animal,
         name='get_ficha_animal'
+    ),
+    path(
+        'acompanhe_sua_clinica', ViewAcompanheSuaClinica.as_view(),
+        name='acompanhe_sua_clinica'
+    ),
+    path(
+        'get_animal/<str:cpf_cliente>/<str:nome_animal>', get_animal
     ),
 ]

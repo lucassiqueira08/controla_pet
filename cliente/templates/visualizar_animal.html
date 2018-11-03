@@ -45,24 +45,25 @@
 					</div>
 					<div class="modal-body">
 						<div class="centralizado">
-							<form method="post" class='formEtapas' enctype="multipart/form-data">
+							<form id="formularioVisualizaAnimal" class='formEtapas' enctype="multipart/form-data">
 								{% csrf_token %}
 								<div class="imagemCardModal coluna">
 									<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
 									<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
 								</div>
 							</div>
+							<input class="formInput" type="hidden" value="{{animal.id}}" name="id">
 							<div class="dupla">
 								<label for="#" class="formLabel">Nome </label>
 								<input  class="formInput" type="text" value="{{animal.nome}}" autofocus name="nome" required>
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Sexo</label>
-								<input  class="formInput" type="text" value="{{animal.sexo}}" name="sexo" required>
+								<input  class="formInput" type="text" value="{{animal.sexo}}" name="sexo">
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Raça</label>
-								<input  class="formInput" type="text" value="{{animal.raca}}" name="raca" required>
+								<input  class="formInput" type="text" value="{{animal.raca}}" name="raca">
 							</div>
 
 							<div class="dupla">
@@ -89,14 +90,13 @@
 								<input  class="formInput" type="text" value="{{animal.microchip}}" name="microchip">
 							</div>
 							<div class="dupla">
-								<input  class="formInput" type="hidden" value="{{animal.cpf_cliente.cpf}}" name="cpf_cliente"  >
+								<input  class="formInput" type="hidden" value="{{animal.cpf_cliente.cpf}}" name="cpf_cliente">
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
-							<button name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
-
-							 <button name="button" value="del" class=" acao btnPrincipal btn-danger clearMarginTop">Deletar</button>
+							<button id="animal_btn_fechar" type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
+							<button id="animal_btn_salvar" name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
+							<button id="animal_btn_deletar" name="button" value="del" class=" acao btnPrincipal btn-danger clearMarginTop">Deletar</button>
 
 						</div>
 					</form>

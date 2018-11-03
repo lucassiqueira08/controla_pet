@@ -7,6 +7,8 @@ $.getJSON('/cliente/get_cliente', function (data) {
         selectCliente.append(option)
     }
 })
+
+// Ajax da pagina cadastro_cliente
 $('#formcadastrocliente').on('submit', function (e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -47,6 +49,8 @@ $('#formcadastrocliente').on('submit', function (e) {
           },
       })
 })
+
+// Ajax da pagina cadastro_animal
 $('#animal_botao').on('click', function (e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -97,6 +101,8 @@ $('#animal_botao').on('click', function (e) {
           },
       })
 })
+
+// AJAX DA PAGINA VISUALIZAR CLIENTE
 $('#cli_botao_salvar').on('click', function(e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -142,6 +148,58 @@ $('#cli_botao_deletar').on('click', function(e) {
           success: function (data) {
             if (data.tipo=='ok') {
               $('#cli_botao_fechar').click()
+            }
+            alerta(data.mensagem, data.tipo, data.time)
+            let timerId = setInterval(() => window.location.reload(), data.time);
+          }
+        })
+  })
+
+// AJAX VISUALIZA ANIMAL
+$('#animal_btn_salvar').on('click', function(e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+          type: "POST",
+          url: '/cliente/visualizar_animal',
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{
+            id: $("input[name='id']").val(),
+            url_foto: $("input[name='url_foto']").val(),
+            nome: $("input[name='nome']").val(),
+            sexo: $("input[name='sexo']").val(),
+            raca: $("input[name='raca']").val(),
+            cor: $("input[name='cor']").val(),
+            especie: $("input[name='especie']").val(),
+            datanasc: $("input[name='datanasc']").val(),
+            obs: $("input[name='obs']").val(),
+            microchip: $("input[name='microchip']").val(),
+            cpf_cliente: $("input[name='cpf_cliente']").val(),
+          },
+          success: function (data) {
+            alerta(data.mensagem, data.tipo, data.time)
+            if (data.tipo=='ok') {
+              $('#animal_btn_fechar').click()
+            }
+          }
+      })
+})
+$('#animal_btn_deletar').on('click', function(e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  id = $("input[name='id']").val()
+  $.ajax({
+          type: "DELETE",
+          url: '/cliente/delete/animal/' + id,
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{},
+          success: function (data) {
+            if (data.tipo=='ok') {
+              $('#animal_btn_fechar').click()
             }
             alerta(data.mensagem, data.tipo, data.time)
             let timerId = setInterval(() => window.location.reload(), data.time);

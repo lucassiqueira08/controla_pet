@@ -3,7 +3,7 @@
 {% block content_base %}
 
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
-<form id="formcadastroanimal" method="post" class='formEtapas' enctype="multipart/form-data">
+<form id="formcadastroanimal" class='formEtapas' enctype="multipart/form-data">
 {% csrf_token %}
 	<ul id="progress">
 		<li class="ativo"><label>Buscar Animal</label></li>
@@ -27,41 +27,10 @@
 		<p>Digite algumas informações do animal!</p>
 
 		<div class="imagemCard">
-			<input id="animal_url_foto" type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
+				<input id="animal_url_foto" type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
 		</div>
-
-		<div class="modal fade" id="modal_{{animal.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
-
-			<div class="modal-dialog" role="document">
-
-				<div class="modal-content">
-
-					<div class="modal-header">
-						<h5 class="modal-title" id="modal_Label">Cadastrar um animal</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-
-						<div class="centralizado">
-							<form method="post" class='formEtapas' enctype="multipart/form-data">
-								{% csrf_token %}
-								<div class="imagemCardModal coluna">
-									<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
-									<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
-								</div>
-						</div>
-
-
-
-						</div>
-					 </div>
-				</div>
-			</div>
-
-		<input type="text" id="animal_nome" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" />
-		<input type="text" id="animal_especie" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" />
+		<input type="text" id="animal_nome" class="formEtapasInput" name="nome" placeholder="Nome" maxlength="50" required/>
+		<input type="text" id="animal_especie" class="formEtapasInput" name="especie" placeholder="Especie" maxlength="50" required/>
 		<input type="text" id="animal_raca" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
 		<input type="text" id="animal_cor" class="formEtapasInput" name="cor" placeholder="Cor" maxlength="50" />
 		<input type="text" id="datanasc" class="formEtapasInput data" name="datanasc" placeholder="Data de Nascimento"/>
@@ -82,13 +51,6 @@
 		<h2 class="tituloGrande">Informações Complementares</h2>
 		<p>Estamos quase lá! Se preferir, digite algumas informações complementares</p>
 		<input id="animal_microchip" type="text" class="formEtapasInput" name="microchip" placeholder="Microchip" maxlength="50" />
-		<p>O animal está vivo?</p>
-		<div class="formEtapasDupla">
-			<div class="formEtapasRadio">
-				<label><input type="radio" name="status_animal" value="vivo" checked>Sim</label>
-				<label><input type="radio" name="status_animal" value="morto">Não</label>
-			</div>
-		</div>
 		<div class="containerBotoes">
 			<input id="botaoPrev_3" type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>

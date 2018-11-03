@@ -22,6 +22,13 @@ def get_animal(request, cpf_cliente, nome_animal):
 
     return HttpResponse(data_json, content_type='application/json')
 
+def get_ficha_animal(request, cpf_cliente , nome_animal):
+    cliente = Cliente.objects.get(cpf=cpf_cliente)
+    animal= Animal.objects.get(nome=nome_animal,cpf_cliente=cliente)
+    data = ([animal,cliente])
+    cliente_json = serializers.serialize("json", data)
+    return HttpResponse(cliente_json, content_type='application/json')
+
 
 def valida_cpf(cpf):
     cliente = Cliente.objects.filter(cpf=cpf)

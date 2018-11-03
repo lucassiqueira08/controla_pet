@@ -240,7 +240,7 @@ class Estadia(models.Model):
 class Exame(models.Model):
     link_doc = models.CharField(unique=True, max_length=255)
     nome = models.CharField(max_length=100)
-    nome = models.CharField(max_length=200)
+    descricao = models.CharField(max_length=200)
     data_realizacao = models.DateField(blank=True, null=True)
     id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
                                   db_column='id_animal')

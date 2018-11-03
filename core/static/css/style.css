@@ -114,7 +114,7 @@
 	color: #ff6600 ;
 	padding-left: 10px;
 	outline: none;
-	box-sizing: border-box;	
+	box-sizing: border-box;
 	font-size: 12px;
 	font-weight: 600;
 }
@@ -652,6 +652,16 @@ cursor: pointer;
 	height: 370px;
 }
 
+/**===========================Página de erros===========================**/
+
+.imgPagErros{
+	width: 250px;
+}
+.textoErro{
+	width: 80%;
+	font-size: 16px;
+}
+
 /**===========================Específicos===========================**/
 
 #paginationActive a{
@@ -684,7 +694,6 @@ cursor: pointer;
 
 }
 /**===========================Tabela===========================**/
-
 
 table{
 	border:.5px solid black;
@@ -728,6 +737,7 @@ table, td,th{
 		font-size: 11px;
 	}
 }
+
 /**===========================Container adicionar===========================**/
 
 .icone{
@@ -740,8 +750,8 @@ table, td,th{
 .inputProduto{
 	width: 200px;
 }
-/**===========================Textos===========================**/
 
+/**===========================Textos===========================**/
 
 p{
 	text-align:left;

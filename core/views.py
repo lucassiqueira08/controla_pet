@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
 from django.shortcuts import render
 from django.views import View
-from .models import Menu, MenuGrupo 
+from .models import Menu, MenuGrupo
 from servicos.models import Atendimento,FeitoPor
 from cliente.models import Cliente,Animal
 from usuarios.models import Funcionario,CargoFuncionario
@@ -20,20 +20,47 @@ class BaseView(LoginRequiredMixin, View):
 class ViewIndexBemVindo(BaseView):
 
     template = 'index_bemvindo.html'
-    
+
     def get(self, request):
         context = {
             'usuario_nome': request.user.primeiro_nome.title(),
             'menu': Menu.objects.get(url= 'index')
         }
         return render(request, self.template, context)
-        
+
+class ErroNaoEncontrado(BaseView):
+
+    template = 'erro_nao_encontrado.html'
+
+    def get(self, request):
+        context = {
+        }
+        return render(request, self.template, context)
+
+class ErroPermissao(BaseView):
+
+    template = 'erro_permissao.html'
+
+    def get(self, request):
+        context = {
+        }
+        return render(request, self.template, context)
+
+class ErroInterno(BaseView):
+
+    template = 'erro_interno.html'
+
+    def get(self, request):
+        context = {
+        }
+        return render(request, self.template, context)
+
 class ViewIndex(BaseView):
 
     template = 'index.html'
-  
+
     def get(self, request):
-        atendimento = Atendimento.objects.all()    
+        atendimento = Atendimento.objects.all()
         funcionarios = Funcionario.objects.all()
         context = {
             'menu': Menu.objects.get(url= 'index'),
@@ -46,10 +73,10 @@ class ViewIndex(BaseView):
     def post(self, request):
         if request.method == "POST":
          botao = request.POST.get('button')
-         
+
          if botao == 'save':
             data = request.POST.get('dataAtendimento')
-            data = data[0:10]+'T'+data[11:] 
+            data = data[0:10]+'T'+data[11:]
             obssumary = request.POST.get('obs')
             #dicionario molde para o calendar
             event = {
@@ -74,7 +101,7 @@ class ViewIndex(BaseView):
             funcionarios = Funcionario.objects.all()
             feito = FeitoPor()
             cliente = Cliente.objects.get(cpf= request.POST.get('cpf') )
-            atendimento = Atendimento() 
+            atendimento = Atendimento()
             atendimento.observacao = request.POST.get('obs')
             atendimento.data_solicitacao = request.POST.get('dataAtendimento')
 
@@ -95,7 +122,7 @@ class ViewIndex(BaseView):
             atendimento.observacao = request.POST.get('obsedit')
             atendimento.data_solicitacao = request.POST.get('DataInicioedit')
             data = request.POST.get('DataInicioedit')
-            data = data[0:10]+'T'+data[11:] 
+            data = data[0:10]+'T'+data[11:]
             google= GCalGoogle()
             IdGoogle = atendimento.id_google_agenda
             coment = request.POST.get('obsedit')
@@ -103,20 +130,18 @@ class ViewIndex(BaseView):
             atendimento.save()
 
          if botao == 'del':
-            atendimento = Atendimento.objects.get(id = request.POST.get('IdEvento')) 
+            atendimento = Atendimento.objects.get(id = request.POST.get('IdEvento'))
             google= GCalGoogle()
             google.deletar(atendimento.id_google_agenda)
             feito = FeitoPor.objects.get(id_atendimento= request.POST.get('IdEvento'))
-            feito.delete() 
+            feito.delete()
             atendimento.delete()
 
 
         context = {
             'menu': Menu.objects.get(url= 'index'),
             'Atendimentos': Atendimento.objects.all(),
-            
-          
+
+
         }
         return HttpResponseRedirect('/index')
-        
-

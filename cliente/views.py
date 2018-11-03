@@ -225,7 +225,7 @@ class ViewBuscarAnimal(BaseView):
             'animal': animal,
             'ficha':ficha,
             'exames':exames,
-            'historico':linhas[0],
+            'historicos':linhas,
         }
         return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'

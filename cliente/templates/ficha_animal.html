@@ -62,18 +62,18 @@
 				<p>Aqui você tem a visão de todo o Histórico do animal!</p>
 
 				<ul class="timeline">
-           
+                  {%for historico in historicos%}
 					<li class="event" data-date="">
-        
+                        
               
-						<h3>{{historico.id}}</h3>
+						<h3>{{historico}}</h3>
 
 						<p>Get here on time, it's first come first serve. Be late, get turned away.</p>
 						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
                             
 					</li>
        
-
+                  {%endfor%}
 					<!--
 					<li class="event" data-date="15/10">
 						<h3>Exame de sangue</h3>

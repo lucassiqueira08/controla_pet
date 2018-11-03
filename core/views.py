@@ -28,27 +28,27 @@ class ViewIndexBemVindo(BaseView):
         }
         return render(request, self.template, context)
 
-class ErroNaoEncontrado(BaseView):
+class Erro404(BaseView):
 
-    template = 'erro_nao_encontrado.html'
-
-    def get(self, request):
-        context = {
-        }
-        return render(request, self.template, context)
-
-class ErroPermissao(BaseView):
-
-    template = 'erro_permissao.html'
+    template = 'erro_404.html'
 
     def get(self, request):
         context = {
         }
         return render(request, self.template, context)
 
-class ErroInterno(BaseView):
+class Erro403(BaseView):
 
-    template = 'erro_interno.html'
+    template = 'erro_403.html'
+
+    def get(self, request):
+        context = {
+        }
+        return render(request, self.template, context)
+
+class Erro500(BaseView):
+
+    template = 'erro_500.html'
 
     def get(self, request):
         context = {

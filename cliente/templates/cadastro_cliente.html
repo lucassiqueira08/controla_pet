@@ -46,14 +46,13 @@
 	<input type="text" class="formEtapasInput" id="nome_cli" name="nome" placeholder="Nome" maxlength="50" required/>
 	<input type="text" class="formEtapasInput cpf" id="cpf_cli" name="cpf" placeholder="CPF" maxlength="50" required/>
 	<input type="text" class="formEtapasInput  email" id="email_cli" name="email" placeholder="E-mail" maxlength="50" />
-	<input type="text" class="formEtapasInput cep" id="cep" name="cep" placeholder="CEP" maxlength="50" onfocusout="preenche_endereco(this)" />
+	<input type="text" class="formEtapasInput cep" id="cep" name="cep" placeholder="CEP" maxlength="9" onfocusout="preenche_endereco(this)" />
 	<input type="text" class="formEtapasInput" id="logradouro" name="logradouro" placeholder="Logradouro" maxlength="50" />
 	<input type="text" class="formEtapasInput" id="numero" name="numero" placeholder="Número" maxlength="50" onkeydown="mascara_apenas_numeros(event);" />
 	<input type="text" class="formEtapasInput" id="cidade" name="cidade" placeholder="Cidade" maxlength="50" />
 	<input type="text" class="formEtapasInput" id="bairro" name="bairro" placeholder="Bairro" maxlength="50" />
 	<input type="text" class="formEtapasInput" id="estado" name="estado" placeholder="Estado" maxlength="50" />
-	<input type="text" class="formEtapasInput" id="complemento" name="complemento" placeholder="Complemento" maxlength="50" />
-
+	<input type="text" class="formEtapasInput" id="complemento" name="complemento" placeholder="Complemento" maxlength="100" />
 
 	<p>Tipo de cliente</p>
 	<select id="tipoCliente" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_cliente" required>

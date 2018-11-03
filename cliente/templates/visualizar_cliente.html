@@ -39,13 +39,14 @@
 					</div>
 					<div class="modal-body">
 						<div class="centralizado">
-							<form method="post" class='formEtapas' enctype="multipart/form-data">
+							<form id="client_id" class='formEtapas' enctype="multipart/form-data">
 								{% csrf_token %}
 								<div class="imagemCardModal coluna">
 									<img src="{{cliente.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
 									<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
 								</div>
 							</div>
+							<input class="formInput" type="hidden" value="{{cliente.id}}" name="id">
 							<div class="dupla">
 								<label for="#" class="formLabel">Nome</label>
 								<input  class="formInput" type="text" value="{{cliente.nome}}" autofocus name="nome" required>
@@ -56,47 +57,52 @@
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Email</label>
-								<input  class="formInput" type="text" value="{{cliente.email}}" name="email" required>
+								<input  class="formInput" type="text" value="{{cliente.email}}" name="email">
 							</div>
 
 							<div class="dupla">
 								<label for="#" class="formLabel">CEP</label>
-								<input  class="formInput" type="text" value="{{cliente.cep}}" name="cep" required>
+								<input  class="formInput" type="text" value="{{cliente.cep}}" name="cep">
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Logradouro</label>
-								<input  class="formInput" type="text" value="{{cliente.logradouro}}" name="logradouro" required>
+								<input  class="formInput" type="text" value="{{cliente.logradouro}}" name="logradouro">
 							</div>
 
 							<div class="dupla">
 
 								<label for="#" class="formLabel">Número</label>
-								<input  class="formInput" type="text" value="{{cliente.numero}}" name="numero" required>
+								<input  class="formInput" type="text" value="{{cliente.numero}}" name="numero">
 							</div>
 
 							<div class="dupla">
 								<label for="#" class="formLabel">Cidade</label>
-								<input  class="formInput" type="text" value="{{cliente.cidade}}" name="cidade" required>
+								<input  class="formInput" type="text" value="{{cliente.cidade}}" name="cidade">
 							</div>
+
 							<div class="dupla">
 								<label for="#" class="formLabel">Bairro</label>
-								<input  class="formInput" type="text" value="{{cliente.bairro}}" name="bairro" required>
+								<input  class="formInput" type="text" value="{{cliente.bairro}}" name="bairro">
+							</div>
+
+							<div class="dupla">
+								<label for="#" class="formLabel">Estado</label>
+								<input  class="formInput" type="text" value="{{cliente.estado}}" name="estado">
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Complemento</label>
-								<input  class="formInput" type="text" value="{{cliente.complemento}}" name="complemento" required>
+								<input  class="formInput" type="text" value="{{cliente.complemento}}" name="complemento">
 							</div>
 							<div class="dupla">
 								<label for="#" class="formLabel">Tipo de cliente</label>
-								<input  class="formInput" type="text" value="{{cliente.id_tipo_cliente}}" name="id_tipo_cliente" required>
+								<input  class="formInput" type="text" value="{{cliente.id_tipo_cliente.id}}" name="id_tipo_cliente" required>
 							</div>
+
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
-							<button name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
-
-							 <button name="button" value="del" class=" acao btnPrincipal btn-danger clearMarginTop">Deletar</button>
-
+							<button id="cli_botao_fechar" type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">FECHAR</button>
+							<button id="cli_botao_salvar" name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
+							<button id="cli_botao_deletar"name="button" value="del" class=" acao btnPrincipal btn-danger clearMarginTop">DELETAR</button>
 						</div>
 					</form>
 				</div>

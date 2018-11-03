@@ -8,6 +8,7 @@ class FormCliente(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = [
+            'id',
             'url_foto',
             'cpf',
             'nome',

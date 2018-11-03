@@ -50,4 +50,8 @@ urlpatterns = [
     path(
         'get_animal/<str:cpf_cliente>/<str:nome_animal>', get_animal
     ),
+    path(
+        'delete/<int:id>', ViewVisualizarCliente.as_view(),
+        name='delete_cliente'
+    ),
 ]

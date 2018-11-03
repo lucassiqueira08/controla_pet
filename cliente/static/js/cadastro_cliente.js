@@ -1,7 +1,6 @@
 $.getJSON('/cliente/get_cliente', function (data) {
     var selectCliente = $('#tipoCliente')
     var clientes = data
-    console.log(selectCliente)
     for (var cliente in clientes) {
         var option = $('<option/>').val(clientes[cliente].pk)
             .text(clientes[cliente].fields.nome)
@@ -98,3 +97,54 @@ $('#animal_botao').on('click', function (e) {
           },
       })
 })
+$('#cli_botao_salvar').on('click', function(e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+          type: "POST",
+          url: '/cliente/visualizar_cliente',
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{
+            id: $("input[name='id']").val(),
+            nome: $("input[name='nome']").val(),
+            cpf: $("input[name='cpf']").val(),
+            email: $("input[name='email']").val(),
+            cep: $("input[name='cep']").val(),
+            logradouro: $("input[name='logradouro']").val(),
+            numero: $("input[name='numero']").val(),
+            cidade: $("input[name='cidade']").val(),
+            bairro: $("input[name='bairro']").val(),
+            estado: $("input[name='estado']").val(),
+            complemento: $("input[name='complemento']").val(),
+            id_tipo_cliente: $("input[name='id_tipo_cliente']").val(),
+          },
+          success: function (data) {
+            alerta(data.mensagem, data.tipo, data.time)
+            if (data.tipo=='ok') {
+              $('#cli_botao_fechar').click()
+            }
+          }
+      })
+})
+$('#cli_botao_deletar').on('click', function(e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  id = $("input[name='id']").val()
+  $.ajax({
+          type: "DELETE",
+          url: '/cliente/delete/' + id,
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{},
+          success: function (data) {
+            if (data.tipo=='ok') {
+              $('#cli_botao_fechar').click()
+            }
+            alerta(data.mensagem, data.tipo, data.time)
+            let timerId = setInterval(() => window.location.reload(), data.time);
+          }
+        })
+  })

@@ -15,6 +15,7 @@ class TipoCliente(models.Model):
 
 
 class Cliente(models.Model):
+    id = models.AutoField(primary_key=True)
     url_foto = models.CharField(max_length=500, blank=True, null=True)
     cpf = models.CharField(unique=True, max_length=14)
     nome = models.CharField(max_length=50)

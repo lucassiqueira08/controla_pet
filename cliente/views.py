@@ -71,6 +71,12 @@ class ViewCadastrarCliente(BaseView):
 
         try:
             cliente.save()
+            context = {
+                'tipo': 'ok',
+                'mensagem': 'Cliente cadastrado com sucesso',
+                'time': 5000
+            }
+
         except Exception as e:
             client.captureException()
             context = {
@@ -78,13 +84,6 @@ class ViewCadastrarCliente(BaseView):
                 'mensagem': 'Ops! Não foi possível cadastrar este cliente',
                 'time': 7000
             }
-            return HttpResponse(json.dumps(context), content_type='application/json')
-
-        context = {
-            'tipo': 'ok',
-            'mensagem': 'Cliente cadastrado com sucesso',
-            'time': 5000
-        }
 
         return HttpResponse(json.dumps(context), content_type='application/json')
 
@@ -345,51 +344,64 @@ class ViewVisualizarCliente(BaseView):
         return render(request, self.template, context)
 
     def post(self, request):
-        cliente = Cliente()
-        id_tipo_cliente = TipoCliente.objects.get(id=request.POST.get('id_tipo_cliente'))
-        cliente.nome = request.POST.get('nome')
-        cliente.nome = request.POST.get('nome')
-        cliente.cpf = request.POST.get('cpf')
-        cliente.email = request.POST.get('email')
-        cliente.cep = request.POST.get('cep')
-        cliente.logradouro = request.POST.get('logradouro')
-        cliente.numero = request.POST.get('numero')
-        cliente.cidade = request.POST.get('cidade')
-        cliente.bairro = request.POST.get('bairro')
-        cliente.complemento = request.POST.get('complemento')
-        cliente.id_tipo_cliente = id_tipo_cliente.pk
-
         try:
-            arquivo = request.FILES['url_foto']
-        except Exception:
-            arquivo = None
+            id = request.POST.get('id')
+            cliente = Cliente.objects.get(pk=id)
+            id_tipo_cliente = TipoCliente.objects.get(id=request.POST.get('id_tipo_cliente'))
+            cliente.nome = request.POST.get('nome')
+            cliente.cpf = request.POST.get('cpf')
+            cliente.email = request.POST.get('email')
+            cliente.cep = request.POST.get('cep')
+            cliente.logradouro = request.POST.get('logradouro')
+            cliente.numero = request.POST.get('numero')
+            cliente.cidade = request.POST.get('cidade')
+            cliente.bairro = request.POST.get('bairro')
+            cliente.complemento = request.POST.get('complemento')
+            cliente.id_tipo_cliente = id_tipo_cliente
 
-        if arquivo is not None and cliente.pk is not None:
-            foto = cloudyapi.upload_cliente_imagem(arquivo, cliente.pk)
-            cliente.url_foto = foto['url']
+            try:
+                arquivo = request.FILES['url_foto']
+            except Exception:
+                arquivo = None
 
-        if request.POST.get('button') == 'del':
-            cliente.delete()
-        if request.POST.get('button') == 'save':
-            cliente.save()
+            if arquivo is not None and cliente.pk is not None:
+                foto = cloudyapi.upload_cliente_imagem(arquivo, cliente.pk)
+                cliente.url_foto = foto['url']
 
-        cliente_list = Animal.objects.all()
-        paginator = Paginator(cliente_list, 10)
-        try:
-            page = int(request.GET.get('page', '1'))
-        except ValueError:
-            page = 1
+            try:
+                cliente.save()
+                context = {
+                    'tipo': 'ok',
+                    'mensagem': 'Cliente editado com sucesso',
+                    'time': 7000
+                }
+                return HttpResponse(json.dumps(context), content_type='application/json')
 
-        try:
-            clientes = paginator.page(page)
-        except (EmptyPage, InvalidPage):
-            clientes = paginator.page(paginator.num_pages)
+            except:
+                context = {
+                    'tipo': 'erro',
+                    'mensagem': 'Não foi possivel editar o cliente',
+                    'time': 7000
+                }
+                return HttpResponse(json.dumps(context), content_type='application/json')
+        except:
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Não foi possivel editar o cliente',
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+    def delete(self, request, id):
+        cliente = Cliente.objects.get(pk=id)
+        cliente.delete()
 
         context = {
-            'menu': Menu.objects.get(url='visualizar_animal'),
-            'cliente': clientes
+            'tipo': 'ok',
+            'mensagem': 'Cliente excluido com sucesso',
+            'time': 7000
         }
-        return render(request, self.template, context)
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 class ViewFichaAnimal(BaseView):

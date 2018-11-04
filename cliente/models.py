@@ -27,7 +27,7 @@ class Cliente(models.Model):
     cep = models.CharField(max_length=9, blank=True, null=True)
     numero = models.SmallIntegerField(blank=True, null=True)
     complemento = models.CharField(max_length=100, blank=True, null=True)
-    id_tipo_cliente = models.ForeignKey('TipoCliente', models.DO_NOTHING,
+    id_tipo_cliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, related_name='cliente_tipo_cliente',
                                         db_column='id_tipo_cliente')
 
     class Meta:
@@ -51,7 +51,9 @@ class Animal(models.Model):
     observacao = models.CharField(max_length=200, blank=True, null=True)
     microchip = models.CharField(unique=True, max_length=50,
                                  blank=True, null=True)
-    cpf_cliente = models.ForeignKey('Cliente', models.DO_NOTHING,
+    cpf_cliente = models.ForeignKey('Cliente',
+                                    on_delete=models.CASCADE,
+                                    related_name='animal_cliente',
                                     db_column='cpf_cliente')
 
     class Meta:
@@ -66,7 +68,7 @@ class Animal(models.Model):
 
 class FichaAnimal(models.Model):
     id = models.AutoField(primary_key=True)
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
+    id_animal = models.ForeignKey(Animal, models.DO_NOTHING, related_name='ficha_animal',
                                   db_column='id_animal')
     data_consulta = models.DateField(blank=True, null=False)
     descricao = models.CharField(max_length=500, blank=True, null=True)
@@ -96,9 +98,9 @@ class TipoStatusAnimal(models.Model):
 
 class StatusAnimal(models.Model):
 
-    id_status = models.ForeignKey(TipoStatusAnimal, models.DO_NOTHING,
-                                  db_column='id_status', primary_key=True)
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
+    id_status = models.OneToOneField(TipoStatusAnimal, models.DO_NOTHING, related_name='status_animal_tipo_status',
+                                     db_column='id_status', primary_key=True)
+    id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE, related_name='status_animal_animal',
                                   db_column='id_animal')
 
     class Meta:
@@ -114,8 +116,8 @@ class StatusAnimal(models.Model):
 
 class TelefoneCliente(models.Model):
 
-    cpf_cliente = models.ForeignKey(Cliente, models.DO_NOTHING,
-                                    db_column='cpf_cliente', primary_key=True)
+    cpf_cliente = models.OneToOneField(Cliente, on_delete=models.DO_NOTHING, related_name='telefone_cliente_cliente',
+                                       db_column='cpf_cliente', primary_key=True)
     telefone = models.CharField(max_length=11)
 
     class Meta:
@@ -131,13 +133,13 @@ class TelefoneCliente(models.Model):
 
 class Responde(models.Model):
 
-    cpf_responsavel = models.ForeignKey(
-        'Responsavel', models.DO_NOTHING,
+    cpf_responsavel = models.OneToOneField(
+        'Responsavel', on_delete=models.CASCADE, related_name='responde_responsavel',
         db_column='cpf_responsavel',
         primary_key=True
     )
-    id_animal = models.ForeignKey(Animal,
-                                  models.DO_NOTHING, db_column='id_animal')
+    id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE,
+                                  db_column='id_animal', related_name='responde_animal')
 
     class Meta:
         db_table = 'RESPONDE'

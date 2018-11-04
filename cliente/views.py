@@ -238,6 +238,7 @@ class ViewCadastrarAnimal(BaseView):
                 }
                 context_responsavel = context
             except:
+                client.captureException()
                 context = {
                     'tipo': 'erro',
                     'mensagem': 'Não foi possivel cadastrar o Responsável',
@@ -320,6 +321,7 @@ class ViewVisualizarAnimal(BaseView):
             return HttpResponse(json.dumps(context), content_type='application/json')
 
         except Exception:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': 'Não foi possivel editar o animal',
@@ -337,12 +339,12 @@ class ViewVisualizarAnimal(BaseView):
                 'time': 4000
             }
         except IntegrityError:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': 'Existe algum cliente associado a este animal',
                 'time': 4000
             }
-
 
         return HttpResponse(json.dumps(context), content_type='application/json')
 
@@ -406,6 +408,7 @@ class ViewVisualizarCliente(BaseView):
                 return HttpResponse(json.dumps(context), content_type='application/json')
 
             except:
+                client.captureException()
                 context = {
                     'tipo': 'erro',
                     'mensagem': 'Não foi possivel editar o cliente',
@@ -413,6 +416,7 @@ class ViewVisualizarCliente(BaseView):
                 }
                 return HttpResponse(json.dumps(context), content_type='application/json')
         except:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': 'Não foi possivel editar o cliente',
@@ -422,13 +426,21 @@ class ViewVisualizarCliente(BaseView):
 
     def delete(self, request, id):
         cliente = Cliente.objects.get(pk=id)
-        cliente.delete()
+        try:
+            cliente.delete()
+            context = {
+                'tipo': 'ok',
+                'mensagem': 'Cliente excluido com sucesso',
+                'time': 7000
+            }
+        except IntegrityError:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Ops...Existe algum animal associado a este cliente',
+                'time': 4000
+            }
 
-        context = {
-            'tipo': 'ok',
-            'mensagem': 'Cliente excluido com sucesso',
-            'time': 7000
-        }
         return HttpResponse(json.dumps(context), content_type='application/json')
 
 

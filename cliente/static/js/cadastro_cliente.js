@@ -118,9 +118,9 @@ function abrirModalCliente(id, nome, cpf, email, cep, logradouro, numero, cidade
   cliente.complemento = complemento
   cliente.id_tipo_cliente = id_tipo_cliente
   $('#modalVisuCliente').modal('show')
-  InputModalAnimal(cliente)
+  InputModalCliente(cliente)
 }
-function InputModalAnimal(cliente) {
+function InputModalCliente(cliente) {
   $("input[name='id']").val(cliente.id)
   $("input[name='nome']").val(cliente.nome)
   $("input[name='cpf']").val(cliente.cpf)
@@ -162,6 +162,7 @@ $('#cli_botao_salvar').on('click', function(e) {
             alerta(data.mensagem, data.tipo, data.time)
             if (data.tipo=='ok') {
               $('#cli_botao_fechar').click()
+              let timerId = setInterval(() => window.location.reload(), data.time);
             }
           }
       })
@@ -180,9 +181,9 @@ $('#cli_botao_deletar').on('click', function(e) {
           success: function (data) {
             if (data.tipo=='ok') {
               $('#cli_botao_fechar').click()
+              let timerId = setInterval(() => window.location.reload(), data.time);
             }
             alerta(data.mensagem, data.tipo, data.time)
-            let timerId = setInterval(() => window.location.reload(), data.time);
           }
         })
   })

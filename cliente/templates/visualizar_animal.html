@@ -5,13 +5,13 @@
 	{% for animal in animal.object_list %}
 	<div class="container centralizado ">
 		<!--===========ANIMAL===============-->
-		<a data-toggle="modal" data-target="#modal_{{animal.id}}">
+		<a>
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
 					<!-- alteração do caminho para imagem, para aplicar o modo dinamico ( tras a imagem com o nome do animao) Bruno 02.09.2019 -->
 					<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{animal.nome}} - ID: {{animal.id}}">
 				</div>
-	<!-- Formulario trazendo os dados de cada animal do banco de dados -->
+				<!-- Formulario trazendo os dados de cada animal do banco de dados -->
 				<div class="conteudoCard linha esquerda">
 					<div class="coluna destacadoEsquerdaDireita">
 						<div class="dupla">
@@ -26,85 +26,90 @@
 							<label for="#" class="formLabel">Dono:</label>
 							<input id="dono" class="formInput" type="text" value="{{animal.cpf_cliente}}" disabled>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="containerBotoes centralizado linha">
-			</div>
-		</a>
-		<!-- Modal -->
-		<!-- consultando dados do banco Bruno 02.09.2018-->
-		<div class="modal fade" id="modal_{{animal.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="modal_Label">Cadastrar um animal</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+
+						<!-- BTN TEMPORARIO ATE A IMPLEMENTAÇÃO DO AJAX -->
+						<button onclick="abrirModal(
+							'{{ animal.id }}',
+							'{{ animal.nome }}',
+							'{{ animal.sexo }}',
+							'{{ animal.raca }}',
+							'{{ animal.cor }}',
+							'{{ animal.especie }}',
+							'{{ animal.datanasc }}',
+							'{{ animal.observacao }}',
+							'{{ animal.microchip }}',
+							'{{ animal.cpf_cliente.cpf }}')" type="button" class="btn btn-primary">Editar
 						</button>
 					</div>
-					<div class="modal-body">
-						<div class="centralizado">
-							<form id="formularioVisualizaAnimal" class='formEtapas' enctype="multipart/form-data">
-								{% csrf_token %}
-								<div class="imagemCardModal coluna">
-									<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
-									<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
-								</div>
-							</div>
-							<input class="formInput" type="hidden" value="{{animal.id}}" name="id">
-							<div class="dupla">
-								<label for="#" class="formLabel">Nome </label>
-								<input  class="formInput" type="text" value="{{animal.nome}}" autofocus name="nome" required>
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Sexo</label>
-								<input  class="formInput" type="text" value="{{animal.sexo}}" name="sexo">
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Raça</label>
-								<input  class="formInput" type="text" value="{{animal.raca}}" name="raca">
-							</div>
-
-							<div class="dupla">
-								<label for="#" class="formLabel">Cor</label>
-								<input  class="formInput" type="text" value="{{animal.cor}}" name="cor">
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Especie</label>
-								<input  class="formInput" type="text" value="{{animal.especie}}" name="especie" required>
-							</div>
-
-							<div class="dupla">
-
-								<label for="#" class="formLabel">Data de Nascimento</label>
-								<input  class="formInput" type="text" value="{{animal.datanasc}}" name="datanasc">
-							</div>
-
-							<div class="dupla">
-								<label for="#" class="formLabel">Observação</label>
-								<input  class="formInput" type="text" value="{{animal.observacao}}" name="obs">
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Microchip</label>
-								<input  class="formInput" type="text" value="{{animal.microchip}}" name="microchip">
-							</div>
-							<div class="dupla">
-								<input  class="formInput" type="hidden" value="{{animal.cpf_cliente.cpf}}" name="cpf_cliente">
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button id="animal_btn_fechar" type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>
-							<button id="animal_btn_salvar" name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
-							<button id="animal_btn_deletar" name="button" value="del" class=" acao btnPrincipal btn-danger clearMarginTop">Deletar</button>
-
-						</div>
-					</form>
 				</div>
 			</div>
-		</div>
+		</a>
 	</div>
 	{%endfor%}
+
+<!-- MODAL PARA EDITAR ANIMAL -->
+	<div class="modal fade" id="modalVisuAnimal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body">
+					<div class="centralizado">
+						<form id="formularioVisualizaAnimal" class='formEtapas' enctype="multipart/form-data">
+							{% csrf_token %}
+							<div class="imagemCardModal coluna">
+								<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="">
+								<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
+							</div>
+						</div>
+						<input class="formInput" type="hidden" value="{{animal.id}}" name="id">
+						<div class="dupla">
+							<label for="#" class="formLabel">Nome </label>
+							<input id="nomeisaque" class="formInput" type="text" value="{{animal.nome}}" autofocus name="nome" required>
+						</div>
+						<div class="dupla">
+							<label for="#" class="formLabel">Sexo</label>
+							<input  class="formInput" type="text" value="{{animal.sexo}}" name="sexo">
+						</div>
+						<div class="dupla">
+							<label for="#" class="formLabel">Raça</label>
+							<input  class="formInput" type="text" value="{{animal.raca}}" name="raca" >
+						</div>
+
+						<div class="dupla">
+							<label for="#" class="formLabel">Cor</label>
+							<input  class="formInput" type="text" value="{{animal.cor}}" name="cor">
+						</div>
+						<div class="dupla">
+							<label for="#" class="formLabel">Especie</label>
+							<input  class="formInput" type="text" value="{{animal.especie}}" name="especie" required>
+						</div>
+
+						<div class="dupla">
+
+							<label for="#" class="formLabel">Data de Nascimento</label>
+							<input  class="formInput" type="text" value="{{animal.datanasc}}" name="datanasc">
+						</div>
+
+						<div class="dupla">
+							<label for="#" class="formLabel">Observação</label>
+							<input  class="formInput" type="text" value="{{animal.observacao}}" name="obs">
+						</div>
+						<div class="dupla">
+							<label for="#" class="formLabel">Microchip</label>
+							<input  class="formInput" type="text" value="{{animal.microchip}}" name="microchip">
+						</div>
+						<div class="dupla">
+							<input  class="formInput" type="hidden" value="{{animal.cpf_cliente.cpf}}" name="cpf_cliente"  >
+						</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button id="animal_btn_fechar" type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>
+						<button id="animal_btn_salvar" name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
+						<button id="animal_btn_deletar" name="button" value="del" class=" acao btnPrincipal btn-danger clearMarginTop">Deletar</button>
+					</div>
+	    </div>
+	  </div>
+	</div>
 
 
 	<!--===========PAGINAÇÃO===============-->

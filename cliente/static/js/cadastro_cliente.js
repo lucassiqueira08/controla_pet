@@ -8,7 +8,7 @@ $.getJSON('/cliente/get_cliente', function (data) {
     }
 })
 
-// Ajax da pagina cadastro_cliente
+// Ajax - POST -  pagina cadastro_cliente
 $('#formcadastrocliente').on('submit', function (e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -50,7 +50,7 @@ $('#formcadastrocliente').on('submit', function (e) {
       })
 })
 
-// Ajax da pagina cadastro_animal
+// Ajax - POST - pagina cadastro_animal
 $('#animal_botao').on('click', function (e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -102,7 +102,7 @@ $('#animal_botao').on('click', function (e) {
       })
 })
 
-// AJAX DA PAGINA VISUALIZAR CLIENTE
+// AJAX - POST E DELETE -PAGINA VISUALIZAR CLIENTE
 $('#cli_botao_salvar').on('click', function(e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -154,10 +154,39 @@ $('#cli_botao_deletar').on('click', function(e) {
           }
         })
   })
-
-// AJAX VISUALIZA ANIMAL
+// ------- VISUALIZA ANIMAL ----------- //
+// GET - VISUALIZA ANIMAL
+function abrirModal(id, nome, sexo, raca, cor, especie, datanasc, observacao, microchip, cpf_cliente){
+  var animal = {}
+  animal.id = id
+  animal.nome = nome
+  animal.sexo = sexo
+  animal.raca = raca
+  animal.cor = cor
+  animal.especie = especie
+  animal.datanasc = datanasc
+  animal.observacao = observacao
+  animal.microchip = microchip
+  animal.cpf_cliente = cpf_cliente
+  $('#modalVisuAnimal').modal('show')
+  InputModalAnimal(animal)
+}
+function InputModalAnimal(animal) {
+  $("input[name='id']").val(animal.id)
+  $("input[name='nome']").val(animal.nome)
+  $("input[name='sexo']").val(animal.sexo)
+  $("input[name='raca']").val(animal.raca)
+  $("input[name='cor']").val(animal.cor)
+  $("input[name='especie']").val(animal.especie)
+  $("input[name='datanasc']").val(animal.datanasc)
+  $("input[name='obs']").val(animal.observacao)
+  $("input[name='microchip']").val(animal.microchip)
+  $("input[name='cpf_cliente']").val(animal.cpf_cliente)
+}
+// AJAX - POST E DELETE - VISUALIZA ANIMAL
 $('#animal_btn_salvar').on('click', function(e) {
   e.preventDefault()
+  console.log($("input[name='nome']").val())
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
           type: "POST",
@@ -182,6 +211,7 @@ $('#animal_btn_salvar').on('click', function(e) {
             alerta(data.mensagem, data.tipo, data.time)
             if (data.tipo=='ok') {
               $('#animal_btn_fechar').click()
+              let timerId = setInterval(() => window.location.reload(), data.time);
             }
           }
       })

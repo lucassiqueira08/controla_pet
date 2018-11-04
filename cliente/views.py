@@ -2,9 +2,9 @@ from datetime import datetime
 import json
 
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponse
+from django.db.utils import IntegrityError
 
 from core.views import BaseView
 from .models import (Animal, Cliente, Responsavel, Responde,
@@ -329,13 +329,21 @@ class ViewVisualizarAnimal(BaseView):
 
     def delete(self, request, id):
         animal = Animal.objects.get(pk=id)
-        animal.delete()
+        try:
+            animal.delete()
+            context = {
+                'tipo': 'ok',
+                'mensagem': 'Animal excluido com sucesso',
+                'time': 4000
+            }
+        except IntegrityError:
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Existe algum cliente associado a este animal',
+                'time': 4000
+            }
 
-        context = {
-            'tipo': 'ok',
-            'mensagem': 'Animal excluido com sucesso',
-            'time': 4000
-        }
+
         return HttpResponse(json.dumps(context), content_type='application/json')
 
 

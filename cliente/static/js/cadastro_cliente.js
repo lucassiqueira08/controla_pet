@@ -101,7 +101,39 @@ $('#animal_botao').on('click', function (e) {
           },
       })
 })
-
+// ------- VISUALIZA CLIENTE ----------- //
+// GET - VISUALIZA CLIENTE
+function abrirModalCliente(id, nome, cpf, email, cep, logradouro, numero, cidade, bairro, estado, complemento, id_tipo_cliente){
+  var cliente = {}
+  cliente.id = id
+  cliente.nome = nome
+  cliente.cpf = cpf
+  cliente.email = email
+  cliente.cep = cep
+  cliente.logradouro = logradouro
+  cliente.numero = numero
+  cliente.cidade = cidade
+  cliente.bairro = bairro
+  cliente.estado = estado
+  cliente.complemento = complemento
+  cliente.id_tipo_cliente = id_tipo_cliente
+  $('#modalVisuCliente').modal('show')
+  InputModalAnimal(cliente)
+}
+function InputModalAnimal(cliente) {
+  $("input[name='id']").val(cliente.id)
+  $("input[name='nome']").val(cliente.nome)
+  $("input[name='cpf']").val(cliente.cpf)
+  $("input[name='email']").val(cliente.email)
+  $("input[name='cep']").val(cliente.cep)
+  $("input[name='logradouro']").val(cliente.logradouro)
+  $("input[name='numero']").val(cliente.numero)
+  $("input[name='cidade']").val(cliente.cidade)
+  $("input[name='bairro']").val(cliente.bairro)
+  $("input[name='estado']").val(cliente.estado)
+  $("input[name='complemento']").val(cliente.complemento)
+  $("input[name='id_tipo_cliente']").val(cliente.id_tipo_cliente)
+}
 // AJAX - POST E DELETE -PAGINA VISUALIZAR CLIENTE
 $('#cli_botao_salvar').on('click', function(e) {
   e.preventDefault()

@@ -5,7 +5,7 @@
 	{% for cliente in cliente.object_list %}
 	<div class="container centralizado ">
 		<!--===========cliente===============-->
-		<a data-toggle="modal" data-target="#modal_{{cliente.id}}">
+		<a>
 			<div class="linha esquerda cardContorno">
 				<div class="imagemCard">
 					<img src="{{cliente.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{cliente.nome}} - ID: {{cliente.id}}">
@@ -20,122 +20,137 @@
 							<label for="#" class="formLabel">CPF:</label>
 							<input id="cpf" class="formInput" type="text" value="{{cliente.cpf}}" disabled>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="containerBotoes centralizado linha">
-			</div>
-		</a>
-		<!-- Modal -->
-		<!-- consultando dados do banco Bruno 02.09.2018-->
-		<div class="modal fade" id="modal_{{cliente.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="modal_Label">Cadastrar um cliente</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="centralizado">
-							<form method="post" class='formEtapas' enctype="multipart/form-data">
-								{% csrf_token %}
-								<div class="imagemCardModal coluna">
-									<img src="{{cliente.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
-									<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
-								</div>
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Nome</label>
-								<input  class="formInput" type="text" value="{{cliente.nome}}" autofocus name="nome" required>
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">CPF</label>
-								<input  class="formInput" type="text" value="{{cliente.cpf}}" name="cpf" required>
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Email</label>
-								<input  class="formInput" type="text" value="{{cliente.email}}" name="email" required>
-							</div>
 
-							<div class="dupla">
-								<label for="#" class="formLabel">CEP</label>
-								<input  class="formInput" type="text" value="{{cliente.cep}}" name="cep" required>
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Logradouro</label>
-								<input  class="formInput" type="text" value="{{cliente.logradouro}}" name="logradouro" required>
-							</div>
-
-							<div class="dupla">
-
-								<label for="#" class="formLabel">Número</label>
-								<input  class="formInput" type="text" value="{{cliente.numero}}" name="numero" required>
-							</div>
-
-							<div class="dupla">
-								<label for="#" class="formLabel">Cidade</label>
-								<input  class="formInput" type="text" value="{{cliente.cidade}}" name="cidade" required>
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Bairro</label>
-								<input  class="formInput" type="text" value="{{cliente.bairro}}" name="bairro" required>
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Complemento</label>
-								<input  class="formInput" type="text" value="{{cliente.complemento}}" name="complemento" required>
-							</div>
-							<div class="dupla">
-								<label for="#" class="formLabel">Tipo de cliente</label>
-								<input  class="formInput" type="text" value="{{cliente.id_tipo_cliente}}" name="id_tipo_cliente" required>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
-							<button name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
-
-							 <button name="button" value="del" class=" acao btnPrincipal btn-danger clearMarginTop">Deletar</button>
-
-						</div>
-					</form>
+						<!-- BTN TEMPORARIO ATE A IMPLEMENTAÇÃO DO AJAX -->
+						<button onclick="abrirModalCliente(
+						'{{ cliente.id }}',
+						'{{ cliente.nome }}',
+						'{{ cliente.cpf }}',
+						'{{ cliente.email }}',
+						'{{ cliente.cep }}',
+						'{{ cliente.logradouro }}',
+						'{{ cliente.numero }}',
+						'{{ cliente.cidade }}',
+						'{{ cliente.bairro }}',
+						'{{ cliente.estado }}',
+						'{{ cliente.complemento }}',
+						'{{ cliente.id_tipo_cliente.id }}')" type="button" class="btnPequeno">Editar
+					</button>
 				</div>
 			</div>
 		</div>
+	</a>
+</div>
+{%endfor%}
+</div>
+<!-- Modal -->
+<!-- consultando dados do banco Bruno 02.09.2018-->
+<div class="modal fade" id="modalVisuCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="centralizado">
+					<form id="formularioVisualizaCliente" class='formEtapas' enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="imagemCardModal coluna">
+							<img src="{{cliente.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Cachorrinho 1">
+							<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
+						</div>
+					</div>
+					<input class="formInput" type="hidden" value="{{cliente.id}}" name="id">
+					<div class="dupla">
+						<label for="#" class="formLabel">Nome</label>
+						<input  class="formInput" type="text" value="{{cliente.nome}}" autofocus name="nome" required>
+					</div>
+					<div class="dupla">
+						<label for="#" class="formLabel">CPF</label>
+						<input  class="formInput" type="text" value="{{cliente.cpf}}" name="cpf" required>
+					</div>
+					<div class="dupla">
+						<label for="#" class="formLabel">Email</label>
+						<input  class="formInput" type="text" value="{{cliente.email}}" name="email">
+					</div>
+
+					<div class="dupla">
+						<label for="#" class="formLabel">CEP</label>
+						<input  class="formInput" type="text" value="{{cliente.cep}}" name="cep">
+					</div>
+					<div class="dupla">
+						<label for="#" class="formLabel">Logradouro</label>
+						<input  class="formInput" type="text" value="{{cliente.logradouro}}" name="logradouro">
+					</div>
+
+					<div class="dupla">
+
+						<label for="#" class="formLabel">Número</label>
+						<input  class="formInput" type="text" value="{{cliente.numero}}" name="numero">
+					</div>
+
+					<div class="dupla">
+						<label for="#" class="formLabel">Cidade</label>
+						<input  class="formInput" type="text" value="{{cliente.cidade}}" name="cidade">
+					</div>
+
+					<div class="dupla">
+						<label for="#" class="formLabel">Bairro</label>
+						<input  class="formInput" type="text" value="{{cliente.bairro}}" name="bairro">
+					</div>
+
+					<div class="dupla">
+						<label for="#" class="formLabel">Estado</label>
+						<input  class="formInput" type="text" value="{{cliente.estado}}" name="estado">
+					</div>
+					<div class="dupla">
+						<label for="#" class="formLabel">Complemento</label>
+						<input  class="formInput" type="text" value="{{cliente.complemento}}" name="complemento">
+					</div>
+					<div class="dupla">
+						<label for="#" class="formLabel">Tipo de cliente</label>
+						<input  class="formInput" type="text" value="{{cliente.id_tipo_cliente.id}}" name="id_tipo_cliente" required>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button id="cli_botao_fechar" type="button" class="btnSecundario" data-dismiss="modal">FECHAR</button>
+				<button id="cli_botao_salvar" name="button" value = "save" class="acao btnPrincipal clearMarginTop">SALVAR</button>
+				<button id="cli_botao_deletar"name="button" value="del" class=" acao btnPrincipal btn-danger clearMarginTop">DELETAR</button>
+			</div>
+		</div>
 	</div>
-	{%endfor%}
+</div>
 
 
-	<!--===========PAGINAÇÃO===============-->
+
+<!--===========PAGINAÇÃO===============-->
 {% if cliente.has_other_pages %}
-	<div class="centralizado destacadoCimaBaixo">
-		<nav aria-label="...">
-			<ul class="pagination">
-				{% if cliente.has_previous %}
-					<li class="page-item">
-						<a class="page-link" href="?page={{ cliente.previous_page_number }}">Anterior</a>
-					</li>
-				{% endif %}
-				{% for page in cliente.paginator.page_range %}
-					{% if cliente.number == page %}
-						<li class="page-item" id="paginationActive">
-							<a class="page-link" href="#">{{ page }}</a>
-						</li>
-					{% else %}
-						<li class="page-item">
-							<a class="page-link" href="?page={{ page }}">{{ page }}</a>
-						</li>
-					{% endif %}
-				{% endfor %}
+<div class="centralizado destacadoCimaBaixo">
+	<nav aria-label="...">
+		<ul class="pagination">
+			{% if cliente.has_previous %}
+			<li class="page-item">
+				<a class="page-link" href="?page={{ cliente.previous_page_number }}">Anterior</a>
+			</li>
+			{% endif %}
+			{% for page in cliente.paginator.page_range %}
+			{% if cliente.number == page %}
+			<li class="page-item" id="paginationActive">
+				<a class="page-link" href="#">{{ page }}</a>
+			</li>
+			{% else %}
+			<li class="page-item">
+				<a class="page-link" href="?page={{ page }}">{{ page }}</a>
+			</li>
+			{% endif %}
+			{% endfor %}
 
-				{% if cliente.has_next %}
-				<li class="page-item">
-					<a class="page-link" href="?page={{ cliente.next_page_number }}">Próxima</a>
-				</li>
-				{% else %}
-				{% endif %}
-			</ul>
-		</nav>
-	</div>
-	{% endif %}
+			{% if cliente.has_next %}
+			<li class="page-item">
+				<a class="page-link" href="?page={{ cliente.next_page_number }}">Próxima</a>
+			</li>
+			{% else %}
+			{% endif %}
+		</ul>
+	</nav>
+</div>
+{% endif %}
 {% endblock %}

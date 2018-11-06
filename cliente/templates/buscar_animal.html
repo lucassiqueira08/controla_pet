@@ -13,8 +13,13 @@
 
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
+<<<<<<< HEAD
 		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" id="nome_animal" name="nome_animal" placeholder="Digite o nome do Animal..." maxlength="100">
 		<input type="search" class="formEtapasInput cpf " id="cpf_cliente" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+=======
+		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="50">
+		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14" required>
+>>>>>>> 9f5ef4eefe631fafafb55ae09ff8f03aed73f2ea
 		<div class="containerBotoes">
 			<input id ="achar_animal" type="submit" name="next" class="acao next btnPrincipal" value="Buscar"/>
 		</div>
@@ -27,10 +32,17 @@
 					<img src="" id="foto_animal"  >
 			</div>
 		</div>
+<<<<<<< HEAD
 		<input type="text" class="formEtapasInput" id="nome" name="nome" value="" maxlength="50" />
 		<input type="text" class="formEtapasInput" id="raca" name="raca"  maxlength="50" />
 		<input type="text" class="formEtapasInput" id ="dono" name="dono" maxlength="50" />
 		<h2 class="tituloMedio destacadoCima">Esse é o bixinho certo?</h2>
+=======
+		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
+		<input type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" />
+		<h2 class="tituloMedio destacadoCima">Esse é o bichinho certo?</h2>
+>>>>>>> 9f5ef4eefe631fafafb55ae09ff8f03aed73f2ea
 		<div class="containerBotoes">
 			<input type="submit" id = "voltar" name="voltar" class="prev acao" value="Não!"/>
 			<button class="acao btnPrincipal" href="{% url 'ficha_animal' %}">Sim!</button>

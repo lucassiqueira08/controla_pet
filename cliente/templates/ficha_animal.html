@@ -84,6 +84,7 @@
 						<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{animal.nome}} - ID: {{animal.id}}">
 				</div>
 			</div>
+<<<<<<< HEAD
   	
 			<input type="text" class="formEtapasInput" 					name="proprietario" 	value="{{cliente.nome}}"maxlength="500"
 			disabled />
@@ -96,6 +97,18 @@
 			<input type="text" class="formEtapasInput"  				name="sexo" 					 value="{{animal.sexo}}" 								maxlength="500" disabled= />
 			<input type="text" class="formEtapasInput"  				name="especie" 				 value="{{animal.especie}}" 							maxlength="500" disabled />
 			<input type="text" class="formEtapasInput"  				name="raca" 					value="{{animal.raca}}"								maxlength="500" disabled />
+=======
+
+			<input type="text" class="formEtapasInput" 					name="proprietario" 	 placeholder="Nome do proprietário" maxlength="50"/>
+			<input type="text" class="formEtapasInput"  				name="logradouro" 		 placeholder="Logradouro" 					maxlength="50"/>
+			<input type="text" class="formEtapasInput cpf" 			name="cpf" 						 placeholder="CPF" 									maxlength="14"/>
+			<input type="text" class="formEtapasInput"  				name="nome_animal" 		 placeholder="Nome do Animal" 			maxlength="50"/>
+			<input type="text" class="formEtapasInput"  				name="pelagem" 				 placeholder="Pelagem" 							maxlength="50"/>
+			<input class="formEtapasInput data"  				name="data_nascimento" placeholder="Data de Nascimento" 		maxlength="10"/>
+			<input type="text" class="formEtapasInput"  				name="sexo" 					 placeholder="Sexo" 								maxlength="1"/>
+			<input type="text" class="formEtapasInput"  				name="especie" 				 placeholder="Espécie" 							maxlength="50"/>
+			<input type="text" class="formEtapasInput"  				name="raca" 					 placeholder="Raça" 								maxlength="50"/>
+>>>>>>> 9f5ef4eefe631fafafb55ae09ff8f03aed73f2ea
 			<h2 class="tituloMedio">Descrição</h2>
 			<textarea placeholder="Digite aqui sua Descrição..." class="formEtapasTextArea" name="descricao" maxlength="500" disabled>{{ficha}}
 			</textarea>

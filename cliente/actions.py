@@ -56,7 +56,7 @@ def valida_cpf(cpf):
 
 def valida_microchip(microchip):
     animal = Animal.objects.filter(microchip=microchip)
-    if animal:
+    if animal and microchip is not '':
         return {'microchip': True, 'msg': 'Microchip já cadastrado'}
     return {'microchip': False}
 

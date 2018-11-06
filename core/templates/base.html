@@ -37,12 +37,12 @@
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuAdministreSuaClinica" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/admin_clinica.png' %}" alt="calendario"><h5>Administre sua clínica</h5></button>
 		<div class="submenu collapse" id="submenuAdministreSuaClinica">
 			<div class="subMenuItem">
-				<img src="{% static 'img/cadastro_atendimento.png' %}" alt="Cadastro de atendimento">
-				<h5><a href ="{% url 'cadastro_atendimento' %}">Cadastro de atendimento</a></h5>
-			</div>
-			<div class="subMenuItem">
 				<img src="{% static 'img/acompanhe_sua_clinica.png' %}" alt="Acompanhe sua Clínica">
 				<h5><a href ="{% url 'acompanhe_sua_clinica' %}">Acompanhe sua Clínica</a></h5>
+			</div>
+			<div class="subMenuItem">
+				<img src="{% static 'img/cadastro_procedimento.png' %}" alt="Cadastrar Procedimento">
+				<h5><a href ="{% url 'cadastro_procedimento' %}">Cadastro de Procedimento</a></h5>
 			</div>
 		</div>
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuAgenda" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/agenda.png' %}" alt="Agenda"><h5>Agenda</h5></button>
@@ -55,40 +55,39 @@
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuCadastro" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/cadastro.png' %}" alt="Cadastro"><h5>Cadastro</h5></button>
 		<div class="submenu collapse" id="submenuCadastro">
 			<div class="subMenuItem">
+				<img src="{% static 'img/cadastro_atendimento.png' %}" alt="Cadastro de atendimento">
+				<h5><a href ="{% url 'cadastro_atendimento' %}">Cadastro de Atendimento</a></h5>
+			</div>
+			<div class="subMenuItem">
 				<img src="{% static 'img/cadastro_animal.png' %}" alt="Cadastrar Animal">
-				<h5><a href ="{% url 'cadastrar_animal' %}">Cadastro de animal</a></h5>
+				<h5><a href ="{% url 'cadastrar_animal' %}">Cadastro de Animal</a></h5>
 			</div>
 			<div class="subMenuItem">
 				<img src="{% static 'img/cadastro_cliente.png' %}" alt="Cadastrar Cliente">
-				<h5><a href ="{% url 'cadastrar_cliente' %}">Cadastro de cliente</a></h5>
+				<h5><a href ="{% url 'cadastrar_cliente' %}">Cadastro de Cliente</a></h5>
 			</div>
 			<div class="subMenuItem">
 				<img src="{% static 'img/cadastro_estadia.png' %}" alt="Cadastrar Estadia">
-				<h5><a href ="{% url 'cadastro_estadia' %}">Cadastro de estadia</a></h5>
+				<h5><a href ="{% url 'cadastro_estadia' %}">Cadastro de Estadia</a></h5>
 			</div>
-			<div class="subMenuItem">
-				<img src="{% static 'img/cadastro_diagnostico.png' %}" alt="Cadastrar Diagnóstico">
-				<h5><a href ="{% url 'cadastrar_diagnostico' %}">Cadastro de Diagnóstico</a></h5>
-			</div>
-			<div class="subMenuItem">
-				<img src="{% static 'img/cadastro_procedimento.png' %}" alt="Cadastrar Procedimento">
-				<h5><a href ="{% url 'cadastro_procedimento' %}">Cadastro de Procedimento</a></h5>
-			</div>
-		</div>
-		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuConsulta" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/consulta.png' %}" alt="Consulta"><h5>Consulta</h5></button>
-
-		<div class="submenu collapse" id="submenuConsulta">
 			<div class="subMenuItem">
 				<img src="{% static 'img/visualizar_cliente.png' %}" alt="Visualizar Cliente">
 				<h5><a href ="{% url 'visualizar_cliente' %}">Visualizar Cliente</a></h5>
 			</div>
 			<div class="subMenuItem">
 				<img src="{% static 'img/visualizar_animal.png' %}" alt="visualiza Animal">
-				<h5><a href ="{% url 'visualizar_animal' %}">Visualizar animal</a></h5>
+				<h5><a href ="{% url 'visualizar_animal' %}">Visualizar Animal</a></h5>
 			</div>
+		</div>
+		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuConsulta" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/consulta.png' %}" alt="Consulta"><h5>Consulta</h5></button>
+		<div class="submenu collapse" id="submenuConsulta">
 			<div class="subMenuItem">
 				<img src="{% static 'img/ficha_animal.png' %}" alt="Ficha do Animal">
 				<h5><a href ="{% url 'buscar_animal' %}">Ficha do Animal</a></h5>
+			</div>
+			<div class="subMenuItem">
+				<img src="{% static 'img/cadastro_diagnostico.png' %}" alt="Cadastrar Diagnóstico">
+				<h5><a href ="{% url 'cadastrar_diagnostico' %}">Cadastro de Diagnóstico</a></h5>
 			</div>
 		</div>
 	</div>

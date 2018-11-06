@@ -12,7 +12,7 @@ from .models import (Animal, Cliente, Responsavel, Responde,
 from core.models import Menu
 from cliente.exceptions import InvalidCPFError, DateError, MicrochipError
 from cliente.actions import valida_cpf, valida_microchip, valida_cpf_responsavel
-from servicos.models import Exame
+from servicos.models import Exame, FichaDiagnostico, DiagnosticoAnimal , TipoDiagnostico
 from cloudinary_api.app import cloudyapi
 from raven.contrib.django.raven_compat.models import client
 
@@ -424,8 +424,9 @@ class ViewBuscarAnimal(BaseView):
      
     def post(self, request):
         cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
+
         animal = Animal.objects.get(cpf_cliente=cliente, nome=request.POST.get('nome_animal'))
-        ficha = FichaAnimal.objects.get(id_animal=animal)
+        
         exames = Exame.objects.filter(id_animal=animal)
 
         query = """
@@ -449,15 +450,41 @@ class ViewBuscarAnimal(BaseView):
 
         linhas= row
 
- 
-
         context = {
             'cliente':cliente,  
             'animal': animal,
-            'ficha':ficha,
+      
             'exames':exames,
             'historicos':linhas,
         }
+      
+        query2 = """
+             SELECT
+
+                    *
+
+             FROM
+                    FICHA_ANIMAL AS FICHA
+              INNER JOIN
+                 FICHA_DIAGNOSTICO AS FICHA_DIAG ON (FICHA.id = FICHA_DIAG.id_ficha)
+           INNER JOIN
+                    DIAGNOSTICO_ANIMAL AS DIAG ON (FICHA_DIAG.id_diagnostico = DIAG.ID)   
+           INNER JOIN TIPO_DIAGNOSTICO AS TDIAG ON (TDIAG.id = DIAG.id_tipo_diagnostico)         
+              WHERE
+                 FICHA.id_animal = {}
+                   """.format(animal.id)
+
+        with connection.cursor() as cursor:
+            cursor.execute(query2)
+            rowfICHA = dictfetchall(cursor)
+ 
+        linhasFicha= rowfICHA
+
+        context['fichas']=linhasFicha
+       
+       
+ 
+
         return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'
     def get(self, request):

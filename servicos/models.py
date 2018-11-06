@@ -22,8 +22,8 @@ class Atendimento(models.Model):
     observacao = models.CharField(max_length=100, blank=True, null=True)
     id_google_agenda = models.CharField(max_length=28, blank=True, null=True)
     data_solicitacao = models.DateTimeField(blank=True, null=True)
-    id_animal = models.ForeignKey(Animal,
-                                    models.DO_NOTHING, db_column='id_animal')
+    cpf_cliente = models.ForeignKey(Cliente,
+                                    models.DO_NOTHING, db_column='cpf_cliente')
     id_orcamento = models.ForeignKey(
         Orcamento, models.DO_NOTHING, db_column='id_orcamento',
         blank=True, null=True
@@ -240,7 +240,7 @@ class Estadia(models.Model):
 class Exame(models.Model):
     link_doc = models.CharField(unique=True, max_length=255)
     nome = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=200)
+  
     data_realizacao = models.DateField(blank=True, null=True)
     id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
                                   db_column='id_animal')

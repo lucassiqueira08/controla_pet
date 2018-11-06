@@ -27,7 +27,55 @@
 </div>
 <form method="post" class='formEtapas menuOpcoes' id="FichaAnimal">
 	{% csrf_token %}
-	<fieldset id="FichaAnimal">
+		
+		<fieldset id="Ficha">
+			<h2 class="tituloGrande">Ficha animal</h2 class="tituloGrande">
+				<p>Aqui você tem a visão de todas das fichas abertas!</p>
+
+				<ul class="timeline">
+                  {%for ficha in fichas %}
+					<li class="event" data-date="{{ficha.data_consulta}}">
+                        
+              
+						<h3>{{ficha.nome}}</h3>
+
+						<p>{{ficha.descricao}}</p>
+						<a data-toggle="modal" data-target="#modal_{{ficha.id}}">
+						<button type="button" class="btnPequeno clearMarginTop" name="button"  data-target="#modal_{{ficha.id}}">Ver mais!</button>
+					</a>
+                            
+					</li>
+
+  <div class="modal fade" id="modal_{{ficha.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modal_Label">Ficha do {{animal.nome}}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="centralizado">
+							<form method="post" class='formEtapas' enctype="multipart/form-data">
+<p>{{ficha}}</p>
+
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+					{% endfor %}
+</ul>
+</fieldset>
+</form>
+
+	<!--fieldset id="FichaAnimal">
 		<h2 class="tituloGrande">Ficha do Animal</h2 class="tituloGrande">
 			<p>Digite algumas informações do procedimento!</p>
 
@@ -49,10 +97,10 @@
 			<input type="text" class="formEtapasInput"  				name="especie" 				 value="{{animal.especie}}" 							maxlength="500" disabled />
 			<input type="text" class="formEtapasInput"  				name="raca" 					value="{{animal.raca}}"								maxlength="500" disabled />
 			<h2 class="tituloMedio">Descrição</h2>
-			<textarea placeholder="Digite aqui sua Descrição..." class="formEtapasTextArea" name="descricao" maxlength="500" disabled>{{ficha.descricao}}
+			<textarea placeholder="Digite aqui sua Descrição..." class="formEtapasTextArea" name="descricao" maxlength="500" disabled>{{ficha}}
 			</textarea>
 
-		</fieldset>
+		</fieldset-->
 	</form>
 
 	<form method="post" class='formEtapas menuOpcoes' id="Historico" style="display:none;">

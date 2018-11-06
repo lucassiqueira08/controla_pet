@@ -1,3 +1,5 @@
+import json
+
 from django.core import serializers
 from django.http import HttpResponse
 
@@ -23,11 +25,26 @@ def get_animal(request, cpf_cliente, nome_animal):
     return HttpResponse(data_json, content_type='application/json')
 
 def get_ficha_animal(request, cpf_cliente , nome_animal):
-    cliente = Cliente.objects.get(cpf=cpf_cliente)
-    animal= Animal.objects.get(nome=nome_animal,cpf_cliente=cliente)
-    data = ([animal,cliente])
-    cliente_json = serializers.serialize("json", data)
-    return HttpResponse(cliente_json, content_type='application/json')
+    cliente = Cliente.objects.filter(cpf=cpf_cliente).first()
+    if cliente:
+        animal= Animal.objects.filter(nome=nome_animal,cpf_cliente=cliente).first()
+        if animal:
+            data = ([animal,cliente])
+            cliente_json = serializers.serialize("json", data)
+            return HttpResponse(cliente_json, content_type='application/json')
+    
+        context = {
+            'tipo':"erro",
+            'mensagem':"Não foi encontrado um animal para este CPF",
+            'time':5000         
+        }
+        return HttpResponse(json.dumps(context),content_type='application/json')
+    context = {
+        'tipo':"erro",
+        'mensagem':"Este cliente não foi cadastrado ou o cpf esta incorreto",
+        'time':5000         
+    }
+    return HttpResponse(json.dumps(context),content_type='application/json')
 
 
 def valida_cpf(cpf):

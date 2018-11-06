@@ -23,11 +23,15 @@ class Atendimento(models.Model):
     id_google_agenda = models.CharField(max_length=28, blank=True, null=True)
     data_solicitacao = models.DateTimeField(blank=True, null=True)
     cpf_cliente = models.ForeignKey(Cliente,
-                                    models.DO_NOTHING, db_column='cpf_cliente')
-    id_orcamento = models.ForeignKey(
-        Orcamento, models.DO_NOTHING, db_column='id_orcamento',
-        blank=True, null=True
-    )
+                                    on_delete=models.CASCADE,
+                                    db_column='cpf_cliente',
+                                    related_name='atendimento_cliente')
+
+    id_orcamento = models.ForeignKey(Orcamento,
+                                     on_delete=models.CASCADE,
+                                     related_name='atendimento_orcamento',
+                                     db_column='id_orcamento',
+                                     blank=True, null=True)
 
     class Meta:
         app_label = 'servicos'
@@ -104,10 +108,8 @@ class ProcedimentoClinico(models.Model):
     descricao = models.CharField(max_length=200)
     especie = models.CharField(max_length=50)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
-    id_tipo_proc = models.ForeignKey(
-        TipoProcedimento, models.DO_NOTHING, db_column='id_tipo_proc'
-    )
-
+    id_tipo_proc = models.ForeignKey(TipoProcedimento, on_delete=models.DO_NOTHING,
+                                     related_name='procclinico_tipoprocclinico', db_column='id_tipo_proc')
     class Meta:
         app_label = 'servicos'
         db_table = 'PROCEDIMENTO_CLINICO'
@@ -120,13 +122,13 @@ class ProcedimentoClinico(models.Model):
 
 class AtendimentoProcClinico(models.Model):
 
-    id_atendimento = models.ForeignKey(
-        Atendimento, models.DO_NOTHING,
-        db_column='id_atendimento', primary_key=True
+    id_atendimento = models.OneToOneField(
+        Atendimento, on_delete=models.CASCADE,
+        db_column='id_atendimento', related_name='atendimentoprocclinico_atendimento', primary_key=True
     )
 
     id_proc_clinico = models.ForeignKey(
-        ProcedimentoClinico, models.DO_NOTHING,
+        ProcedimentoClinico, on_delete=models.DO_NOTHING, related_name='atendimentoprocclinico_procclinico',
         db_column='id_proc_clinico'
     )
 
@@ -143,15 +145,14 @@ class AtendimentoProcClinico(models.Model):
 
 class AtendimentoProcEstetico(models.Model):
 
-    id_atendimento = models.ForeignKey(
-        Atendimento, models.DO_NOTHING,
+    id_atendimento = models.OneToOneField(
+        Atendimento, on_delete=models.CASCADE, related_name='atendimentoprocestetico_atendimento',
         db_column='id_atendimento', primary_key=True
     )
 
     id_proc_estetico = models.ForeignKey(
-        ProcedimentoEstetico,
-        models.DO_NOTHING,
-        db_column='id_proc_estetico'
+        ProcedimentoEstetico, on_delete=models.DO_NOTHING,
+        related_name='atendimentoprocestetico_procestetico', db_column='id_proc_estetico'
     )
 
     class Meta:
@@ -171,7 +172,7 @@ class Autorizacao(models.Model):
                                 blank=True, null=True)
 
     id_proc_clinico = models.ForeignKey(ProcedimentoClinico, models.DO_NOTHING,
-                                        db_column='id_proc_clinico')
+                                        related_name='autorizacaoo_procclinico', db_column='id_proc_clinico')
 
     class Meta:
         app_label = 'servicos'
@@ -187,7 +188,7 @@ class Comissao(models.Model):
 
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     id_atendimento = models.ForeignKey(Atendimento, models.DO_NOTHING,
-                                       db_column='id_atendimento')
+                                       related_name='comissao_atendimento', db_column='id_atendimento')
 
     class Meta:
         app_label = 'servicos'
@@ -203,10 +204,9 @@ class DiagnosticoAnimal(models.Model):
 
     descricao = models.CharField(max_length=500, blank=True, null=True)
     booleano = models.IntegerField(blank=True, null=True)
-    id_tipo_diagnostico = models.ForeignKey(
-        TipoDiagnostico, models.DO_NOTHING, db_column='id_tipo_diagnostico',
-        blank=True, null=True
-    )
+    id_tipo_diagnostico = models.ForeignKey(TipoDiagnostico, models.DO_NOTHING,
+                                            related_name='diagnostico_tipodiagnostico', db_column='id_tipo_diagnostico',
+                                            blank=True, null=True)
 
     class Meta:
         app_label = 'servicos'
@@ -224,8 +224,8 @@ class Estadia(models.Model):
     data_fim = models.DateTimeField()
     data_solicitacao = models.DateField()
     valor_diaria = models.DecimalField(max_digits=10, decimal_places=2)
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
-                                    db_column='id_animal')
+    id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE,
+                                  related_name='estadia_animal', db_column='id_animal')
 
     class Meta:
         app_label = 'servicos'
@@ -241,11 +241,11 @@ class Exame(models.Model):
     link_doc = models.CharField(unique=True, max_length=255)
     nome = models.CharField(max_length=100)
     data_realizacao = models.DateField(blank=True, null=True)
-    id_animal = models.ForeignKey(Animal, models.DO_NOTHING,
-                                  db_column='id_animal')
+    id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE,
+                                  related_name='exame_animal', db_column='id_animal')
 
-    id_tipo_exame = models.ForeignKey(TipoExame, models.DO_NOTHING,
-                                      db_column='id_tipo_exame')
+    id_tipo_exame = models.ForeignKey(TipoExame, on_delete=models.DO_NOTHING,
+                                      related_name='exame_id_tipo_exame', db_column='id_tipo_exame')
 
     class Meta:
         app_label = 'servicos'
@@ -258,13 +258,15 @@ class Exame(models.Model):
 
 
 class FeitoPor(models.Model):
-    id_atendimento = models.ForeignKey(
-        Atendimento, models.DO_NOTHING,
-        db_column='id_atendimento', primary_key=True
+    id_atendimento = models.OneToOneField(
+        Atendimento, on_delete=models.CASCADE,
+        db_column='id_atendimento', related_name='feitopor_atendimento',
+        primary_key=True
     )
 
     id_funcionario = models.ForeignKey(
-        Funcionario, models.DO_NOTHING, db_column='id_funcionario'
+        Funcionario, on_delete=models.CASCADE,
+        related_name='feitopor_funcionario', db_column='id_funcionario'
     )
 
     data_realizacao = models.DateField(blank=True, null=True)
@@ -281,10 +283,11 @@ class FeitoPor(models.Model):
 
 
 class FichaDiagnostico(models.Model):
-    id_diagnostico = models.ForeignKey(DiagnosticoAnimal, models.DO_NOTHING,
-                                db_column='id_diagnostico', primary_key=True)
-    id_ficha = models.ForeignKey(FichaAnimal, models.DO_NOTHING,
-                                 db_column='id_ficha')
+    id_diagnostico = models.OneToOneField(DiagnosticoAnimal, on_delete=models.CASCADE,
+                                          db_column='id_diagnostico', related_name='fichadiagnostico_diagnostico',
+                                          primary_key=True)
+    id_ficha = models.ForeignKey(FichaAnimal, on_delete=models.CASCADE,
+                                 db_column='id_ficha', related_name='fichadiagnostico_ficha')
 
     class Meta:
         app_label = 'servicos'
@@ -292,7 +295,6 @@ class FichaDiagnostico(models.Model):
         unique_together = (('id_diagnostico', 'id_ficha'),)
         verbose_name = 'Ficha de Diagnóstico'
         verbose_name_plural = 'Fichas de Diagnóstico'
-
 
     def __str__(self):
         return str(self.id_ficha) + ' - ' + str(self.id_diagnostico)
@@ -325,13 +327,13 @@ class TipoStatusEstadia(models.Model):
 
 
 class StatusAtendimento(models.Model):
-    id_atendimento = models.ForeignKey(
-        Atendimento, models.DO_NOTHING, db_column='id_atendimento',
-        primary_key=True
+    id_atendimento = models.OneToOneField(
+        Atendimento, on_delete=models.CASCADE, db_column='id_atendimento',
+        related_name='statusatendimento_atendimento', primary_key=True
     )
 
-    id_status = models.ForeignKey(TipoStatusAtendimento, models.DO_NOTHING,
-                                  db_column='id_status')
+    id_status = models.ForeignKey(TipoStatusAtendimento, on_delete=models.DO_NOTHING,
+                                  related_name='statusatendimento_status', db_column='id_status')
 
     class Meta:
         db_table = 'STATUS_ATENDIMENTO'
@@ -345,11 +347,12 @@ class StatusAtendimento(models.Model):
 
 
 class StatusEstadia(models.Model):
-    id_estadia = models.ForeignKey(Estadia, models.DO_NOTHING,
-                                   db_column='id_estadia', primary_key=True)
+    id_estadia = models.OneToOneField(Estadia, on_delete=models.CASCADE,
+                                      related_name='statusestadia_estadia', db_column='id_estadia',
+                                      primary_key=True)
 
-    id_status = models.ForeignKey(TipoStatusEstadia, models.DO_NOTHING,
-                                  db_column='id_status')
+    id_status = models.ForeignKey(TipoStatusEstadia, on_delete=models.DO_NOTHING,
+                                  related_name='statusestadia_status', db_column='id_status')
 
     class Meta:
         db_table = 'STATUS_ESTADIA'

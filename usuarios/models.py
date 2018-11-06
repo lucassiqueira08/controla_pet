@@ -104,8 +104,8 @@ class Veterinario(FuncionarioAbstrato):
     ultimo_nome = models.CharField('Último nome', max_length=50)
     crmv = models.CharField('CRMV', max_length=50, unique=True)
     estado_emissor = models.CharField('Estado Emissor', max_length=2)
-    id_funcionario = models.ForeignKey(Funcionario, models.DO_NOTHING,
-                                db_column='id_funcionario')
+    id_funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE,
+                                       related_name='veterinario_funcionario', db_column='id_funcionario')
 
     class Meta:
         app_label = 'usuarios'
@@ -118,9 +118,11 @@ class Veterinario(FuncionarioAbstrato):
 
 
 class CargoFuncionario(models.Model):
-    id_cargo = models.ForeignKey(Cargo, models.DO_NOTHING,
-                                 db_column='id_cargo', primary_key=True)
-    id_func = models.ForeignKey(Funcionario, models.DO_NOTHING,
+    id_cargo = models.OneToOneField(Cargo, on_delete=models.CASCADE,
+                                    related_name='cargofuncionario_cargo', db_column='id_cargo',
+                                    primary_key=True)
+    id_func = models.ForeignKey(Funcionario, on_delete=models.CASCADE,
+                                related_name='cargofuncionario_funcionario',
                                 db_column='id_func')
 
     class Meta:

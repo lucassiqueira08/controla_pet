@@ -1,13 +1,14 @@
 $.getJSON('/cliente/get_cliente', function (data) {
     var selectCliente = $('#tipoCliente')
     var clientes = data
-    console.log(selectCliente)
     for (var cliente in clientes) {
         var option = $('<option/>').val(clientes[cliente].pk)
             .text(clientes[cliente].fields.nome)
         selectCliente.append(option)
     }
 })
+
+// Ajax - POST -  pagina cadastro_cliente
 $('#formcadastrocliente').on('submit', function (e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -48,6 +49,8 @@ $('#formcadastrocliente').on('submit', function (e) {
           },
       })
 })
+
+// Ajax - POST - pagina cadastro_animal
 $('#animal_botao').on('click', function (e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -98,3 +101,171 @@ $('#animal_botao').on('click', function (e) {
           },
       })
 })
+// ------- VISUALIZA CLIENTE ----------- //
+// GET - VISUALIZA CLIENTE
+function abrirModalCliente(id, nome, cpf, email, cep, logradouro, numero, cidade, bairro, estado, complemento, id_tipo_cliente){
+  var cliente = {}
+  cliente.id = id
+  cliente.nome = nome
+  cliente.cpf = cpf
+  cliente.email = email
+  cliente.cep = cep
+  cliente.logradouro = logradouro
+  cliente.numero = numero
+  cliente.cidade = cidade
+  cliente.bairro = bairro
+  cliente.estado = estado
+  cliente.complemento = complemento
+  cliente.id_tipo_cliente = id_tipo_cliente
+  $('#modalVisuCliente').modal('show')
+  InputModalCliente(cliente)
+}
+function InputModalCliente(cliente) {
+  $("input[name='id']").val(cliente.id)
+  $("input[name='nome']").val(cliente.nome)
+  $("input[name='cpf']").val(cliente.cpf)
+  $("input[name='email']").val(cliente.email)
+  $("input[name='cep']").val(cliente.cep)
+  $("input[name='logradouro']").val(cliente.logradouro)
+  $("input[name='numero']").val(cliente.numero)
+  $("input[name='cidade']").val(cliente.cidade)
+  $("input[name='bairro']").val(cliente.bairro)
+  $("input[name='estado']").val(cliente.estado)
+  $("input[name='complemento']").val(cliente.complemento)
+  $("input[name='id_tipo_cliente']").val(cliente.id_tipo_cliente)
+}
+// AJAX - POST E DELETE -PAGINA VISUALIZAR CLIENTE
+$('#cli_botao_salvar').on('click', function(e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+          type: "POST",
+          url: '/cliente/visualizar_cliente',
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{
+            id: $("input[name='id']").val(),
+            nome: $("input[name='nome']").val(),
+            cpf: $("input[name='cpf']").val(),
+            email: $("input[name='email']").val(),
+            cep: $("input[name='cep']").val(),
+            logradouro: $("input[name='logradouro']").val(),
+            numero: $("input[name='numero']").val(),
+            cidade: $("input[name='cidade']").val(),
+            bairro: $("input[name='bairro']").val(),
+            estado: $("input[name='estado']").val(),
+            complemento: $("input[name='complemento']").val(),
+            id_tipo_cliente: $("input[name='id_tipo_cliente']").val(),
+          },
+          success: function (data) {
+            alerta(data.mensagem, data.tipo, data.time)
+            if (data.tipo=='ok') {
+              $('#cli_botao_fechar').click()
+              let timerId = setInterval(() => window.location.reload(), data.time);
+            }
+          }
+      })
+})
+$('#cli_botao_deletar').on('click', function(e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  id = $("input[name='id']").val()
+  $.ajax({
+          type: "DELETE",
+          url: '/cliente/delete/' + id,
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{},
+          success: function (data) {
+            if (data.tipo=='ok') {
+              $('#cli_botao_fechar').click()
+              let timerId = setInterval(() => window.location.reload(), data.time);
+            }
+            alerta(data.mensagem, data.tipo, data.time)
+          }
+        })
+  })
+// ------- VISUALIZA ANIMAL ----------- //
+// GET - VISUALIZA ANIMAL
+function abrirModal(id, nome, sexo, raca, cor, especie, datanasc, observacao, microchip, cpf_cliente){
+  var animal = {}
+  animal.id = id
+  animal.nome = nome
+  animal.sexo = sexo
+  animal.raca = raca
+  animal.cor = cor
+  animal.especie = especie
+  animal.datanasc = datanasc
+  animal.observacao = observacao
+  animal.microchip = microchip
+  animal.cpf_cliente = cpf_cliente
+  $('#modalVisuAnimal').modal('show')
+  InputModalAnimal(animal)
+}
+function InputModalAnimal(animal) {
+  $("input[name='id']").val(animal.id)
+  $("input[name='nome']").val(animal.nome)
+  $("input[name='sexo']").val(animal.sexo)
+  $("input[name='raca']").val(animal.raca)
+  $("input[name='cor']").val(animal.cor)
+  $("input[name='especie']").val(animal.especie)
+  $("input[name='datanasc']").val(animal.datanasc)
+  $("input[name='obs']").val(animal.observacao)
+  $("input[name='microchip']").val(animal.microchip)
+  $("input[name='cpf_cliente']").val(animal.cpf_cliente)
+}
+// AJAX - POST E DELETE - VISUALIZA ANIMAL
+$('#animal_btn_salvar').on('click', function(e) {
+  e.preventDefault()
+  console.log($("input[name='nome']").val())
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+          type: "POST",
+          url: '/cliente/visualizar_animal',
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{
+            id: $("input[name='id']").val(),
+            url_foto: $("input[name='url_foto']").val(),
+            nome: $("input[name='nome']").val(),
+            sexo: $("input[name='sexo']").val(),
+            raca: $("input[name='raca']").val(),
+            cor: $("input[name='cor']").val(),
+            especie: $("input[name='especie']").val(),
+            datanasc: $("input[name='datanasc']").val(),
+            obs: $("input[name='obs']").val(),
+            microchip: $("input[name='microchip']").val(),
+            cpf_cliente: $("input[name='cpf_cliente']").val(),
+          },
+          success: function (data) {
+            alerta(data.mensagem, data.tipo, data.time)
+            if (data.tipo=='ok') {
+              $('#animal_btn_fechar').click()
+              let timerId = setInterval(() => window.location.reload(), data.time);
+            }
+          }
+      })
+})
+$('#animal_btn_deletar').on('click', function(e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  id = $("input[name='id']").val()
+  $.ajax({
+          type: "DELETE",
+          url: '/cliente/delete/animal/' + id,
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{},
+          success: function (data) {
+            if (data.tipo=='ok') {
+              $('#animal_btn_fechar').click()
+            }
+            alerta(data.mensagem, data.tipo, data.time)
+            let timerId = setInterval(() => window.location.reload(), data.time);
+          }
+        })
+  })

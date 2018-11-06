@@ -101,7 +101,6 @@ $('#animal_botao').on('click', function (e) {
           },
       })
 })
-<<<<<<< HEAD
 console.log('teste')
 $('#achar_animal').click(function(){
 
@@ -129,7 +128,7 @@ $('#voltar').click(function(){
   data=''
   
 })
-=======
+
 // ------- VISUALIZA CLIENTE ----------- //
 // GET - VISUALIZA CLIENTE
 function abrirModalCliente(id, nome, cpf, email, cep, logradouro, numero, cidade, bairro, estado, complemento, id_tipo_cliente){
@@ -298,4 +297,4 @@ $('#animal_btn_deletar').on('click', function(e) {
           }
         })
   })
->>>>>>> 9f5ef4eefe631fafafb55ae09ff8f03aed73f2ea
+

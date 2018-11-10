@@ -61,3 +61,68 @@ $('#FormCadastroProcedimentoClinico').on('submit', function (e) {
           },
       })
 })
+
+//====================CADASTRO DE ESTADIA====================
+
+$('#cpfCliente').on('blur', function (e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+          type: "POST",
+          url: '/servicos/cadastro_estadia',
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{
+            nome                  : $('#nome').val(),
+            raca                  : $('#raca').val(),
+            dono                  : $('#dono').val(),
+            especie               : $('#C_especie').val(),
+            tipo_procedimento     : $('#C_tipoProcedimento').val(),
+            aba_procedimento      : 'clinico',
+          },
+          success: function (data) {
+            alerta(data.mensagem, data.tipo, data.time)
+            if (data.tipo=='ok') {
+              $('.formEtapasInput').val('')
+              $('.formInput').val('')
+            }
+          },
+      })
+  $.getJSON('/cliente/get_animais_cliente/', function (data) {
+      var selectCliente = $('#tipoCliente')
+      var clientes = data
+      for (var cliente in clientes) {
+          var option = $('<option/>').val(clientes[cliente].pk)
+              .text(clientes[cliente].fields.nome)
+          selectCliente.append(option)
+      }
+  })
+})
+
+$('#buscarAnimalEstadia').on('click', function (e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+          type: "POST",
+          url: '/servicos/cadastro_estadia',
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{
+            nome                  : $('#nome').val(),
+            raca                  : $('#raca').val(),
+            dono                  : $('#dono').val(),
+            especie               : $('#C_especie').val(),
+            tipo_procedimento     : $('#C_tipoProcedimento').val(),
+            aba_procedimento      : 'clinico',
+          },
+          success: function (data) {
+            alerta(data.mensagem, data.tipo, data.time)
+            if (data.tipo=='ok') {
+              $('.formEtapasInput').val('')
+              $('.formInput').val('')
+            }
+          },
+      })
+})

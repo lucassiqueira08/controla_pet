@@ -10,27 +10,22 @@ $.getJSON('/cliente/get_cliente', function (data) {
 
 // Ajax - POST -  pagina cadastro_cliente
 $('#formcadastrocliente').on('submit', function (e) {
+  var file;
+  $('#cliente_url_foto').on('change', function(){
+    file = event.target.files;
+  });
   e.preventDefault()
+  var data = new FormData($('#formcadastrocliente').get(0));
+  data.append('file', $('#cliente_url_foto')[0].files);
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
           type: "POST",
           url: '/cliente/cadastrar_cliente',
-          headers:{
-              "X-CSRFToken": csrftoken,
-          },
-          data:{
-            nome_cliente: $('#nome_cli').val(),
-            cpf_cliente: $('#cpf_cli').val(),
-            email_cliente: $('#email_cli').val(),
-            cep: $('#cep').val(),
-            logradouro: $('#logradouro').val(),
-            numero: $('#numero').val(),
-            cidade: $('#cidade').val(),
-            bairro: $('#bairro').val(),
-            estado: $('#estado').val(),
-            complemento: $('#complemento').val(),
-            id_tipo_cliente: $('#tipoCliente').val(),
-          },
+          headers:{"X-CSRFToken": csrftoken},
+          data:data,
+          processData: false,
+          contentType: false,
+          dataType: "json",
           success: function (data) {
             alerta(data.mensagem, data.tipo, data.time)
             if (data.tipo=='ok') {
@@ -52,29 +47,22 @@ $('#formcadastrocliente').on('submit', function (e) {
 
 // Ajax - POST - pagina cadastro_animal
 $('#animal_botao').on('click', function (e) {
+  var file;
+  $('#animal_url_foto').on('change', function(){
+    file = event.target.files;
+  });
   e.preventDefault()
+  var data = new FormData($('#formcadastroanimal').get(0));
+  data.append('file', $('#animal_url_foto')[0].files);
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
           type: "POST",
           url: '/cliente/cadastrar_animal',
-          headers:{
-              "X-CSRFToken": csrftoken,
-          },
-          data:{
-            cpf_cliente: $('#animal_cpf').val(),
-            url_foto: $('#animal_url_foto').val(),
-            nome: $('#animal_nome').val(),
-            especie: $('#animal_especie').val(),
-            raca: $('#animal_raca').val(),
-            cor: $('#animal_cor').val(),
-            datanasc: $('#datanasc').val(),
-            sexo: $("input[name='sexo']").val(),
-            microchip: $('#animal_microchip').val(),
-            status_animal: $("input[name='status_animal']").val(),
-            observacao: $('#animal_obs').val(),
-            cpf_responsavel: $('#animal_cpf_responsavel').val(),
-            nome_responsavel: $('#animal_nome_responsavel').val()
-          },
+          headers:{"X-CSRFToken": csrftoken},
+          data:data,
+          processData: false,
+          contentType: false,
+          dataType: "json",
           success: function (data) {
             alerta(data.mensagem, data.tipo, data.time)
             alerta(data.dic_responsavel.mensagem, data.dic_responsavel.tipo, data.dic_responsavel.time)
@@ -136,28 +124,22 @@ function InputModalCliente(cliente) {
 }
 // AJAX - POST E DELETE -PAGINA VISUALIZAR CLIENTE
 $('#cli_botao_salvar').on('click', function(e) {
+  var file;
+  $('#file_input_visu_cliente').on('change', function(){
+    file = event.target.files;
+  });
   e.preventDefault()
+  var data = new FormData($('#formularioVisualizaCliente').get(0));
+  data.append('file', $('#file_input_visu_cliente')[0].files);
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
           type: "POST",
           url: '/cliente/visualizar_cliente',
-          headers:{
-              "X-CSRFToken": csrftoken,
-          },
-          data:{
-            id: $("input[name='id']").val(),
-            nome: $("input[name='nome']").val(),
-            cpf: $("input[name='cpf']").val(),
-            email: $("input[name='email']").val(),
-            cep: $("input[name='cep']").val(),
-            logradouro: $("input[name='logradouro']").val(),
-            numero: $("input[name='numero']").val(),
-            cidade: $("input[name='cidade']").val(),
-            bairro: $("input[name='bairro']").val(),
-            estado: $("input[name='estado']").val(),
-            complemento: $("input[name='complemento']").val(),
-            id_tipo_cliente: $("input[name='id_tipo_cliente']").val(),
-          },
+          headers:{"X-CSRFToken": csrftoken},
+          data:data,
+          processData: false,
+          contentType: false,
+          dataType: "json",
           success: function (data) {
             alerta(data.mensagem, data.tipo, data.time)
             if (data.tipo=='ok') {
@@ -189,9 +171,10 @@ $('#cli_botao_deletar').on('click', function(e) {
   })
 // ------- VISUALIZA ANIMAL ----------- //
 // GET - VISUALIZA ANIMAL
-function abrirModal(id, nome, sexo, raca, cor, especie, datanasc, observacao, microchip, cpf_cliente){
+function abrirModal(id, url_foto, nome, sexo, raca, cor, especie, datanasc, observacao, microchip, cpf_cliente){
   var animal = {}
   animal.id = id
+  animal.url_foto = url_foto
   animal.nome = nome
   animal.sexo = sexo
   animal.raca = raca
@@ -218,28 +201,22 @@ function InputModalAnimal(animal) {
 }
 // AJAX - POST E DELETE - VISUALIZA ANIMAL
 $('#animal_btn_salvar').on('click', function(e) {
+  var file;
+  $('#file_input_visu_animal').on('change', function(){
+    file = event.target.files;
+  });
   e.preventDefault()
-  console.log($("input[name='nome']").val())
+  var data = new FormData($('#formularioVisualizaAnimal').get(0));
+  data.append('file', $('#file_input_visu_animal')[0].files);
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
           type: "POST",
           url: '/cliente/visualizar_animal',
-          headers:{
-              "X-CSRFToken": csrftoken,
-          },
-          data:{
-            id: $("input[name='id']").val(),
-            url_foto: $("input[name='url_foto']").val(),
-            nome: $("input[name='nome']").val(),
-            sexo: $("input[name='sexo']").val(),
-            raca: $("input[name='raca']").val(),
-            cor: $("input[name='cor']").val(),
-            especie: $("input[name='especie']").val(),
-            datanasc: $("input[name='datanasc']").val(),
-            obs: $("input[name='obs']").val(),
-            microchip: $("input[name='microchip']").val(),
-            cpf_cliente: $("input[name='cpf_cliente']").val(),
-          },
+          headers:{"X-CSRFToken": csrftoken},
+          data:data,
+          processData: false,
+          contentType: false,
+          dataType: "json",
           success: function (data) {
             alerta(data.mensagem, data.tipo, data.time)
             if (data.tipo=='ok') {

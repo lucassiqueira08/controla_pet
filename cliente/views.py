@@ -32,7 +32,7 @@ class ViewCadastrarCliente(BaseView):
         cliente = Cliente()
 
         try:
-            cliente.cpf = request.POST.get('cpf_cliente')
+            cliente.cpf = request.POST.get('cpf')
             resposta = valida_cpf(cliente.cpf)
 
             if resposta['cpf'] is True:
@@ -47,8 +47,8 @@ class ViewCadastrarCliente(BaseView):
             }
             return HttpResponse(json.dumps(context), content_type='application/json')
 
-        cliente.nome = request.POST.get('nome_cliente')
-        cliente.email = request.POST.get('email_cliente')
+        cliente.nome = request.POST.get('nome')
+        cliente.email = request.POST.get('email')
         cliente.logradouro = request.POST.get('logradouro')
         cliente.bairro = request.POST.get('bairro')
         cliente.cidade = request.POST.get('cidade')
@@ -65,7 +65,7 @@ class ViewCadastrarCliente(BaseView):
         except Exception:
             foto = None
 
-        if foto is not None and cliente.pk is not None:
+        if foto:
             foto = cloudyapi.upload_cliente_imagem(foto, cliente.pk)
             cliente.url_foto = foto['url']
 

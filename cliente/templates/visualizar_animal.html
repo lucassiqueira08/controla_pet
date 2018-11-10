@@ -30,6 +30,7 @@
 						<!-- BTN TEMPORARIO ATE A IMPLEMENTAÇÃO DO AJAX -->
 						<button onclick="abrirModal(
 						'{{ animal.id }}',
+						'{{ animal.url_foto }}',
 						'{{ animal.nome }}',
 						'{{ animal.sexo }}',
 						'{{ animal.raca }}',
@@ -53,11 +54,11 @@
 		<div class="modal-content">
 			<div class="modal-body">
 				<div class="centralizado">
-					<form id="formularioVisualizaAnimal" class='formEtapas' enctype="multipart/form-data">
+					<form method="post" id="formularioVisualizaAnimal" class='formEtapas' enctype="multipart/form-data">
 						{% csrf_token %}
 						<div class="imagemCardModal coluna">
 							<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="">
-							<input type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
+							<input type="file" id="file_input_visu_animal" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg text/plain"  multiple />
 						</div>
 					</div>
 					<input class="formInput" type="hidden" value="{{animal.id}}" name="id">

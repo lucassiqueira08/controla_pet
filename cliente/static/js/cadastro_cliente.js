@@ -298,7 +298,7 @@ $('#animal_btn_deletar').on('click', function(e) {
         })
   })
 
-console.log('teste')
+
   
 $('#achar_animal').on('click', function(e) {
   e.preventDefault()
@@ -320,9 +320,21 @@ $('#achar_animal').on('click', function(e) {
         
             }
             else{
-            $('#nome').val(data[1].fields.nome)
-        $('#raca').val(data[0].fields.raca)
-        $('#dono').val(data[0].fields.nome)
+            $('#nome').val(data[0].fields.nome)
+            $('#raca').val(data[0].fields.raca)
+            $('#dono').val(data[1].fields.nome)
+            $('#sexo').val(data[0].fields.sexo)
+            $('#especie').val(data[0].fields.especie)
+            $('#microchip').val(data[0].fields.microchip)
+            $('#datanasc').val(data[0].fields.datanasc)
+            $('#cor').val(data[0].fields.cor)
+            $('#bairro').val(data[1].fields.bairro)
+            $('#numero').val(data[1].fields.numero)
+            $('#cep').val(data[1].fields.cep)
+            $('#cidade').val(data[1].fields.cidade)
+            $('#estado').val(data[1].fields.estado)
+            
+            $('#foto_animal').attr('src',data[0].fields.url_foto)
 
             }
 

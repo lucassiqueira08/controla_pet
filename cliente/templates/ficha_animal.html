@@ -5,11 +5,12 @@
 
 
 <div class="container">
+
 	<div class="row">
 		<div class="col">
 		</div>
 		<div class="col-8">
-			<div class="w3-row">
+			<div class="w4-row">
 				<a href="javascript:void(0)" onclick="OpenMenu(event, 'FichaAnimal');">
 					<div class=" border-orange w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Ficha do Animal</div>
 				</a>
@@ -18,6 +19,9 @@
 				</a>
 				<a href="javascript:void(0)" onclick="OpenMenu(event, 'Exames');">
 					<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Exames</div>
+				</a>
+				<a href="{% url 'buscar_animal' %}" onclick="OpenMenu(event, 'Voltar');">
+					<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Pesquisar outra</div>
 				</a>
 			</div>
 		</div>
@@ -37,43 +41,71 @@
 					<li class="event" data-date="{{ficha.data_consulta}}">
                         
               
-						<h3>{{ficha.nome}}</h3>
+					<h3>{{ficha.nome}}</h3>
 
 						<p>{{ficha.descricao}}</p>
-						<a data-toggle="modal" data-target="#modal_{{ficha.id}}">
+					<a data-toggle="modal" data-target="#modal_{{ficha.id}}">
 						<button type="button" class="btnPequeno clearMarginTop" name="button"  data-target="#modal_{{ficha.id}}">Ver mais!</button>
 					</a>
                             
 					</li>
 
-  <div class="modal fade" id="modal_{{ficha.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+ <div class="modal fade" id="modal_{{ficha.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 		<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="modal_Label">Ficha do {{animal.nome}}</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal_Label">Ficha do {{animal.nome}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="centralizado">
+
+		
+                      	  	<fieldset>
+
+                               <div class="dupla">
+       							 <label class="formLabel">Data da consulta</label>
+									<input type="text" class="formInput" name="dataconsult" id="dataconsult" value ="{{ficha.data_consulta}}" maxlength="50" disabled />
+								</div>
+
+
+							   <div class="dupla">
+							<label for="#" class="formLabel">Descrição:</label>
+							<input id="dono" class="formInput" type="text" value="{{ficha.descricao}}" disabled />
+									</div>
+
+
+                            {% if ficha.booleano == 0 %}
+                            <div class="dupla"> 
+	 						<label class="formLabel">Possui ?</label>
+									<input type="text" class="formInput" name="booleano" id="booleano" value ="Sim" maxlength="20" disabled/>
+							</div>
+							{% else %}
+							 <div class="dupla">
+								 <label class="formLabel">Possui ?</label>
+									<input type="text" class="formInput" name="booleano" id="booleano" value ="Não" maxlength="20" disabled />
+								</div>	
+							{% endif %}	
+
+								
+							</fieldset>
+					
+
 					</div>
-					<div class="modal-body">
-						<div class="centralizado">
-							<form method="post" class='formEtapas' enctype="multipart/form-data">
-<p>{{ficha}}</p>
+				
+				</div>
+			</div>
+		</div>
+	</div>
 
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
-
-
-
-
-					{% endfor %}
+			{% endfor %}
 </ul>
 </fieldset>
 </form>
+
+
 
 	<!--fieldset id="FichaAnimal">
 		<h2 class="tituloGrande">Ficha do Animal</h2 class="tituloGrande">
@@ -114,7 +146,7 @@
 			</textarea>
 
 		</fieldset-->
-	</form>
+	
 
 	<form method="post" class='formEtapas menuOpcoes' id="Historico" style="display:none;">
 		{% csrf_token %}
@@ -130,9 +162,76 @@
 						<h3>{{historico.nome}}</h3>
 
 						<p>{{historico.descricao}}</p>
+					<a data-toggle="modal" data-target="#modal_Hist_{{historico.id_proc_clinico}}">
 						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-                            
+                    </a>        
 					</li>
+
+ <div class="modal fade" id="modal_Hist_{{historico.id_proc_clinico}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal_Label">Procedimento de {{historico.nome}}	</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="centralizado">
+
+		
+                      	  	<fieldset>
+                           
+                               <div class="dupla">
+       							 <label class="formLabel">Data/Hora da solicitação</label>
+									<input type="text" class="formInput" name="dataconsult" id="dataconsult" value ="{{historico.data_solicitacao}}" maxlength="50" disabled />
+								</div>
+
+
+							   <div class="dupla">
+							<label for="#" class="formLabel">Descrição</label>
+							<input id="dono" class="formInput" type="text" value="{{historico.descricao}}" disabled />
+									</div>
+
+ 						<div class="dupla">
+							<label for="#" class="formLabel">Observação</label>
+							<input id="dono" class="formInput" type="text" value="{{historico.observacao}}" disabled />
+									</div>
+                          
+
+                            {% if historico.preco > 0 %}
+                            <div class="dupla"> 
+	 						<label class="formLabel">Valor</label>
+									<input type="text" class="formInput" name="booleano" id="booleano" value ="R$ {{historico.preco}}" maxlength="20" disabled/>
+							</div>
+							{% else %}
+							 <div class="dupla">
+								 <label class="formLabel">Valor</label>
+									<input type="text" class="formInput" name="booleano" id="booleano" value ="sem" maxlength="20" disabled />
+								</div>	
+							{% endif %}	
+
+								
+							</fieldset>
+					
+
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
        
                   {%endfor%}
 					<!--
@@ -222,4 +321,7 @@
 				</ul>
 				</fieldset>
 			</form>
+
+
+
 			{% endblock %}

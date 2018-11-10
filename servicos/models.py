@@ -24,7 +24,7 @@ class Atendimento(models.Model):
     data_solicitacao = models.DateTimeField(blank=True, null=True)
     id_animal = models.ForeignKey(Animal,
                                     on_delete=models.CASCADE,
-                                    db_column='if_animal',
+                                    db_column='id_animal',
                                     related_name='atendimento_cliente')
 
     id_orcamento = models.ForeignKey(Orcamento,

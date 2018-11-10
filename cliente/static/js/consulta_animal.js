@@ -17,7 +17,7 @@ $('#achar_animal').on('click', function(e) {
             if (data.tipo=='erro') {
               $('#voltar').click()	
               alerta(data.mensagem, data.tipo, data.time)
-              let timerId = setInterval(() => window.location.reload(), data.time);
+        
             }
             else{
          		$('#nome').val(data[0].fields.nome)

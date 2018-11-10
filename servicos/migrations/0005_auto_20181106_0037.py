@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='atendimento',
             name='id_animal',
-            field=models.ForeignKey(db_column='if_animal', default=1, on_delete=django.db.models.deletion.CASCADE, related_name='atendimento_cliente', to='cliente.Animal'),
+            field=models.ForeignKey(db_column='id_animal', default=1, on_delete=django.db.models.deletion.CASCADE, related_name='atendimento_cliente', to='cliente.Animal'),
             preserve_default=False,
         ),
         migrations.AddField(

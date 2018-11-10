@@ -22,16 +22,13 @@ class Atendimento(models.Model):
     observacao = models.CharField(max_length=100, blank=True, null=True)
     id_google_agenda = models.CharField(max_length=28, blank=True, null=True)
     data_solicitacao = models.DateTimeField(blank=True, null=True)
-    cpf_cliente = models.ForeignKey(Cliente,
-                                    on_delete=models.CASCADE,
-                                    db_column='cpf_cliente',
-                                    related_name='atendimento_cliente')
-
-    id_orcamento = models.ForeignKey(Orcamento,
-                                     on_delete=models.CASCADE,
-                                     related_name='atendimento_orcamento',
-                                     db_column='id_orcamento',
-                                     blank=True, null=True)
+    id_cliente = models.ForeignKey(Cliente,
+                                    models.DO_NOTHING, db_column='id_cliente',
+                                    default=None)
+    id_orcamento = models.ForeignKey(
+        Orcamento, models.DO_NOTHING, db_column='id_orcamento',
+        blank=True, null=True
+    )
 
     class Meta:
         app_label = 'servicos'

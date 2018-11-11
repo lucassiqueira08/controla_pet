@@ -491,7 +491,8 @@ class ViewBuscarAnimal(BaseView):
             INNER JOIN
                 ATENDIMENTO_PROC_CLINICO AS ATE_CL ON (ATEND.id = ATE_CL.id_atendimento)
             INNER JOIN
-                PROCEDIMENTO_CLINICO AS PC ON (PC.id = ATE_CL.id_proc_clinico)   
+                PROCEDIMENTO_CLINICO AS PC ON (PC.id = ATE_CL.id_proc_clinico)
+                   
             WHERE
                 ATEND.id_animal = {}
         """.format(animal.id)

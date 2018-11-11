@@ -2,21 +2,24 @@
 {% load static %}
 {% block content_base %}
 
+
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
 <form method="post" class='formEtapas'>
 	{% csrf_token %}
 	<ul id="progress">
 		<li class="ativo"><label>Procurar Animal</label></li>
 		<li><label>Tela de confirmação</label></li>
-		<li><label>Ficha do animal</label></li>
+		<li><label>Ficha do animal</label></li>		
 	</ul>
 
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
-		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="50">
-		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14" required>
+        
+		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" id="nome_animal" name="nome_animal" placeholder="Digite o nome do Animal..." maxlength="100">
+		<input type="search" class="formEtapasInput cpf " id="cpf_cliente" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14">
+
 		<div class="containerBotoes">
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
+			<input id ="achar_animal" type="submit" name="next" class="acao next btnPrincipal" value="Buscar"/>
 		</div>
 	</fieldset>
 
@@ -24,16 +27,79 @@
 		<h2 class="tituloGrande">Confirmar animal</h2>
 		<div class="centralizado destacadoCimaBaixo">
 			<div class="imagemCardModal coluna">
-				<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+					<img src="" id="foto_animal"  onerror="this.src='../../static/img/semfoto.jpeg';" >
 			</div>
 		</div>
-		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" />
-		<input type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" />
+        <div class="dupla">
+        <label class="formLabel">Animal</label>
+		<input type="text" class="formInput" name="nome" id="nome" placeholder="Nome do animal" maxlength="50" />
+	</div>
+	<div class="dupla">
+        <label class="formLabel">Raça</label>
+		<input type="text" class="formInput" name="raca" id="raca" placeholder="Raça" maxlength="50" />
+	</div>
+
+	<div class="dupla">
+        <label class="formLabel">Dono</label>
+		<input type="text" class="formInput" name="dono" id = "dono" placeholder="Dono" maxlength="50" />
+    </div>
+	<div class="dupla">
+        <label class="formLabel">Sexo</label>
+		<input type="text" class="formInput" name="sexo" id = "sexo" placeholder="sexo" maxlength="50" />
+    </div>
+    	<div class="dupla">
+        <label class="formLabel">Especie</label>
+		<input type="text" class="formInput" name="especie" id = "especie" placeholder="especie" maxlength="50" />
+    </div>
+    	<div class="dupla">
+        <label class="formLabel">Microchip</label>
+		<input type="text" class="formInput" name="microchip" id = "microchip" placeholder="microchip" maxlength="50" />
+    </div>
+   
+    <div class="dupla">
+        <label class="formLabel">Cor</label>
+		<input type="text" class="formInput" name="cor" id = "cor" placeholder="cor" maxlength="50" />
+    </div>
+
+  <div class="dupla">
+        <label class="formLabel">Nascimento</label>
+		<input type="text" class="formInput" name="datanasc" id = "datanasc" placeholder="datanasc" maxlength="50" />
+    </div>
+
+
+  <div class="dupla">
+        <label class="formLabel">Mora Na</label>
+		<input type="text" class="formInput" name="bairro" id = "bairro" placeholder="bairro" maxlength="50" />
+    </div>
+    <div class="dupla">
+        <label class="formLabel">Numero</label>
+		<input type="text" class="formInput" name="numero" id = "numero" placeholder="numero" maxlength="50" />
+    </div>
+  
+  <div class="dupla">
+        <label class="formLabel">De Cep</label>
+		<input type="text" class="formInput" name="cep" id = "cep" placeholder="cep" maxlength="50" />
+    </div>
+
+
+  <div class="dupla">
+        <label class="formLabel">Que fica em</label>
+		<input type="text" class="formInput" name="cidade" id = "cidade" placeholder="cidade" maxlength="50" />
+    </div>
+   <div class="dupla">
+        <label class="formLabel">No estado de</label>
+		<input type="text" class="formInput" name="estado" id = "estado" placeholder="estado" maxlength="50" />
+    </div>
+
+ 
+  
+
+
 		<h2 class="tituloMedio destacadoCima">Esse é o bichinho certo?</h2>
+
 		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao" value="Não!"/>
-			<a class="next acao btnPrincipal" href="{% url 'ficha_animal' %}">Sim!</a>
+			<input type="submit" id = "voltar" name="voltar" class="prev acao" value="Não!"/>
+			<button class="acao btnPrincipal" href="{% url 'ficha_animal' %}">Sim!</button>
 		</div>
 	</fieldset>
 
@@ -158,5 +224,5 @@
 
 	</form>
 	<!--===========FIMM===============-->
-
 	{% endblock %}
+

@@ -89,6 +89,33 @@ $('#animal_botao').on('click', function (e) {
           },
       })
 })
+
+$('#achar_animal').click(function(){
+
+  cpf_cliente = $('#cpf_cliente').val()
+  nome_animal = $('#nome_animal').val()
+
+  $.getJSON('/cliente/get_ficha_animal'+ '/' + cpf_cliente +  '/' + nome_animal , function (data) {
+    $('#nome').val(data[0].fields.nome)
+    $('#raca').val(data[0].fields.raca)
+    $('#dono').val(data[1].fields.nome)
+    if (data[0].fields.url_foto == null){
+    $('#foto_animal').attr('src','../../static/img/semfoto.jpeg')
+      
+    }else
+    {
+    $('#foto_animal').attr('src',data[0].fields.url_foto)
+        }
+  })
+
+})
+
+$('#voltar').click(function(){
+
+  data=''
+  
+})
+
 // ------- VISUALIZA CLIENTE ----------- //
 // GET - VISUALIZA CLIENTE
 function abrirModalCliente(id, nome, cpf, email, cep, logradouro, numero, cidade, bairro, estado, complemento, id_tipo_cliente){
@@ -243,6 +270,51 @@ $('#animal_btn_deletar').on('click', function(e) {
             }
             alerta(data.mensagem, data.tipo, data.time)
             let timerId = setInterval(() => window.location.reload(), data.time);
+          }
+        })
+  })
+
+
+  
+$('#achar_animal').on('click', function(e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    cpf_cliente = $('#cpf_cliente').val()
+  nome_animal = $('#nome_animal').val()
+  $.ajax({
+          type: "GET",
+          url: '/cliente/get_ficha_animal'+ '/' + cpf_cliente +   '/' + nome_animal,
+          headers:{
+              "X-CSRFToken": csrftoken,
+          },
+          data:{},
+          success: function (data) 
+          {
+            if (data.tipo=='erro') {
+              $('#voltar').click()  
+              alerta(data.mensagem, data.tipo, data.time)
+        
+            }
+            else{
+            $('#nome').val(data[0].fields.nome)
+            $('#raca').val(data[0].fields.raca)
+            $('#dono').val(data[1].fields.nome)
+            $('#sexo').val(data[0].fields.sexo)
+            $('#especie').val(data[0].fields.especie)
+            $('#microchip').val(data[0].fields.microchip)
+            $('#datanasc').val(data[0].fields.datanasc)
+            $('#cor').val(data[0].fields.cor)
+            $('#bairro').val(data[1].fields.bairro)
+            $('#numero').val(data[1].fields.numero)
+            $('#cep').val(data[1].fields.cep)
+            $('#cidade').val(data[1].fields.cidade)
+            $('#estado').val(data[1].fields.estado)
+            
+            $('#foto_animal').attr('src',data[0].fields.url_foto)
+
+            }
+
+           
           }
         })
   })

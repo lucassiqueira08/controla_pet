@@ -5,19 +5,23 @@
 
 
 <div class="container">
+
 	<div class="row">
 		<div class="col">
 		</div>
 		<div class="col-8">
 			<div class="w3-row">
 				<a href="javascript:void(0)" onclick="OpenMenu(event, 'FichaAnimal');">
-					<div class=" border-orange w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Ficha do Animal</div>
+					<div class=" border-orange w4-third tablink w3-bottombar w3-hover-light-grey w3-padding">Ficha do Animal</div>
 				</a>
 				<a href="javascript:void(0)" onclick="OpenMenu(event, 'Historico');">
-					<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Histórico</div>
+					<div class="w4-third tablink w3-bottombar w3-hover-light-grey w3-padding">Histórico</div>
 				</a>
 				<a href="javascript:void(0)" onclick="OpenMenu(event, 'Exames');">
-					<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Exames</div>
+					<div class="w4-third tablink w3-bottombar w3-hover-light-grey w3-padding">Exames</div>
+				</a>
+				<a href="{% url 'buscar_animal' %}" onclick="OpenMenu(event, 'Voltar');">
+					<div class="w4-third tablink w3-bottombar w3-hover-light-grey w3-padding">Voltar</div>
 				</a>
 			</div>
 		</div>
@@ -27,30 +31,79 @@
 </div>
 <form method="post" class='formEtapas menuOpcoes' id="FichaAnimal">
 	{% csrf_token %}
-	<fieldset id="FichaAnimal">
-		<h2 class="tituloGrande">Ficha do Animal</h2 class="tituloGrande">
-			<p>Digite algumas informações do procedimento!</p>
+		
+		<fieldset id="Ficha">
+			<h2 class="tituloGrande">Ficha animal</h2 class="tituloGrande">
+				<p>Aqui você tem a visão de todas das fichas abertas!</p>
 
-			<div class="centralizado destacadoCimaBaixo">
-				<div class="imagemCardModal coluna">
-					<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+				<ul class="timeline">
+                  {%for ficha in fichas %}
+					<li class="event" data-date="{{ficha.data_consulta}}">
+                        
+              
+					<h3>{{ficha.nome}}</h3>
+
+						<p>{{ficha.descricao}}</p>
+					<a data-toggle="modal" data-target="#modal_{{ficha.id}}">
+						<button type="button" class="btnPequeno clearMarginTop" name="button"  data-target="#modal_{{ficha.id}}">Ver mais!</button>
+					</a>
+                            
+					</li>
+
+ <div class="modal fade" id="modal_{{ficha.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal_Label">Ficha do {{animal.nome}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="centralizado">
+                      	  	<fieldset>
+
+                               <div class="dupla">
+       							 <label class="formLabel">Data da consulta</label>
+									<input type="text" class="formInput" name="dataconsult" id="dataconsult" value ="{{ficha.data_consulta}}" maxlength="50" disabled />
+								</div>
+
+
+							   <div class="dupla">
+							<label for="#" class="formLabel">Descrição:</label>
+							<input id="dono" class="formInput" type="text" value="{{ficha.descricao}}" disabled />
+									</div>
+
+
+                            {% if ficha.booleano == 0 %}
+                            <div class="dupla"> 
+	 						<label class="formLabel">Possui ?</label>
+									<input type="text" class="formInput" name="booleano" id="booleano" value ="Sim" maxlength="20" disabled/>
+							</div>
+							{% else %}
+							 <div class="dupla">
+								 <label class="formLabel">Possui ?</label>
+									<input type="text" class="formInput" name="booleano" id="booleano" value ="Não" maxlength="20" disabled />
+								</div>	
+							{% endif %}	
+
+								
+							</fieldset>
+					
+
+					</div>
+				
 				</div>
 			</div>
+		</div>
+	</div>
 
-			<input type="text" class="formEtapasInput" 					name="proprietario" 	 placeholder="Nome do proprietário" maxlength="50"/>
-			<input type="text" class="formEtapasInput"  				name="logradouro" 		 placeholder="Logradouro" 					maxlength="50"/>
-			<input type="text" class="formEtapasInput cpf" 			name="cpf" 						 placeholder="CPF" 									maxlength="14"/>
-			<input type="text" class="formEtapasInput"  				name="nome_animal" 		 placeholder="Nome do Animal" 			maxlength="50"/>
-			<input type="text" class="formEtapasInput"  				name="pelagem" 				 placeholder="Pelagem" 							maxlength="50"/>
-			<input class="formEtapasInput data"  				name="data_nascimento" placeholder="Data de Nascimento" 		maxlength="10"/>
-			<input type="text" class="formEtapasInput"  				name="sexo" 					 placeholder="Sexo" 								maxlength="1"/>
-			<input type="text" class="formEtapasInput"  				name="especie" 				 placeholder="Espécie" 							maxlength="50"/>
-			<input type="text" class="formEtapasInput"  				name="raca" 					 placeholder="Raça" 								maxlength="50"/>
-			<h2 class="tituloMedio">Descrição</h2>
-			<textarea placeholder="Digite aqui sua Descrição..." class="formEtapasTextArea" name="descricao" maxlength="500"></textarea>
+			{% endfor %}
+</ul>
+</fieldset>
+</form>
 
-		</fieldset>
-	</form>
+	
 
 	<form method="post" class='formEtapas menuOpcoes' id="Historico" style="display:none;">
 		{% csrf_token %}
@@ -59,74 +112,74 @@
 				<p>Aqui você tem a visão de todo o Histórico do animal!</p>
 
 				<ul class="timeline">
-					<li class="event" data-date="12/10">
+                  {%for historico in historicos%}
+					<li class="event" data-date="{{historico.data_solicitacao}}">
+                        
+              
+						<h3>{{historico.nome}}</h3>
 
-						<h3>Vacina anti-pulga</h3>
-						<p>Get here on time, it's first come first serve. Be late, get turned away.</p>
+						<p>{{historico.descricao}}</p>
+					<a data-toggle="modal" data-target="#modal_Hist_{{historico.id_proc_clinico}}">
 						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="15/10">
-						<h3>Exame de sangue</h3>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="16/11">
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="12/10">
-						<h3>Vacina anti-pulga</h3>
-						<p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="15/10">
-						<h3>Exame de sangue</h3>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="16/11">
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="12/10">
-						<h3>Vacina anti-pulga</h3>
-						<p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="15/10">
-						<h3>Exame de sangue</h3>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="16/11">
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="12/10">
-						<h3>Vacina anti-pulga</h3>
-						<p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="15/10">
-						<h3>Exame de sangue</h3>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="16/11">
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
+                    </a>        
 					</li>
 
+ <div class="modal fade" id="modal_Hist_{{historico.id_proc_clinico}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal_Label">Procedimento de {{historico.nome}}	</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="centralizado">
+
+		
+                      	  	<fieldset>
+                           
+                               <div class="dupla">
+       							 <label class="formLabel">Data/Hora da solicitação</label>
+									<input type="text" class="formInput" name="dataconsult" id="dataconsult" value ="{{historico.data_solicitacao}}" maxlength="50" disabled />
+								</div>
+
+
+							   <div class="dupla">
+							<label for="#" class="formLabel">Descrição</label>
+							<input id="dono" class="formInput" type="text" value="{{historico.descricao}}" disabled />
+									</div>
+
+ 						<div class="dupla">
+							<label for="#" class="formLabel">Observação</label>
+							<input id="dono" class="formInput" type="text" value="{{historico.observacao}}" disabled />
+									</div>
+                          
+
+                            {% if historico.preco > 0 %}
+                            <div class="dupla"> 
+	 						<label class="formLabel">Valor</label>
+									<input type="text" class="formInput" name="booleano" id="booleano" value ="R$ {{historico.preco}}" maxlength="20" disabled/>
+							</div>
+							{% else %}
+							 <div class="dupla">
+								 <label class="formLabel">Valor</label>
+									<input type="text" class="formInput" name="booleano" id="booleano" value ="sem" maxlength="20" disabled />
+								</div>	
+							{% endif %}	
+
+								
+							</fieldset>
+					
+
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+                  {%endfor%}
+		
 				</ul>
 
 
@@ -140,38 +193,20 @@
 				<p>Aqui você tem a visão de todos os Exames do animal!</p>
 
 				<ul class="timeline">
-					<li class="event" data-date="12/10">
-						<h3>Exame de sangue Hospital São Luiz</h3>
+						{% for exame in exames %}
+					<li class="event" data-date="{{exame.data_realizacao}}">
+					
+						<h3>{{exame.nome}}</h3>
 						<div class="arquivo">
 							<img src="{% static 'img/file.png' %}" alt="testes">
-							<a href="{% static 'arquivo_teste.pdf' %}" target="_blank">Ficha do animal.pdf</a>
+							<a href="{% static exame.link_doc %}" target="_blank">{{exame.link_doc}}</a>
 						</div>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-
-						<h3>Raio X Clinica Pereira</h3>
-						<div class="arquivo">
-							<img src="{% static 'img/file.png' %}" alt="testes">
-							<a href="{% static 'arquivo_teste.pdf' %}" target="_blank">Ficha do animal.pdf</a>
-						</div>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-
-						<h3>Fotos do tumor</h3>
-						<div class="arquivo">
-							<img src="{% static 'img/file.png' %}" alt="testes">
-							<a href="{% static 'arquivo_teste.pdf' %}" target="_blank">Ficha do animal.pdf</a>
-						</div>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-
+						<p><h3>{{exame.descricao}}</h3></p>
+                       
 					</li>
-					<li class="event" data-date="15/10">
-						<h3>Arquivo do Exame tal</h3>
-						<div class="arquivo">
-							<img src="{% static 'img/file.png' %}" alt="testes">
-							<a href="{% static 'arquivo_teste.pdf' %}" target="_blank">Ficha do animal.pdf</a>
-						</div>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-					</li>
+					 {%endfor%}
 				</ul>
 				</fieldset>
 			</form>
+
 			{% endblock %}

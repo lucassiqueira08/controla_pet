@@ -5,7 +5,10 @@ from .views import (ViewCadastrarAnimal, ViewVisualizarAnimal,
                     ViewFichaAnimal, ViewAcompanheSuaClinica,
                     ViewBuscarAnimal, ViewCadastrarDiagnostico)
 
-from .actions import get_cliente, get_animal
+                    
+from .actions import get_cliente, get_animal , get_ficha_animal
+
+
 
 urlpatterns = [
     path(
@@ -51,11 +54,19 @@ urlpatterns = [
         'get_animal/<str:cpf_cliente>/<str:nome_animal>', get_animal
     ),
     path(
+
+        'get_ficha_animal/<str:cpf_cliente>/<str:nome_animal>', get_ficha_animal,
+
+        name='get_ficha_animal'
+        ),
+    path(    
+
         'delete/<int:id>', ViewVisualizarCliente.as_view(),
         name='delete_cliente'
     ),
     path(
         'delete/animal/<int:id>', ViewVisualizarAnimal.as_view(),
         name='delete_animal'
+
     ),
 ]

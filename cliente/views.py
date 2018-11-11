@@ -8,13 +8,18 @@ from django.db.utils import IntegrityError
 
 from core.views import BaseView
 from .models import (Animal, Cliente, Responsavel, Responde,
-                     TipoStatusAnimal, StatusAnimal, TipoCliente)
+                     TipoStatusAnimal, StatusAnimal, TipoCliente, FichaAnimal)
 from core.models import Menu
 from cliente.exceptions import InvalidCPFError, DateError, MicrochipError
 from cliente.actions import valida_cpf, valida_microchip, valida_cpf_responsavel
-
+from servicos.models import Exame, FichaDiagnostico, DiagnosticoAnimal , TipoDiagnostico
 from cloudinary_api.app import cloudyapi
 from raven.contrib.django.raven_compat.models import client
+
+
+from django.db import connection
+from core.actions import dictfetchall
+import json
 
 
 class ViewCadastrarCliente(BaseView):
@@ -467,15 +472,79 @@ class ViewCadastrarDiagnostico(BaseView):
 
 
 class ViewBuscarAnimal(BaseView):
+    templateficha = 'ficha_animal.html'
+     
+    def post(self, request):
+        cliente = Cliente.objects.get(cpf=request.POST.get('cpf_cliente'))
 
+        animal = Animal.objects.get(cpf_cliente=cliente, nome=request.POST.get('nome_animal'))
+        
+        exames = Exame.objects.filter(id_animal=animal)
+
+        query = """
+            SELECT
+
+                *
+
+            FROM
+                ATENDIMENTO AS ATEND
+            INNER JOIN
+                ATENDIMENTO_PROC_CLINICO AS ATE_CL ON (ATEND.id = ATE_CL.id_atendimento)
+            INNER JOIN
+                PROCEDIMENTO_CLINICO AS PC ON (PC.id = ATE_CL.id_proc_clinico)
+                   
+            WHERE
+                ATEND.id_animal = {}
+        """.format(animal.id)
+
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            row = dictfetchall(cursor)
+
+        linhas= row
+
+        context = {
+            'cliente':cliente,  
+            'animal': animal,
+      
+            'exames':exames,
+            'historicos':linhas,
+        }
+      
+        query2 = """
+             SELECT
+
+                    *
+
+             FROM
+                    FICHA_ANIMAL AS FICHA
+              INNER JOIN
+                 FICHA_DIAGNOSTICO AS FICHA_DIAG ON (FICHA.id = FICHA_DIAG.id_ficha)
+           INNER JOIN
+                    DIAGNOSTICO_ANIMAL AS DIAG ON (FICHA_DIAG.id_diagnostico = DIAG.ID)   
+           INNER JOIN TIPO_DIAGNOSTICO AS TDIAG ON (TDIAG.id = DIAG.id_tipo_diagnostico)         
+              WHERE
+                 FICHA.id_animal = {}
+                   """.format(animal.id)
+
+        with connection.cursor() as cursor:
+            cursor.execute(query2)
+            rowfICHA = dictfetchall(cursor)
+ 
+        linhasFicha= rowfICHA
+
+        context['fichas']=linhasFicha
+       
+       
+ 
+
+        return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'
-
     def get(self, request):
         context = {
 
         }
         return render(request, self.template, context)
-
 
 class ViewAcompanheSuaClinica(BaseView):
 

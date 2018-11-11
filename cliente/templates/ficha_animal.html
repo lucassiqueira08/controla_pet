@@ -61,8 +61,6 @@
 				</div>
 				<div class="modal-body">
 					<div class="centralizado">
-
-		
                       	  	<fieldset>
 
                                <div class="dupla">
@@ -105,46 +103,6 @@
 </fieldset>
 </form>
 
-
-
-	<!--fieldset id="FichaAnimal">
-		<h2 class="tituloGrande">Ficha do Animal</h2 class="tituloGrande">
-			<p>Digite algumas informações do procedimento!</p>
-
-			<div class="centralizado destacadoCimaBaixo">
-				<div class="imagemCardModal coluna">
-						<img src="{{animal.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Foto do {{animal.nome}} - ID: {{animal.id}}">
-				</div>
-			</div>
-  	
-			<input type="text" class="formEtapasInput" 					name="proprietario" 	value="{{cliente.nome}}"maxlength="500"
-			disabled />
-	
-			<input type="text" class="formEtapasInput"  				name="logradouro" 		value="{{cliente.logradouro}}"					maxlength="500"  disabled />
-			<input type="text" class="formEtapasInput cpf" 			name="cpf" 						value="{{cliente.cpf}}"								maxlength="14" disabled />
-			<input type="text" class="formEtapasInput"  				name="nome_animal" 		 value="{{animal.nome}}"			maxlength="500" disabled="" />
-			<input type="text" class="formEtapasInput"  				name="pelagem" 				 value="{{animal.cor}}" 				maxlength="500" disabled />
-			<input type="text" class="formEtapasInput"  				name="data_nascimento" value="{{animal.datanasc}}"		maxlength="500" disabled />
-			<input type="text" class="formEtapasInput"  				name="sexo" 					 value="{{animal.sexo}}" 								maxlength="500" disabled= />
-			<input type="text" class="formEtapasInput"  				name="especie" 				 value="{{animal.especie}}" 							maxlength="500" disabled />
-			<input type="text" class="formEtapasInput"  				name="raca" 					value="{{animal.raca}}"								maxlength="500" disabled />
-=======
-
-			<input type="text" class="formEtapasInput" 					name="proprietario" 	 placeholder="Nome do proprietário" maxlength="50"/>
-			<input type="text" class="formEtapasInput"  				name="logradouro" 		 placeholder="Logradouro" 					maxlength="50"/>
-			<input type="text" class="formEtapasInput cpf" 			name="cpf" 						 placeholder="CPF" 									maxlength="14"/>
-			<input type="text" class="formEtapasInput"  				name="nome_animal" 		 placeholder="Nome do Animal" 			maxlength="50"/>
-			<input type="text" class="formEtapasInput"  				name="pelagem" 				 placeholder="Pelagem" 							maxlength="50"/>
-			<input class="formEtapasInput data"  				name="data_nascimento" placeholder="Data de Nascimento" 		maxlength="10"/>
-			<input type="text" class="formEtapasInput"  				name="sexo" 					 placeholder="Sexo" 								maxlength="1"/>
-			<input type="text" class="formEtapasInput"  				name="especie" 				 placeholder="Espécie" 							maxlength="50"/>
-			<input type="text" class="formEtapasInput"  				name="raca" 					 placeholder="Raça" 								maxlength="50"/>
->>>>>>> 9f5ef4eefe631fafafb55ae09ff8f03aed73f2ea
-			<h2 class="tituloMedio">Descrição</h2>
-			<textarea placeholder="Digite aqui sua Descrição..." class="formEtapasTextArea" name="descricao" maxlength="500" disabled>{{ficha}}
-			</textarea>
-
-		</fieldset-->
 	
 
 	<form method="post" class='formEtapas menuOpcoes' id="Historico" style="display:none;">
@@ -220,76 +178,8 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-       
                   {%endfor%}
-					<!--
-					<li class="event" data-date="15/10">
-						<h3>Exame de sangue</h3>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="16/11">
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="12/10">
-						<h3>Vacina anti-pulga</h3>
-						<p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="15/10">
-						<h3>Exame de sangue</h3>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="16/11">
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="12/10">
-						<h3>Vacina anti-pulga</h3>
-						<p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="15/10">
-						<h3>Exame de sangue</h3>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="16/11">
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="12/10">
-						<h3>Vacina anti-pulga</h3>
-						<p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="15/10">
-						<h3>Exame de sangue</h3>
-						<p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li>
-					<li class="event" data-date="16/11">
-						<h3>Vacina de Tétano</h3>
-						<p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>
-						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-					</li> -->
-
+		
 				</ul>
 
 
@@ -313,14 +203,10 @@
 						</div>
 						<p><h3>{{exame.descricao}}</h3></p>
                        
-
-
 					</li>
 					 {%endfor%}
 				</ul>
 				</fieldset>
 			</form>
-
-
 
 			{% endblock %}

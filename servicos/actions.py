@@ -11,11 +11,23 @@ def get_tipo_procedimento(request):
     return HttpResponse(tipo_procedimento_json, content_type='application/json')
 
 def get_animais_cliente(request):
-    print("********************************")
-
     cpf_cliente           = request.GET.get('cpf_cliente')
     cliente               = Cliente.objects.filter(cpf = cpf_cliente).first()
     animais_cliente       = Animal.objects.filter(cpf_cliente = cliente)
     animais_cliente_json  = serializers.serialize("json", animais_cliente)
-    print(animais_cliente_json)
     return HttpResponse(animais_cliente_json, content_type='application/json')
+
+def get_animal(request):
+    cpf_cliente  = request.GET.get('cpf_cliente')
+    id_animal    = request.GET.get('id_animal')
+    animal       = Animal.objects.filter(pk = id_animal)
+    cliente      = Cliente.objects.filter(cpf = cpf_cliente)
+    animal_json  = serializers.serialize("json", animal)
+    cliente_json = serializers.serialize("json", cliente)
+    retorno      = {'cliente':cliente_json, 'animal':animal_json}
+    print("*****************************************************")
+    
+    retorno_json = serializers.serialize("json", retorno)
+    print("*****************************************************")
+    print(retorno_json)
+    return HttpResponse(retorno_json, content_type='application/json')

@@ -69,25 +69,21 @@ $('#buscarAnimalEstadia').on('click', function (e) {
     e.preventDefault()
     var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
     $.ajax({
-            type: "POST",
-            url: '/servicos/busca',
+            type: "GET",
+            url: '/servicos/get_animal',
             headers:{
                 "X-CSRFToken": csrftoken,
             },
             data:{
-              nome                  : $('#nome').val(),
-              raca                  : $('#raca').val(),
-              dono                  : $('#dono').val(),
-              especie               : $('#C_especie').val(),
-              tipo_procedimento     : $('#C_tipoProcedimento').val(),
-              aba_procedimento      : 'clinico',
+              id_animal     : $('#selectAnimal').val(),
+              cpf_cliente     : $('#cpf_cliente').val(),
             },
             success: function (data) {
-              alerta(data.mensagem, data.tipo, data.time)
-              if (data.tipo=='ok') {
-                $('.formEtapasInput').val('')
-                $('.formInput').val('')
-              }
+              alert(data)
+              $('#nome_animal').val(data.animal[0].fields.nome)
+              $('#raca_animal').val(data.animal[0].fields.raca)
+              $('#dono_animal').val(data.cliente[0].fields.nome)
+
             },
         })
   }
@@ -122,7 +118,6 @@ $('#cpf_cliente').on('blur', function (e) {
         var option = $('<option/>').val(animais[animal].pk)
         .text(animais[animal].fields.nome)
         selectAnimais.append(option)
-
       }
     },
   })

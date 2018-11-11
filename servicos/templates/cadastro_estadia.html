@@ -4,18 +4,18 @@
 <form method="post" class='formEtapas'>
 	{% csrf_token %}
 	<ul id="progress">
-		<li class="ativo"><label>Buscar Cliente</label></li>
-		<li><label>Tela de escolha de animal</label></li>
+		<li class="ativo"><label>Buscar Animal</label></li>
+		<li><label>Confirmação do animal</label></li>
 		<li><label>Estadia</label></li>
 		<li><label>Observações</label></li>
 	</ul>
 
 	<fieldset>
-		<h3 class="tituloExtraGrande">Buscar Cliente</h3>
-		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Cliente..." maxlength="14" required id="cpfCliente">
+		<h3 class="tituloExtraGrande">Buscar Animal</h3>
+		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Cliente..." maxlength="14" required id="cpf_cliente">
 
-		<p>Tipo de cliente</p>
-		<select id="tipoCliente" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_cliente" required>
+		<p>Animais:</p>
+		<select id="selectAnimal" class="formInput destacadoCimaBaixo clearMarginTop" name="id_animal" required>
 			<option value=""></option>
 		</select>
 		<div class="containerBotoes">
@@ -24,7 +24,7 @@
 	</fieldset>
 
 	<fieldset>
-		<h2 class="tituloGrande">Escolher Animal</h2>
+		<h2 class="tituloGrande">Confirmação do animal</h2>
 		<div class="centralizado destacadoCimaBaixo">
 			<div class="imagemCardModal coluna">
 				<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
@@ -35,7 +35,7 @@
 		<input type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" disabled/>
 		<h2 class="tituloMedio destacadoCima">Esse é o bichinho certo?</h2>
 		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
+			<input id="btnConfirmacaoPrev" type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
 		</div>
 	</fieldset>
@@ -71,4 +71,8 @@
 		</div>
 	</fieldset>
 </form>
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/cadastro_procedimento.js' %}"></script>
 {% endblock %}

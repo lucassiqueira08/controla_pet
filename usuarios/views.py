@@ -8,3 +8,13 @@ class ViewEsqueceuSenha(View):
 
     def get(self, request):
         return render(request, self.template)
+
+
+class ViewCadastroFuncionario(View):
+    template = 'cadastro_funcionario.html'
+
+    def get(self, request):
+        context = {
+        }
+
+        return render(request, self.template, context)

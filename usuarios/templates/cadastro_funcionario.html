@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+					<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+<form id="formcadastrofuncionario" class='formEtapas' enctype="multipart/form-data">
+{% csrf_token %}
+<fieldset>
+<h2 class="tituloGrande">Dados Gerais</h2 class="tituloGrande">
+<p>Digite algumas informações do Funcionário!</p>
+<input type="text" class="formEtapasInput" id="primeiro_nome_func" name="primeiro_nome" placeholder="Nome" maxlength="50" required/>
+<input type="text" class="formEtapasInput" id="ultimo_nome_func" name="ultimo_nome" placeholder="Sobrenome" maxlength="50" required/>
+<input type="text" class="formEtapasInput" id="apelido_func" name="apelido" placeholder="Apelido" maxlength="50"/>
+<input type="text" class="formEtapasInput cpf" id="cpf_func" name="cpf" placeholder="CPF" maxlength="50" required/>
+<input type="text" class="formEtapasInput" id="data_nasc_func" name="data_nasc" placeholder="Data de nascimento" maxlength="50" required/>
+
+<p>Cargo</p>
+<select id="cargo_func" class="formInput destacadoCimaBaixo clearMarginTop" name="situacao_func" required>
+	<option value=""></option>
+</select>
+<p>Situação</p>
+<select id="situacao_func" class="formInput destacadoCimaBaixo clearMarginTop" name="situacao_func" required>
+	<option value=""></option>
+</select>
+<p>Tem acesso ao sistema?</p>
+<select id="situacao_func" class="formInput destacadoCimaBaixo clearMarginTop" name="situacao_func" required>
+	<option value=""></option>
+</select>
+
+<div class="containerBotoes linha centralizado">
+      <button  type="submit" class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
+</div>
+</fieldset>
+</form>
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/cadastro_cliente.js' %}"></script>
+{% endblock %}

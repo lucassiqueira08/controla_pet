@@ -93,7 +93,7 @@ $('#animal_botao').on('click', function (e) {
 $('#achar_animal').click(function(){
 
   cpf_cliente = $('#cpf_cliente').val()
-  nome_animal = $('#nome_animal').val()
+  nome_animal = $('#selectAnimal').val()
 
   $.getJSON('/cliente/get_ficha_animal'+ '/' + cpf_cliente +  '/' + nome_animal , function (data) {
     $('#nome').val(data[0].fields.nome)

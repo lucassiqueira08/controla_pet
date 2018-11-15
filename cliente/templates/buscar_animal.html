@@ -12,27 +12,19 @@
 		<li><label>Ficha do animal</label></li>		
 	</ul>
 
-	<fieldset>
-		<h3 class="tituloExtraGrande">Buscar Animal</h3>
-        
-		<input type="search" class="formEtapasInput destacadoCimaBaixo clearMarginTop" id="nome_animal" name="nome_animal" placeholder="Digite o nome do Animal..." maxlength="100">
-		<input type="search" class="formEtapasInput cpf " id="cpf_cliente" name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14">
-
-		<div class="containerBotoes">
-			<input id ="achar_animal" type="submit" name="next" class="acao next btnPrincipal" value="Buscar"/>
-		</div>
-	</fieldset>
+	
 
 		<fieldset>
 
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
-		<input type="search" class="formEtapasInput cpf " name="cpf_cliente" placeholder="Digite o CPF do Cliente..." maxlength="14" required id="cpf_cliente">
+		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Cliente..." maxlength="14" required id="cpf_cliente">
  		<p>Animais:</p>
-		<select id="selectAnimal" class="formInput destacadoCimaBaixo clearMarginTop"  name="nome_animal" required>
+		<select id="selectAnimal" class="formInput destacadoCimaBaixo clearMarginTop" name="id_animal" required>
 			<option value=""></option>
 		</select>
-	<div class="containerBotoes">
-			<input id ="achar_animal" type="submit" name="next" class="acao next btnPrincipal" value="Buscar"/>
+		<div class="containerBotoes">
+	
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar" id="achar_animal"/>
 		</div>
 	</fieldset>
 

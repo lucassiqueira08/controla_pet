@@ -122,3 +122,32 @@ $('#cpf_cliente').on('blur', function (e) {
     },
   })
 })
+
+$('#cpf_cliente').on('blur', function (e) {
+  //Limpa valores atuais
+  $('#selectAnimal option').remove()
+  $('#selectAnimal').append("<option/>")
+
+  //Busca animais do cliente em específico
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+    type: "GET",
+    url: '/servicos/get_animais_cliente_',
+    headers:{
+      "X-CSRFToken": csrftoken,
+    },
+    data:{
+      cpf_cliente     : $('#cpf_cliente').val(),
+    },
+    success: function (data) {
+      var selectAnimais = $('#selectAnimal')
+      var animais = data
+      for (var animal in animais) {
+        var option = $('<option/>').val(animais[animal].pk)
+        .text(animais[animal].fields.nome)
+        selectAnimais.append(option)
+      }
+    },
+  })
+})

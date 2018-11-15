@@ -27,7 +27,7 @@ def get_animal(request, cpf_cliente, nome_animal):
 def get_ficha_animal(request, cpf_cliente , nome_animal):
     cliente = Cliente.objects.filter(cpf=cpf_cliente).first()
     if cliente:
-        animal= Animal.objects.filter(nome=nome_animal,cpf_cliente=cliente).first()
+        animal= Animal.objects.filter(pk=nome_animal,cpf_cliente=cliente).first()
         if animal:
             data = ([animal,cliente])
             cliente_json = serializers.serialize("json", data)

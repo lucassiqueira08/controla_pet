@@ -133,7 +133,7 @@ $('#cpf_cliente').on('blur', function (e) {
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
     type: "GET",
-    url: '/servicos/get_animais_cliente_',
+    url: '/servicos/get_animais_cliente',
     headers:{
       "X-CSRFToken": csrftoken,
     },

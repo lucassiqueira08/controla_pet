@@ -259,16 +259,18 @@ $('#achar_animal').on('click', function(e) {
     cpf_cliente = $('#cpf_cliente').val()
     nome_animal = $('#selectAnimal').val()
     
-    
-       
-     if ($('#cpf_cliente').val() != ""){
+//Verifica se o usuario     
+    if ($('#selectAnimal').val().trim() != '') {
+     
         $.ajax({
-                type: "GET",
-                url: '/cliente/get_ficha_animal'+ '/' + cpf_cliente +   '/' + nome_animal,
+                type: "POST",
+                url: '/cliente/get_ficha_animal'+ '/' + cpf_cliente + '/' + nome_animal,
                 headers:{
                     "X-CSRFToken": csrftoken,
                 },
-                data:{},
+                data:{
+                   cpf_cliente     : $('#cpf_cliente').val(),
+                },
                 success: function (data) 
                 {
                   if (data.tipo=='erro' ) {
@@ -299,10 +301,14 @@ $('#achar_animal').on('click', function(e) {
                 }
 
               })
-       }else{
-         $('#voltar').click()  
-       }
-
-
+      
+          }
+         else {
+        
+    alerta("Por favor selecione um cliente e animal válido..", "aviso", 5000)
+    setTimeout(function(){
+      $("#voltar").click()
+    },1);
+  }
 
   })

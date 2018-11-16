@@ -2,6 +2,7 @@ from django.urls import path
 from servicos.actions import get_tipo_procedimento
 from .views import ViewCadastroProcedimento, ViewCadastroEstadia, ViewModal,ViewCadastroAtendimento
 from servicos.actions import get_animais_cliente
+from cliente.actions import get_ficha_animal
 urlpatterns = [
     path(
         'cadastro_estadia', ViewCadastroEstadia.as_view(),
@@ -27,4 +28,5 @@ urlpatterns = [
         'get_animais_cliente', get_animais_cliente,
         name='get_animais_cliente'
     ),
+
 ]

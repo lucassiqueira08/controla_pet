@@ -8,7 +8,8 @@ from django.http import HttpResponse
 
 from servicos.models import (Atendimento, FeitoPor, AtendimentoProcClinico,
                              AtendimentoProcEstetico, ProcedimentoEstetico,
-                             ProcedimentoClinico, Orcamento, TipoProcedimento)
+                             ProcedimentoClinico, Orcamento, TipoProcedimento,
+                             DiagnosticoAnimal, TipoDiagnostico)
 from core.views import BaseView
 from core.models import Menu
 from cliente.models import Cliente
@@ -137,7 +138,8 @@ class ViewCadastrarDiagnostico(BaseView):
     template = 'cadastrar_diagnostico.html'
 
     def get(self, request):
+        tipo_diagnostico = TipoDiagnostico.objects.all()
         context = {
-
+            'tipos_diagnostico': tipo_diagnostico
         }
         return render(request, self.template, context)

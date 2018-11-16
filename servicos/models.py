@@ -203,7 +203,7 @@ class Comissao(models.Model):
 class DiagnosticoAnimal(models.Model):
 
     descricao = models.CharField(max_length=500, blank=True, null=True)
-    booleano = models.IntegerField(blank=True, null=True)
+    booleano = models.BooleanField(default=False)
     id_tipo_diagnostico = models.ForeignKey(TipoDiagnostico, models.DO_NOTHING,
                                             related_name='diagnostico_tipodiagnostico', db_column='id_tipo_diagnostico',
                                             blank=True, null=True)

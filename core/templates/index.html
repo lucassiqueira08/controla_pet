@@ -160,20 +160,32 @@
   </div>
   <div class="form-group">
     <label for="exampleInputName">Data/hora</label>
-    <input type="datetime" class="form-control" name ="dataAtendimento" id="dataAtendimento" >
+    <input type="date" class="form-control" name ="dataAtendimento" id="dataAtendimento" >
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputName">Data/hora</label>
+    <input type="time" class="form-control" name ="HoraAtendimento" id="HoraAtendimento" >
   </div>
 
    <div class="form-group">
+
     <label for="exampleInputName">CPF:</label>
-    <input type="text" class="form-control"  name="cpf" id="cpf">
-  </div>  
-   <div class="form-group">
-<p>Funcionario</p>
-  <select id="funcionarios" class="formInput destacadoCimaBaixo clearMarginTop" name="funcionarios" required>
+
+    <input type="search" class="form-control " name="cpf_cliente" placeholder="Digite o CPF do Cliente..." maxlength="14"  id="cpf_cliente" required>
+
+     <label for="exampleInputName">Animais:</label>
+
+    <select id="selectAnimal" class="form-control " name="selectAnimal" required>
+      <option value=""></option>
+    </select>
+
+     <label for="exampleInputName">Funcionario</label>
+
+
+  <select id="funcionarios" class="form-control" name="funcionarios" required>
  {% for Funcionario in Funcionarios %}
     <option value="{{ Funcionario.cpf }}">{{ Funcionario.primeiro_nome }}</option>
-  
- 
  {% endfor %}
   </select>
   </div>
@@ -193,6 +205,9 @@
     </div>
   </div>
 </div>
+
+
+
 
    <div class="modal fade" id="cadastrar" tabindex="-1"
   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -233,6 +248,8 @@
 
 
 		</div>
+
 	</div>
+
 
 {% endblock %}

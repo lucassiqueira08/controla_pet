@@ -76,7 +76,7 @@ class ViewIndex(BaseView):
 
          if botao == 'save':
             data = request.POST.get('dataAtendimento')
-            data = data[0:10]+'T'+data[11:]
+            data = request.POST.get('dataAtendimento')+'T'+request.POST.get('HoraAtendimento')
             obssumary = request.POST.get('obs')
             #dicionario molde para o calendar
             event = {
@@ -96,6 +96,7 @@ class ViewIndex(BaseView):
               },
 
             }
+
             google= GCalGoogle()
             gid = google.criar(event)
             funcionarios = Funcionario.objects.all()
@@ -103,8 +104,9 @@ class ViewIndex(BaseView):
             cliente = Cliente.objects.get(cpf= request.POST.get('cpf') )
             atendimento = Atendimento()
             atendimento.observacao = request.POST.get('obs')
-            atendimento.data_solicitacao = request.POST.get('dataAtendimento')
-            Animal.objects.get(cpf_cliente=cliente)
+            data_atend = request.POST.get('dataAtendimento') + request.POST.get('HoraAtendimento')
+            atendimento.data_solicitacao = data_atend
+            Animal.objects.get(cpf_cliente=cliente, pk= request.POST.get('selectAnimal'))
             atendimento.cpf_cliente = Animal
 
             Responsavel = Funcionario.objects.get(cpf= request.POST.get('funcionarios'))

@@ -21,7 +21,7 @@
       eventLimit: true, // allow "more" link when too many events
   selectable : true,
 
-   googleCalendarApiKey: 'AIzaSyCj753IljI6MYJ0T0JCCsAALvCROE_Zweo',
+   //googleCalendarApiKey: 'AIzaSyCj753IljI6MYJ0T0JCCsAALvCROE_Zweo',
      eventClick: function(events) {
      $('#visualizar #Nome').text(events.title);
      $('#visualizar #NomeAnimal').val(events.title);
@@ -178,19 +178,16 @@
   </select>
   </div>
 
-
-  <div class="dupla">
-  <button name="button" value = "save" class="acao btn btnPrincipal clearMarginTop">SALVAR</button>
-   
-    </div>
-      <div class="dupla">
-     <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
-     </div>
 </form>
      </div>
 
 	 <div class="modal-footer">
 
+
+  <button name="button" value = "save" class="btn acao btn btnPrincipal clearMarginTop" 
+  data-dismiss="modal"> SALVAR </button>
+   
+     <button type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>
 
       </div>
     </div>

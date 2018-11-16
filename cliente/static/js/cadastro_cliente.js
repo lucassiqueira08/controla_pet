@@ -259,7 +259,7 @@ $('#achar_animal').on('click', function(e) {
     cpf_cliente = $('#cpf_cliente').val()
     nome_animal = $('#selectAnimal').val()
     
-//Verifica se o usuario     
+//Verifica o usuario e o animal, caso existe, preenche a tela seguinte.
     if ($('#selectAnimal').val().trim() != '') {
      
         $.ajax({

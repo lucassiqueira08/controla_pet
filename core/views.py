@@ -104,8 +104,8 @@ class ViewIndex(BaseView):
             atendimento = Atendimento()
             atendimento.observacao = request.POST.get('obs')
             atendimento.data_solicitacao = request.POST.get('dataAtendimento')
-
-            atendimento.cpf_cliente = cliente
+            Animal.objects.get(cpf_cliente=cliente)
+            atendimento.cpf_cliente = Animal
 
             Responsavel = Funcionario.objects.get(cpf= request.POST.get('funcionarios'))
             atendimento.id_google_agenda = gid

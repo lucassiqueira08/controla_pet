@@ -29,7 +29,7 @@ def get_ficha_animal(request, cpf_cliente, nome_animal ):
     if cliente:
         animal= Animal.objects.filter(pk=nome_animal,cpf_cliente=cliente).first()
         if animal:
-            data = ([animal,cliente])
+            data = ([animal,cliente])    
             cliente_json = serializers.serialize("json", data)
             return HttpResponse(cliente_json, content_type='application/json')
     

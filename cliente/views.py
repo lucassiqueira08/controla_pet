@@ -534,9 +534,6 @@ class ViewBuscarAnimal(BaseView):
         linhasFicha= rowfICHA
 
         context['fichas']=linhasFicha
-       
-       
- 
 
         return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'

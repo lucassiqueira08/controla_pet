@@ -123,12 +123,44 @@ $('#cpf_cliente').on('blur', function (e) {
   })
 })
 
-$('#cpf_cliente').on('blur', function (e) {
-  //Limpa valores atuais
-  $('#selectAnimal option').remove()
-  $('#selectAnimal').append("<option/>")
 
-  //Busca animais do cliente em específico
+// Cadastro de Diagnóstico
+$('#buscarAnimalDiagnostico').on('click', function (e) {
+  if ($('#selectAnimalDiagnostico').val().trim() != '') {
+    e.preventDefault()
+    var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+            type: "GET",
+            url: '/servicos/get_animal',
+            headers:{
+                "X-CSRFToken": csrftoken,
+            },
+            data:{
+              id_animal     : $('#selectAnimalDiagnostico').val(),
+              cpf_cliente     : $('#cpf_cliente_diagnostico').val(),
+            },
+            success: function (data) {
+              $('#nomeAnimalDiagnostico').val(data[0].fields.nome)
+              $('#racaAnimalDiagnostico').val(data[0].fields.raca)
+              $('#donoAnimalDiagnostico').val(data[0].fields.nome)
+              $('#url_foto_diagnostico').attr('src', data[0].fields.url_foto)
+             },
+        })
+  }
+  else {
+    alerta("Por favor selecione um cliente e animal válido..", "aviso", 5000)
+    setTimeout(function(){
+      $("#btnConfirmacaoPrevDiagnostico").click()
+    },1);
+  }
+})
+
+$('#cpf_cliente_diagnostico').on('blur', function (e) {
+  //Limpa valores atuais
+  $('#selectAnimalDiagnostico option').remove()
+  $('#selectAnimalDiagnostico').append("<option/>")
+   //Busca animais do cliente em específico
+
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
@@ -138,10 +170,10 @@ $('#cpf_cliente').on('blur', function (e) {
       "X-CSRFToken": csrftoken,
     },
     data:{
-      cpf_cliente     : $('#cpf_cliente').val(),
+      cpf_cliente : $('#cpf_cliente_diagnostico').val(),
     },
     success: function (data) {
-      var selectAnimais = $('#selectAnimal')
+      var selectAnimais = $('#selectAnimalDiagnostico')
       var animais = data
       for (var animal in animais) {
         var option = $('<option/>').val(animais[animal].pk)

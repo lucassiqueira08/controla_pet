@@ -1,20 +1,20 @@
 import json
 import datetime
 
-from django.contrib.auth.mixins import (LoginRequiredMixin,
-                                        PermissionRequiredMixin)
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse, QueryDict
 
 from django.http import HttpResponse
 
 from servicos.models import (Atendimento, FeitoPor, AtendimentoProcClinico,
                              AtendimentoProcEstetico, ProcedimentoEstetico,
-                             ProcedimentoClinico, Orcamento,TipoProcedimento)
-from core.models import Menu, MenuGrupo
+                             ProcedimentoClinico, Orcamento, TipoProcedimento,
+                             DiagnosticoAnimal, TipoDiagnostico)
+from core.views import BaseView
+from core.models import Menu
 from cliente.models import Cliente
 from usuarios.models import Funcionario
+
 
 class ViewCadastroProcedimento(View):
 
@@ -27,40 +27,29 @@ class ViewCadastroProcedimento(View):
         return render(request, self.template, context)
 
     def post(self, request):
-        nome                  = request.POST.get('nome')
-        descricao             = request.POST.get('descricao')
-        preco                 = request.POST.get('preco')
-        especie               = request.POST.get('especie')
-        aba_procedimento      = request.POST.get('aba_procedimento')
-
-
-        print('******************************')
-        print(aba_procedimento)
+        nome = request.POST.get('nome')
+        descricao = request.POST.get('descricao')
+        preco = request.POST.get('preco')
+        especie = request.POST.get('especie')
+        aba_procedimento = request.POST.get('aba_procedimento')
 
         if aba_procedimento == 'clinico':
             tipo_procedimento = request.POST.get('tipo_procedimento')
 
-            procedimento              = ProcedimentoClinico()
-            procedimento.nome         = nome
-            procedimento.descricao    = descricao
-            procedimento.preco        = preco.replace(",",".")
-            procedimento.especie      = especie
+            procedimento = ProcedimentoClinico()
+            procedimento.nome = nome
+            procedimento.descricao = descricao
+            procedimento.preco = preco.replace(",", ".")
+            procedimento.especie = especie
             procedimento.id_tipo_proc = TipoProcedimento.objects.get(id=tipo_procedimento)
             procedimento.save()
         if aba_procedimento == 'estetico':
-            procedimento            = ProcedimentoEstetico()
-            procedimento.nome       = nome
-            procedimento.descricao  = descricao
-            procedimento.preco      = preco.replace(",",".")
-            procedimento.especie    = especie
+            procedimento = ProcedimentoEstetico()
+            procedimento.nome = nome
+            procedimento.descricao = descricao
+            procedimento.preco = preco.replace(",", ".")
+            procedimento.especie = especie
             procedimento.save()
-        context = {'menu': ''}
-
-        try:
-            context['menu'] = Menu.objects.get(url='cadastro_animal')
-
-        except ObjectDoesNotExist:
-            context['menu'] = Menu.objects.get(url='index')
 
         context = {
             'tipo': 'ok',
@@ -87,12 +76,14 @@ class ViewCadastroEstadia(View):
         }
         return render(request, self.template)
 
+
 class ViewModal(View):
 
     template = 'modal_orcamento.html'
 
     def get(self, request):
         return render(request, self.template)
+
 
 class ViewCadastroAtendimento(View):
 
@@ -140,3 +131,15 @@ class ViewCadastroAtendimento(View):
         feito_por.id_funcionario = funcionario
         feito_por.save()
         return HttpResponse(data['procedimentos'], content_type='application/json')
+
+
+class ViewCadastrarDiagnostico(BaseView):
+
+    template = 'cadastrar_diagnostico.html'
+
+    def get(self, request):
+        tipo_diagnostico = TipoDiagnostico.objects.all()
+        context = {
+            'tipos_diagnostico': tipo_diagnostico
+        }
+        return render(request, self.template, context)

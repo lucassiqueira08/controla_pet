@@ -460,17 +460,6 @@ class ViewFichaAnimal(BaseView):
         return render(request, self.template, context)
 
 
-class ViewCadastrarDiagnostico(BaseView):
-
-    template = 'cadastrar_diagnostico.html'
-
-    def get(self, request):
-        context = {
-
-        }
-        return render(request, self.template, context)
-
-
 class ViewBuscarAnimal(BaseView):
     templateficha = 'ficha_animal.html'
      
@@ -537,11 +526,13 @@ class ViewBuscarAnimal(BaseView):
 
         return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'
+
     def get(self, request):
         context = {
 
         }
         return render(request, self.template, context)
+
 
 class ViewAcompanheSuaClinica(BaseView):
 

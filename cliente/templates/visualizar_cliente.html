@@ -34,6 +34,7 @@
 						'{{ cliente.bairro }}',
 						'{{ cliente.estado }}',
 						'{{ cliente.complemento }}',
+						'{{ cliente.url_foto }}',
 						'{{ cliente.id_tipo_cliente.id }}')" type="button" class="btnPequeno">Editar
 					</button>
 				</div>
@@ -53,7 +54,7 @@
 					<form id="formularioVisualizaCliente" class='formEtapas' enctype="multipart/form-data">
 						{% csrf_token %}
 						<div class="imagemCardModal coluna">
-							<img src="{{cliente.url_foto}}" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Foto do {{cliente.nome}} - ID: {{cliente.id}}">
+							<img id="url_foto_visualiza_cliente" src="" onerror="this.src='../../static/img/semfoto.jpeg';" class="destacadoCimaBaixo" alt="Foto do {{cliente.nome}} - ID: {{cliente.id}}">
 							<input id="file_input_visu_cliente" type="file" name="url_foto" class="formFileInput esquerda" accept="image/png, image/jpeg"  multiple />
 						</div>
 					</div>

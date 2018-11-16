@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
 from django.shortcuts import render
+from datetime import datetime
 from django.views import View
 from .models import Menu, MenuGrupo
 from servicos.models import Atendimento,FeitoPor
@@ -96,7 +97,8 @@ class ViewIndex(BaseView):
               },
 
             }
-
+            data_nova = request.POST.get('dataAtendimento')
+            hora_nova = request.POST.get('HoraAtendimento')
             google= GCalGoogle()
             gid = google.criar(event)
             funcionarios = Funcionario.objects.all()
@@ -104,7 +106,7 @@ class ViewIndex(BaseView):
             cliente = Cliente.objects.get(cpf= request.POST.get('cpf_cliente') )
             atendimento = Atendimento()
             atendimento.observacao = request.POST.get('obs')
-            data_atend = '2018-11-18'+' ' + '00:00'
+            data_atend = data_nova+' ' + hora_nova
             atendimento.data_solicitacao = data_atend
 
             Atend_animal= Animal.objects.get(cpf_cliente=cliente, pk= request.POST.get('selectAnimal'))

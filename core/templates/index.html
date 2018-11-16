@@ -158,16 +158,19 @@
     <label for="exampleInputName">Observação</label>
     <input type="text" class="form-control" id="exampleInputName" name="obs" placeholder="Nome">
   </div>
-  <div class="form-group">
-    <label for="exampleInputName">Data/hora</label>
+   <div class="form-group">
+  <div class="form-row">
+
+  <div class="form-group col-md-7 mb-3">
+    <label for="exampleInputName">Data</label>
     <input type="date" class="form-control" name ="dataAtendimento" id="dataAtendimento" >
+     </div>
+  <div class="form-group col-md-5 mb-3">
+    <label for="  exampleInputName">hora</label>
+    <input type="time" class="form-control" name ="HoraAtendimento" id="horaAtendimento" >
+ 
   </div>
-
-  <div class="form-group">
-    <label for="exampleInputName">Data/hora</label>
-    <input type="time" class="form-control" name ="HoraAtendimento" id="HoraAtendimento" >
   </div>
-
    <div class="form-group">
 
     <label for="exampleInputName">CPF:</label>
@@ -196,7 +199,7 @@
 	 <div class="modal-footer">
 
 
-  <button name="button" value = "save" class="btn acao btn btnPrincipal clearMarginTop" 
+  <button name="button" value = "save" class="acao btn btnPrincipal clearMarginTop" 
   data-dismiss="modal"> SALVAR </button>
    
      <button type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>

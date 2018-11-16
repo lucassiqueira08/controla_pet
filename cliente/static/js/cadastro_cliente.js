@@ -101,7 +101,7 @@ $('#achar_animal').click(function(){
     $('#dono').val(data[1].fields.nome)
     if (data[0].fields.url_foto == null){
     $('#foto_animal').attr('src','../../static/img/semfoto.jpeg')
-      
+
     }else
     {
     $('#foto_animal').attr('src',data[0].fields.url_foto)
@@ -113,12 +113,12 @@ $('#achar_animal').click(function(){
 $('#voltar').click(function(){
 
   data=''
-  
+
 })
 
 // ------- VISUALIZA CLIENTE ----------- //
 // GET - VISUALIZA CLIENTE
-function abrirModalCliente(id, nome, cpf, email, cep, logradouro, numero, cidade, bairro, estado, complemento, id_tipo_cliente){
+function abrirModalCliente(id, nome, cpf, email, cep, logradouro, numero, cidade, bairro, estado, complemento, url_foto, id_tipo_cliente){
   var cliente = {}
   cliente.id = id
   cliente.nome = nome
@@ -131,6 +131,7 @@ function abrirModalCliente(id, nome, cpf, email, cep, logradouro, numero, cidade
   cliente.bairro = bairro
   cliente.estado = estado
   cliente.complemento = complemento
+  cliente.url_foto = url_foto
   cliente.id_tipo_cliente = id_tipo_cliente
   $('#modalVisuCliente').modal('show')
   InputModalCliente(cliente)
@@ -147,6 +148,7 @@ function InputModalCliente(cliente) {
   $("input[name='bairro']").val(cliente.bairro)
   $("input[name='estado']").val(cliente.estado)
   $("input[name='complemento']").val(cliente.complemento)
+  $('#url_foto_visualiza_cliente').attr('src', cliente.url_foto)
   $("input[name='id_tipo_cliente']").val(cliente.id_tipo_cliente)
 }
 // AJAX - POST E DELETE -PAGINA VISUALIZAR CLIENTE
@@ -225,6 +227,7 @@ function InputModalAnimal(animal) {
   $("input[name='obs']").val(animal.observacao)
   $("input[name='microchip']").val(animal.microchip)
   $("input[name='cpf_cliente']").val(animal.cpf_cliente)
+  $('#url_foto_visualiza_animal').attr('src', animal.url_foto)
 }
 // AJAX - POST E DELETE - VISUALIZA ANIMAL
 $('#animal_btn_salvar').on('click', function(e) {
@@ -275,7 +278,7 @@ $('#animal_btn_deletar').on('click', function(e) {
   })
 
 
-  
+
 $('#achar_animal').on('click', function(e) {
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -288,12 +291,12 @@ $('#achar_animal').on('click', function(e) {
               "X-CSRFToken": csrftoken,
           },
           data:{},
-          success: function (data) 
+          success: function (data)
           {
             if (data.tipo=='erro') {
-              $('#voltar').click()  
+              $('#voltar').click()
               alerta(data.mensagem, data.tipo, data.time)
-        
+
             }
             else{
             $('#nome').val(data[0].fields.nome)
@@ -309,12 +312,12 @@ $('#achar_animal').on('click', function(e) {
             $('#cep').val(data[1].fields.cep)
             $('#cidade').val(data[1].fields.cidade)
             $('#estado').val(data[1].fields.estado)
-            
+
             $('#foto_animal').attr('src',data[0].fields.url_foto)
 
             }
 
-           
+
           }
         })
   })

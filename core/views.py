@@ -75,7 +75,7 @@ class ViewIndex(BaseView):
          botao = request.POST.get('button')
 
          if botao == 'save':
-            data = request.POST.get('dataAtendimento')
+       
             data = request.POST.get('dataAtendimento')+'T'+request.POST.get('HoraAtendimento')
             obssumary = request.POST.get('obs')
             #dicionario molde para o calendar
@@ -86,11 +86,11 @@ class ViewIndex(BaseView):
               'description': obssumary,
             #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
               'start': {
-                'dateTime':  data+'-03:00', # Adição da hora com o fusorario
+                'dateTime':  data+':00', # Adição da hora com o fusorario
                 'timeZone': 'America/Sao_Paulo',
               },
               'end': {
-                'dateTime':  data+'-03:00',
+                'dateTime':  data+':00',
                 'timeZone': 'America/Sao_Paulo',
             #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
               },
@@ -101,13 +101,14 @@ class ViewIndex(BaseView):
             gid = google.criar(event)
             funcionarios = Funcionario.objects.all()
             feito = FeitoPor()
-            cliente = Cliente.objects.get(cpf= request.POST.get('cpf') )
+            cliente = Cliente.objects.get(cpf= request.POST.get('cpf_cliente') )
             atendimento = Atendimento()
             atendimento.observacao = request.POST.get('obs')
-            data_atend = request.POST.get('dataAtendimento') + request.POST.get('HoraAtendimento')
+            data_atend = '2018-11-18'+' ' + '00:00'
             atendimento.data_solicitacao = data_atend
-            Animal.objects.get(cpf_cliente=cliente, pk= request.POST.get('selectAnimal'))
-            atendimento.cpf_cliente = Animal
+
+            Atend_animal= Animal.objects.get(cpf_cliente=cliente, pk= request.POST.get('selectAnimal'))
+            atendimento.id_animal = Atend_animal
 
             Responsavel = Funcionario.objects.get(cpf= request.POST.get('funcionarios'))
             atendimento.id_google_agenda = gid

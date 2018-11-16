@@ -382,8 +382,8 @@ cursor: pointer;
 .formEtapasRadio label input{
 	margin-right: 5px;
 }
-.formNovo.formEtapas{
-margin:0;
+.formNovo{
+margin: 0px 0 0px 0;
 }
 
 .formEtapas p{

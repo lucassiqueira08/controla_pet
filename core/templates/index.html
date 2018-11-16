@@ -152,7 +152,7 @@
       </div>
 	<div class="modal-body">
 <!-- Usa o form para criar alimentar o evento para gravar dados na google agenda -->
-		<form method="post" class='formEtapas'>
+		<form method="post" class='formEtapas formNovo'>
         {% csrf_token %}
   <div class="form-group">
     <label for="exampleInputName">Observação</label>
@@ -193,18 +193,18 @@
   </select>
   </div>
 
-</form>
+
      </div>
 
 	 <div class="modal-footer">
 
 
-  <button name="button" value = "save" class="acao btn btnPrincipal clearMarginTop" 
-  data-dismiss="modal"> SALVAR </button>
+  <button name="button" value = "save" class="acao btn btn-success clearMarginTop">SALVAR</button>
    
      <button type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>
 
       </div>
+      </form>
     </div>
   </div>
 </div>

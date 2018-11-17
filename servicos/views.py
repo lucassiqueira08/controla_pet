@@ -3,13 +3,13 @@ import datetime
 
 from django.shortcuts import render
 from django.views import View
-
 from django.http import HttpResponse
 
+from cliente.models import FichaAnimal, Animal
 from servicos.models import (Atendimento, FeitoPor, AtendimentoProcClinico,
                              AtendimentoProcEstetico, ProcedimentoEstetico,
                              ProcedimentoClinico, Orcamento, TipoProcedimento,
-                             DiagnosticoAnimal, TipoDiagnostico)
+                             DiagnosticoAnimal, TipoDiagnostico, FichaDiagnostico)
 from core.views import BaseView
 from core.models import Menu
 from cliente.models import Cliente
@@ -145,4 +145,22 @@ class ViewCadastrarDiagnostico(BaseView):
         return render(request, self.template, context)
 
     def post(self, request):
-        pass
+        try:
+            ficha_animal = FichaAnimal.objects.get(data_consulta=datetime.date, id_animal=request.POST.get('id_animal'))
+        except:
+            ficha_animal = FichaAnimal()
+
+        animal = Animal()
+        ficha_animal.id_animal = animal.pk
+        ficha_animal.data_consulta = datetime.date
+        ficha_animal.descricao = request.POST.get('diagnostico_especifico')
+        try:
+            ficha_animal.save()
+
+            ficha_diagnostico = FichaDiagnostico()
+            ficha_diagnostico.id_ficha = ficha_animal
+            ficha_diagnostico.id_diagnostico
+        except:
+            context={}
+
+

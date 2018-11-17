@@ -196,9 +196,9 @@ $('#btnConfirmacaoNextDiagnostico').on('click', function(e){
             x = 0
             y = 0
             while (x < tipos.length){
-                html = html + '<p class="centro-esquerda">'+tipos[x].tipo.nome+'</p> <ul>'
+                html = html + '<p name="nome_tipo_diagnostico" class="centro-esquerda">'+tipos[x].tipo.nome+'</p> <ul>'
                 while (y < tipos[x].diagnosticos.length){
-                  html = html + '<li class="centro-esquerda"><input class="formInputCheckbox" type="checkbox" value="True">'+tipos[x].diagnosticos[y].descricao+'</li>'
+                  html = html + '<li class="centro-esquerda"><input name="diagnostico_boolean" class="formInputCheckbox" type="checkbox" value="'+tipos[x].diagnosticos[y].id+'">'+tipos[x].diagnosticos[y].descricao+'</li>'
                   y++
                 }
                 y = 0
@@ -209,6 +209,23 @@ $('#btnConfirmacaoNextDiagnostico').on('click', function(e){
         }
 
       })
+  $.ajax({
+        type: "GET",
+        url: '/servicos/get_tipo_exame',
+        headers:{
+            "X-CSRFToken": csrftoken,
+        },
+        data:{},
+        success: function (data) {
+          var selectTipoExame = $('#tipoExame')
+          var tipos_exame = data
+          for (var tipo_exame in tipos_exame) {
+            var option = $('<option/>').val(tipos_exame[tipo_exame].pk)
+            .text(tipos_exame[tipo_exame].fields.nome)
+            selectTipoExame.append(option)
+          }
+        }
+  })
 })
 // Ajax - POST - pagina cadastro_diagnostico
 $('#btnDiagnosticoSalvar').on('click', function (e) {

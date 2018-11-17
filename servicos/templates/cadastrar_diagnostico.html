@@ -15,7 +15,7 @@
 
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
-		<input id="cpf_cliente_diagnostico" type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14" required>
+		<input id="cpf_cliente_diagnostico" type="search" class="formEtapasInput cpf " name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14" required>
 		<p>Animais:</p>
 		<select id="selectAnimalDiagnostico" class="formInput destacadoCimaBaixo clearMarginTop" name="id_animal" required>
 			<option value=""></option>
@@ -51,59 +51,11 @@
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
 		</div>
-
-		<!--!!!!!!!!!!!! MODAL !!!!!!!!!!!!-->
-		<div class="modal fade" id="modalNovoDiagnostio" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Cadastrar novo diagnóstico</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="centralizado">
-							<div class="imagemCardModal coluna">
-								<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" class="destacadoCimaBaixo" alt="Cachorrinho 1">
-							</div>
-						</div>
-						<div class="dupla">
-							<label class="formLabel">Diagnóstico</label>
-							<input class="formInput" type="text" placeholder="Digite o diagnóstico..." name="diagnostico" autofocus>
-						</div>
-						<div class="cima linha">
-							<p>Tipo: </p>
-							<div class="coluna cima destacadoEsquerdaDireita">
-								<div class="linha">
-									<input type="checkbox" class="formInputCheckbox" name="sistema_reprodutor" value="sistema_reprodutor" id="sistema_reprodutor">
-									<label for="sistema_reprodutor">Sistema Reprodutor</label>
-								</div>
-								<div class="linha">
-									<input type="checkbox" class="formInputCheckbox" name="sistema_respiratorio" value="sistema_respiratorio" id="sistema_respiratorio">
-									<label for="sistema_respiratorio">Sistema Respiratório</label>
-								</div>
-								<div class="linha">
-									<input type="checkbox" class="formInputCheckbox" name="secrecao_nasal" value="secrecao_nasal" id="secrecao_nasal">
-									<label for="secrecao_nasal">Secreção Nasal</label>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
-						<button type="button" class="btnPrincipal clearMarginTop">Salvar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!--!!!!!!!!!!!! FIM DO MODAL !!!!!!!!!!!!-->
 	</fieldset>
 
 	<fieldset>
 		<h2 class="tituloGrande">Diagnóstico específico</h2>
-		<textarea placeholder="Digite aqui seu diagnóstico..." class="formEtapasTextArea" name="diagnostico" maxlength="500"></textarea>
+		<textarea placeholder="Digite aqui seu diagnóstico..." class="formEtapasTextArea" name="diagnostico_especifico" maxlength="500"></textarea>
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
@@ -112,13 +64,13 @@
 
 	<fieldset>
 		<h2 class="tituloGrande">Anexar Exames</h2>
-		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do Exame" maxlength="50"/>
-		<input type="date" class="formEtapasInput" name="data_realizacao" placeholder="Nome do Exame" maxlength="50"/>
+		<input type="text" class="formEtapasInput" name="nome_exame" placeholder="Nome do Exame" maxlength="50"/>
+		<input type="text" class="formEtapasInput data" name="data_realizacao_exame" placeholder="Data de Realização" maxlength="50"/>
 		<p>Tipo de Exame</p>
 		<select id="tipoExame" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_exame">
 			<option value=""></option>
 		</select>
-		<input type="file" id="file_input_diagnostico" name="exame" class="centralizado" accept="image/png, image/jpeg text/plain"  multiple />
+		<input type="file" id="file_input_diagnostico" name="exame" class="direita" accept="image/png, image/jpeg text/plain"  multiple />
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input id="btnDiagnosticoSalvar" type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>

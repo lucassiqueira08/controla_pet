@@ -3,7 +3,7 @@ import json
 from django.http import HttpResponse
 from django.core import serializers
 
-from servicos.models import TipoProcedimento, DiagnosticoAnimal, TipoDiagnostico
+from servicos.models import TipoProcedimento, DiagnosticoAnimal, TipoDiagnostico, TipoExame
 from cliente.models import Cliente
 from cliente.models import Animal
 
@@ -37,6 +37,13 @@ def get_diagnostico(request):
     for tipo in tipos_diagnostico:
         dic = {}
         dic['tipo'] = tipo
-        dic['diagnosticos'] = list(DiagnosticoAnimal.objects.filter(id_tipo_diagnostico=tipo['id']).values('descricao'))
+        dic['diagnosticos'] = list(DiagnosticoAnimal.objects.filter(
+            id_tipo_diagnostico=tipo['id']).values('id', 'descricao'))
         response.append(dic)
     return HttpResponse(json.dumps(response), content_type='application/json')
+
+
+def get_tipo_exame(request):
+    tipo_exame = TipoExame.objects.all()
+    tipo_exame_json = serializers.serialize("json", tipo_exame)
+    return HttpResponse(tipo_exame_json, content_type='application/json')

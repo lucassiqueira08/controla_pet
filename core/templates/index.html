@@ -36,7 +36,7 @@
     },
       selectHelper: true,
         select:function(start,end){
-    $('#cadastrar #dataAtendimento').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+    $('#cadastrar #dataAtendimento').val(moment(start).format('YYYY-MM-DD'));
     $('#cadastrar #end').val(moment(end).format('DD/MM/YYYY HH:mm:ss'));
     $('#cadastrar').modal('show');
     },
@@ -117,11 +117,7 @@
     <label class="formLabel" for="exampleInputName">Data/hora</label>
     <input class="formInput " type="datetime" class="form-control" id ="DataInicioedit" name ="DataInicioedit" id="DataInicio" >
   </div>
-  
-   <!--div class="form-group">
-    <label for="exampleInputName">CPF:</label>
-    <input type="text" class="form-control"  name="cpf" id="cpf">
-  </div-->
+
       <input type="hidden" class="form-control"  name="IdEvento" id="IdEvento">
 				<div class="modal-footer">
         <button type="button" class="btn btn-canc-edit btn-primary clearMarginTop" onclick="Mudar('edit') ">Cancelar</button>
@@ -175,7 +171,7 @@
 
     <label for="exampleInputName">CPF:</label>
 
-    <input type="search" class="form-control " name="cpf_cliente" placeholder="Digite o CPF do Cliente..." maxlength="14"  id="cpf_cliente" required>
+    <input type="search" class="form-control" name="cpf_cliente" placeholder="Digite o CPF do Cliente..." maxlength="14"  id="cpf_cliente" required>
 
      <label for="exampleInputName">Animais:</label>
 

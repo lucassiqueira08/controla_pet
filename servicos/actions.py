@@ -1,7 +1,9 @@
+import json
+
 from django.http import HttpResponse
 from django.core import serializers
 
-from servicos.models import TipoProcedimento
+from servicos.models import TipoProcedimento, DiagnosticoAnimal, TipoDiagnostico
 from cliente.models import Cliente
 from cliente.models import Animal
 
@@ -27,3 +29,14 @@ def get_animal(request):
     cliente = Cliente.objects.filter(cpf=cpf_cliente)
     animal_json = serializers.serialize("json", animal)
     return HttpResponse(animal_json, content_type='application/json')
+
+
+def get_diagnostico(request):
+    tipos_diagnostico = TipoDiagnostico.objects.all().values()
+    response = []
+    for tipo in tipos_diagnostico:
+        dic = {}
+        dic['tipo'] = tipo
+        dic['diagnosticos'] = list(DiagnosticoAnimal.objects.filter(id_tipo_diagnostico=tipo['id']).values('descricao'))
+        response.append(dic)
+    return HttpResponse(json.dumps(response), content_type='application/json')

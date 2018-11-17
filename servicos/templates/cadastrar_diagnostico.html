@@ -3,7 +3,7 @@
 {% block content_base %}
 
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
-<form method="post" class='formEtapas'>
+<form id="formCadastroDiagnostico" method="post" class='formEtapas'>
 	{% csrf_token %}
 	<ul id="progress">
 		<li class="ativo"><label>Procurar Animal</label></li>
@@ -38,22 +38,15 @@
 		<h2 class="tituloMedio destacadoCima">Esse é o bichinho certo?</h2>
 		<div class="containerBotoes">
 			<input id="btnConfirmacaoPrevDiagnostico" type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
+			<input id="btnConfirmacaoNextDiagnostico" type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
 		</div>
 	</fieldset>
 
 	<fieldset>
 		<h2 class="tituloGrande">Diagnóstico</h2>
-		<h3 class="tituloPequeno">Perguntas pré-definidas para preenchimento</h3>
-		{% for tipo_diagnostico in tipos_diagnostico.object_list %}
-		<p>O animal apresenta cansaço?</p>
-		<div class="formEtapasDupla destacadoBaixo">
-			<div class="formEtapasRadio">
-				<label><input type="radio" value="V" name="cansaco">Verdadeiro</label>
-				<label><input type="radio" value="F" name="cansaco" checked>Falso</label>
-			</div>
+		<div id="conteudoDiagnostico">
+			<!-- Conteudo inserido via AJAX -->
 		</div>
-		{%endfor%}
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
@@ -119,9 +112,16 @@
 
 	<fieldset>
 		<h2 class="tituloGrande">Anexar Exames</h2>
+		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do Exame" maxlength="50"/>
+		<input type="date" class="formEtapasInput" name="data_realizacao" placeholder="Nome do Exame" maxlength="50"/>
+		<p>Tipo de Exame</p>
+		<select id="tipoExame" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_exame">
+			<option value=""></option>
+		</select>
+		<input type="file" id="file_input_diagnostico" name="exame" class="centralizado" accept="image/png, image/jpeg text/plain"  multiple />
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Salvar"/>
+			<input id="btnDiagnosticoSalvar" type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>
 		</div>
 	</fieldset>
 

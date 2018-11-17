@@ -143,3 +143,6 @@ class ViewCadastrarDiagnostico(BaseView):
             'tipos_diagnostico': tipo_diagnostico
         }
         return render(request, self.template, context)
+
+    def post(self, request):
+        pass

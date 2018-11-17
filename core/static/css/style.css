@@ -6,6 +6,13 @@
 	justify-content: flex-start;
 	align-items: center;
 }
+.centro-esquerda{
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin-left: 10%;
+}
 .direita{
 	display: flex;
 	justify-content: flex-end;

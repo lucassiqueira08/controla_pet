@@ -14,27 +14,6 @@
 	</ul>
 
 	<fieldset>
-		<h2 class="tituloGrande">Anexar Exames</h2>
-		<input type="text" class="formEtapasInput" name="nome_exame" placeholder="Nome do Exame" maxlength="50"/>
-		<input type="text" class="formEtapasInput data" name="data_realizacao_exame" placeholder="Data de Realização" maxlength="50"/>
-		<p>Tipo de Exame</p>
-		<select id="tipoExame" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_exame">
-			<option value=""></option>
-		</select>
-
-		<div class="centralizado coluna">
-			<div id="dropContainer" class="centralizado coluna">
-				 <p class="pImage">Arraste o arquivo aqui:</p>
-			</div>
-			<input type="file" id="fileInput" onchange="addFile();" onmouseout="addFile();" name="exame"  accept="image/png, image/jpeg text/plain"  multiple="multiple"/>
-		</div>
-
-		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
-			<input id="btnDiagnosticoSalvar" type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>
-		</div>
-	</fieldset>
-	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
 		<input id="cpf_cliente_diagnostico" type="search" class="formEtapasInput cpf " name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14" required>
 		<p>Animais:</p>
@@ -90,13 +69,14 @@
 		<select id="tipoExame" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_exame">
 			<option value=""></option>
 		</select>
-		<div class="centralizado coluna">
-			<div id="dropContainer">
-			   <p>Arraste o arquivo aqui!</p>
-			</div>
 
-		  <input type="file" id="fileInput" name="exame"  accept="image/png, image/jpeg text/plain"  multiple/>
+		<div class="centralizado coluna">
+			<div id="dropContainer" class="centralizado coluna">
+				 <p class="pImage">Arraste o arquivo aqui:</p>
+			</div>
+			<input type="file" id="fileInput" onchange="addFile();" onmouseout="addFile();" name="exame"  accept="image/png, image/jpeg text/plain"  multiple="multiple"/>
 		</div>
+
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input id="btnDiagnosticoSalvar" type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>

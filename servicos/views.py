@@ -9,7 +9,8 @@ from cliente.models import FichaAnimal, Animal
 from servicos.models import (Atendimento, FeitoPor, AtendimentoProcClinico,
                              AtendimentoProcEstetico, ProcedimentoEstetico,
                              ProcedimentoClinico, Orcamento, TipoProcedimento,
-                             DiagnosticoAnimal, TipoDiagnostico, FichaDiagnostico)
+                             DiagnosticoAnimal, TipoDiagnostico, FichaDiagnostico,
+                             Estadia)
 from core.views import BaseView
 from core.models import Menu
 from cliente.models import Cliente
@@ -66,16 +67,34 @@ class ViewCadastroEstadia(View):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url='cadastro_estadia')
         }
         return render(request, self.template, context)
 
     def post(self, request):
-        context = {
-            'menu': Menu.objects.get(url='cadastro_estadia')
-        }
-        return render(request, self.template)
+        observacao       = request.POST.get('observacao')
+        data_inicio      = request.POST.get('data_inicio')
+        data_fim         = request.POST.get('data_fim')
+        data_solicitacao = request.POST.get('data_solicitacao')
+        valor_diaria     = request.POST.get('valor_diaria')
+        id_animal        = request.POST.get('id_animal')
 
+        estadia = Estadia()
+        estadia.observacao       = observacao
+        estadia.data_inicio      = data_inicio
+        estadia.data_fim         = data_fim
+        estadia.data_solicitacao = data_solicitacao
+        estadia.valor_diaria     = valor_diaria
+        estadia.data_solicitacao = datetime.datetime.now()
+        estadia.id_animal        = Animal.objects.get(id = id_animal)
+        estadia.save()
+
+        context = {
+            'tipo': 'ok',
+            'mensagem': 'Estadia cadastrado com sucesso',
+            'time': 5000
+        }
+
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 class ViewModal(View):
 
@@ -162,5 +181,3 @@ class ViewCadastrarDiagnostico(BaseView):
             ficha_diagnostico.id_diagnostico
         except:
             context={}
-
-

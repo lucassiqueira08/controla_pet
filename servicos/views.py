@@ -198,7 +198,6 @@ class ViewCadastrarDiagnostico(BaseView):
             diagnostico = DiagnosticoAnimal.objects.get(id=e)
             ficha_diagnostico.id_diagnostico = diagnostico
             ficha_diagnostico.id_ficha = ficha_animal
-<<<<<<< HEAD
             ficha_diagnostico.save()
 
         ficha_animal.descricao = request.POST.get('descricao_ficha')
@@ -259,8 +258,3 @@ class ViewCadastrarDiagnostico(BaseView):
             'time': 7000
         }
         return HttpResponse(json.dumps(context), content_type='application/json')
-=======
-            ficha_diagnostico.id_diagnostico
-        except:
-            context={}
->>>>>>> a1ca712510966b06c10caa27b2b77d3de90faebc

@@ -170,7 +170,7 @@ $('#buscarAnimalDiagnostico').on('click', function (e) {
             success: function (data) {
               $('#nomeAnimalDiagnostico').val(data[0].fields.nome)
               $('#racaAnimalDiagnostico').val(data[0].fields.raca)
-              $('#donoAnimalDiagnostico').val(data[0].fields.nome)
+              $('#especieAnimalDiagnostico').val(data[0].fields.especie)
               $('#url_foto_diagnostico').attr('src', data[0].fields.url_foto)
              },
         })

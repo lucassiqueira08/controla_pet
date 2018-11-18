@@ -23,9 +23,9 @@ def get_animais_cliente(request):
 
 
 def get_animal(request):
-    id_animal       = request.GET.get('id_animal')
-    animal          = Animal.objects.filter(pk=id_animal)
-    animal_json     = serializers.serialize("json", animal)
+    id_animal = request.GET.get('id_animal')
+    animal = Animal.objects.filter(pk=id_animal)
+    animal_json = serializers.serialize("json", animal)
     return HttpResponse(animal_json, content_type='application/json')
 
 

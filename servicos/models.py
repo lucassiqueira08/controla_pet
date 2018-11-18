@@ -203,7 +203,7 @@ class Comissao(models.Model):
 class DiagnosticoAnimal(models.Model):
 
     descricao = models.CharField(max_length=500, blank=True, null=True)
-    booleano = models.IntegerField(blank=True, null=True)
+    booleano = models.BooleanField(default=False)
     id_tipo_diagnostico = models.ForeignKey(TipoDiagnostico, models.DO_NOTHING,
                                             related_name='diagnostico_tipodiagnostico', db_column='id_tipo_diagnostico',
                                             blank=True, null=True)
@@ -240,7 +240,7 @@ class Estadia(models.Model):
 class Exame(models.Model):
     link_doc = models.CharField(unique=True, max_length=255)
     nome = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=250)
+    descricao = models.CharField(max_length=250, blank=True, null=True)
     data_realizacao = models.DateField(blank=True, null=True)
     id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE,
                                   related_name='exame_animal', db_column='id_animal')

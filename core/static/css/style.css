@@ -6,6 +6,13 @@
 	justify-content: flex-start;
 	align-items: center;
 }
+.centro-esquerda{
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin-left: 10%;
+}
 .direita{
 	display: flex;
 	justify-content: flex-end;
@@ -802,4 +809,18 @@ color: #ff6600;
 	.tituloPequeno{
 		font-size: 16px;
 	}
+}
+
+
+/**==Drag and Drop Image Upload===========================**/
+
+#dropContainer{
+	border:.5px solid #ff6600;
+	height:100px;
+	width: 375px;
+	padding: 50px;
+	margin: 15px;
+}
+.pImage{
+	margin:0px;
 }

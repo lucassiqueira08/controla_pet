@@ -4,34 +4,38 @@
 <form method="post" class='formEtapas'>
 	{% csrf_token %}
 	<ul id="progress">
-		<li class="ativo"><label>Buscar Cliente</label></li>
-		<li><label>Tela de escolha de animal</label></li>
+		<li class="ativo"><label>Buscar Animal</label></li>
+		<li><label>Confirmação do animal</label></li>
 		<li><label>Estadia</label></li>
 		<li><label>Observações</label></li>
 	</ul>
 
 	<fieldset>
-		<h3 class="tituloExtraGrande">Buscar Cliente</h3>
-		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Cliente..." maxlength="14" required>
+		<h3 class="tituloExtraGrande">Buscar Animal</h3>
+		<input type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Cliente..." maxlength="14" required id="cpf_cliente">
+
+		<p>Animais:</p>
+		<select id="selectAnimal" class="formInput destacadoCimaBaixo clearMarginTop" name="id_animal" required>
+			<option value=""></option>
+		</select>
 		<div class="containerBotoes">
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar"/>
+			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar" id="buscarAnimal"/>
 		</div>
 	</fieldset>
 
 	<fieldset>
-		<h2 class="tituloGrande">Escolher Animal</h2>
+		<h2 class="tituloGrande">Confirmar animal</h2>
 		<div class="centralizado destacadoCimaBaixo">
 			<div class="imagemCardModal coluna">
-				<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" alt="Cachorrinho 1">
+				<img id="urlFoto" src="" onerror="this.src='../../static/img/semfoto.jpeg';" alt="Imagem de Identificação do Animal">
 			</div>
 		</div>
-		<input type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" disabled/>
-		<input type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" disabled/>
-		<input type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" disabled/>
+		<input id="nomeAnimal" type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" disabled/>
+		<input id="racaAnimal" type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" disabled/>
 		<h2 class="tituloMedio destacadoCima">Esse é o bichinho certo?</h2>
 		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
+			<input id="btnConfirmacaoPrev" type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
+			<input id="btnConfirmacaoNext" type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
 		</div>
 	</fieldset>
 
@@ -40,16 +44,16 @@
 		<p>Digite as informações da estadia!</p>
 
 		<div class="dupla">
-			<label for="Data" class="formLabel">Data de inicio:</label>
-			<input type="date" placeholder="__/__/____" maxlength="10"  class="formInput" name="datainicio">
+			<label for="data_inicio" class="formLabel">Data de inicio:</label>
+			<input id="data_inicio" placeholder="__/__/____" maxlength="10"  class="formInput" type="date" name="datainicio">
 		</div>
 		<div class="dupla">
-			<label for="Data1" class="formLabel">Data de fim:</label>
-			<input type="date" placeholder="__/__/____" maxlength="10" class="formInput" name="datafim" >
+			<label for="data_fim" class="formLabel">Data de fim:</label>
+			<input id="data_fim" placeholder="__/__/____" maxlength="10" class="formInput" type="date" name="datafim" >
 		</div>
 		<div class="dupla">
-			<label for="Data" class="formLabel">Valor da Diária:</label>
-			<input  placeholder="Digite o valor da diária..." maxlength="10"  type="number" class="formInput dinheiro" name="valordiaria">
+			<label for="valor_diaria" class="formLabel">Valor da Diária:</label>
+			<input id="valor_diaria"  placeholder="Digite o valor da diária..." maxlength="10" class="formInput dinheiro" name="valordiaria">
 		</div>
 
 		<div class="containerBotoes centralizado linha">
@@ -59,11 +63,15 @@
 	</fieldset>
 	<fieldset>
 		<h2 class="tituloGrande">Observações</h2>
-		<textarea placeholder="Digite aqui as observações..." class="formEtapasTextArea" name="diagnostico" maxlength="500"></textarea>
+		<textarea id="observacao" placeholder="Digite aqui as observações..." class="formEtapasTextArea" name="diagnostico" maxlength="500"></textarea>
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
-			<input type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>
+			<input id="salvaEstadia" type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>
 		</div>
 	</fieldset>
 </form>
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/cadastro_procedimento.js' %}"></script>
 {% endblock %}

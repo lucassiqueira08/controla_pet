@@ -223,3 +223,12 @@ function HideShow(show, hide1, hide2=null, hide3=null, hide4=null){
 	if(hide4 != null)
 		document.getElementById(hide4).style.display = "none";
 }
+
+
+//---FILE INPUT ------------------------------------------------
+function addFile(){
+	var files = $("#fileInput")[0].files
+	for (var i=0; i<file.length; i++){
+		alert(files[i].name)
+	}
+})

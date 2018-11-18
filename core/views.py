@@ -133,7 +133,7 @@ class ViewIndex(BaseView):
             google.atualizar(IdGoogle,coment,data,data)
             atendimento.save()
 
-         if botao == 'del':
+         if botao == 'del': 
             atendimento = Atendimento.objects.get(id = request.POST.get('IdEvento'))
             google= GCalGoogle()
             google.deletar(atendimento.id_google_agenda)

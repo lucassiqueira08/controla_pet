@@ -26,14 +26,16 @@
      $('#visualizar #Nome').text(events.title);
      $('#visualizar #NomeAnimal').val(events.title);
      $('#visualizar #IdEvento').val(events.id);
-     $('#visualizar #DataInicio').text(events.start.format('DD/MM/YYYY HH:mm:ss'));
+     $('#visualizar #DataInicio').text(events.start.format('DD/MM/YYYY'));
+     $('#visualizar #HoraInicio').text(events.start.format('HH:mm'));
+
 
      $('#visualizar #DataInicioedit').val(events.start.format('YYYY-MM-DD'));
 
 
      $('#visualizar #HoraInicioedit').val(events.start.format('HH:mm'));
      $('#visualizar #obsedit').val((events.title));
-     $('#visualizar #DataInicio').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
+//     $('#visualizar #DataInicio').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
      $('#visualizar #datahora').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
        $('#visualizar').modal('show');
      return false;
@@ -69,7 +71,7 @@
   
 .alert-info {
     background-color: #ff6600;
-
+    
 }
 
 
@@ -99,10 +101,15 @@
 		<dl Class = "dl-horizontal">
 			<dt>Observação:</dt>
 			<dd id="Nome"></dd>
-        <dt>Data:</dt>
-		<dd id="DataInicio"></dd>
 
+        <dt>Data:</dt>
+    <dd id="DataInicio"></dd>
+     <dt>Hora:</dt>
+		<dd id="HoraInicio"></dd>
+
+    
 		</dl>
+
      </div>
 
 	 <div class="modal-footer">

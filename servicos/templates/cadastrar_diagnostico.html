@@ -61,10 +61,15 @@
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
 		</div>
 	</fieldset>
-
 	<fieldset>
 		<h2 class="tituloGrande">Anexar Exames</h2>
-		<input type="file" id="file_input_diagnostico" name="exame" class="direita" accept="image/png, image/jpeg text/plain"  multiple />
+		<div class="centralizado coluna">
+			<div id="dropContainer">
+			   <p>Arraste o arquivo aqui!</p>
+			</div>
+
+		  <input type="file" id="file_input_diagnostico" name="exame"  accept="image/png, image/jpeg text/plain"  multiple/>
+		</div>
 		<input type="text" class="formEtapasInput" name="nome_exame" placeholder="Nome do Exame" maxlength="50"/>
 		<input type="text" class="formEtapasInput data" name="data_realizacao_exame" placeholder="Data de Realização" maxlength="50"/>
 		<textarea placeholder=" Descrição do exame" class="formEtapasTextArea" name="descricao_exame" maxlength="250"></textarea>
@@ -79,6 +84,17 @@
 	</fieldset>
 
 </form>
+<script>
+
+	dropContainer.ondragover = dropContainer.ondragenter = function(evt) {
+		evt.preventDefault();
+	};
+
+	dropContainer.ondrop = function(evt) {
+		fileInput.files = evt.dataTransfer.files;
+		evt.preventDefault();
+	};
+</script>
 <!--===========FIMM===============-->
 
 {% endblock %}

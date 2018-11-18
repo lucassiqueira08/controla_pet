@@ -227,8 +227,8 @@ function HideShow(show, hide1, hide2=null, hide3=null, hide4=null){
 
 //---FILE INPUT ------------------------------------------------
 function addFile(){
-	var files = $("#fileInput")[0].files
+	var files = $("#file_input_diagnostico")[0].files
 	for (var i=0; i<file.length; i++){
 		alert(files[i].name)
 	}
-})
+}

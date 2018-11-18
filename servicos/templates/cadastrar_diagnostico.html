@@ -61,10 +61,8 @@
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
 		</div>
 	</fieldset>
-
 	<fieldset>
 		<h2 class="tituloGrande">Anexar Exames</h2>
-		<input type="file" id="file_input_diagnostico" name="exame" class="direita" accept="image/png, image/jpeg text/plain"  multiple />
 		<input type="text" class="formEtapasInput" name="nome_exame" placeholder="Nome do Exame" maxlength="50"/>
 		<input type="text" class="formEtapasInput data" name="data_realizacao_exame" placeholder="Data de Realização" maxlength="50"/>
 		<textarea placeholder=" Descrição do exame" class="formEtapasTextArea" name="descricao_exame" maxlength="250"></textarea>
@@ -72,6 +70,13 @@
 		<select id="tipoExame" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_exame">
 			<option value=""></option>
 		</select>
+		<div class="centralizado coluna">
+			<div id="dropContainer" class="centralizado coluna">
+				 <p class="pImage">Arraste o arquivo aqui:</p>
+			</div>
+			<input type="file" id="fileInput" onchange="addFile();" onmouseout="addFile();" name="exame"  accept="image/png, image/jpeg text/plain"  multiple="multiple"/>
+		</div>
+
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input id="btnDiagnosticoSalvar" type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>
@@ -79,6 +84,17 @@
 	</fieldset>
 
 </form>
+<script>
+
+	dropContainer.ondragover = dropContainer.ondragenter = function(evt) {
+		evt.preventDefault();
+	};
+
+	dropContainer.ondrop = function(evt) {
+		fileInput.files = evt.dataTransfer.files;
+		evt.preventDefault();
+	};
+</script>
 <!--===========FIMM===============-->
 
 {% endblock %}

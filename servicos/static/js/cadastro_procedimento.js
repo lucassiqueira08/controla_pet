@@ -230,12 +230,12 @@ $('#btnConfirmacaoNextDiagnostico').on('click', function(e){
 // Ajax - POST - pagina cadastro_diagnostico
 $('#btnDiagnosticoSalvar').on('click', function (e) {
   var file;
-  $('#file_input_diagnostico').on('change', function(){
+  $('#fileInput').on('change', function(){
     file = event.target.files;
   });
   e.preventDefault()
   var data = new FormData($('#formCadastroDiagnostico').get(0));
-  data.append('file', $('#file_input_diagnostico')[0].files);
+  data.append('file', $('#fileInput')[0].files);
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
           type: "POST",
@@ -247,7 +247,8 @@ $('#btnDiagnosticoSalvar').on('click', function (e) {
           dataType: "json",
           success: function (data) {
             alerta(data.mensagem, data.tipo, data.time)
-            if (data.tipo=='ok') {
+            if (data.dic_animal.tipo=='ok') {
+              $('#cpf_cliente_diagnostico').val('')
               let timerId = setInterval(() => window.location.reload(), data.time);
             }
           },

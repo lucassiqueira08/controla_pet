@@ -20,11 +20,30 @@ function fadeInOut(){
 
 function Mudar(el){
 	var display = document.getElementById(el).style.display;
-	if(display == "none")
+	if(display == "none"){
 		document.getElementById(el).style.display = 'block';
-	 else
-	 	document.getElementById(el).style.display ='none';
+  }
+
+	 else{
+	 
+   	document.getElementById(el).style.display ='none';
+   }
+  if(display == "block")
+  {
+    document.getElementById(el).style.display ='none';
+  }
 }
+
+function MudarFechar(el){
+  var display = document.getElementById(el).style.display;
+  if(display == "block")
+  {
+    document.getElementById(el).style.display ='none';
+  }
+}
+
+
+
 function change(elemento){
 	document.getElementById(elemento).className.replace("invis", "");
 }
@@ -223,3 +242,11 @@ function HideShow(show, hide1, hide2=null, hide3=null, hide4=null){
 	if(hide4 != null)
 		document.getElementById(hide4).style.display = "none";
 }
+
+
+
+$('#visualizar').on('show.bs.modal', function (e) {
+  
+  alert('teste')
+
+});

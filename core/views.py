@@ -125,9 +125,8 @@ class ViewIndex(BaseView):
          if botao == 'edit':
             atendimento = Atendimento.objects.get(id = request.POST.get('IdEvento'))
             atendimento.observacao = request.POST.get('obsedit')
-            atendimento.data_solicitacao = request.POST.get('DataInicioedit')
-            data = request.POST.get('DataInicioedit')
-            data = data[0:10]+'T'+data[11:]
+            data = request.POST.get('DataInicioedit')+'T'+request.POST.get('HoraInicioedit')+':00'
+            atendimento.data_solicitacao = data
             google= GCalGoogle()
             IdGoogle = atendimento.id_google_agenda
             coment = request.POST.get('obsedit')

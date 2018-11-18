@@ -27,7 +27,11 @@
      $('#visualizar #NomeAnimal').val(events.title);
      $('#visualizar #IdEvento').val(events.id);
      $('#visualizar #DataInicio').text(events.start.format('DD/MM/YYYY HH:mm:ss'));
-     $('#visualizar #DataInicioedit').val(events.start.format('YYYY/MM/DD HH:mm:ss'));
+
+     $('#visualizar #DataInicioedit').val(events.start.format('YYYY-MM-DD'));
+
+
+     $('#visualizar #HoraInicioedit').val(events.start.format('HH:mm'));
      $('#visualizar #obsedit').val((events.title));
      $('#visualizar #DataInicio').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
      $('#visualizar #datahora').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
@@ -84,7 +88,7 @@
 
         <h5 class="modal-title text-center" ></h5>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closemodal">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -95,16 +99,15 @@
 		<dl Class = "dl-horizontal">
 			<dt>Observação:</dt>
 			<dd id="Nome"></dd>
-             <dt>Data:</dt>
-			<dd id="DataInicio"></dd>
-
+        <dt>Data:</dt>
+		<dd id="DataInicio"></dd>
 
 		</dl>
      </div>
 
 	 <div class="modal-footer">
 		<button type="button" name="fecha" id="fecha" class="btn btn-canc-vis btn-warning"  onclick="Mudar('edit')"   >Editar</button>
-        <button type="button" class="btn btn-success" onclick="Mudar('edit')"  data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-success" onclick="MudarFechar('edit')"  data-dismiss="modal">Fechar</button>
 		 </div>
   <form method="post" >
         {% csrf_token %}
@@ -115,16 +118,30 @@
   </div>
   <div class="dupla">
     <label class="formLabel" for="exampleInputName">Data/hora</label>
-    <input class="formInput " type="datetime" class="form-control" id ="DataInicioedit" name ="DataInicioedit" id="DataInicio" >
+    <input class="formInput " type="date" class="form-control" id ="DataInicioedit" name ="DataInicioedit"   >
   </div>
+
+   <div class="dupla">
+    <label class="formLabel" for="exampleInputName">hora</label>
+    <input class="formInput " type="time" class="form-control" id ="HoraInicioedit" name ="HoraInicioedit" id="DataInicio" >
+  </div>
+
 
       <input type="hidden" class="form-control"  name="IdEvento" id="IdEvento">
 				<div class="modal-footer">
-        <button type="button" class="btn btn-canc-edit btn-primary clearMarginTop" onclick="Mudar('edit') ">Cancelar</button>
 
-          <button name="button" value = "edit" class="acao btn btn-success clearMarginTop">SALVAR</button>
+        <button type="button" class="acao btn btn-canc-edit btn-primary  "  
+        onclick="Mudar('edit') ">
+          Cancelar
+        </button>
 
-				<button name="button" value = "del" class="acao btn btn-danger btn-primary clearMarginTop" ">Deletar</button>
+        <button name="button" value = "edit" class="acao btn btn-success clearMarginTop">
+          Salvar
+        </button>
+
+				<button name="button" value = "del" class="acao btn btn-danger btn-primary clearMarginTop"">
+          Deletar
+        </button>
 
 </div>
 		</div>
@@ -159,7 +176,7 @@
 
   <div class="form-group col-md-7 mb-3">
     <label for="exampleInputName">Data</label>
-    <input type="date" class="form-control" name ="dataAtendimento" id="dataAtendimento" >
+    <input type="text" class="form-control data" name ="dataAtendimento" id="dataAtendimento" >
      </div>
   <div class="form-group col-md-5 mb-3">
     <label for="  exampleInputName">hora</label>

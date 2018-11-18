@@ -64,36 +64,6 @@ $('#FormCadastroProcedimentoClinico').on('submit', function (e) {
 
 //====================CADASTRO DE ESTADIA====================
 
-$('#buscarAnimalEstadia').on('click', function (e) {
-  if ($('#selectAnimal').val().trim() != '') {
-    e.preventDefault()
-    var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
-    $.ajax({
-            type: "GET",
-            url: '/servicos/get_animal',
-            headers:{
-                "X-CSRFToken": csrftoken,
-            },
-            data:{
-              id_animal     : $('#selectAnimal').val(),
-              cpf_cliente     : $('#cpf_cliente').val(),
-            },
-            success: function (data) {
-              alert(data)
-              $('#nome_animal').val(data.animal[0].fields.nome)
-              $('#raca_animal').val(data.animal[0].fields.raca)
-              $('#dono_animal').val(data.cliente[0].fields.nome)
-
-            },
-        })
-  }
-  else {
-    alerta("Por favor selecione um cliente e animal válido..", "aviso", 5000)
-    setTimeout(function(){
-      $("#btnConfirmacaoPrev").click()
-    },1);
-  }
-})
 $('#cpf_cliente').on('blur', function (e) {
   //Limpa valores atuais
   $('#selectAnimal option').remove()
@@ -123,6 +93,65 @@ $('#cpf_cliente').on('blur', function (e) {
   })
 })
 
+$('#buscarAnimal').on('click', function (e) {
+  if ($('#selectAnimal').val().trim() != '') {
+    e.preventDefault()
+    var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+            type: "GET",
+            url: '/servicos/get_animal',
+            headers:{
+                "X-CSRFToken": csrftoken,
+            },
+            data:{
+              id_animal       : $('#selectAnimal').val(),
+              cpf_cliente     : $('#cpf_cliente').val(),
+            },
+            success: function (data) {
+              $('#nomeAnimal').val(data[0].fields.nome)
+              $('#racaAnimal').val(data[0].fields.raca)
+              $('#urlFoto').attr('src', data[0].fields.url_foto)
+             },
+        })
+  }
+  else {
+    alerta("Por favor selecione um cliente e animal válido..", "aviso", 5000)
+    setTimeout(function(){
+      $("#btnConfirmacaoPrevDiagnostico").click()
+    },1);
+  }
+})
+
+$('#salvaEstadia').on('click', function (e) {
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+    type: "POST",
+    url: '/servicos/cadastro_estadia',
+    headers:{
+      "X-CSRFToken": csrftoken,
+    },
+    data:{
+      observacao   : $('#observacao').val(),
+      data_inicio  : $('#data_inicio').val(),
+      data_fim     : $('#data_fim').val(),
+      valor_diaria : $('#valor_diaria').val().replace(",","."),
+      id_animal    : $('#selectAnimal').val()
+    },
+    success: function (data) {
+      alerta(data.mensagem, data.tipo, data.time)
+      if (data.tipo=='ok') {
+        $('.formEtapasInput').val('')
+        $('.formInput').val('')
+      }
+    },
+    error: function(){
+      alerta("Erro interno", "erro", 7000)
+    }
+  })
+})
+
+
 // Cadastro de Diagnóstico
 $('#buscarAnimalDiagnostico').on('click', function (e) {
   if ($('#selectAnimalDiagnostico').val().trim() != '') {
@@ -135,7 +164,7 @@ $('#buscarAnimalDiagnostico').on('click', function (e) {
                 "X-CSRFToken": csrftoken,
             },
             data:{
-              id_animal     : $('#selectAnimalDiagnostico').val(),
+              id_animal       : $('#selectAnimalDiagnostico').val(),
               cpf_cliente     : $('#cpf_cliente_diagnostico').val(),
             },
             success: function (data) {
@@ -153,6 +182,8 @@ $('#buscarAnimalDiagnostico').on('click', function (e) {
     },1);
   }
 })
+
+
 $('#cpf_cliente_diagnostico').on('blur', function (e) {
   //Limpa valores atuais
   $('#selectAnimalDiagnostico option').remove()

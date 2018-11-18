@@ -49,7 +49,6 @@ class GdApi:
         file = self.drive_service.files().create(body=file_metadata,
                                                  media_body=media,
                                                  fields='id, parents').execute()
-
         self.move_files_between_folders(file.get('id'), folder_id)
 
         return file.get('id')
@@ -96,7 +95,7 @@ class GdApi:
     def create_folder(self, name):
         folder_exist = self.search_folder_by_name(name)
 
-        if not folder_exist:
+        if folder_exist == []:
             folder_id = '164t7EFFY3R4MKNmOsYt4TuOtroIgUfFr'
             file_metadata = {
                 'name': name,

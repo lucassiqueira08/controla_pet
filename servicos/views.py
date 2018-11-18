@@ -19,6 +19,8 @@ from cliente.models import Cliente
 from usuarios.models import Funcionario
 from gdstorage.app import upload_animal_exame
 
+from raven.contrib.django.raven_compat.models import client
+
 
 class ViewCadastroProcedimento(View):
 
@@ -164,6 +166,7 @@ class ViewCadastrarDiagnostico(BaseView):
             ficha_animal.save()
 
         except:
+            client.captureException()
             context = {
                 'tipo': 'erro',
                 'mensagem': 'Não foi possível cadastrar este diagnóstico',
@@ -187,6 +190,15 @@ class ViewCadastrarDiagnostico(BaseView):
             exame = Exame()
             exame.id_animal = animal
             exame.nome = request.POST.get('nome_exame')
+
+            if not exame.nome:
+                context = {
+                    'tipo': 'erro',
+                    'mensagem': 'Digite um nome de identificação para o exame',
+                    'time': 7000
+                }
+                return HttpResponse(json.dumps(context), content_type='application/json')
+
             exame.descricao = request.POST.get('descricao_exame')
             data_realizacao = request.POST.get('data_realizacao_exame')
 
@@ -214,6 +226,7 @@ class ViewCadastrarDiagnostico(BaseView):
                 exame.link_doc = arquivo
                 exame.save()
             except:
+                client.captureException()
                 context = {
                     'tipo': 'erro',
                     'mensagem': 'Não foi possível cadastrar este exame',

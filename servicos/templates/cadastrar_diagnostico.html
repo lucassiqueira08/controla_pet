@@ -55,7 +55,7 @@
 
 	<fieldset>
 		<h2 class="tituloGrande">Diagnóstico específico</h2>
-		<textarea placeholder="Digite aqui seu diagnóstico..." class="formEtapasTextArea" name="diagnostico_especifico" maxlength="500"></textarea>
+		<textarea placeholder="Digite aqui seu diagnóstico..." class="formEtapasTextArea" name="descricao_ficha" maxlength="500"></textarea>
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
@@ -64,13 +64,14 @@
 
 	<fieldset>
 		<h2 class="tituloGrande">Anexar Exames</h2>
+		<input type="file" id="file_input_diagnostico" name="exame" class="direita" accept="image/png, image/jpeg text/plain"  multiple />
 		<input type="text" class="formEtapasInput" name="nome_exame" placeholder="Nome do Exame" maxlength="50"/>
 		<input type="text" class="formEtapasInput data" name="data_realizacao_exame" placeholder="Data de Realização" maxlength="50"/>
+		<textarea placeholder=" Descrição do exame" class="formEtapasTextArea" name="descricao_exame" maxlength="250"></textarea>
 		<p>Tipo de Exame</p>
 		<select id="tipoExame" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_exame">
 			<option value=""></option>
 		</select>
-		<input type="file" id="file_input_diagnostico" name="exame" class="direita" accept="image/png, image/jpeg text/plain"  multiple />
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input id="btnDiagnosticoSalvar" type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>

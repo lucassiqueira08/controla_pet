@@ -247,8 +247,7 @@ $('#btnDiagnosticoSalvar').on('click', function (e) {
           dataType: "json",
           success: function (data) {
             alerta(data.mensagem, data.tipo, data.time)
-            if (data.dic_animal.tipo=='ok') {
-              $('#cpf_cliente_diagnostico').val('')
+            if (data.tipo=='ok') {
               let timerId = setInterval(() => window.location.reload(), data.time);
             }
           },

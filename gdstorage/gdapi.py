@@ -2,22 +2,19 @@ from __future__ import print_function
 
 import io
 
-
-
-
 from apiclient.http import MediaFileUpload, MediaIoBaseDownload
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
 
 scopes = 'https://www.googleapis.com/auth/drive'
-client_secret_file = 'credentials.json'
+client_secret_file = 'gdstorage/credentials.json'
 application_name = 'Drive API Python'
 
 
 class GdApi:
 
-    store = file.Storage('token.json')
+    store = file.Storage('gdstorage/token.json')
     creds = store.get()
     if not creds or creds.invalid:
         flow = client.flow_from_clientsecrets(client_secret_file, scopes)
@@ -52,6 +49,7 @@ class GdApi:
         file = self.drive_service.files().create(body=file_metadata,
                                                  media_body=media,
                                                  fields='id, parents').execute()
+
         self.move_files_between_folders(file.get('id'), folder_id)
 
         return file.get('id')
@@ -98,7 +96,7 @@ class GdApi:
     def create_folder(self, name):
         folder_exist = self.search_folder_by_name(name)
 
-        if folder_exist == []:
+        if not folder_exist:
             folder_id = '164t7EFFY3R4MKNmOsYt4TuOtroIgUfFr'
             file_metadata = {
                 'name': name,

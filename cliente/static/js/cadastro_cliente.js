@@ -89,9 +89,6 @@ $('#animal_botao').on('click', function (e) {
           },
       })
 })
-
-
-
 // ------- VISUALIZA CLIENTE ----------- //
 // GET - VISUALIZA CLIENTE
 function abrirModalCliente(id, nome, cpf, email, cep, logradouro, numero, cidade, bairro, estado, complemento, url_foto, id_tipo_cliente){
@@ -261,14 +258,14 @@ $('#achar_animal').on('click', function(e) {
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
     cpf_cliente = $('#cpf_cliente').val()
 
-    nome_animal = $('#selectAnimal').val()
+    id_animal = $('#selectAnimal').val()
     
 //Verifica o usuario e o animal, caso existe, preenche a tela seguinte.
     if ($('#selectAnimal').val().trim() != '') {
      
         $.ajax({
                 type: "POST",
-                url: '/cliente/get_ficha_animal'+ '/' + cpf_cliente + '/' + nome_animal,
+                url: '/cliente/get_ficha_animal'+ '/' + cpf_cliente + '/' + id_animal,
                 headers:{
                     "X-CSRFToken": csrftoken,
                 },

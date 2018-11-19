@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
 from django.shortcuts import render
-from datetime import datetime
+from datetime import datetime , date
+
 from django.views import View
 from .models import Menu, MenuGrupo
 from servicos.models import Atendimento,FeitoPor
@@ -74,53 +75,80 @@ class ViewIndex(BaseView):
     def post(self, request):
         if request.method == "POST":
          botao = request.POST.get('button')
+         radio = request.POST.get('inlineRadioOptions')
+         if botao == 'save' :
+            contador= 0
+            periodo= 0
+            if radio == 'M':
+                contador = 12 
+            if radio == 'S':
+                contador = 52
 
-         if botao == 'save':
-       
-            data = request.POST.get('dataAtendimento')+'T'+request.POST.get('HoraAtendimento')
-            obssumary = request.POST.get('obs')
-            #dicionario molde para o calendar
-            event = {
-        #-------------------------------CRIA O EVENTO--------------------------------
-              'summary': obssumary,
-              'location': 'Av. Dr. Alberto de Oliveira Lima, 254 - Real Parque, São Paulo',
-              'description': obssumary,
-            #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
-              'start': {
-                'dateTime':  data+':00', # Adição da hora com o fusorario
-                'timeZone': 'America/Sao_Paulo',
-              },
-              'end': {
-                'dateTime':  data+':00',
-                'timeZone': 'America/Sao_Paulo',
-            #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
-              },
+            if radio == 'A':
+                contador = 10
 
-            }
-            data_nova = request.POST.get('dataAtendimento')
-            hora_nova = request.POST.get('HoraAtendimento')
-            google= GCalGoogle()
-            gid = google.criar(event)
-            funcionarios = Funcionario.objects.all()
-            feito = FeitoPor()
-            cliente = Cliente.objects.get(cpf= request.POST.get('cpf_cliente') )
-            atendimento = Atendimento()
-            atendimento.observacao = request.POST.get('obs')
-            data_atend = data_nova+' ' + hora_nova
-            atendimento.data_solicitacao = data_atend
+            if radio == 'N':
+                contador = 1
+               
+            for cont in range(contador):
+                data = request.POST.get('dataAtendimento')+'T'+request.POST.get('HoraAtendimento')
+                obssumary = request.POST.get('obs')
 
-            Atend_animal= Animal.objects.get(cpf_cliente=cliente, pk= request.POST.get('selectAnimal'))
-            atendimento.id_animal = Atend_animal
+                #dicionario molde para o calendar
+                event = {
+            #-------------------------------CRIA O EVENTO--------------------------------
+                  'summary': obssumary,
+                  'location': 'Av. Dr. Alberto de Oliveira Lima, 254 - Real Parque, São Paulo',
+                  'description': obssumary,
+                #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
+                  'start': {
+                    'dateTime':  data+':00', # Adição da hora com o fusorario
+                    'timeZone': 'America/Sao_Paulo',
+                  },
+                  'end': {
+                    'dateTime':  data+':00',
+                    'timeZone': 'America/Sao_Paulo',
+                #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
+                  },
 
-            Responsavel = Funcionario.objects.get(cpf= request.POST.get('funcionarios'))
-            atendimento.id_google_agenda = gid
-            atendimento.save()
-            feito.id_atendimento= atendimento
-            feito.id_funcionario = Responsavel
-            feito.save()
-            atendimento = ''
-            cliente = ''
-            botao = ''
+                }
+                data_nova = request.POST.get('dataAtendimento')
+                hora_nova = request.POST.get('HoraAtendimento')
+
+                google= GCalGoogle()
+                gid = google.criar(event)
+                funcionarios = Funcionario.objects.all()
+                feito = FeitoPor()
+                cliente = Cliente.objects.get(cpf= request.POST.get('cpf_cliente') )
+                atendimento = Atendimento()
+                atendimento.observacao = request.POST.get('obs')
+              
+                data_nova =  datetime.strptime(data_nova, "%Y-%m-%d").date()
+                if radio == 'M':
+                    periodo = periodo + 30
+                if radio == 'S':
+                    periodo = periodo + 7 
+                if radio == 'A':
+                    periodo = periodo + 365
+                if radio == 'N':
+                    periodo = 0             
+                data_nova = date.fromordinal(data_nova.toordinal() + periodo) 
+                data_nova = str(data_nova)
+                data_atend = data_nova +' ' + hora_nova
+                atendimento.data_solicitacao =  data_atend
+
+                Atend_animal= Animal.objects.get(cpf_cliente=cliente, pk= request.POST.get('selectAnimal'))
+                atendimento.id_animal = Atend_animal
+
+                Responsavel = Funcionario.objects.get(cpf= request.POST.get('funcionarios'))
+                atendimento.id_google_agenda = gid
+                atendimento.save()
+                feito.id_atendimento= atendimento
+                feito.id_funcionario = Responsavel
+                feito.save()
+                atendimento = ''
+                cliente = ''
+                botao = ''
 
          if botao == 'edit':
             atendimento = Atendimento.objects.get(id = request.POST.get('IdEvento'))

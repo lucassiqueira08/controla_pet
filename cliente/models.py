@@ -51,10 +51,10 @@ class Animal(models.Model):
     observacao = models.CharField(max_length=200, blank=True, null=True)
     microchip = models.CharField(unique=True, max_length=50,
                                  blank=True, null=True)
-    cpf_cliente = models.ForeignKey('Cliente',
+    id_cliente = models.ForeignKey('Cliente',
                                     on_delete=models.CASCADE,
                                     related_name='animal_cliente',
-                                    db_column='cpf_cliente')
+                                    db_column='id_cliente')
 
     class Meta:
         app_label = 'cliente'

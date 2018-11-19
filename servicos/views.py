@@ -11,7 +11,7 @@ from servicos.models import (Atendimento, FeitoPor, AtendimentoProcClinico,
                              AtendimentoProcEstetico, ProcedimentoEstetico,
                              ProcedimentoClinico, Orcamento, TipoProcedimento,
                              DiagnosticoAnimal, TipoDiagnostico, FichaDiagnostico,
-                             Exame, TipoExame)
+                             Exame, TipoExame, StatusAtendimento, TipoStatusAtendimento)
 
 from core.views import BaseView
 from core.models import Menu
@@ -119,7 +119,7 @@ class ViewCadastroAtendimento(View):
     def post(self, request):
         actual_date = datetime.datetime.now()
         data = json.loads(request.body)
-        cliente = Cliente.objects.get(pk=data['cpf_cliente'])
+        animal = Animal.objects.get(pk=data['nome_animal'])
         funcionario = Funcionario.objects.get(pk=data['funcionario'])
 
         orcamento = Orcamento()
@@ -128,7 +128,7 @@ class ViewCadastroAtendimento(View):
 
         atendimento = Atendimento()
 
-        atendimento.cpf_cliente = cliente
+        atendimento.id_animal = animal
         atendimento.observacao = 'algo'
         atendimento.data_solicitacao = actual_date
         atendimento.id_orcamento = orcamento
@@ -151,10 +151,18 @@ class ViewCadastroAtendimento(View):
             atendimento_proc_clinico.save()
 
         feito_por = FeitoPor()
-        feito_por.id_atendimento = atendimento
-        feito_por.id_funcionario = funcionario
+        feito_por.data_realizacao = actual_date
+        feito_por.id_atendimento  = atendimento
+        feito_por.id_funcionario  = funcionario
         feito_por.save()
-        return HttpResponse(data['procedimentos'], content_type='application/json')
+
+        tipo_status_atendimento = TipoStatusAtendimento.objects.get(nome='aberto')
+
+        status_atendimento                = StatusAtendimento()
+        status_atendimento.id_atendimento = atendimento
+        status_atendimento.id_status      = tipo_status_atendimento
+        status_atendimento.save()
+        return HttpResponse(json.dumps(data), content_type='application/json')
 
 
 class ViewCadastrarDiagnostico(BaseView):

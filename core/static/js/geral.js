@@ -205,6 +205,7 @@ function OpenMenu(evt, menuName, tabela = false) {
   }
 	if (tabela) {
   	document.getElementById(menuName).style.display = "table";
+  	document.getElementById(menuName).style.display = "table";
 	}
 	else {
   	document.getElementById(menuName).style.display = "flex";

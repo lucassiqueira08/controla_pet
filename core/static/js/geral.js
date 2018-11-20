@@ -20,11 +20,30 @@ function fadeInOut(){
 
 function Mudar(el){
 	var display = document.getElementById(el).style.display;
-	if(display == "none")
+	if(display == "none"){
 		document.getElementById(el).style.display = 'block';
-	 else
-	 	document.getElementById(el).style.display ='none';
+  }
+
+	 else{
+	 
+   	document.getElementById(el).style.display ='none';
+   }
+  if(display == "block")
+  {
+    document.getElementById(el).style.display ='none';
+  }
 }
+
+function MudarFechar(el){
+  var display = document.getElementById(el).style.display;
+  if(display == "block")
+  {
+    document.getElementById(el).style.display ='none';
+  }
+}
+
+
+
 function change(elemento){
 	document.getElementById(elemento).className.replace("invis", "");
 }
@@ -226,6 +245,7 @@ function HideShow(show, hide1, hide2=null, hide3=null, hide4=null){
 }
 
 
+
 //---FILE INPUT ------------------------------------------------
 function addFile(){
 	var files = $("#fileInput")[0].files
@@ -233,3 +253,4 @@ function addFile(){
 		alert(files[i].name)
 	}
 }
+

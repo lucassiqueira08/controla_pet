@@ -1,4 +1,9 @@
 from django.urls import path
+
+from .views import ViewCadastroProcedimento, ViewCadastroEstadia, ViewModal,ViewCadastroAtendimento
+
+from cliente.actions import get_ficha_animal
+
 from servicos.actions import (get_tipo_procedimento, get_animais_cliente,
                               get_animal, get_diagnostico, get_tipo_exame,
                               get_procedimento, get_pagamentos_pendentes,
@@ -31,6 +36,7 @@ urlpatterns = [
         'get_animais_cliente', get_animais_cliente,
         name='get_animais_cliente'
     ),
+
     path(
         'get_animal', get_animal,
         name='get_animal'
@@ -39,6 +45,7 @@ urlpatterns = [
         'cadastrar_diagnostico', ViewCadastrarDiagnostico.as_view(),
         name='cadastrar_diagnostico'
     ),
+
     path(
         'get_diagnostico', get_diagnostico,
         name='get_diagnostico'

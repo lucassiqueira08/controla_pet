@@ -5,6 +5,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse
 from django.core import serializers
 
+from cliente.models import Cliente, Animal
 from servicos.models import (ProcedimentoEstetico, ProcedimentoClinico,
                              TipoProcedimento, StatusEstadia, StatusAtendimento,
                              AtendimentoProcClinico, DiagnosticoAnimal,
@@ -79,9 +80,7 @@ def get_animais_hospedados(request):
 
 
 def get_atendimentos_pendentes(request):
-    atendimento = StatusAtendimento.objects.exclude(id_status__nome='fechado').filter(
-        id_atendimento__feitopor_atendimento__data_realizacao__gte=datetime.date.today()
-    ).values(
+    atendimento = StatusAtendimento.objects.exclude(id_status__nome='fechado').values(
         'id_atendimento__id_animal__nome',
         'id_atendimento__feitopor_atendimento__data_realizacao',
         'id_status__nome',
@@ -98,8 +97,8 @@ def get_atendimentos_pendentes(request):
 
 def get_pagamentos_pendentes(request):
     pagamento_pendente = StatusAtendimento.objects.filter(id_status__nome='aguardando pagamento').values(
-        'id_atendimento__id_animal__id_cliente__id_tipo_cliente__nome',
-        'id_atendimento__id_animal__id_cliente__nome',
+        'id_atendimento__id_animal__cpf_cliente__id_tipo_cliente__nome',
+        'id_atendimento__id_animal__cpf_cliente__nome',
         'id_atendimento__id_orcamento__preco_final',
         'id_atendimento__feitopor_atendimento__data_realizacao',
         'id_status__nome',

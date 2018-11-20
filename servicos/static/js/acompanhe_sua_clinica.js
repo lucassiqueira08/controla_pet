@@ -75,7 +75,7 @@ var AcompanheSuaClinica = $('#AcompanheSuaClinica').DataTable( {
     },
     'columns': [
         { "data": "id_status__nome" },
-        { "data": "id_atendimento__id_cliente__nome" },
+        { "data": "id_atendimento__id_animal__nome" },
         { "data": "id_atendimento__feitopor_atendimento__data_realizacao" },
     ]
 } );
@@ -103,8 +103,8 @@ var PagamentosPendentes = $('#PagamentosPendentes').DataTable( {
         "dataSrc": ""
     },
     'columns': [
-        { "data": "id_atendimento__id_animal__id_cliente__id_tipo_cliente__nome" },
-        { "data": "id_atendimento__id_animal__id_cliente__nome" },
+        { "data": "id_atendimento__id_animal__cpf_cliente__id_tipo_cliente__nome" },
+        { "data": "id_atendimento__id_animal__cpf_cliente__nome" },
         { "data": "id_atendimento__id_orcamento__preco_final" },
         { "data": "id_atendimento__feitopor_atendimento__data_realizacao" },
         { "data": "id_status__nome" },

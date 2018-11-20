@@ -26,24 +26,25 @@ def get_animal(request, cpf_cliente, nome_animal):
 
 
 def get_ficha_animal(request, cpf_cliente , nome_animal):
+
     cliente = Cliente.objects.filter(cpf=cpf_cliente).first()
     if cliente:
-        animal= Animal.objects.filter(nome=nome_animal,cpf_cliente=cliente).first()
+        animal= Animal.objects.filter(pk=id_animal,cpf_cliente=cliente).first()
         if animal:
             data = ([animal,cliente])
             cliente_json = serializers.serialize("json", data)
             return HttpResponse(cliente_json, content_type='application/json')
-    
+
         context = {
             'tipo':"erro",
             'mensagem':"Não foi encontrado um animal para este CPF",
-            'time':5000         
+            'time':5000
         }
         return HttpResponse(json.dumps(context),content_type='application/json')
     context = {
         'tipo':"erro",
         'mensagem':"Este cliente não foi cadastrado ou o cpf esta incorreto",
-        'time':5000         
+        'time':5000
     }
     return HttpResponse(json.dumps(context),content_type='application/json')
 
@@ -67,4 +68,3 @@ def valida_cpf_responsavel(cpf):
     if responsavel:
         return {'cpf': True, 'msg': 'Responsável já cadastrado'}
     return {'cpf': False}
-

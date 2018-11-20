@@ -385,9 +385,14 @@ cursor: pointer;
 	margin-right:10px;
 	margin-bottom:0px!important;
 }
+
 .formEtapasRadio label input{
 	margin-right: 5px;
 }
+.formNovo{
+margin: 0px 0 0px 0;
+}
+
 .formEtapas p{
 	text-align: center;
 }

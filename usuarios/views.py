@@ -50,7 +50,7 @@ class ViewCadastroFuncionario(View):
 
         context = {
             'tipo': 'ok',
-            'mensagem': 'Procedimento cadastrado com sucesso',
+            'mensagem': 'Funcionário cadastrado com sucesso',
             'time': 5000
         }
         return HttpResponse(json.dumps(context), content_type='application/json')

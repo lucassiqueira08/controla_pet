@@ -48,6 +48,20 @@ function change(elemento){
 	document.getElementById(elemento).className.replace("invis", "");
 }
 
+function verifica_horario_notificacao(dataJson){
+  var d           = new Date();
+  var hora_atual  = d.toString().substring(16,24);
+
+  for (var item in dataJson) {
+    var hora  = (dataJson[item]['data/hora']).substring(11,19);
+    var dono  = dataJson[item]['dono'];
+    if (hora == hora_atual) {
+      alerta("Hora de fazer um atendimento ao Bixinho do " + dono,"aviso",7000);
+    }
+
+  }
+}
+
 $.get('/get_notificacao', function(data){
   var notificacoes = $('#notificacoes')
   var notificacao  =
@@ -80,22 +94,8 @@ $.get('/get_notificacao', function(data){
 
     notificacoes.append(final)
   }
+	let timerId = setInterval(() => verifica_horario_notificacao(dataJson), 1000);
 })
-
-function verifica_horario_notificacao(){
-  var d           = new Date();
-  var hora_atual  = d.toString().substring(16,24);
-
-  for (var item in dataJson) {
-    var hora  = (dataJson[item]['data/hora']).substring(11,19);
-    var dono  = dataJson[item]['dono'];
-    if (hora == hora_atual) {
-      alerta("Hora de fazer um atendimento ao Bixinho do " + dono,"aviso",7000);
-    }
-
-  }
-}
-let timerId = setInterval(() => verifica_horario_notificacao(), 1000);
 
 //============================================
 
@@ -245,8 +245,11 @@ function HideShow(show, hide1, hide2=null, hide3=null, hide4=null){
 
 
 
-$('#visualizar').on('show.bs.modal', function (e) {
-  
-  alert('teste')
+//---FILE INPUT ------------------------------------------------
+function addFile(){
+	var files = $("#fileInput")[0].files
+	for (var i=0; i<file.length; i++){
+		alert(files[i].name)
+	}
+}
 
-});

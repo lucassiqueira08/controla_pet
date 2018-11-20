@@ -1,19 +1,25 @@
 import json
 import datetime
 
+from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.shortcuts import render
 from django.views import View
-
 from django.http import HttpResponse
 
+from cliente.models import FichaAnimal, Animal
 from servicos.models import (Atendimento, FeitoPor, AtendimentoProcClinico,
                              AtendimentoProcEstetico, ProcedimentoEstetico,
                              ProcedimentoClinico, Orcamento, TipoProcedimento,
-                             DiagnosticoAnimal, TipoDiagnostico)
+                             DiagnosticoAnimal, TipoDiagnostico, FichaDiagnostico,
+                             Exame, TipoExame)
+
 from core.views import BaseView
 from core.models import Menu
 from cliente.models import Cliente
 from usuarios.models import Funcionario
+from gdstorage.app import upload_animal_exame
+
+from raven.contrib.django.raven_compat.models import client
 
 
 class ViewCadastroProcedimento(View):
@@ -66,16 +72,34 @@ class ViewCadastroEstadia(View):
 
     def get(self, request):
         context = {
-            'menu': Menu.objects.get(url='cadastro_estadia')
         }
         return render(request, self.template, context)
 
     def post(self, request):
-        context = {
-            'menu': Menu.objects.get(url='cadastro_estadia')
-        }
-        return render(request, self.template)
+        observacao       = request.POST.get('observacao')
+        data_inicio      = request.POST.get('data_inicio')
+        data_fim         = request.POST.get('data_fim')
+        data_solicitacao = request.POST.get('data_solicitacao')
+        valor_diaria     = request.POST.get('valor_diaria')
+        id_animal        = request.POST.get('id_animal')
 
+        estadia = Estadia()
+        estadia.observacao       = observacao
+        estadia.data_inicio      = data_inicio
+        estadia.data_fim         = data_fim
+        estadia.data_solicitacao = data_solicitacao
+        estadia.valor_diaria     = valor_diaria
+        estadia.data_solicitacao = datetime.datetime.now()
+        estadia.id_animal        = Animal.objects.get(id = id_animal)
+        estadia.save()
+
+        context = {
+            'tipo': 'ok',
+            'mensagem': 'Estadia cadastrado com sucesso',
+            'time': 5000
+        }
+
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 class ViewModal(View):
 
@@ -143,3 +167,94 @@ class ViewCadastrarDiagnostico(BaseView):
             'tipos_diagnostico': tipo_diagnostico
         }
         return render(request, self.template, context)
+
+    def post(self, request):
+        try:
+            ficha_animal = FichaAnimal.objects.get(data_consulta=datetime.date.today(),
+                                                   id_animal=request.POST.get('id_animal'))
+        except:
+            ficha_animal = FichaAnimal()
+
+        animal = Animal.objects.get(id=request.POST.get('id_animal'))
+        ficha_animal.id_animal = animal
+        data_consulta = str(datetime.date.today())
+        if data_consulta:
+            ficha_animal.data_consulta = data_consulta
+        try:
+            ficha_animal.save()
+
+        except:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Não foi possível cadastrar este diagnóstico',
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        lista_diagnostico = request.POST.getlist('diagnostico_boolean')
+        for e in lista_diagnostico:
+            ficha_diagnostico = FichaDiagnostico()
+            diagnostico = DiagnosticoAnimal.objects.get(id=e)
+            ficha_diagnostico.id_diagnostico = diagnostico
+            ficha_diagnostico.id_ficha = ficha_animal
+            ficha_diagnostico.save()
+
+        ficha_animal.descricao = request.POST.get('descricao_ficha')
+
+        file = request.FILES
+
+        if file:
+            exame = Exame()
+            exame.id_animal = animal
+            exame.nome = request.POST.get('nome_exame')
+
+            if not exame.nome:
+                context = {
+                    'tipo': 'erro',
+                    'mensagem': 'Digite um nome de identificação para o exame',
+                    'time': 7000
+                }
+                return HttpResponse(json.dumps(context), content_type='application/json')
+
+            exame.descricao = request.POST.get('descricao_exame')
+            data_realizacao = request.POST.get('data_realizacao_exame')
+
+            if data_realizacao:
+                exame.data_realizacao = datetime.datetime.strptime(data_realizacao, "%d/%m/%Y").strftime('%Y-%m-%d')
+
+            tipo_exame = TipoExame.objects.get(id=request.POST.get('id_tipo_exame'))
+            if tipo_exame:
+                exame.id_tipo_exame = tipo_exame
+
+            try:
+                temp_file = TemporaryUploadedFile(name=file['exame'].name,
+                                                  content_type=file['exame'].content_type,
+                                                  size=file['exame'].size,
+                                                  charset=file['exame'].charset)
+                temp_path = temp_file.temporary_file_path()
+
+                destination = open(temp_path, 'wb+')
+                for chunk in file['exame'].chunks():
+                    destination.write(chunk)
+                destination.close()
+
+                arquivo = upload_animal_exame(file['exame'], animal.pk,
+                                              temp_path, exame.data_realizacao)
+                exame.link_doc = arquivo
+                exame.save()
+            except:
+                client.captureException()
+                context = {
+                    'tipo': 'erro',
+                    'mensagem': 'Não foi possível cadastrar este exame',
+                    'time': 7000
+                }
+                return HttpResponse(json.dumps(context), content_type='application/json')
+
+        context = {
+            'tipo': 'ok',
+            'mensagem': 'Diagnostico cadastrado com sucesso',
+            'time': 7000
+        }
+        return HttpResponse(json.dumps(context), content_type='application/json')

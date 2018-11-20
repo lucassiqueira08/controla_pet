@@ -3,7 +3,7 @@
 {% block content_base %}
 
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
-<form method="post" class='formEtapas'>
+<form id="formCadastroDiagnostico" method="post" class='formEtapas'>
 	{% csrf_token %}
 	<ul id="progress">
 		<li class="ativo"><label>Procurar Animal</label></li>
@@ -15,7 +15,7 @@
 
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
-		<input id="cpf_cliente_diagnostico" type="search" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14" required>
+		<input id="cpf_cliente_diagnostico" type="search" class="formEtapasInput cpf " name="cpf_cliente" placeholder="Digite o CPF do Proprietario..." maxlength="14" required>
 		<p>Animais:</p>
 		<select id="selectAnimalDiagnostico" class="formInput destacadoCimaBaixo clearMarginTop" name="id_animal" required>
 			<option value=""></option>
@@ -34,98 +34,67 @@
 		</div>
 		<input id="nomeAnimalDiagnostico" type="text" class="formEtapasInput" name="nome" placeholder="Nome do animal" maxlength="50" disabled/>
 		<input id="racaAnimalDiagnostico" type="text" class="formEtapasInput" name="raca" placeholder="Raça" maxlength="50" disabled/>
-		<input id="donoAnimalDiagnostico" type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" disabled/>
+		<input id="especieAnimalDiagnostico" type="text" class="formEtapasInput" name="dono" placeholder="Dono" maxlength="50" disabled/>
 		<h2 class="tituloMedio destacadoCima">Esse é o bichinho certo?</h2>
 		<div class="containerBotoes">
 			<input id="btnConfirmacaoPrevDiagnostico" type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
+			<input id="btnConfirmacaoNextDiagnostico" type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
 		</div>
 	</fieldset>
 
 	<fieldset>
 		<h2 class="tituloGrande">Diagnóstico</h2>
-		<h3 class="tituloPequeno">Perguntas pré-definidas para preenchimento</h3>
-		{% for tipo_diagnostico in tipos_diagnostico.object_list %}
-		<p>O animal apresenta cansaço?</p>
-		<div class="formEtapasDupla destacadoBaixo">
-			<div class="formEtapasRadio">
-				<label><input type="radio" value="V" name="cansaco">Verdadeiro</label>
-				<label><input type="radio" value="F" name="cansaco" checked>Falso</label>
-			</div>
+		<div id="conteudoDiagnostico">
+			<!-- Conteudo inserido via AJAX -->
 		</div>
-		{%endfor%}
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
 		</div>
-
-		<!--!!!!!!!!!!!! MODAL !!!!!!!!!!!!-->
-		<div class="modal fade" id="modalNovoDiagnostio" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Cadastrar novo diagnóstico</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="centralizado">
-							<div class="imagemCardModal coluna">
-								<img src="{% static 'img/cachorro_ficha_animal.jpg' %}" class="destacadoCimaBaixo" alt="Cachorrinho 1">
-							</div>
-						</div>
-						<div class="dupla">
-							<label class="formLabel">Diagnóstico</label>
-							<input class="formInput" type="text" placeholder="Digite o diagnóstico..." name="diagnostico" autofocus>
-						</div>
-						<div class="cima linha">
-							<p>Tipo: </p>
-							<div class="coluna cima destacadoEsquerdaDireita">
-								<div class="linha">
-									<input type="checkbox" class="formInputCheckbox" name="sistema_reprodutor" value="sistema_reprodutor" id="sistema_reprodutor">
-									<label for="sistema_reprodutor">Sistema Reprodutor</label>
-								</div>
-								<div class="linha">
-									<input type="checkbox" class="formInputCheckbox" name="sistema_respiratorio" value="sistema_respiratorio" id="sistema_respiratorio">
-									<label for="sistema_respiratorio">Sistema Respiratório</label>
-								</div>
-								<div class="linha">
-									<input type="checkbox" class="formInputCheckbox" name="secrecao_nasal" value="secrecao_nasal" id="secrecao_nasal">
-									<label for="secrecao_nasal">Secreção Nasal</label>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btnSecundario clearMarginTop" data-dismiss="modal">Fechar</button>
-						<button type="button" class="btnPrincipal clearMarginTop">Salvar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!--!!!!!!!!!!!! FIM DO MODAL !!!!!!!!!!!!-->
 	</fieldset>
 
 	<fieldset>
 		<h2 class="tituloGrande">Diagnóstico específico</h2>
-		<textarea placeholder="Digite aqui seu diagnóstico..." class="formEtapasTextArea" name="diagnostico" maxlength="500"></textarea>
+		<textarea placeholder="Digite aqui seu diagnóstico..." class="formEtapasTextArea" name="descricao_ficha" maxlength="500"></textarea>
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Proximo"/>
 		</div>
 	</fieldset>
-
 	<fieldset>
 		<h2 class="tituloGrande">Anexar Exames</h2>
+		<div class="centralizado coluna">
+			<div id="dropContainer" class="centralizado coluna">
+				<i class="fa fa-upload" style="font-size:48px;color:#ff6600"></i>
+				<h6 style="color:#ff6600">Arraste e solte seus arquivos aqui</h6>
+			</div>
+			<input type="file" id="fileInput" onchange="addFile();" onmouseout="addFile();" name="exame"  accept="image/png, image/jpeg text/plain"  multiple="multiple"/>
+		</div>
+		<input type="text" class="formEtapasInput" name="nome_exame" placeholder="Nome do Exame" maxlength="50"/>
+		<input type="text" class="formEtapasInput data" name="data_realizacao_exame" placeholder="Data de Realização" maxlength="50"/>
+		<textarea placeholder=" Descrição do exame" class="formEtapasTextArea" name="descricao_exame" maxlength="250"></textarea>
+		<p>Tipo de Exame</p>
+		<select id="tipoExame" class="formInput destacadoCimaBaixo clearMarginTop" name="id_tipo_exame">
+			<option value=""></option>
+		</select>
 		<div class="containerBotoes">
 			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
-			<input type="submit" name="next" class="next acao btnPrincipal" value="Salvar"/>
+			<input id="btnDiagnosticoSalvar" type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>
 		</div>
 	</fieldset>
 
 </form>
+<script>
+
+	dropContainer.ondragover = dropContainer.ondragenter = function(evt) {
+		evt.preventDefault();
+	};
+
+	dropContainer.ondrop = function(evt) {
+		fileInput.files = evt.dataTransfer.files;
+		evt.preventDefault();
+	};
+</script>
 <!--===========FIMM===============-->
 
 {% endblock %}

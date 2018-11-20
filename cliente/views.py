@@ -19,7 +19,6 @@ from raven.contrib.django.raven_compat.models import client
 
 from django.db import connection
 from core.actions import dictfetchall
-import json
 
 
 class ViewCadastrarCliente(BaseView):

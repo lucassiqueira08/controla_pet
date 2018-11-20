@@ -21,22 +21,28 @@
       eventLimit: true, // allow "more" link when too many events
   selectable : true,
 
-   googleCalendarApiKey: 'AIzaSyCj753IljI6MYJ0T0JCCsAALvCROE_Zweo',
+ 
      eventClick: function(events) {
      $('#visualizar #Nome').text(events.title);
      $('#visualizar #NomeAnimal').val(events.title);
      $('#visualizar #IdEvento').val(events.id);
-     $('#visualizar #DataInicio').text(events.start.format('DD/MM/YYYY HH:mm:ss'));
-     $('#visualizar #DataInicioedit').val(events.start.format('YYYY/MM/DD HH:mm:ss'));
+     $('#visualizar #DataInicio').text(events.start.format('DD/MM/YYYY'));
+     $('#visualizar #HoraInicio').text(events.start.format('HH:mm'));
+
+
+     $('#visualizar #DataInicioedit').val(events.start.format('YYYY-MM-DD'));
+
+
+     $('#visualizar #HoraInicioedit').val(events.start.format('HH:mm'));
      $('#visualizar #obsedit').val((events.title));
-     $('#visualizar #DataInicio').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
+//     $('#visualizar #DataInicio').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
      $('#visualizar #datahora').val(events.start.format('DD/MM/YYYY HH:mm:ss'));
        $('#visualizar').modal('show');
      return false;
     },
       selectHelper: true,
         select:function(start,end){
-    $('#cadastrar #dataAtendimento').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+    $('#cadastrar #dataAtendimento').val(moment(start).format('YYYY-MM-DD'));
     $('#cadastrar #end').val(moment(end).format('DD/MM/YYYY HH:mm:ss'));
     $('#cadastrar').modal('show');
     },
@@ -65,7 +71,7 @@
   
 .alert-info {
     background-color: #ff6600;
-
+    
 }
 
 
@@ -84,7 +90,7 @@
 
         <h5 class="modal-title text-center" ></h5>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closemodal">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -95,16 +101,20 @@
 		<dl Class = "dl-horizontal">
 			<dt>Observação:</dt>
 			<dd id="Nome"></dd>
-             <dt>Data:</dt>
-			<dd id="DataInicio"></dd>
 
+        <dt>Data:</dt>
+    <dd id="DataInicio"></dd>
+     <dt>Hora:</dt>
+		<dd id="HoraInicio"></dd>
 
+    
 		</dl>
+
      </div>
 
 	 <div class="modal-footer">
 		<button type="button" name="fecha" id="fecha" class="btn btn-canc-vis btn-warning"  onclick="Mudar('edit')"   >Editar</button>
-        <button type="button" class="btn btn-success" onclick="Mudar('edit')"  data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-success" onclick="MudarFechar('edit')"  data-dismiss="modal">Fechar</button>
 		 </div>
   <form method="post" >
         {% csrf_token %}
@@ -115,20 +125,30 @@
   </div>
   <div class="dupla">
     <label class="formLabel" for="exampleInputName">Data/hora</label>
-    <input class="formInput " type="datetime" class="form-control" id ="DataInicioedit" name ="DataInicioedit" id="DataInicio" >
+    <input class="formInput " type="date" class="form-control" id ="DataInicioedit" name ="DataInicioedit"   >
   </div>
-  
-   <!--div class="form-group">
-    <label for="exampleInputName">CPF:</label>
-    <input type="text" class="form-control"  name="cpf" id="cpf">
-  </div-->
+
+   <div class="dupla">
+    <label class="formLabel" for="exampleInputName">hora</label>
+    <input class="formInput " type="time" class="form-control" id ="HoraInicioedit" name ="HoraInicioedit" id="DataInicio" >
+  </div>
+
+
       <input type="hidden" class="form-control"  name="IdEvento" id="IdEvento">
 				<div class="modal-footer">
-        <button type="button" class="btn btn-canc-edit btn-primary clearMarginTop" onclick="Mudar('edit') ">Cancelar</button>
 
-          <button name="button" value = "edit" class="acao btn btn-success clearMarginTop">SALVAR</button>
+        <button type="button" class="acao btn btn-canc-edit btn-primary  "  
+        onclick="Mudar('edit') ">
+          Cancelar
+        </button>
 
-				<button name="button" value = "del" class="acao btn btn-danger btn-primary clearMarginTop" ">Deletar</button>
+        <button name="button" value = "edit" class="acao btn btn-success clearMarginTop">
+          Salvar
+        </button>
+
+				<button name="button" value = "del" class="acao btn btn-danger btn-primary clearMarginTop"">
+          Deletar
+        </button>
 
 </div>
 		</div>
@@ -152,51 +172,82 @@
       </div>
 	<div class="modal-body">
 <!-- Usa o form para criar alimentar o evento para gravar dados na google agenda -->
-		<form method="post" class='formEtapas'>
+		<form method="post" class='formEtapas formNovo'>
         {% csrf_token %}
   <div class="form-group">
     <label for="exampleInputName">Observação</label>
     <input type="text" class="form-control" id="exampleInputName" name="obs" placeholder="Nome">
   </div>
-  <div class="form-group">
-    <label for="exampleInputName">Data/hora</label>
-    <input type="datetime" class="form-control" name ="dataAtendimento" id="dataAtendimento" >
-  </div>
+   <div class="form-group">
+  <div class="form-row">
 
+  <div class="form-group col-md-7 mb-3">
+    <label for="exampleInputName">Data</label>
+    <input type="date" class="form-control data" name ="dataAtendimento" id="dataAtendimento" >
+     </div>
+  <div class="form-group col-md-5 mb-3">
+    <label for="  exampleInputName">hora</label>
+    <input type="time" class="form-control" name ="HoraAtendimento" id="horaAtendimento" >
+ 
+  </div>
+  </div>
    <div class="form-group">
+
     <label for="exampleInputName">CPF:</label>
-    <input type="text" class="form-control"  name="cpf" id="cpf">
-  </div>  
-   <div class="form-group">
-<p>Funcionario</p>
-  <select id="funcionarios" class="formInput destacadoCimaBaixo clearMarginTop" name="funcionarios" required>
+
+    <input type="search" class="form-control cpf" name="cpf_cliente" placeholder="Digite o CPF do Cliente..." maxlength="14"  id="cpf_cliente" required>
+
+     <label for="exampleInputName">Animais:</label>
+
+    <select id="selectAnimal" class="form-control " name="selectAnimal" required>
+      <option value=""></option>
+    </select>
+
+     <label for="exampleInputName">Funcionario</label>
+
+
+  <select id="funcionarios" class="form-control" name="funcionarios" required>
  {% for Funcionario in Funcionarios %}
     <option value="{{ Funcionario.cpf }}">{{ Funcionario.primeiro_nome }}</option>
-  
- 
  {% endfor %}
   </select>
+
+
+<h5 class="destacadoCima">Repetir o atendimento?</h5 >
+
   </div>
 
+<div class="custom-control custom-radio custom-control-inline">
+  <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="S">
+  <label class="custom-control-label" for="inlineRadio1">Semanalmente</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="M">
+  <label class="custom-control-label" for="inlineRadio2">mensalmente</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="A" >
+  <label class="custom-control-label" for="inlineRadio3">Anualmente</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="N" >
+  <label class="custom-control-label" for="inlineRadio4">Não</label>
+</div>
 
-  <div class="dupla">
-  <button name="button" value = "save" class="acao btn btnPrincipal clearMarginTop">SALVAR</button>
-   
-    </div>
-      <div class="dupla">
-     <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
-     </div>
-</form>
-     </div>
+
 
 	 <div class="modal-footer">
 
 
+  <button name="button" value = "save" class="acao btn btnPrincipal clearMarginTop">SALVAR</button>
+   
+     <button type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>
+
       </div>
+      </form>
     </div>
   </div>
 </div>
-
    <div class="modal fade" id="cadastrar" tabindex="-1"
   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -236,6 +287,8 @@
 
 
 		</div>
+
 	</div>
+
 
 {% endblock %}

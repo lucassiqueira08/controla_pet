@@ -13,10 +13,10 @@ def get_cliente(request):
     return HttpResponse(cliente_json, content_type='application/json')
 
 
-def get_animal(request, cpf_cliente, nome_animal):
+def get_animal(request, cpf_cliente, id_animal):
 
     cliente = Cliente.objects.get(cpf=cpf_cliente)
-    animal = Animal.objects.get(cpf_cliente=cliente, nome=nome_animal)
+    animal = Animal.objects.get(cpf_cliente=cliente, nome=id_animal)
 
     data_json = serializers.serialize(
         "json", [cliente, animal], ensure_ascii=False
@@ -26,11 +26,12 @@ def get_animal(request, cpf_cliente, nome_animal):
 
 
 def get_ficha_animal(request, cpf_cliente , nome_animal):
+
     cliente = Cliente.objects.filter(cpf=cpf_cliente).first()
     if cliente:
-        animal= Animal.objects.filter(nome=nome_animal,cpf_cliente=cliente).first()
+        animal= Animal.objects.filter(pk=id_animal,cpf_cliente=cliente).first()
         if animal:
-            data = ([animal,cliente])
+            data = ([animal,cliente])    
             cliente_json = serializers.serialize("json", data)
             return HttpResponse(cliente_json, content_type='application/json')
     

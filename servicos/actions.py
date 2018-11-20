@@ -3,9 +3,11 @@ import json
 from django.http import HttpResponse
 from django.core import serializers
 
+
+from cliente.models import Cliente, Animal
+
 from servicos.models import TipoProcedimento, DiagnosticoAnimal, TipoDiagnostico, TipoExame
-from cliente.models import Cliente
-from cliente.models import Animal
+
 
 
 def get_tipo_procedimento(request):

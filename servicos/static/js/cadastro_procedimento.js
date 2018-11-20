@@ -189,6 +189,7 @@ $('#cpf_cliente_diagnostico').on('blur', function (e) {
   $('#selectAnimalDiagnostico option').remove()
   $('#selectAnimalDiagnostico').append("<option/>")
    //Busca animais do cliente em específico
+
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
   $.ajax({
@@ -198,7 +199,7 @@ $('#cpf_cliente_diagnostico').on('blur', function (e) {
       "X-CSRFToken": csrftoken,
     },
     data:{
-      cpf_cliente     : $('#cpf_cliente_diagnostico').val(),
+      cpf_cliente : $('#cpf_cliente_diagnostico').val(),
     },
     success: function (data) {
       var selectAnimais = $('#selectAnimalDiagnostico')

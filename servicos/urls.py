@@ -5,8 +5,9 @@ from .views import ViewCadastroProcedimento, ViewCadastroEstadia, ViewModal,View
 from cliente.actions import get_ficha_animal
 
 from servicos.actions import (get_tipo_procedimento, get_animais_cliente,
-                              get_animal, get_diagnostico, get_tipo_exame)
-
+                              get_animal, get_diagnostico, get_tipo_exame,
+                              get_procedimento, get_pagamentos_pendentes,
+                              get_animais_hospedados, get_atendimentos_pendentes, )
 from .views import (ViewCadastroProcedimento, ViewCadastroEstadia,
                     ViewModal, ViewCadastroAtendimento, ViewCadastrarDiagnostico)
 
@@ -53,5 +54,20 @@ urlpatterns = [
         'get_tipo_exame', get_tipo_exame,
         name='get_tipo_exame'
     ),
-
+    path(
+        'get_procedimento', get_procedimento,
+        name='get_procedimento'
+    ),
+    path(
+        'get_animais_hospedados', get_animais_hospedados,
+        name='get_animais_hospedados'
+    ),
+    path(
+        'get_atendimentos_pendentes', get_atendimentos_pendentes,
+        name='get_atendimentos_pendentes'
+    ),
+    path(
+        'get_pagamentos_pendentes', get_pagamentos_pendentes,
+        name='get_pagamentos_pendentes'
+    ),
 ]

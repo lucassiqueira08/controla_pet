@@ -34,3 +34,17 @@ $('#formcadastroFuncionario').on('submit', function (e) {
           }
       })
 })
+
+
+$(document).ready(function () {
+    $('input[name=veterinario]').change(function () {
+        if ($("input[name='veterinario']:checked").val() == '1') {
+            $("#crmv").removeClass(" hide")
+            $("#emissor").removeClass(" hide")
+        }
+        if ($("input[name='veterinario']:checked").val() == '0') {
+            $("#crmv").addClass(" hide")
+            $("#emissor").addClass(" hide")
+        }
+    });
+});

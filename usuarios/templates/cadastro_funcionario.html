@@ -2,42 +2,75 @@
 {% load static %}
 {% block content_base %}
 
-					<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
 <form id="formcadastroFuncionario" class='formEtapas' enctype="multipart/form-data">
-{% csrf_token %}
-<fieldset>
-	<h2 class="tituloGrande">Dados Gerais</h2 class="tituloGrande">
-	<p>Digite algumas informações do funcionário!</p>
+	{% csrf_token %}
+	<fieldset>
+		<h2 class="tituloGrande">Dados Gerais</h2 class="tituloGrande">
+			<p>Digite algumas informações do funcionário!</p>
 
-	<input type="text" class="formEtapasInput" 		id="primeiro_nome" name="primeiro_nome" placeholder="Primeiro nome" maxlength="50" />
-	<input type="text" class="formEtapasInput" 		id="ultimo_nome" name="ultimo_nome" placeholder="Último nome" maxlength="20" />
-	<input type="text" class="formEtapasInput" 		id="apelido"   name="apelido"   placeholder="Apelido" maxlength="50"/>
-	<input type="text" class="formEtapasInput cpf"id="cpf" 	     name="cpf" 		  placeholder="CPF" maxlength="14"/>
-	<input type="date" class="formEtapasInput" 		id="data_nasc" name="data_nasc" placeholder="Data de nascimento" maxlength="20" />
+			<input type="text" class="formEtapasInput" 		id="primeiro_nome" name="primeiro_nome" placeholder="Primeiro nome" maxlength="50" required/>
+			<input type="text" class="formEtapasInput" 		id="ultimo_nome" name="ultimo_nome" placeholder="Último nome" maxlength="20"required />
+			<input type="text" class="formEtapasInput" 		id="apelido"   name="apelido"   placeholder="Apelido" maxlength="50"required/>
+			<input type="text" class="formEtapasInput cpf"id="cpf" 	     name="cpf" 		  placeholder="CPF" maxlength="14" required/>
+			<input type="date" class="formEtapasInput" 		id="data_nasc" name="data_nasc" placeholder="Data de nascimento" maxlength="10" required />
+			<input type="text" class="formEtapasInput hide" 		id="crmv" name="crmv" placeholder="crmv" maxlength="50" />
 
-	<p>Cargo</p>
-	<select id="cargos" class="formInput destacadoCimaBaixo clearMarginTop" name="id_cargo" required>
-		<option value=""></option>
-	</select>
+			<div class="container">
+				<div class="row">
+					<div class="col-6">
+						<p>Cargo</p>
+						<select id="cargos" class="formInput destacadoCimaBaixo clearMarginTop" name="id_cargo" required>
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-6">
+						<p>Situação</p>
+						<select id="situacao" class="formInput destacadoCimaBaixo clearMarginTop" name="situacao" required>
+							<option value="Ativo">Ativo</option>
+							<option value="Inativo">Inativo</option>
+						</select>
+					</div>
+				</div>
+			</div>
 
-	<p>Situação</p>
-	<select id="situacao" class="formInput destacadoCimaBaixo clearMarginTop" name="situacao" required>
-		<option value="Ativo">Ativo</option>
-		<option value="Inativo">Inativo</option>
-	</select>
+			<div class="container">
+				<div class="row">
+					<div class="col-6">
+						<p>Utilizará o sistema?</p>
+						<label for="equipe_sistema_sim">Sim</label>
+						<input type="radio" name="equipe_sistema" id="equipe_sistema_sim" value="1" required>
+						<label for="equipe_sistema_nao">Não</label>
+						<input type="radio" name="equipe_sistema" id="equipe_sistema_nao" value="0" required>
+					</div>
+					<div class="col-6">
+						<p>É veterinário(a)?</p>
+						<label for="veterinario_sim">Sim</label>
+						<input type="radio" name="veterinario" id="veterinario_sim" value="1" required>
+						<label for="veterinario_nao">Não</label>
+						<input type="radio" name="veterinario" id="veterinario_nao" value="0" required>
+					</div>
+				</div>
+			</div>
+			<div class="container" id="veterinario">
+				<div class="row">
+					<div class="col-6 hide" id="emissor">
+						<p>Estado emissor</p>
+						<select id="estado_emissor" class="formInput destacadoCimaBaixo clearMarginTop" name="estado_emissor" required>
+							<option value="Sp">Sp</option>
+							<option value="Rj">Rj</option>
+						</select>
+					</div>
+					<div class="col-6"></div>
+			</div>
 
-	<p>Utilizará o sistema?</p>
-	<select id="equipe_sistema" class="formInput destacadoCimaBaixo clearMarginTop" name="equipe_sistema" required>
-		<option value="1">Sim</option>
-		<option value="0">Não</option>
-	</select>
-	<div class="containerBotoes linha centralizado">
-    <button  type="submit" class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
-	</div>
-</fieldset>
-</form>
-{% endblock %}
+			<div class="containerBotoes linha centralizado">
+				<button  type="submit" class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
+			</div>
+		</fieldset>
+	</form>
+	{% endblock %}
 
-{% block add_js %}
-    <script src="{% static 'js/usuarios.js' %}"></script>
-{% endblock %}
+	{% block add_js %}
+	<script src="{% static 'js/usuarios.js' %}"></script>
+	{% endblock %}

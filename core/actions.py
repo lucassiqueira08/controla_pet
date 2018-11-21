@@ -7,7 +7,7 @@ from django.db import connection
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 
-from servicos.models import Atendimento, FeitoPor, AtendimentoProcClinico, AtendimentoProcEstetico, StatusAtendimento
+from servicos.models import Atendimento
 
 
 def get_atendimentos(request):
@@ -40,20 +40,21 @@ def get_notificacao(request):
     query_date = year + '-' + month
 
     try:
-        notificacao = Atendimento.objects.filter(data_solicitacao=query_date).values(
+        notificacao = Atendimento.objects.filter(data_solicitacao__month=month,
+                                                 data_solicitacao__year=year).values(
             'id',
-            'statusatendimento__id_status__nome',
+            'statusatendimento_atendimento__id_status__nome',
             'data_solicitacao',
             'id_animal__especie',
-            'atendimentoprocestetico__id_proc_estetico__nome',
-            'atendimentoprocclinico__id_proc_clinico__nome',
+            'atendimentoprocestetico_atendimento__id_proc_estetico__nome',
+            'atendimentoprocclinico_atendimento__id_proc_clinico__nome',
             'id_animal__cpf_cliente__nome',
             'id_animal__cpf_cliente__cpf',
             'feitopor_atendimento__id_funcionario__primeiro_nome',
         )
 
         context = json.dumps(
-            notificacao,
+            list(notificacao),
             sort_keys=True,
             indent=1,
             cls=DjangoJSONEncoder

@@ -74,8 +74,8 @@ $.get('/get_notificacao', function(data){
                    +     '</li>'
                    +   '</ul>'
                    + '</div>';
-  dataJson = JSON.parse(data)
 
+	dataJson = JSON.parse(data)
 
   for (var item in dataJson) {
     var id                    = dataJson[item]['id'];
@@ -138,7 +138,6 @@ $('.btnEditar').click(function(){
 	$("#formularioModal :input").prop('readonly', false);
 });
 
-
 //=====================Modal=======================
 
 $('#FormModal').on('shown.bs.modal', function () {
@@ -148,8 +147,6 @@ $('#FormModal').on('shown.bs.modal', function () {
 $(window).on('load',function(){
     $('#modalBemVindo').modal('show');
 });
-
-
 
 function DisableCampos(){
 		$("input").attr('disabled','disabled');
@@ -162,6 +159,7 @@ function EditFields(){
 		$("input").attr('disabled','disabled');
 	}
 }
+
 //=====================File Input=======================
 // const FileInput     	= $("#formEtapasFileInput")
 // const FileInputBtn  	= $("#fileInputBtn")
@@ -181,7 +179,6 @@ function EditFields(){
 
 // }
 //=====================File Input=======================
-
 
 $(document).ready(function() {
 var x = 1;

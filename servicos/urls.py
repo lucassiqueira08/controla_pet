@@ -7,7 +7,7 @@ from cliente.actions import get_ficha_animal
 from servicos.actions import (get_tipo_procedimento, get_animais_cliente,
                               get_animal, get_diagnostico, get_tipo_exame,
                               get_procedimento, get_pagamentos_pendentes,
-                              get_animais_hospedados, get_atendimentos_pendentes)
+                              get_animais_hospedados, get_atendimentos_pendentes, )
 from .views import (ViewCadastroProcedimento, ViewCadastroEstadia,
                     ViewModal, ViewCadastroAtendimento, ViewCadastrarDiagnostico)
 

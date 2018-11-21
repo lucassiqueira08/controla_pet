@@ -68,3 +68,13 @@ def valida_cpf_responsavel(cpf):
     if responsavel:
         return {'cpf': True, 'msg': 'Responsável já cadastrado'}
     return {'cpf': False}
+
+
+def get_cliente_id(request):
+    id = request.POST.get('cpf_cliente')
+    if id:
+        cliente = Cliente.objects.filter(id=id)
+    else:
+        cliente = Cliente.objects.all()
+    cliente_json = serializers.serialize("json", cliente)
+    return HttpResponse(cliente_json, content_type='application/json')

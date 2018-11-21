@@ -1,8 +1,8 @@
-$('#sendForm').on('submit', function (e) {
+$('#btnAtendimentoSalvar').on('click', function (e) {
     e.preventDefault()
     var dataProcedimentos = serielizersTable()
     var funcionario = getFuncionario()
-    var animal = $('.nome_animal_table').data('pk')
+    var animal = $('#selectAtendimento').val()
     console.log(animal)
     var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
     $.ajax({
@@ -21,7 +21,10 @@ $('#sendForm').on('submit', function (e) {
             orcamento: $('#precoTotal').text()
         }),
         success: function (data) {
-
+          alerta(data.mensagem, data.tipo, data.time)
+          if (data.tipo=='ok') {
+            let timerId = setInterval(() => window.location.reload(), data.time);
+          }
         },
         dataType: 'json',
     })
@@ -136,19 +139,79 @@ function apagar() {
     calculaPreco()
 }
 
-$('#Buscar').click(function () {
-    var nomeAnimal = $('#nome_animal').val()
-    var nomeCpf = $('#cpf').val()
-    $.getJSON('/cliente/get_animal/' + nomeCpf + '/' + nomeAnimal, function (data) {
-        var cliente = data[0].fields
-        var clienteCpf = data[0].pk
-        var animal = data[1].fields
+$('#cpfAtendimento').on('blur', function (e) {
+  //Limpa valores atuais
+  $('#selectAtendimento option').remove()
+  $('#selectAtendimento').append("<option/>")
+   //Busca animais do cliente em específico
 
-        $('.nome_animal_table').text(animal.nome).data(data[1])
-        $('.logradouro').text(cliente.logradouro)
-        $('.nome_cliente').text(cliente.nome)
-        $('.cor_animal').text(animal.cor)
-        $('.cpf_cliente').text(clienteCpf)
-        $('.sexo_animal').text(animal.sexo)
-    })
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+  $.ajax({
+    type: "GET",
+    url: '/servicos/get_animais_cliente',
+    headers:{
+      "X-CSRFToken": csrftoken,
+    },
+    data:{
+      cpf_cliente : $('#cpfAtendimento').val(),
+    },
+    success: function (data) {
+      var selectAtendimento = $('#selectAtendimento')
+      var animais = data
+      for (var animal in animais) {
+        var option = $('<option/>').val(animais[animal].pk)
+        .text(animais[animal].fields.nome)
+        selectAtendimento.append(option)
+      }
+    },
+  })
+})
+
+$('#Buscar').on('click', function (e) {
+  if ($('#selectAtendimento').val().trim() != '') {
+    e.preventDefault()
+    var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+            type: "GET",
+            url: '/servicos/get_animal',
+            headers:{
+                "X-CSRFToken": csrftoken,
+            },
+            data:{
+              id_animal       : $('#selectAtendimento').val(),
+              cpf_cliente     : $('#cpfAtendimento').val(),
+            },
+            success: function (data) {
+              var animal = data[0].fields
+
+              $('.nome_animal_table').text(animal.nome)
+              $('.cor_animal').text(animal.cor)
+              $('.cpf_cliente').text(animal.cpf_cliente)
+              $('.sexo_animal').text(animal.sexo)
+             },
+        })
+        $.ajax({
+                type: "GET",
+                url: '/cliente/get_cliente_id',
+                headers:{
+                    "X-CSRFToken": csrftoken,
+                },
+                data:{
+                  cpf_cliente     : $('#cpfAtendimento').val(),
+                },
+                success: function (data) {
+                  var cliente = data[0].fields
+
+                  $('.logradouro').text(cliente.logradouro)
+                  $('.nome_cliente').text(cliente.nome)
+                 },
+            })
+  }
+  else {
+    alerta("Por favor selecione um cliente e animal válido..", "aviso", 5000)
+    setTimeout(function(){
+      $("#btnConfirmacaoPrevAtendimento").click()
+    },1);
+  }
 })

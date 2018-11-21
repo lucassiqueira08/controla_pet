@@ -6,7 +6,7 @@ from .views import (ViewCadastrarAnimal, ViewVisualizarAnimal,
                     ViewBuscarAnimal)
 
                     
-from .actions import get_cliente, get_animal, get_ficha_animal
+from .actions import get_cliente, get_animal, get_ficha_animal, get_cliente_id
 
 
 
@@ -29,6 +29,9 @@ urlpatterns = [
     ),
     path(
         'get_cliente', get_cliente
+    ),
+    path(
+        'get_cliente_id', get_cliente_id
     ),
     path(
         'acompanhe_sua_clinica', ViewAcompanheSuaClinica.as_view(),

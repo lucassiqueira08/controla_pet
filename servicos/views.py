@@ -11,7 +11,7 @@ from servicos.models import (Atendimento, FeitoPor, AtendimentoProcClinico,
                              AtendimentoProcEstetico, ProcedimentoEstetico,
                              ProcedimentoClinico, Orcamento, TipoProcedimento,
                              DiagnosticoAnimal, TipoDiagnostico, FichaDiagnostico,
-                             Exame, TipoExame, StatusAtendimento, TipoStatusAtendimento)
+                             Exame, TipoExame, StatusAtendimento, TipoStatusAtendimento, Estadia)
 
 from core.views import BaseView
 from core.models import Menu
@@ -101,6 +101,7 @@ class ViewCadastroEstadia(View):
 
         return HttpResponse(json.dumps(context), content_type='application/json')
 
+
 class ViewModal(View):
 
     template = 'modal_orcamento.html'
@@ -128,11 +129,21 @@ class ViewCadastroAtendimento(View):
 
         atendimento = Atendimento()
 
+        # TODO Devemos colocar uma observação decente, já que a mesma é que aparece para o usuário
         atendimento.id_animal = animal
-        atendimento.observacao = 'algo'
+        atendimento.observacao = 'Atendimento'
         atendimento.data_solicitacao = actual_date
         atendimento.id_orcamento = orcamento
-        atendimento.save()
+        try:
+            atendimento.save()
+        except Exception as e:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Não foi possível cadastrar esse atendimento',
+                'time': 5000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
         for item in data['procedimentos']:
             if item['model'] == 'servicos.procedimentoestetico':
@@ -152,17 +163,31 @@ class ViewCadastroAtendimento(View):
 
         feito_por = FeitoPor()
         feito_por.data_realizacao = actual_date
-        feito_por.id_atendimento  = atendimento
-        feito_por.id_funcionario  = funcionario
-        feito_por.save()
+        feito_por.id_atendimento = atendimento
+        feito_por.id_funcionario = funcionario
+        try:
+            feito_por.save()
+        except Exception as e:
+            client.captureException()
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Não foi possível associar o atendimento a este funcionario',
+                'time': 7000
+            }
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
         tipo_status_atendimento = TipoStatusAtendimento.objects.get(nome='aberto')
 
-        status_atendimento                = StatusAtendimento()
+        status_atendimento = StatusAtendimento()
         status_atendimento.id_atendimento = atendimento
-        status_atendimento.id_status      = tipo_status_atendimento
+        status_atendimento.id_status = tipo_status_atendimento
         status_atendimento.save()
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        context = {
+            'tipo': 'ok',
+            'mensagem': 'Atendimento cadastrado com sucesso!',
+            'time': 7000
+        }
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 class ViewCadastrarDiagnostico(BaseView):

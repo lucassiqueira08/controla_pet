@@ -25,7 +25,7 @@ function Mudar(el){
   }
 
 	 else{
-	 
+
    	document.getElementById(el).style.display ='none';
    }
   if(display == "block")
@@ -79,16 +79,17 @@ $.get('/get_notificacao', function(data){
 
   for (var item in dataJson) {
     var id                    = dataJson[item]['id'];
-    var data                  = (dataJson[item]['data/hora']).substring(0,10).replace("-","/");
-    var hora                  = (dataJson[item]['data/hora']).substring(11,16);
-    var dono                  = dataJson[item]['dono'];
-    var cpf_cliente           = dataJson[item]['cpf_cliente'];
-    var procedimento_clinico  = dataJson[item]['procedimento_clinico'];
-    var procedimento_estetico = dataJson[item]['procedimento_estetico'];
-    var responsavel           = dataJson[item]['responsavel'];
-    var status_atendimento    = dataJson[item]['status_atendimento'];
+    var data                  = (dataJson[item]['data_solicitacao']).substring(0,10).replace("-","/");
+    var hora                  = (dataJson[item]['data_solicitacao']).substring(11,16);
+    var dono                  = dataJson[item]['id_animal__cpf_cliente__nome'];
+    var especie               = dataJson[item]['id_animal__especie'];
+    var cpf_cliente           = dataJson[item]['id_animal__cpf_cliente__cpf'];
+    var procedimento_clinico  = dataJson[item]['atendimentoprocclinico_atendimento__id_proc_clinico__nome'];
+    var procedimento_estetico = dataJson[item]['atendimentoprocestetico_atendimento__id_proc_estetico__nome'];
+    var responsavel           = dataJson[item]['feitopor_atendimento__id_funcionario__primeiro_nome'];
+    var status_atendimento    = dataJson[item]['statusatendimento_atendimento__id_status__nome'];
 
-    var procedimento          = dataJson[item]['procedimento_clinico'] != null ? dataJson[item]['procedimento_clinico'] : dataJson[item]['procedimento_estetico'] != null ? dataJson[item]['procedimento_estetico'] : "Sem procedimento!";
+    var procedimento          = dataJson[item]['atendimentoprocclinico_atendimento__id_proc_clinico__nome'] != null ? dataJson[item]['atendimentoprocclinico_atendimento__id_proc_clinico__nome'] : dataJson[item]['atendimentoprocestetico_atendimento__id_proc_estetico__nome'] != null ? dataJson[item]['atendimentoprocestetico_atendimento__id_proc_estetico__nome'] : "Sem procedimento!";
     var final                 = notificacao.replace("##hora", hora).replace("##bichinho",dono).replace("##procedimento",procedimento);
 
 
@@ -250,4 +251,3 @@ function addFile(){
 		alert(files[i].name)
 	}
 }
-

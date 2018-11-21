@@ -81,6 +81,7 @@ $('#salvaEstadia').on('click', function (e) {
       if (data.tipo=='ok') {
         $('.formEtapasInput').val('')
         $('.formInput').val('')
+        let timerId = setInterval(() => window.location.reload(), data.time);
       }
     },
     error: function(){

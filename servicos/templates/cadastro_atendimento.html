@@ -11,8 +11,11 @@
 
 	<fieldset>
 		<h3 class="tituloExtraGrande">Buscar Animal</h3 class="tituloExtraGrande">
-		<input type="text" class="formEtapasInput destacadoCimaBaixo clearMarginTop" id="nome_animal" name="nomeanimal" placeholder="Digite o nome do Animal..." maxlength="50">
-		<input type="text" id="cpf" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14" required>
+		<input type="text" id="cpfAtendimento" class="formEtapasInput cpf " name="cpf" placeholder="Digite o CPF do Proprietario..." maxlength="14" required>
+		<p>Animais:</p>
+		<select id="selectAtendimento" class="formInput destacadoCimaBaixo clearMarginTop" name="id_animal" required>
+			<option value=""></option>
+		</select>
 		<div class="containerBotoes">
 			<input type="submit" id="Buscar" name="next" class="next acao btnPrincipal" value="Buscar"/>
 		</div>
@@ -54,7 +57,7 @@
 		</div>
 		<h2 class="tituloMedio destacadoCima">Esse é o bichinho certo?</h2>
 		<div class="containerBotoes">
-			<input type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
+			<input id="btnConfirmacaoPrevAtendimento" type="submit" name="prev" class="prev acao btnPrincipal" value="Não!"/>
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Sim!"/>
 		</div>
 	</fieldset>
@@ -144,7 +147,9 @@
         </div>
 
         <div class="containerBotoes">
-            <button class="btnPrincipal">Enviar</button>
+					<input type="submit" name="prev" class="prev acao btnPrincipal" value="Anterior"/>
+					<input id="btnAtendimentoSalvar" type="submit" name="next" class="acao btnPrincipal" value="Salvar"/>
+
         </div>
 	</fieldset>
 </form>

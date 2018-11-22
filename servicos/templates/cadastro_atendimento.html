@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content_base %}
+
+
+<div class="titulo destacadoCimaBaixo clearMarginTop">
+		<div class="itensTitulo">
+			<div class="circulo">
+				<img src="../static/img/cadastro.png" alt="{{menu.descricao}}">
+			</div>
+	</div>
+</div>
+
+
 <form id="sendForm" class='formEtapas'>{% csrf_token %}
 	<ul id="progress">
 		<li class="ativo"><label>Buscar Animal</label></li>

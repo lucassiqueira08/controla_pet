@@ -23,9 +23,9 @@ class Atendimento(models.Model):
     id_google_agenda = models.CharField(max_length=28, blank=True, null=True)
     data_solicitacao = models.DateTimeField(blank=True, null=True)
     id_animal = models.ForeignKey(Animal,
-                                    on_delete=models.CASCADE,
-                                    db_column='id_animal',
-                                    related_name='atendimento_cliente')
+                                  on_delete=models.CASCADE,
+                                  db_column='id_animal',
+                                  related_name='atendimento_cliente')
 
     id_orcamento = models.ForeignKey(Orcamento,
                                      on_delete=models.CASCADE,

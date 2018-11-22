@@ -34,23 +34,26 @@
 		
 		<fieldset id="Ficha">
 			<h2 class="tituloGrande">Ficha animal</h2 class="tituloGrande">
+				<h3>{{fichasGerais.FichaAnimal}}</h3>
 				<p>Aqui você tem a visão de todas das fichas abertas!</p>
 
 				<ul class="timeline">
-                  {%for ficha in fichas %}
+                  {%for ficha in fichasGerais %}
 					<li class="event" data-date="{{ficha.data_consulta}}">
-                        
-              
-					<h3>{{ficha.nome}}</h3>
 
-						<p>{{ficha.descricao}}</p>
+					
+					
+                  
 					<a data-toggle="modal" data-target="#modal_{{ficha.id}}">
 						<button type="button" class="btnPequeno clearMarginTop" name="button"  data-target="#modal_{{ficha.id}}">Ver mais!</button>
 					</a>
                             
 					</li>
 
+
+
  <div class="modal fade" id="modal_{{ficha.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -61,43 +64,40 @@
 				</div>
 				<div class="modal-body">
 					<div class="centralizado">
+
+               
                       	  	<fieldset>
 
-                               <div class="dupla">
-       							 <label class="formLabel">Data da consulta</label>
-									<input type="text" class="formInput" name="dataconsult" id="dataconsult" value ="{{ficha.data_consulta}}" maxlength="50" disabled />
-								</div>
+   {% for ficha2 in fichas %}
 
+                   {% if ficha2.id == ficha.id%}
+
+
+                          
 
 							   <div class="dupla">
-							<label for="#" class="formLabel">Descrição:</label>
-							<input id="dono" class="formInput" type="text" value="{{ficha.descricao}}" disabled />
+							<label for="#" class="formLabel">Diagnostico:</label>
+							<input id="dono" class="formInput" type="text" value="{{ficha2.fichadiagnostico_ficha__id_diagnostico__descricao}}" disabled/>
 									</div>
 
 
-                            {% if ficha.booleano == 0 %}
-                            <div class="dupla"> 
-	 						<label class="formLabel">Possui ?</label>
-									<input type="text" class="formInput" name="booleano" id="booleano" value ="Sim" maxlength="20" disabled/>
-							</div>
-							{% else %}
-							 <div class="dupla">
-								 <label class="formLabel">Possui ?</label>
-									<input type="text" class="formInput" name="booleano" id="booleano" value ="Não" maxlength="20" disabled />
-								</div>	
-							{% endif %}	
+                     
+                         
+								{% endif %}
+                  {% endfor %}
 
 								
 							</fieldset>
-					
+			
 
 					</div>
 				
 				</div>
 			</div>
 		</div>
+		  
 	</div>
-
+ 					
 			{% endfor %}
 </ul>
 </fieldset>

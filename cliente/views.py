@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponse
 from django.db.utils import IntegrityError
-
+from django.db.models import Sum, Count
 from core.views import BaseView
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal, TipoCliente, FichaAnimal)
@@ -498,7 +498,19 @@ class ViewBuscarAnimal(BaseView):
             'exames':exames,
             'historicos':linhas,
         }
-      
+        
+        ficha = FichaAnimal.objects.filter( id_animal = animal.id).values(
+            'id',
+            'data_consulta',
+            'descricao',
+            'fichadiagnostico_ficha__id_diagnostico__descricao',
+   
+              )
+        fichaGeral = FichaAnimal.objects.filter( id_animal = animal.id)
+
+
+
+
         query2 = """
              SELECT
 
@@ -506,13 +518,13 @@ class ViewBuscarAnimal(BaseView):
 
              FROM
                     FICHA_ANIMAL AS FICHA
-              INNER JOIN
+              left JOIN
                  FICHA_DIAGNOSTICO AS FICHA_DIAG ON (FICHA.id = FICHA_DIAG.id_ficha)
            INNER JOIN
                     DIAGNOSTICO_ANIMAL AS DIAG ON (FICHA_DIAG.id_diagnostico = DIAG.ID)   
-           INNER JOIN TIPO_DIAGNOSTICO AS TDIAG ON (TDIAG.id = DIAG.id_tipo_diagnostico)         
+                 
               WHERE
-                 FICHA.id_animal = {}
+                 FICHA.id_animal = {} 
                    """.format(animal.id)
 
         with connection.cursor() as cursor:
@@ -520,8 +532,15 @@ class ViewBuscarAnimal(BaseView):
             rowfICHA = dictfetchall(cursor)
  
         linhasFicha= rowfICHA
+        novoDic = {}
+ 
+        
+        
 
-        context['fichas']=linhasFicha
+      
+
+        context['fichas'] = ficha
+        context['fichasGerais'] = fichaGeral
 
         return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'

@@ -503,11 +503,16 @@ class ViewBuscarAnimal(BaseView):
             'id',
             'data_consulta',
             'descricao',
-            'fichadiagnostico_ficha__id_diagnostico__descricao',
+          
    
               )
         fichaGeral = FichaAnimal.objects.filter( id_animal = animal.id)
 
+        fichadesc = FichaAnimal.objects.filter( id_animal = animal.id).values(
+            'id',
+            'fichadiagnostico_ficha__id_diagnostico__descricao',
+   
+              )
 
 
 
@@ -541,6 +546,7 @@ class ViewBuscarAnimal(BaseView):
 
         context['fichas'] = ficha
         context['fichasGerais'] = fichaGeral
+        context['fichadesc'] = fichadesc
 
         return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'

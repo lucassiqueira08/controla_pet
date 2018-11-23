@@ -33,24 +33,21 @@
 	{% csrf_token %}
 		
 		<fieldset id="Ficha">
+			{{ficha}}
 			<h2 class="tituloGrande">Ficha animal</h2 class="tituloGrande">
 				<h3>{{fichasGerais.FichaAnimal}}</h3>
 				<p>Aqui você tem a visão de todas das fichas abertas!</p>
 
 				<ul class="timeline">
-                  {%for ficha in fichasGerais %}
+			        
+                  {%for ficha in fichas %}
 					<li class="event" data-date="{{ficha.data_consulta}}">
-
-					
-					
                   
 					<a data-toggle="modal" data-target="#modal_{{ficha.id}}">
 						<button type="button" class="btnPequeno clearMarginTop" name="button"  data-target="#modal_{{ficha.id}}">Ver mais!</button>
 					</a>
                             
 					</li>
-
-
 
  <div class="modal fade" id="modal_{{ficha.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 
@@ -68,22 +65,33 @@
                
                       	  	<fieldset>
 
-   {% for ficha2 in fichas %}
-
-                   {% if ficha2.id == ficha.id%}
-
-
-                          
-
+                      	
 							   <div class="dupla">
-							<label for="#" class="formLabel">Diagnostico:</label>
-							<input id="dono" class="formInput" type="text" value="{{ficha2.fichadiagnostico_ficha__id_diagnostico__descricao}}" disabled/>
+                            
+							<label for="#" class="formLabel">Descrição da ficha :</label>
+							<input id="dono" class="formInput" type="text" value="{{ficha.descricao}}" disabled/>
 									</div>
 
+   {% for fichaItens in fichadesc %}
 
-                     
+           {% if fichaItens.id == ficha.id%}
+
+           				   <div class="dupla">
+
+							<label for="#" class="formLabel">Diagnostico:</label>
+                         {% if fichaItens.fichadiagnostico_ficha__id_diagnostico__descricao == None  %}
+                           
+							<input id="dono" class="formInput" type="text" value="Sem diagnostico" disabled/>
+
+                           {% else %}
+                           
+							<input id="dono" class="formInput" type="text" value="{{fichaItens.fichadiagnostico_ficha__id_diagnostico__descricao}}" disabled/>
+									       
                          
 								{% endif %}
+
+								</div>   
+						{% endif %}
                   {% endfor %}
 
 								
@@ -102,8 +110,6 @@
 </ul>
 </fieldset>
 </form>
-
-	
 
 	<form method="post" class='formEtapas menuOpcoes' id="Historico" style="display:none;">
 		{% csrf_token %}

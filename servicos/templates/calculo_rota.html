@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_base %}
+
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+
+	<form method="post" class='formEtapas menuOpcoes' id="FormCadastroProcedimentoEstetico">
+	{% csrf_token %}
+
+	</form>
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/cadastro_procedimento.js' %}"></script>
+{% endblock %}

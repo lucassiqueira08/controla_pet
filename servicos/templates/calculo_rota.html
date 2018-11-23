@@ -1,0 +1,31 @@
+{% extends 'base.html' %}O
+{% load static %}
+{% block content_base %}
+
+<!--===========INSIRA AQUI SEU CONTEUDO===============-->
+
+<div class="titulo destacadoCimaBaixo clearMarginTop">
+	<div class="itensTitulo">
+		<div class="circulo">
+			<img src="../static/img/calculo_rota.png" alt="Rota">
+		</div>
+	</div>
+</div>
+	<form method="post" class='formEtapas menuOpcoes' id="FormCadastroProcedimentoEstetico">
+	{% csrf_token %}
+	<fieldset>
+		<h2 class="tituloGrande">Calculo de Rota</h2 class="tituloGrande">
+			<p>Para realizar o calculo da rota digite a origem e o destino!</p>
+			<input type="text" class="formEtapasInput" 		id="destino" name="destino" placeholder="Origem" maxlength="50" required/>
+			<input type="text" class="formEtapasInput" 		id="origem" name="origem" placeholder="Destino" maxlength="50" required/>
+
+			<div class="containerBotoes linha centralizado">
+				<button  type="submit" class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
+			</div>
+		</fieldset>
+	</form>
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/cadastro_procedimento.js' %}"></script>
+{% endblock %}

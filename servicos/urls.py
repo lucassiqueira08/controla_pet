@@ -9,7 +9,7 @@ from servicos.actions import (get_tipo_procedimento, get_animais_cliente,
                               get_procedimento, get_pagamentos_pendentes,
                               get_animais_hospedados, get_atendimentos_pendentes, )
 from .views import (ViewCadastroProcedimento, ViewCadastroEstadia,
-                    ViewModal, ViewCadastroAtendimento, ViewCadastrarDiagnostico)
+                    ViewModal, ViewCadastroAtendimento, ViewCadastrarDiagnostico,ViewCalculoRota)
 
 urlpatterns = [
     path(
@@ -29,6 +29,15 @@ urlpatterns = [
         name='cadastro_procedimento'
     ),
     path(
+        'cadastrar_diagnostico', ViewCadastrarDiagnostico.as_view(),
+        name='cadastrar_diagnostico'
+    ),
+    path(
+        'calculo_rota', ViewCalculoRota.as_view(),
+        name='calculo_rota'
+    ),
+
+    path(
         'get_tipo_procedimento', get_tipo_procedimento,
         name='get_tipo_procedimento'
     ),
@@ -40,10 +49,6 @@ urlpatterns = [
     path(
         'get_animal', get_animal,
         name='get_animal'
-    ),
-    path(
-        'cadastrar_diagnostico', ViewCadastrarDiagnostico.as_view(),
-        name='cadastrar_diagnostico'
     ),
 
     path(

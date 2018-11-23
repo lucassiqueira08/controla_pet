@@ -12,7 +12,7 @@ from .models import (Animal, Cliente, Responsavel, Responde,
 from core.models import Menu
 from cliente.exceptions import InvalidCPFError, DateError, MicrochipError
 from cliente.actions import valida_cpf, valida_microchip, valida_cpf_responsavel
-from servicos.models import Exame, FichaDiagnostico, DiagnosticoAnimal , TipoDiagnostico
+from servicos.models import Exame, FichaDiagnostico, DiagnosticoAnimal , TipoDiagnostico , Atendimento
 from cloudinary_api.app import cloudyapi
 from raven.contrib.django.raven_compat.models import client
 
@@ -469,43 +469,22 @@ class ViewBuscarAnimal(BaseView):
         
         exames = Exame.objects.filter(id_animal=animal)
 
-        query = """
-            SELECT
-
-                *
-
-            FROM
-                ATENDIMENTO AS ATEND
-            INNER JOIN
-                ATENDIMENTO_PROC_CLINICO AS ATE_CL ON (ATEND.id = ATE_CL.id_atendimento)
-            INNER JOIN
-                PROCEDIMENTO_CLINICO AS PC ON (PC.id = ATE_CL.id_proc_clinico)
-                   
-            WHERE
-                ATEND.id_animal = {}
-        """.format(animal.id)
-
-        with connection.cursor() as cursor:
-            cursor.execute(query)
-            row = dictfetchall(cursor)
-
-        linhas= row
-
-        context = {
-            'cliente':cliente,  
-            'animal': animal,
-      
-            'exames':exames,
-            'historicos':linhas,
-        }
-        
+        historicos = Atendimento.objects.filter(id_animal = animal.id).values(
+            'data_solicitacao',
+            'observacao',
+            'atendimentoprocclinico_atendimento__id_proc_clinico',
+            'atendimentoprocclinico_atendimento__id_proc_clinico_id__nome',
+            'atendimentoprocclinico_atendimento__id_proc_clinico_id__descricao',
+            'atendimentoprocclinico_atendimento__id_proc_clinico_id__preco'
+            )
+  
         ficha = FichaAnimal.objects.filter( id_animal = animal.id).values(
             'id',
             'data_consulta',
-            'descricao',
-          
+            'descricao',      
    
               )
+
         fichaGeral = FichaAnimal.objects.filter( id_animal = animal.id)
 
         fichadesc = FichaAnimal.objects.filter( id_animal = animal.id).values(
@@ -514,40 +493,17 @@ class ViewBuscarAnimal(BaseView):
    
               )
 
+        context = {
+            'cliente':cliente,  
+            'animal': animal,
+            'exames':exames,
+            'hist':historicos,
+            'fichas':ficha,
+            'fichasGerais': fichaGeral,
+            'fichadesc':fichadesc
 
-
-        query2 = """
-             SELECT
-
-                    *
-
-             FROM
-                    FICHA_ANIMAL AS FICHA
-              left JOIN
-                 FICHA_DIAGNOSTICO AS FICHA_DIAG ON (FICHA.id = FICHA_DIAG.id_ficha)
-           INNER JOIN
-                    DIAGNOSTICO_ANIMAL AS DIAG ON (FICHA_DIAG.id_diagnostico = DIAG.ID)   
-                 
-              WHERE
-                 FICHA.id_animal = {} 
-                   """.format(animal.id)
-
-        with connection.cursor() as cursor:
-            cursor.execute(query2)
-            rowfICHA = dictfetchall(cursor)
- 
-        linhasFicha= rowfICHA
-        novoDic = {}
- 
-        
-        
-
+        }
       
-
-        context['fichas'] = ficha
-        context['fichasGerais'] = fichaGeral
-        context['fichadesc'] = fichadesc
-
         return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'
 

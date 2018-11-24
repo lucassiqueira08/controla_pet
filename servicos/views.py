@@ -1,6 +1,7 @@
 import json
 import datetime
 
+from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.shortcuts import render
 from django.views import View
@@ -38,24 +39,34 @@ class ViewCadastroProcedimento(View):
         preco = request.POST.get('preco')
         especie = request.POST.get('especie')
         aba_procedimento = request.POST.get('aba_procedimento')
+        try:
+            if aba_procedimento == 'clinico':
+                tipo_procedimento = request.POST.get('tipo_procedimento')
 
-        if aba_procedimento == 'clinico':
-            tipo_procedimento = request.POST.get('tipo_procedimento')
+                procedimento = ProcedimentoClinico()
+                procedimento.nome = nome
+                procedimento.descricao = descricao
+                if preco:
+                    procedimento.preco = preco.replace(",", ".")
+                procedimento.especie = especie
+                procedimento.id_tipo_proc = TipoProcedimento.objects.get(id=tipo_procedimento)
+                procedimento.save()
 
-            procedimento = ProcedimentoClinico()
-            procedimento.nome = nome
-            procedimento.descricao = descricao
-            procedimento.preco = preco.replace(",", ".")
-            procedimento.especie = especie
-            procedimento.id_tipo_proc = TipoProcedimento.objects.get(id=tipo_procedimento)
-            procedimento.save()
-        if aba_procedimento == 'estetico':
-            procedimento = ProcedimentoEstetico()
-            procedimento.nome = nome
-            procedimento.descricao = descricao
-            procedimento.preco = preco.replace(",", ".")
-            procedimento.especie = especie
-            procedimento.save()
+            if aba_procedimento == 'estetico':
+                procedimento = ProcedimentoEstetico()
+                procedimento.nome = nome
+                procedimento.descricao = descricao
+                procedimento.preco = preco.replace(",", ".")
+                procedimento.especie = especie
+                procedimento.save()
+        except Exception:
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Não foi possível cadastrar esse procedimento',
+                'time': 5000
+            }
+
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
         context = {
             'tipo': 'ok',
@@ -76,22 +87,39 @@ class ViewCadastroEstadia(View):
         return render(request, self.template, context)
 
     def post(self, request):
-        observacao       = request.POST.get('observacao')
-        data_inicio      = request.POST.get('data_inicio')
-        data_fim         = request.POST.get('data_fim')
-        data_solicitacao = request.POST.get('data_solicitacao')
-        valor_diaria     = request.POST.get('valor_diaria')
-        id_animal        = request.POST.get('id_animal')
+        observacao = request.POST.get('observacao')
+        data_inicio = request.POST.get('data_inicio')
+        data_fim = request.POST.get('data_fim')
+        valor_diaria = request.POST.get('valor_diaria')
+        id_animal = request.POST.get('id_animal')
 
         estadia = Estadia()
-        estadia.observacao       = observacao
-        estadia.data_inicio      = data_inicio
-        estadia.data_fim         = data_fim
-        estadia.data_solicitacao = data_solicitacao
-        estadia.valor_diaria     = valor_diaria
+        estadia.observacao = observacao
+        estadia.data_inicio = data_inicio
+        estadia.data_fim = data_fim
+        estadia.valor_diaria = valor_diaria
         estadia.data_solicitacao = datetime.datetime.now()
-        estadia.id_animal        = Animal.objects.get(id = id_animal)
-        estadia.save()
+        estadia.id_animal = Animal.objects.get(id=id_animal)
+        try:
+            estadia.save()
+
+        except ValidationError:
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Por favor digite datas válidas',
+                'time': 5000
+            }
+
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        except Exception:
+            context = {
+                'tipo': 'erro',
+                'mensagem': 'Não foi possível cadastrar a estadia',
+                'time': 5000
+            }
+
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
         context = {
             'tipo': 'ok',

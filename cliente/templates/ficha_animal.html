@@ -195,8 +195,7 @@
 				</ul>
 			</fieldset>
 		</form>
-		<form method="post" class='formEtapas menuOpcoes' id="Exames" style="display:none;">
-			{% csrf_token %}
+		<form class='formEtapas menuOpcoes' id="Exames" style="display:none;">
 			<fieldset id="Exames">
 				<h2 class="tituloGrande">Exames</h2 class="tituloGrande">
 					<p>Aqui você tem a visão de todos os Exames do animal!</p>
@@ -206,11 +205,14 @@
 						<li class="event" data-date="{{exame.data_realizacao}}">
 
 							<h3>{{exame.nome}}</h3>
+							<p>{{exame.descricao}}</p>
 							<div class="arquivo">
 								<img src="{% static 'img/file.png' %}" alt="testes">
-								<a href="{{exame.link_doc}}" target="_blank"><button class="btn"><i class="fa fa-download"></i>Download</button></a>
+								<div>
+									<a href="{{exame.link_doc}}" target="_blank"><button type='button' class="btn"><i class="fa fa-download"></i> Download</button></a
+								</div>
+								<a href="{{exame.link_doc}}" target="_blank"><button type='button' class="btn"><i  class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button></a>
 							</div>
-							<p><h3>{{exame.descricao}}</h3></p>
 
 						</li>
 						{%endfor%}

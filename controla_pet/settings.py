@@ -40,12 +40,12 @@ INSTALLED_APPS = [
     # Whitenoise - Disable Django static file handling and allow White Noise to take over
     'whitenoise.runserver_nostatic',
     # Django Apps
+    'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     # My Apps
     'usuarios',
     'cliente',
@@ -218,7 +218,7 @@ django_heroku.settings(locals())
 
 # SMTP e-mail configuration
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'controlapet@gmail.com'
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 587
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER = config('EMAIL_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
+EMAIL_PORT = config('EMAIL_PORT')

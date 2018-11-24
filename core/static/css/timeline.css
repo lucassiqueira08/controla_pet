@@ -60,7 +60,6 @@
 }
 .timeline .event:after {
   box-shadow: 0 0 0 4px #ff6600;
-  /*content: url('../../img/diagnostico.png')!important;*/
   left: -57.85px;
   background: #fff;
   border-radius: 50%;

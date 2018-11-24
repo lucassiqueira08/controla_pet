@@ -7,7 +7,7 @@
 <div class="titulo destacadoCimaBaixo clearMarginTop">
 		<div class="itensTitulo">
 			<div class="circulo">
-				<img src="../static/img/ficha_animal.png" alt="{{menu.descricao}}">
+				<img src="{% static 'img/ficha_animal.png' %}" alt="{{menu.descricao}}">
 			</div>
 	</div>
 </div>
@@ -42,7 +42,7 @@
 </div>
 <form method="post" class='formEtapas menuOpcoes' id="FichaAnimal">
 	{% csrf_token %}
-		
+
 		<fieldset id="Ficha">
 			<h2 class="tituloGrande">Ficha animal</h2 class="tituloGrande">
 				<p>Aqui você tem a visão de todas das fichas abertas!</p>
@@ -50,15 +50,15 @@
 				<ul class="timeline">
                   {%for ficha in fichas %}
 					<li class="event" data-date="{{ficha.data_consulta}}">
-                        
-              
+
+
 					<h3>{{ficha.nome}}</h3>
 
 						<p>{{ficha.descricao}}</p>
 					<a data-toggle="modal" data-target="#modal_{{ficha.id}}">
 						<button type="button" class="btnPequeno clearMarginTop" name="button"  data-target="#modal_{{ficha.id}}">Ver mais!</button>
 					</a>
-                            
+
 					</li>
 
  <div class="modal fade" id="modal_{{ficha.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
@@ -87,7 +87,7 @@
 
 
                             {% if ficha.booleano == 0 %}
-                            <div class="dupla"> 
+                            <div class="dupla">
 	 						<label class="formLabel">Possui ?</label>
 									<input type="text" class="formInput" name="booleano" id="booleano" value ="Sim" maxlength="20" disabled/>
 							</div>
@@ -95,15 +95,15 @@
 							 <div class="dupla">
 								 <label class="formLabel">Possui ?</label>
 									<input type="text" class="formInput" name="booleano" id="booleano" value ="Não" maxlength="20" disabled />
-								</div>	
-							{% endif %}	
+								</div>
+							{% endif %}
 
-								
+
 							</fieldset>
-					
+
 
 					</div>
-				
+
 				</div>
 			</div>
 		</div>
@@ -114,7 +114,7 @@
 </fieldset>
 </form>
 
-	
+
 
 	<form method="post" class='formEtapas menuOpcoes' id="Historico" style="display:none;">
 		{% csrf_token %}
@@ -125,14 +125,14 @@
 				<ul class="timeline">
                   {%for historico in historicos%}
 					<li class="event" data-date="{{historico.data_solicitacao}}">
-                        
-              
+
+
 						<h3>{{historico.nome}}</h3>
 
 						<p>{{historico.descricao}}</p>
 					<a data-toggle="modal" data-target="#modal_Hist_{{historico.id_proc_clinico}}">
 						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-                    </a>        
+                    </a>
 					</li>
 
  <div class="modal fade" id="modal_Hist_{{historico.id_proc_clinico}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
@@ -147,9 +147,9 @@
 				<div class="modal-body">
 					<div class="centralizado">
 
-		
+
                       	  	<fieldset>
-                           
+
                                <div class="dupla">
        							 <label class="formLabel">Data/Hora da solicitação</label>
 									<input type="text" class="formInput" name="dataconsult" id="dataconsult" value ="{{historico.data_solicitacao}}" maxlength="50" disabled />
@@ -165,10 +165,10 @@
 							<label for="#" class="formLabel">Observação</label>
 							<input id="dono" class="formInput" type="text" value="{{historico.observacao}}" disabled />
 									</div>
-                          
+
 
                             {% if historico.preco > 0 %}
-                            <div class="dupla"> 
+                            <div class="dupla">
 	 						<label class="formLabel">Valor</label>
 									<input type="text" class="formInput" name="booleano" id="booleano" value ="R$ {{historico.preco}}" maxlength="20" disabled/>
 							</div>
@@ -176,21 +176,21 @@
 							 <div class="dupla">
 								 <label class="formLabel">Valor</label>
 									<input type="text" class="formInput" name="booleano" id="booleano" value ="sem" maxlength="20" disabled />
-								</div>	
-							{% endif %}	
+								</div>
+							{% endif %}
 
-								
+
 							</fieldset>
-					
+
 
 					</div>
-				
+
 				</div>
 			</div>
 		</div>
 	</div>
                   {%endfor%}
-		
+
 				</ul>
 
 
@@ -206,14 +206,14 @@
 				<ul class="timeline">
 						{% for exame in exames %}
 					<li class="event" data-date="{{exame.data_realizacao}}">
-					
+
 						<h3>{{exame.nome}}</h3>
 						<div class="arquivo">
 							<img src="{% static 'img/file.png' %}" alt="testes">
 							<a href="{% static exame.link_doc %}" target="_blank">{{exame.link_doc}}</a>
 						</div>
 						<p><h3>{{exame.descricao}}</h3></p>
-                       
+
 					</li>
 					 {%endfor%}
 				</ul>

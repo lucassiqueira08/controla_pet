@@ -168,7 +168,7 @@ tbody tr:hover {
     font-weight: unset;
     position: absolute;
     width: 40%;
-    left: 30px;
+    left: 10px;
     top: 0;
   }
 
@@ -191,6 +191,16 @@ tbody tr:hover {
     font-size: 14px;
   }
 
+	/* RESPONSIVIDADE CALCULO DE ROTA */
+	#CalculoRota tbody tr td:nth-child(1):before {
+	  content: "Distância";
+	}
+	#CalculoRota tbody tr td:nth-child(2):before {
+	  content: "Tempo";
+	}
+	#CalculoRota tbody tr td:nth-child(3):before {
+	  content: "Valor";
+	}
   /* RESPONSIVIDADE ACOMPANHE SUA CLÍNICA */
   #AcompanheSuaClinica tbody tr td:nth-child(1):before {
     content: "Status";

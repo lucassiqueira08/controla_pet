@@ -1,7 +1,6 @@
-{% extends 'base.html' %}O
+{% extends 'base.html' %}
 {% load static %}
 {% block content_base %}
-
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
 
 <div class="titulo destacadoCimaBaixo clearMarginTop">
@@ -11,21 +10,62 @@
 		</div>
 	</div>
 </div>
-	<form method="post" class='formEtapas menuOpcoes' id="FormCadastroProcedimentoEstetico">
+<form method="post" class='formEtapas menuOpcoes' id="FormCadastroProcedimentoEstetico">
 	{% csrf_token %}
 	<fieldset>
 		<h2 class="tituloGrande">Calculo de Rota</h2 class="tituloGrande">
 			<p>Para realizar o calculo da rota digite a origem e o destino!</p>
-			<input type="text" class="formEtapasInput" 		id="destino" name="destino" placeholder="Origem" maxlength="50" required/>
-			<input type="text" class="formEtapasInput" 		id="origem" name="origem" placeholder="Destino" maxlength="50" required/>
+			<input type="text" class="formEtapasInput" 		id="origem" name="origem" placeholder="Origem" maxlength="50" required />
+			<input type="text" class="formEtapasInput destino" 		id="destino" name="destino" placeholder="Destino" maxlength="50"required />
+			<input type="text" class="formEtapasInput destino" 		id="destino2" name="destino2" placeholder="Destino2" maxlength="50" />
+			<input type="text" class="formEtapasInput destino" 		id="destino3" name="destino3" placeholder="Destino3" maxlength="50" />
 
 			<div class="containerBotoes linha centralizado">
-				<button  type="submit" class="acao btnPrincipal clearMarginTop" name="button">Cadastrar</button>
+				<button id="buscar" type="submit" class="acao btnPrincipal clearMarginTop" name="button">Buscar</button>
 			</div>
+
 		</fieldset>
 	</form>
-{% endblock %}
 
-{% block add_js %}
-    <script src="{% static 'js/cadastro_procedimento.js' %}"></script>
-{% endblock %}
+	<!-- MODAL -->
+	<div class="modal fade" id="modalRota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="centralizado">
+						<form method="post" id="" class='formEtapas' enctype="multipart/form-data">
+							{% csrf_token %}
+							<h2 class="tituloMedio">Rota</h2 class="tituloGrande">
+
+							<div style="padding: 10px 0 0; clear: both">
+								<iframe width="750" scrolling="no" height="350" frameborder="0" id="map" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?saddr=Morumbi+,+Brasil&output=embed"></iframe>
+							</div>
+							<!-- TABELA ACOMPANHE SUA CLINICA -->
+							<table class="tabelaResponsiva menuOpcoes" id="CalculoRota">
+								<thead>
+									<tr class="table100-head">
+										<th class="column1">Distância</th>
+										<th class="column2">Tempo</th>
+										<th class="column3">Valor</th>
+										<th class="colunaEscondida">Cálculo de Rota</th>
+									</tr>
+								</thead>
+								<tbody id="informacoes">
+								</tbody>
+							</table>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button id="animal_btn_fechar"  type="button" class="btnSecundario" data-dismiss="modal">FECHAR</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endblock %}
+
+		{% block add_js %}
+		<script src="{% static 'js/calcula_rota.js' %}"></script>
+
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1wS6ZzSylTB13zG79LVIzFEHrqUoeqZo"
+		type="text/javascript"></script>
+		{% endblock %}

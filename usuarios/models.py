@@ -34,7 +34,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     primeiro_nome = models.CharField('Primeiro nome', max_length=50)
     ultimo_nome = models.CharField('Último nome', max_length=50)
+    email = models.CharField('Email', max_length=100, blank=True, null=True)
     login = models.CharField('Login', max_length=150, unique=True)
+    is_active = models.BooleanField('está ativo?', default=True)
     is_staff = models.BooleanField('faz parte da equipe?', default=False)
     is_superuser = models.BooleanField('é super usuario?', default=False)
     situacao = models.BooleanField('Está ativo?', default=True)

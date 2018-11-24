@@ -54,7 +54,7 @@ urlpatterns = [
     ),
     path(
 
-        'get_ficha_animal/<str:cpf_cliente>/<str:id_animal>', get_ficha_animal,
+        'get_ficha_animal/<str:cpf_cliente>/<int:id_animal>', get_ficha_animal,
 
         name='get_ficha_animal'
         ),

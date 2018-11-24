@@ -5,14 +5,14 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponse
 from django.db.utils import IntegrityError
-
+from django.db.models import Sum, Count
 from core.views import BaseView
 from .models import (Animal, Cliente, Responsavel, Responde,
                      TipoStatusAnimal, StatusAnimal, TipoCliente, FichaAnimal)
 from core.models import Menu
 from cliente.exceptions import InvalidCPFError, DateError, MicrochipError
 from cliente.actions import valida_cpf, valida_microchip, valida_cpf_responsavel
-from servicos.models import Exame, FichaDiagnostico, DiagnosticoAnimal , TipoDiagnostico
+from servicos.models import Exame, FichaDiagnostico, DiagnosticoAnimal , TipoDiagnostico , Atendimento
 from cloudinary_api.app import cloudyapi
 from raven.contrib.django.raven_compat.models import client
 
@@ -469,60 +469,41 @@ class ViewBuscarAnimal(BaseView):
         
         exames = Exame.objects.filter(id_animal=animal)
 
-        query = """
-            SELECT
+        historicos = Atendimento.objects.filter(id_animal = animal.id).values(
+            'data_solicitacao',
+            'observacao',
+            'atendimentoprocclinico_atendimento__id_proc_clinico',
+            'atendimentoprocclinico_atendimento__id_proc_clinico_id__nome',
+            'atendimentoprocclinico_atendimento__id_proc_clinico_id__descricao',
+            'atendimentoprocclinico_atendimento__id_proc_clinico_id__preco'
+            )
+  
+        ficha = FichaAnimal.objects.filter( id_animal = animal.id).values(
+            'id',
+            'data_consulta',
+            'descricao',      
+   
+              )
 
-                *
+        fichaGeral = FichaAnimal.objects.filter( id_animal = animal.id)
 
-            FROM
-                ATENDIMENTO AS ATEND
-            INNER JOIN
-                ATENDIMENTO_PROC_CLINICO AS ATE_CL ON (ATEND.id = ATE_CL.id_atendimento)
-            INNER JOIN
-                PROCEDIMENTO_CLINICO AS PC ON (PC.id = ATE_CL.id_proc_clinico)
-                   
-            WHERE
-                ATEND.id_animal = {}
-        """.format(animal.id)
-
-        with connection.cursor() as cursor:
-            cursor.execute(query)
-            row = dictfetchall(cursor)
-
-        linhas= row
+        fichadesc = FichaAnimal.objects.filter( id_animal = animal.id).values(
+            'id',
+            'fichadiagnostico_ficha__id_diagnostico__descricao',
+   
+              )
 
         context = {
             'cliente':cliente,  
             'animal': animal,
-      
             'exames':exames,
-            'historicos':linhas,
+            'hist':historicos,
+            'fichas':ficha,
+            'fichasGerais': fichaGeral,
+            'fichadesc':fichadesc
+
         }
       
-        query2 = """
-             SELECT
-
-                    *
-
-             FROM
-                    FICHA_ANIMAL AS FICHA
-              INNER JOIN
-                 FICHA_DIAGNOSTICO AS FICHA_DIAG ON (FICHA.id = FICHA_DIAG.id_ficha)
-           INNER JOIN
-                    DIAGNOSTICO_ANIMAL AS DIAG ON (FICHA_DIAG.id_diagnostico = DIAG.ID)   
-           INNER JOIN TIPO_DIAGNOSTICO AS TDIAG ON (TDIAG.id = DIAG.id_tipo_diagnostico)         
-              WHERE
-                 FICHA.id_animal = {}
-                   """.format(animal.id)
-
-        with connection.cursor() as cursor:
-            cursor.execute(query2)
-            rowfICHA = dictfetchall(cursor)
- 
-        linhasFicha= rowfICHA
-
-        context['fichas']=linhasFicha
-
         return render(request, self.templateficha, context) 
     template = 'buscar_animal.html'
 

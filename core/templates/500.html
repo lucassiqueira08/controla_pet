@@ -3,9 +3,9 @@
 {% block content_base %}
 <div class="coluna centralizado">
   <h2 class="tituloGrande">Oops! Ocorreu um erro...</h2 class="tituloGrande">
-  <p class="textoErro">Ocorreu um erro interno ao tentar processar a requisição! <a href="{% url 'index' %}">Voltar para a home...</a></p>
-
+  <p class="centralizado">Ocorreu um erro na aplicação, estamos trabalhando para que não volte a acontecer!</p>
   <img class="imgPagErros" src="{% static 'img/Luke_Duvida.png' %}" alt="Erro!">
+  <a href="{% url 'index' %}">Voltar para a home...</a>
 </div>
 
 {% endblock %}

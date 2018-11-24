@@ -215,3 +215,10 @@ RAVEN_CONFIG = {
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 # -----------------------------------
+
+# SMTP e-mail configuration
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'controlapet@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587

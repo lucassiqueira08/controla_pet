@@ -2,6 +2,15 @@
 {% load static %}
 {% block content_base %}
 
+
+<div class="titulo destacadoCimaBaixo clearMarginTop">
+		<div class="itensTitulo">
+			<div class="circulo">
+				<img src="{% static 'img/cadastro_diagnostico.png' %}" alt="{{menu.descricao}}">
+			</div>
+	</div>
+</div>
+
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
 <form id="formCadastroDiagnostico" method="post" class='formEtapas'>
 	{% csrf_token %}

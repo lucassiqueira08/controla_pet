@@ -25,7 +25,7 @@ function Mudar(el){
   }
 
 	 else{
-	 
+
    	document.getElementById(el).style.display ='none';
    }
   if(display == "block")
@@ -74,21 +74,22 @@ $.get('/get_notificacao', function(data){
                    +     '</li>'
                    +   '</ul>'
                    + '</div>';
-  dataJson = JSON.parse(data)
 
+	dataJson = JSON.parse(data)
 
   for (var item in dataJson) {
     var id                    = dataJson[item]['id'];
-    var data                  = (dataJson[item]['data/hora']).substring(0,10).replace("-","/");
-    var hora                  = (dataJson[item]['data/hora']).substring(11,16);
-    var dono                  = dataJson[item]['dono'];
-    var cpf_cliente           = dataJson[item]['cpf_cliente'];
-    var procedimento_clinico  = dataJson[item]['procedimento_clinico'];
-    var procedimento_estetico = dataJson[item]['procedimento_estetico'];
-    var responsavel           = dataJson[item]['responsavel'];
-    var status_atendimento    = dataJson[item]['status_atendimento'];
+    var data                  = (dataJson[item]['data_solicitacao']).substring(0,10).replace("-","/");
+    var hora                  = (dataJson[item]['data_solicitacao']).substring(11,16);
+    var dono                  = dataJson[item]['id_animal__cpf_cliente__nome'];
+    var especie               = dataJson[item]['id_animal__especie'];
+    var cpf_cliente           = dataJson[item]['id_animal__cpf_cliente__cpf'];
+    var procedimento_clinico  = dataJson[item]['atendimentoprocclinico_atendimento__id_proc_clinico__nome'];
+    var procedimento_estetico = dataJson[item]['atendimentoprocestetico_atendimento__id_proc_estetico__nome'];
+    var responsavel           = dataJson[item]['feitopor_atendimento__id_funcionario__primeiro_nome'];
+    var status_atendimento    = dataJson[item]['statusatendimento_atendimento__id_status__nome'];
 
-    var procedimento          = dataJson[item]['procedimento_clinico'] != null ? dataJson[item]['procedimento_clinico'] : dataJson[item]['procedimento_estetico'] != null ? dataJson[item]['procedimento_estetico'] : "Sem procedimento!";
+    var procedimento          = dataJson[item]['atendimentoprocclinico_atendimento__id_proc_clinico__nome'] != null ? dataJson[item]['atendimentoprocclinico_atendimento__id_proc_clinico__nome'] : dataJson[item]['atendimentoprocestetico_atendimento__id_proc_estetico__nome'] != null ? dataJson[item]['atendimentoprocestetico_atendimento__id_proc_estetico__nome'] : "Sem procedimento!";
     var final                 = notificacao.replace("##hora", hora).replace("##bichinho",dono).replace("##procedimento",procedimento);
 
 
@@ -138,7 +139,6 @@ $('.btnEditar').click(function(){
 	$("#formularioModal :input").prop('readonly', false);
 });
 
-
 //=====================Modal=======================
 
 $('#FormModal').on('shown.bs.modal', function () {
@@ -148,8 +148,6 @@ $('#FormModal').on('shown.bs.modal', function () {
 $(window).on('load',function(){
     $('#modalBemVindo').modal('show');
 });
-
-
 
 function DisableCampos(){
 		$("input").attr('disabled','disabled');
@@ -162,6 +160,7 @@ function EditFields(){
 		$("input").attr('disabled','disabled');
 	}
 }
+
 //=====================File Input=======================
 // const FileInput     	= $("#formEtapasFileInput")
 // const FileInputBtn  	= $("#fileInputBtn")
@@ -181,7 +180,6 @@ function EditFields(){
 
 // }
 //=====================File Input=======================
-
 
 $(document).ready(function() {
 var x = 1;
@@ -224,6 +222,7 @@ function OpenMenu(evt, menuName, tabela = false) {
   }
 	if (tabela) {
   	document.getElementById(menuName).style.display = "table";
+  	document.getElementById(menuName).style.display = "table";
 	}
 	else {
   	document.getElementById(menuName).style.display = "flex";
@@ -252,4 +251,3 @@ function addFile(){
 		alert(files[i].name)
 	}
 }
-

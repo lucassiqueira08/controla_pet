@@ -1,12 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'base_login_esqueci_senha.html' %}
 {% load static %}
 {% block content_base %}
 
 <div class="coluna centralizado">
   <h2 class="tituloGrande">Oops! Página não disponível...</h2 class="tituloGrande">
-  <p class="textoErro">O link que você acessou pode estar quebrado, ou a página pode ter sido removida! <a href="{% url 'index' %}">Voltar para a home...</a></p>
-
+  <p class="centralizado">O link que você acessou não existe ou você não está autenticado!</p>
   <img class="imgPagErros" src="{% static 'img/Luke_Duvida.png' %}" alt="Erro!">
+  <a href="{% url 'index' %}">Voltar para a home</a>
 </div>
 
 {% endblock %}

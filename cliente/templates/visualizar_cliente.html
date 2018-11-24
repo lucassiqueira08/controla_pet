@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content_base %}
+
+
+<div class="titulo destacadoCimaBaixo clearMarginTop">
+	<div class="itensTitulo">
+		<div class="circulo">
+			<img src="{% static 'img/visualizar_cliente.png' %}" alt="{{menu.descricao}}">
+		</div>
+	</div>
+</div>
+
+
 <div class="titulo">
 	{% for cliente in cliente.object_list %}
 	<div class="container centralizado ">

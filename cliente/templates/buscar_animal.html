@@ -2,6 +2,14 @@
 {% load static %}
 {% block content_base %}
 
+<div class="titulo destacadoCimaBaixo clearMarginTop">
+		<div class="itensTitulo">
+			<div class="circulo">
+				<img src="{% static 'img/ficha_animal.png' %}" alt="{{menu.descricao}}">
+			</div>
+	</div>
+</div>
+
 
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
 <form method="post" class='formEtapas'>
@@ -9,10 +17,10 @@
 	<ul id="progress">
 		<li class="ativo"><label>Procurar Animal</label></li>
 		<li><label>Tela de confirmação</label></li>
-		<li><label>Ficha do animal</label></li>		
+		<li><label>Ficha do animal</label></li>
 	</ul>
 
-	
+
 	<fieldset>
 
 		<h3 class="tituloExtraGrande">Buscar Animal</h3>
@@ -25,9 +33,9 @@
 			<option value=""></option>
 		</select>
 
-		
+
 		<div class="containerBotoes">
-	
+
 			<input type="submit" name="next" class="next acao btnPrincipal" value="Buscar" id="achar_animal"/>
 		</div>
 	      </fieldset>
@@ -64,7 +72,7 @@
         <label class="formLabel">Microchip</label>
 		<input type="text" class="formInput" name="microchip" id = "microchip" placeholder="microchip" maxlength="50" />
     </div>
-   
+
     <div class="dupla">
         <label class="formLabel">Cor</label>
 		<input type="text" class="formInput" name="cor" id = "cor" placeholder="cor" maxlength="50" />
@@ -84,7 +92,7 @@
         <label class="formLabel">Numero</label>
 		<input type="text" class="formInput" name="numero" id = "numero" placeholder="numero" maxlength="50" />
     </div>
-  
+
   <div class="dupla">
         <label class="formLabel">De Cep</label>
 		<input type="text" class="formInput" name="cep" id = "cep" placeholder="cep" maxlength="50" />
@@ -100,8 +108,8 @@
 		<input type="text" class="formInput" name="estado" id = "estado" placeholder="estado" maxlength="50" />
     </div>
 
- 
-  
+
+
 
 
 		<h2 class="tituloMedio destacadoCima">Esse é o bichinho certo?</h2>
@@ -234,4 +242,3 @@
 	</form>
 	<!--===========FIMM===============-->
 	{% endblock %}
-

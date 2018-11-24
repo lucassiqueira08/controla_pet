@@ -1,16 +1,15 @@
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
 from django.shortcuts import render
-from datetime import datetime , date
+from datetime import datetime, date
 
 from django.views import View
 from .models import Menu, MenuGrupo
-from servicos.models import Atendimento,FeitoPor
-from cliente.models import Cliente,Animal
-from usuarios.models import Funcionario,CargoFuncionario
+from servicos.models import Atendimento, FeitoPor
+from cliente.models import Cliente, Animal
+from usuarios.models import Funcionario, CargoFuncionario
 from django.http import HttpResponseRedirect
 from gagenda.app import GCalGoogle
-
 
 
 class BaseView(LoginRequiredMixin, View):
@@ -18,6 +17,7 @@ class BaseView(LoginRequiredMixin, View):
     login_url = '/usuario/login'
     permission_required = 'usuarios.Admin'
     lista_titulos = MenuGrupo.objects.filter
+
 
 class ViewIndexBemVindo(BaseView):
 
@@ -30,32 +30,6 @@ class ViewIndexBemVindo(BaseView):
         }
         return render(request, self.template, context)
 
-class Erro404(BaseView):
-
-    template = 'erro_404.html'
-
-    def get(self, request):
-        context = {
-        }
-        return render(request, self.template, context)
-
-class Erro403(BaseView):
-
-    template = 'erro_403.html'
-
-    def get(self, request):
-        context = {
-        }
-        return render(request, self.template, context)
-
-class Erro500(BaseView):
-
-    template = 'erro_500.html'
-
-    def get(self, request):
-        context = {
-        }
-        return render(request, self.template, context)
 
 class ViewIndex(BaseView):
 

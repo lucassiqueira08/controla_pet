@@ -86,7 +86,7 @@ def get_atualiza_atendimento(request,id_evento,observacao,data_init,horaedit):
     atendimento = Atendimento.objects.get(id = id_evento)
     atendimento.observacao = observacao
     
-    data_sistema = datetime.datetime.strptime(data_init, "%Y-%m-%d").strftime('%d-%m-%Y')
+    data_sistema = datetime.strptime(data_init, "%Y-%m-%d").strftime('%d-%m-%Y')
 
     data = data_init+'T'+horaedit+':00-03:00'
 
@@ -174,12 +174,12 @@ def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,
     contador= 0
     periodo= 0
     if radio == 'M':
-        contador = 12 
+        contador = 5 
     if radio == 'S':
-        contador = 52
+        contador = 26
 
     if radio == 'A':
-        contador = 10
+        contador = 5
 
     if radio == 'N':
         contador = 1
@@ -243,8 +243,11 @@ def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,
 
     context = {
             'tipo':"ok",
-            'mensagem':radio,
-            'time':5000       
+            'mensagem':'Atendimento registrado',
+            'time':5000,
+            'id_data':atendimento.id,       
+            'data_atend':atendimento.data_solicitacao,       
+            'data_obs':atendimento.observacao,       
 
               }       
    

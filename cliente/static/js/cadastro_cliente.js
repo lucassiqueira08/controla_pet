@@ -420,13 +420,14 @@ $('#CriaAtendimento').on('click', function(e) {
                 $("#load").modal('hide');
              
                 alerta(data.mensagem, data.tipo, data.time)
+                 
             
-
                  $('#calendar').fullCalendar('renderEvent',
                     {
-                   id :  id_evento,  
-                   title: radio,
-                   start: DataInicioedit,
+                   id :  data.id_data,  
+                   title: data.data_obs,
+                   start: data.data_atend,
+
                      }
                     ) ;  
 

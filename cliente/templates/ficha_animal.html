@@ -31,7 +31,7 @@
 					<div class="w4-third tablink w3-bottombar w3-hover-light-grey w3-padding">Exames</div>
 				</a>
 				<a href="{% url 'buscar_animal' %}" onclick="OpenMenu(event, 'Voltar');">
-					<div class="w4-third tablink w3-bottombar w3-hover-light-grey w3-padding">Voltar</div>
+					<div class="w4-third tablink w3-bottombar w3-hover-light-grey w3-padding"><i class="fa fa-reply" aria-hidden="true"></i> Voltar</div>
 				</a>
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 				<p>Aqui você tem a visão de todas das fichas abertas!</p>
 
 				<ul class="timeline">
-			        
+
                   {%for ficha in fichas %}
 					<li class="event" data-date="{{ficha.data_consulta}}">
 
@@ -79,7 +79,7 @@
 					<div class="centralizado">
                       	  	<fieldset>
 							   <div class="dupla">
-                            
+
 							<label for="#" class="formLabel">Descrição da ficha :</label>
 							<input id="dono" class="formInput" type="text" value="{{ficha.descricao}}" disabled/>
 									</div>
@@ -90,17 +90,17 @@
 
 							<label for="#" class="formLabel">Diagnostico:</label>
                          {% if fichaItens.fichadiagnostico_ficha__id_diagnostico__descricao == None  %}
-                           
+
 							<input id="dono" class="formInput" type="text" value="Sem diagnostico" disabled/>
 
                            {% else %}
-                           
+
 							<input id="dono" class="formInput" type="text" value="{{fichaItens.fichadiagnostico_ficha__id_diagnostico__descricao}}" disabled/>
-									       
-                         
+
+
 								{% endif %}
 
-								</div>   
+								</div>
 						{% endif %}
                   {% endfor %}
 							</fieldset>
@@ -111,9 +111,9 @@
 				</div>
 			</div>
 		</div>
-		  
+
 	</div>
- 					
+
 			{% endfor %}
 </ul>
 </fieldset>
@@ -123,14 +123,14 @@
 	<form method="post" class='formEtapas menuOpcoes' id="Historico" style="display:none;">
 		{% csrf_token %}
 		<fieldset id="Historico">
-	
+
 			<h2 class="tituloGrande">Histórico</h2 class="tituloGrande">
-				<p>Aqui você tem a visão de todo o Histórico do animal!</p>            
+				<p>Aqui você tem a visão de todo o Histórico do animal!</p>
 				<ul class="timeline">
 
                   {%for historico in hist%}
 					<li class="event " data-date="{{historico.data_solicitacao}}">
-      
+
 						<h3>{{historico.atendimentoprocclinico_atendimento__id_proc_clinico_id__nome}}</h3>
 
 
@@ -169,7 +169,7 @@
 									</div>
 
                             {% if historico.atendimentoprocclinico_atendimento__id_proc_clinico_id__preco > 0 %}
-                            <div class="dupla"> 
+                            <div class="dupla">
 
 	 						<label class="formLabel">Valor</label>
 									<input type="text" class="formInput" name="booleano" id="booleano" value ="R$ {{historico.atendimentoprocclinico_atendimento__id_proc_clinico_id__preco}}" maxlength="20" disabled/>
@@ -179,10 +179,10 @@
 								 <label class="formLabel">Valor</label>
 									<input type="text" class="formInput" name="booleano" id="booleano" value ="sem" maxlength="20" disabled />
 
-								</div>	
-							{% endif %}	
-								
-							</fieldset>					
+								</div>
+							{% endif %}
+
+							</fieldset>
 
 					</div>
 

@@ -6,6 +6,7 @@ $.getJSON('/cliente/get_cliente', function (data) {
             .text(clientes[cliente].fields.nome)
         selectCliente.append(option)
     }
+ 
 })
 
 // Ajax - POST -  pagina cadastro_cliente
@@ -189,6 +190,7 @@ function abrirModal(id, url_foto, nome, sexo, raca, cor, especie, datanasc, obse
   $('#modalVisuAnimal').modal('show')
   InputModalAnimal(animal)
 }
+
 function InputModalAnimal(animal) {
   $("input[name='id']").val(animal.id)
   $("input[name='nome']").val(animal.nome)
@@ -252,8 +254,6 @@ $('#animal_btn_deletar').on('click', function(e) {
         })
   })
 
-
-
 $('#achar_animal').on('click', function(e) {
 
   e.preventDefault()
@@ -299,16 +299,14 @@ $('#achar_animal').on('click', function(e) {
                   $('#foto_animal').attr('src',data[0].fields.url_foto)
 
 
-
                   }
-
-
-
+                 
                 }
 
               })
 
           }
+
          else {
 
     alerta("Por favor selecione um cliente e animal válido..", "aviso", 5000)
@@ -318,3 +316,126 @@ $('#achar_animal').on('click', function(e) {
   }
 
   })
+
+$('#EditaAtendimento').on('click', function(e) {
+
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    cpf_cliente = $('#cpf_cliente').val()
+
+    id_evento = $('#IdEvento').val()
+    obsedit = $('#obsedit').val()
+    DataInicioedit = $('#DataInicioedit').val()
+    HoraInicioedit = $('#HoraInicioedit').val()
+
+        $.ajax({
+                type: "POST",
+                url: '/cliente/get_atualiza_atendimento'+ '/' + id_evento + '/' + obsedit +'/' + DataInicioedit+ '/' + HoraInicioedit,
+                headers:{
+                    "X-CSRFToken": csrftoken,
+                },
+                data:{
+                   id_evento     : $('#IdEvento').val(),
+                   obsedit     : $('#obsedit').val(),
+                   DataInicioedit     : $('#DataInicioedit').val(),
+                   HoraInicioedit     : $('#HoraInicioedit').val(),
+                },
+                success: function (data) 
+                {
+                  
+                $('#visualizar').modal('hide');
+                alerta(data.mensagem, data.tipo, data.time)
+                 $('#calendar').fullCalendar('removeEvents', id_evento );
+
+                 $('#calendar').fullCalendar('renderEvent',
+                    {
+                   id :  id_evento,  
+                   title: obsedit,
+                   start: DataInicioedit,
+                     }
+                    ) ;   
+                }
+              })
+  })
+
+$('#DeletarAtendimento').on('click', function(e) {
+
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    id_evento = $('#IdEvento').val()
+
+        $.ajax({
+                type: "POST",
+                url: '/cliente/get_deleta_atendimento'+ '/' + id_evento ,
+                headers:{
+                    "X-CSRFToken": csrftoken,
+                },
+                data:{
+                   id_evento     : $('#IdEvento').val(),
+          
+                },
+                success: function (data) 
+                {
+                  
+                $('#visualizar').modal('hide');
+                alerta(data.mensagem, data.tipo, data.time)
+
+                $('#calendar').fullCalendar('removeEvents', id_evento );
+  
+                }
+
+              })
+  })
+
+$('#CriaAtendimento').on('click', function(e) {
+
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    radio = $("input[type=radio]:checked").val();
+    dataAtendimento = $('#dataAtendimento').val()
+    HoraAtendimento = $('#HoraAtendimento').val()
+    obs = $('#obs').val()
+    funcionarios = $('#funcionarios').val()
+    funcionarios = $('#funcionarios').val()
+    selectAnimal = $('#selectAnimal').val()
+    cpf_cliente = $('#cpf_cliente').val()
+
+        $.ajax({
+                type: "POST",
+                url: '/cliente/GravarAtendimento'+ '/' + dataAtendimento + '/' + HoraAtendimento +'/' + obs+ '/' + funcionarios+'/'+cpf_cliente+'/'+selectAnimal+'/'+radio,
+                headers:{
+                    "X-CSRFToken": csrftoken,
+                },
+                data:{
+                   dataAtendimento     : $('#dataAtendimento').val(),
+                   HoraAtendimento     : $('#HoraAtendimento').val(),
+                   obs     : $('#obs').val(),
+                   funcionarios     : $('#funcionarios').val(),
+                   selectAnimal     : $('#selectAnimal').val(),
+                },
+                 beforeSend: function () {
+                  $("#load").modal('show');
+                  $('#cadastrar').modal('hide');
+
+                   },
+                success: function (data) 
+                {
+                $("#load").modal('hide');
+             
+                alerta(data.mensagem, data.tipo, data.time)
+                 
+            
+                 $('#calendar').fullCalendar('renderEvent',
+                    {
+                   id :  data.id_data,  
+                   title: data.data_obs,
+                   start: data.data_atend,
+
+                     }
+                    ) ;  
+
+
+                }
+              })
+  })
+

@@ -220,14 +220,6 @@ def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,
         atendimento.observacao = request.POST.get('obs')
                   
         data_nova =  datetime.strptime(dataAtendimento, "%Y-%m-%d").date()
-        if radio == 'M':
-            periodo = periodo + 30
-        if radio == 'S':
-            periodo = periodo + 7 
-        if radio == 'A':
-            periodo = periodo + 365
-        if radio == 'N':
-            periodo = 0             
         data_nova = date.fromordinal(data_nova.toordinal() + periodo) 
         data_nova = str(data_nova)
         data_atend = data_nova +' ' + hora_nova
@@ -240,6 +232,14 @@ def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,
         feito.id_atendimento= atendimento
         feito.id_funcionario = Responsavel
         feito.save()
+        if radio == 'M':
+            periodo = periodo + 30
+        if radio == 'S':
+            periodo = periodo + 7 
+        if radio == 'A':
+            periodo = periodo + 365
+        if radio == 'N':
+            periodo = 0             
 
     context = {
             'tipo':"ok",

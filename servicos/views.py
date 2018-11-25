@@ -320,3 +320,10 @@ class ViewCadastrarDiagnostico(BaseView):
             'time': 7000
         }
         return HttpResponse(json.dumps(context), content_type='application/json')
+
+class ViewCalculoRota(View):
+
+    template = 'calculo_rota.html'
+
+    def get(self, request):
+        return render(request, self.template)

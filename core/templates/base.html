@@ -23,7 +23,7 @@
 	  <a id="sinoNotificacao" onclick="fadeInOut();" class="sinoNotificacaoInativo">
 	    <img class="icone" src="{% static 'img/notification.png' %}" alt="Notificações">
 	  </a>
-		<a href="{% url 'logout_url' %}">Sair</a>
+		<a href="{% url 'logout_url' %}"><i class="fa fa-sign-out" aria-hidden="true"> Sair</i></a>
 	</div>
 	{% endif %}
 </header>
@@ -43,6 +43,10 @@
 			<div class="subMenuItem">
 				<img src="{% static 'img/cadastro_procedimento.png' %}" alt="Cadastrar Procedimento">
 				<h5><a href ="{% url 'cadastro_procedimento' %}">Cadastro de Procedimento</a></h5>
+			</div>
+			<div class="subMenuItem">
+				<img src="{% static 'img/calculo_rota.png' %}" alt="Calculo de Rota">
+				<h5><a href ="{% url 'calculo_rota' %}">Calculo de Rota</a></h5>
 			</div>
 		</div>
 		<button  class="item" type="button" data-toggle="collapse" data-target="#submenuAgenda" aria-expanded="false" aria-controls="collapseExample"><img src="{% static 'img/agenda.png' %}" alt="Agenda"><h5>Agenda</h5></button>

@@ -53,8 +53,8 @@ function verifica_horario_notificacao(dataJson){
   var hora_atual  = d.toString().substring(16,24);
 
   for (var item in dataJson) {
-    var hora  = (dataJson[item]['data/hora']).substring(11,19);
-    var dono  = dataJson[item]['dono'];
+    var hora  = (dataJson[item]['data_solicitacao']).substring(11,19);
+    var dono  = dataJson[item]['id_animal__cpf_cliente__nome'];
     if (hora == hora_atual) {
       alerta("Hora de fazer um atendimento ao Bixinho do " + dono,"aviso",7000);
     }

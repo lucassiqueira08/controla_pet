@@ -155,7 +155,7 @@ class ViewCadastrarAnimal(BaseView):
             if resposta['microchip'] is True:
                 raise MicrochipError(resposta['msg'])
 
-            if microchip is not '':
+            if microchip:
                 animal.microchip = microchip
 
         except MicrochipError as e:

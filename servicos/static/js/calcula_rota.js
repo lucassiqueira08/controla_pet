@@ -1,4 +1,4 @@
-$("#buscar").on("click",function(){
+$("#Calcular").on("click",function(){
   if ($("#destino").val().trim()!='' && $("#origem").val().trim()!='') {
     CalculaDistancia()
   }
@@ -49,9 +49,6 @@ function callback(response, status) {
     }
     else {
       if (response.rows[0].elements[0].distance) {
-
-
-        console.log(response)
         $('#informacoes').html(
           "<tr>"+
           "   <td>" +response.rows[0].elements[0].distance.text+"</td>"+
@@ -73,7 +70,6 @@ function callback(response, status) {
           }
         }
         urlQuery += "&output=embed&zoom="+zoom
-        console.log(urlQuery);
         $("#map").attr("src", urlQuery);
         $('#modalRota').modal('show')
       }

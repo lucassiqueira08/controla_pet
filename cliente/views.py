@@ -302,8 +302,11 @@ class ViewVisualizarAnimal(BaseView):
             datanasc = request.POST.get('datanasc')
             animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
             animal.observacao = request.POST.get('obs')
-            animal.microchip = request.POST.get('microchip')
+            microchiṕ = request.POST.get('microchip')
 
+            if microchiṕ:
+                animal.microchip = microchiṕ
+                
             animal.cpf_cliente = cpf_cliente
             try:
                 arquivo = request.FILES['url_foto']

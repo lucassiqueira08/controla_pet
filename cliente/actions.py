@@ -176,7 +176,7 @@ def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,
     if radio == 'M':
         contador = 5 
     if radio == 'S':
-        contador = 26
+        contador = 4
 
     if radio == 'A':
         contador = 5

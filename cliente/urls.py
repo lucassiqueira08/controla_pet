@@ -7,7 +7,7 @@ from .views import (ViewCadastrarAnimal, ViewVisualizarAnimal,
 
                     
 from .actions import (get_cliente, get_animal, get_ficha_animal, get_cliente_id ,
-                                 get_atualiza_atendimento,get_deleta_atendimento)
+                                 get_atualiza_atendimento,get_deleta_atendimento,GravarAtendimento)
 
 
 
@@ -75,6 +75,9 @@ urlpatterns = [
     path(
          'get_deleta_atendimento/<int:id_evento>', get_deleta_atendimento
         ),  
+  path(
+         'GravarAtendimento/<str:dataAtendimento>/<str:hora_atendimento>/<str:obs>/<str:funcionarios>/<str:cpf_cliente>/<str:selectAnimal>/<str:radio>', GravarAtendimento
+        ), 
 
 
 ]

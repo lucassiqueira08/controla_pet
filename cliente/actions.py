@@ -1,8 +1,10 @@
 import json
 import datetime 
+from datetime import datetime, date
 from django.core import serializers
 from django.http import HttpResponse
 from servicos.models import Atendimento ,FeitoPor
+from usuarios.models import Funcionario
 from gagenda.app import GCalGoogle
 
 from .models import TipoCliente, Cliente, Animal, Responsavel
@@ -99,7 +101,7 @@ def get_atualiza_atendimento(request,id_evento,observacao,data_init,horaedit):
     except Exception :
         context = {
             'tipo':"erro",
-            'mensagem':'erro google'+data,
+            'mensagem':'Erro ao sincronizar informação com a google agenda',
             'time':5000       
 
               }       
@@ -108,7 +110,7 @@ def get_atualiza_atendimento(request,id_evento,observacao,data_init,horaedit):
     except Exception :
         context = {
             'tipo':"erro",
-            'mensagem':'erro atendi' + data_init,
+            'mensagem':'Erro ao cadastrar atendimento',
             'time':5000       
 
               }   
@@ -144,7 +146,7 @@ def get_deleta_atendimento(request,id_evento):
     except Exception :
         context = {
             'tipo':"erro",
-            'mensagem':'Erro ao excluir a informação de quem fez',
+            'mensagem':'Erro ao excluir a informação de quem fez o procedimento',
             'time':5000       
 
               }   
@@ -168,8 +170,82 @@ def get_deleta_atendimento(request,id_evento):
     return HttpResponse(json.dumps(context),content_type='application/json')  
 
 
+def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,cpf_cliente,selectAnimal,radio):
+    contador= 0
+    periodo= 0
+    if radio == 'M':
+        contador = 12 
+    if radio == 'S':
+        contador = 52
 
+    if radio == 'A':
+        contador = 10
 
+    if radio == 'N':
+        contador = 1
+               
+    for cont in range(contador):
 
+        var_data =  datetime.strptime(dataAtendimento, "%Y-%m-%d").strftime('%d-%m-%Y')
+        data = dataAtendimento +'T'+hora_atendimento
+        obssumary = request.POST.get('obs')
 
+                #dicionario molde para o calendar
+        event = {
+            #-------------------------------CRIA O EVENTO--------------------------------
+            'summary': obssumary,
+            'location': 'Av. Dr. Alberto de Oliveira Lima, 254 - Real Parque, São Paulo',
+            'description': obssumary,
+                #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
+            'start': {
+                'dateTime':  data+':00', # Adição da hora com o fusorario
+                    'timeZone': 'America/Sao_Paulo',
+                  },
+                'end': {
+                'dateTime':  data+':00',
+                'timeZone': 'America/Sao_Paulo',
+                #-------------------------------HORA QUE COMEÇA E TERMINA--------------------------------
+                  },
 
+                }
+        data_nova = dataAtendimento
+        hora_nova =hora_atendimento
+
+        google= GCalGoogle()
+        gid = google.criar(event)
+  
+        feito = FeitoPor()
+        cliente = Cliente.objects.get(cpf= cpf_cliente )
+        atendimento = Atendimento()
+        atendimento.observacao = request.POST.get('obs')
+                  
+        data_nova =  datetime.strptime(dataAtendimento, "%Y-%m-%d").date()
+        if radio == 'M':
+            periodo = periodo + 30
+        if radio == 'S':
+            periodo = periodo + 7 
+        if radio == 'A':
+            periodo = periodo + 365
+        if radio == 'N':
+            periodo = 0             
+        data_nova = date.fromordinal(data_nova.toordinal() + periodo) 
+        data_nova = str(data_nova)
+        data_atend = data_nova +' ' + hora_nova
+        atendimento.data_solicitacao =  data_atend
+        Atend_animal= Animal.objects.get(cpf_cliente=cliente, pk= selectAnimal)
+        atendimento.id_animal = Atend_animal
+        Responsavel = Funcionario.objects.get(cpf= funcionarios)
+        atendimento.id_google_agenda = gid
+        atendimento.save()
+        feito.id_atendimento= atendimento
+        feito.id_funcionario = Responsavel
+        feito.save()
+
+    context = {
+            'tipo':"ok",
+            'mensagem':radio,
+            'time':5000       
+
+              }       
+   
+    return HttpResponse(json.dumps(context),content_type='application/json')          

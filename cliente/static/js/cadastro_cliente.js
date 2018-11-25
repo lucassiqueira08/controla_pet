@@ -324,9 +324,7 @@ $('#EditaAtendimento').on('click', function(e) {
     obsedit = $('#obsedit').val()
     DataInicioedit = $('#DataInicioedit').val()
     HoraInicioedit = $('#HoraInicioedit').val()
-    
-//Verifica o usuario e o animal, caso existe, preenche a tela seguinte.
-  
+
         $.ajax({
                 type: "POST",
                 url: '/cliente/get_atualiza_atendimento'+ '/' + id_evento + '/' + obsedit +'/' + DataInicioedit+ '/' + HoraInicioedit,
@@ -386,6 +384,54 @@ $('#DeletarAtendimento').on('click', function(e) {
               })
   })
 
+$('#CriaAtendimento').on('click', function(e) {
+
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    radio = $("input[type=radio]:checked").val();
+    dataAtendimento = $('#dataAtendimento').val()
+    HoraAtendimento = $('#HoraAtendimento').val()
+    obs = $('#obs').val()
+    funcionarios = $('#funcionarios').val()
+    funcionarios = $('#funcionarios').val()
+    selectAnimal = $('#selectAnimal').val()
+    cpf_cliente = $('#cpf_cliente').val()
+
+        $.ajax({
+                type: "POST",
+                url: '/cliente/GravarAtendimento'+ '/' + dataAtendimento + '/' + HoraAtendimento +'/' + obs+ '/' + funcionarios+'/'+cpf_cliente+'/'+selectAnimal+'/'+radio,
+                headers:{
+                    "X-CSRFToken": csrftoken,
+                },
+                data:{
+                   dataAtendimento     : $('#dataAtendimento').val(),
+                   HoraAtendimento     : $('#HoraAtendimento').val(),
+                   obs     : $('#obs').val(),
+                   funcionarios     : $('#funcionarios').val(),
+                   selectAnimal     : $('#selectAnimal').val(),
+                },
+                 beforeSend: function () {
+                  $("#load").modal('show');
+                  $('#cadastrar').modal('hide');
+
+                   },
+                success: function (data) 
+                {
+                $("#load").modal('hide');
+             
+                alerta(data.mensagem, data.tipo, data.time)
+            
+
+                 $('#calendar').fullCalendar('renderEvent',
+                    {
+                   id :  id_evento,  
+                   title: radio,
+                   start: DataInicioedit,
+                     }
+                    ) ;  
 
 
+                }
+              })
+  })
 

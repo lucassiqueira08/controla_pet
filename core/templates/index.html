@@ -71,15 +71,29 @@
 <style type="text/css" 
 
 >
-  
+ 
 .alert-info {
     background-color: #ff6600;
     
 }
+.loading-image{
+
+	background-color: #FFF;
+  border-radius: 20px !important;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  width: auto;
+}
 
 
 </style>
-
+<div  id="load"  class="modal"  tabindex="-1"
+  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<dir class="modal-dialog"> 
+<img class="loading-image"  src='https://media1.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif'>
+</dir>
+</div>
 <div clss="container">
 	<div id='calendar'>
 
@@ -187,7 +201,7 @@
         {% csrf_token %}
   <div class="form-group">
     <label for="exampleInputName">Observação</label>
-    <input type="text" class="form-control" id="exampleInputName" name="obs" placeholder="Nome">
+    <input type="text" class="form-control" id="obs" name="obs" placeholder="Nome">
   </div>
    <div class="form-group">
   <div class="form-row">
@@ -198,7 +212,7 @@
      </div>
   <div class="form-group col-md-5 mb-3">
     <label for="  exampleInputName">hora</label>
-    <input type="time" class="form-control" name ="HoraAtendimento" id="horaAtendimento" >
+    <input type="time" class="form-control" name ="HoraAtendimento" id="HoraAtendimento" >
  
   </div>
   </div>
@@ -230,7 +244,7 @@
 
 <div class="custom-control custom-radio custom-control-inline">
   <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="S">
-  <label class="custom-control-label" for="inlineRadio1">Semanalmente</label>
+  <label class="custom-control-label" for="inlineRadio1" namme ="inlineRadioOptions"value="S">Semanalmente</label>
 </div>
 <div class="custom-control custom-radio custom-control-inline">
   <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="M">
@@ -249,10 +263,14 @@
 
 	 <div class="modal-footer">
 
+<div class="dupla	">
+<input type="submit" name="CriaAtendimento" class="acao btn btnPrincipal" value="SALVAR" id="CriaAtendimento"/>
+	     <button type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>
+</div>
 
-  <button name="button" value = "save" class="acao btn btnPrincipal clearMarginTop">SALVAR</button>
+
    
-     <button type="button" class="btnSecundario" data-dismiss="modal">Fechar</button>
+
 
       </div>
       </form>

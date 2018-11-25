@@ -1,8 +1,9 @@
 import json
-
+import datetime 
 from django.core import serializers
 from django.http import HttpResponse
-
+from servicos.models import Atendimento ,FeitoPor
+from gagenda.app import GCalGoogle
 
 from .models import TipoCliente, Cliente, Animal, Responsavel
 
@@ -78,3 +79,92 @@ def get_cliente_id(request):
         cliente = Cliente.objects.all()
     cliente_json = serializers.serialize("json", cliente)
     return HttpResponse(cliente_json, content_type='application/json')
+
+def get_atualiza_atendimento(request,id_evento,observacao,data_init,horaedit):
+    atendimento = Atendimento.objects.get(id = id_evento)
+    atendimento.observacao = observacao
+    
+    data_sistema = datetime.datetime.strptime(data_init, "%Y-%m-%d").strftime('%d-%m-%Y')
+
+    data = data_init+'T'+horaedit+':00-03:00'
+
+    atendimento.data_solicitacao = data_init + ' '+ horaedit 
+
+    google= GCalGoogle()
+    IdGoogle = atendimento.id_google_agenda
+
+    coment = observacao
+    try:
+        google.atualizar(IdGoogle,coment,data,data)
+    except Exception :
+        context = {
+            'tipo':"erro",
+            'mensagem':'erro google'+data,
+            'time':5000       
+
+              }       
+    try:  
+        atendimento.save()
+    except Exception :
+        context = {
+            'tipo':"erro",
+            'mensagem':'erro atendi' + data_init,
+            'time':5000       
+
+              }   
+
+    context = {
+            'tipo':"ok",
+            'mensagem':'Data atualizada com sucesso ',
+            'time':5000       
+
+              }       
+   
+    return HttpResponse(json.dumps(context),content_type='application/json')
+
+
+def get_deleta_atendimento(request,id_evento):
+
+    try:
+        atendimento = Atendimento.objects.get(id = id_evento)
+        google= GCalGoogle()
+        google.deletar(atendimento.id_google_agenda)
+        
+
+    except Exception :
+        context = {
+            'tipo':"erro",
+            'mensagem':'erro google'+data,
+            'time':5000       
+
+              }       
+    try:  
+         feito = FeitoPor.objects.get(id_atendimento= id_evento)
+         feito.delete()
+     
+    except Exception :
+        context = {
+            'tipo':"erro",
+            'mensagem':'Erro ao excluir a informação de quem fez',
+            'time':5000       
+
+              }   
+    try:  
+        
+        atendimento.delete()
+    except Exception :
+        context = {
+            'tipo':"erro",
+            'mensagem':'Erro ao excluir atendimento',
+            'time':5000       
+
+              }   
+              
+    context = {
+            'tipo':"ok",
+            'mensagem':'Atendimento excluido',
+            'time':5000       
+
+              }       
+   
+    return HttpResponse(json.dumps(context),content_type='application/json')    

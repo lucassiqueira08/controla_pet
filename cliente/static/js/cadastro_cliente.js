@@ -6,6 +6,7 @@ $.getJSON('/cliente/get_cliente', function (data) {
             .text(clientes[cliente].fields.nome)
         selectCliente.append(option)
     }
+ 
 })
 
 // Ajax - POST -  pagina cadastro_cliente
@@ -189,6 +190,7 @@ function abrirModal(id, url_foto, nome, sexo, raca, cor, especie, datanasc, obse
   $('#modalVisuAnimal').modal('show')
   InputModalAnimal(animal)
 }
+
 function InputModalAnimal(animal) {
   $("input[name='id']").val(animal.id)
   $("input[name='nome']").val(animal.nome)
@@ -316,3 +318,61 @@ $('#achar_animal').on('click', function(e) {
   }
 
   })
+
+$('#EditaAtendimento').on('click', function(e) {
+
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    cpf_cliente = $('#cpf_cliente').val()
+
+    id_evento = $('#IdEvento').val()
+    obsedit = $('#obsedit').val()
+    DataInicioedit = $('#DataInicioedit').val()
+    HoraInicioedit = $('#HoraInicioedit').val()
+    
+//Verifica o usuario e o animal, caso existe, preenche a tela seguinte.
+  
+     
+        $.ajax({
+                type: "POST",
+                url: '/cliente/get_atualiza_atendimento'+ '/' + id_evento + '/' + obsedit +'/' + DataInicioedit+ '/' + HoraInicioedit,
+                headers:{
+                    "X-CSRFToken": csrftoken,
+                },
+                data:{
+                   id_evento     : $('#IdEvento').val(),
+                   obsedit     : $('#obsedit').val(),
+                   DataInicioedit     : $('#DataInicioedit').val(),
+                   HoraInicioedit     : $('#HoraInicioedit').val(),
+                },
+                success: function (data) 
+                {
+                  
+                $('#visualizar').modal('hide');
+                alerta(data.mensagem, data.tipo, data.time)
+
+                 $('#calendar').fullCalendar('removeEvents', id_evento );
+
+                 $('#calendar').fullCalendar('renderEvent',
+                    {
+                   id :  id_evento,  
+                   title: obsedit,
+                   start: DataInicioedit,
+                     }
+                    ) ;
+
+
+
+     
+                        
+                 
+                }
+
+              })
+      
+          
+
+
+  })
+
+

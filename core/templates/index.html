@@ -15,11 +15,12 @@
         right: 'month,agendaWeek,agendaDay,listWeek'
       },
       defaultDate: Date() ,
-    locale:'pt-br',
+  	  locale:'pt-br',
       navLinks: true, //Permite navegar entre o dia e a semana.
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-  selectable : true,
+ 	 selectable : true,
+
 
  
      eventClick: function(events) {
@@ -63,6 +64,8 @@
     });
 
   });
+
+
 
 </script>
 <style type="text/css" 
@@ -142,13 +145,16 @@
           Cancelar
         </button>
 
-        <button name="button" value = "edit" class="acao btn btn-success clearMarginTop">
+        <!--button name="button" value = "edit" class="acao btn btn-success clearMarginTop">
           Salvar
-        </button>
+        </button!-->
+        	<div class="containerBotoes">
 
-				<button name="button" value = "del" class="acao btn btn-danger btn-primary clearMarginTop"">
-          Deletar
-        </button>
+			<input type="submit" name="EditaAtendimento" class="acao btn btnPrincipal" value="SALVAR" id="EditaAtendimento"/>
+		
+
+				<input type="submit" name="DeletarAtendimento" id="DeletarAtendimento" value = "DELETAR" class="acao btn btnPrincipal" />
+        </div>
 
 </div>
 		</div>

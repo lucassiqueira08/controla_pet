@@ -6,7 +6,8 @@ from .views import (ViewCadastrarAnimal, ViewVisualizarAnimal,
                     ViewBuscarAnimal)
 
                     
-from .actions import get_cliente, get_animal, get_ficha_animal, get_cliente_id
+from .actions import (get_cliente, get_animal, get_ficha_animal, get_cliente_id ,
+                                 get_atualiza_atendimento,get_deleta_atendimento)
 
 
 
@@ -68,4 +69,12 @@ urlpatterns = [
         name='delete_animal'
 
     ),
+    path(
+         'get_atualiza_atendimento/<int:id_evento>/<str:observacao>/<str:data_init>/<str:horaedit>', get_atualiza_atendimento
+        ),    
+    path(
+         'get_deleta_atendimento/<int:id_evento>', get_deleta_atendimento
+        ),  
+
+
 ]

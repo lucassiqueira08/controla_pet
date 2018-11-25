@@ -375,4 +375,48 @@ $('#EditaAtendimento').on('click', function(e) {
 
   })
 
+$('#DeletarAtendimento').on('click', function(e) {
 
+  e.preventDefault()
+  var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+    cpf_cliente = $('#cpf_cliente').val()
+
+    id_evento = $('#IdEvento').val()
+
+    
+//Verifica o usuario e o animal, caso existe, preenche a tela seguinte.
+  
+     
+        $.ajax({
+                type: "POST",
+                url: '/cliente/get_deleta_atendimento'+ '/' + id_evento ,
+                headers:{
+                    "X-CSRFToken": csrftoken,
+                },
+                data:{
+                   id_evento     : $('#IdEvento').val(),
+          
+                },
+                success: function (data) 
+                {
+                  
+                $('#visualizar').modal('hide');
+                alerta(data.mensagem, data.tipo, data.time)
+
+                 $('#calendar').fullCalendar('removeEvents', id_evento );
+
+               
+
+
+
+     
+                        
+                 
+                }
+
+              })
+      
+          
+
+
+  })

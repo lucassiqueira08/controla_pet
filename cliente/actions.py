@@ -135,7 +135,7 @@ def get_deleta_atendimento(request,id_evento):
     except Exception :
         context = {
             'tipo':"erro",
-            'mensagem':'erro google'+data,
+            'mensagem':'erro ao sincronizar google <agenda></agenda>',
             'time':5000       
 
               }       

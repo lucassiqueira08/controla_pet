@@ -424,7 +424,6 @@ $('#CriaAtendimento').on('click', function(e) {
              
                 alerta(data.mensagem, data.tipo, data.time)
                  
-            
                  $('#calendar').fullCalendar('renderEvent',
                     {
                    id :  data.id_data,  

@@ -252,8 +252,6 @@ $('#animal_btn_deletar').on('click', function(e) {
         })
   })
 
-
-
 $('#achar_animal').on('click', function(e) {
 
   e.preventDefault()
@@ -298,17 +296,14 @@ $('#achar_animal').on('click', function(e) {
                   
                   $('#foto_animal').attr('src',data[0].fields.url_foto)
 
-  
-
                   }
-
-
                  
                 }
 
               })
       
           }
+
          else {
         
     alerta("Por favor selecione um cliente e animal válido..", "aviso", 5000)
@@ -332,7 +327,6 @@ $('#EditaAtendimento').on('click', function(e) {
     
 //Verifica o usuario e o animal, caso existe, preenche a tela seguinte.
   
-     
         $.ajax({
                 type: "POST",
                 url: '/cliente/get_atualiza_atendimento'+ '/' + id_evento + '/' + obsedit +'/' + DataInicioedit+ '/' + HoraInicioedit,
@@ -350,7 +344,6 @@ $('#EditaAtendimento').on('click', function(e) {
                   
                 $('#visualizar').modal('hide');
                 alerta(data.mensagem, data.tipo, data.time)
-
                  $('#calendar').fullCalendar('removeEvents', id_evento );
 
                  $('#calendar').fullCalendar('renderEvent',
@@ -359,34 +352,17 @@ $('#EditaAtendimento').on('click', function(e) {
                    title: obsedit,
                    start: DataInicioedit,
                      }
-                    ) ;
-
-
-
-     
-                        
-                 
+                    ) ;   
                 }
-
               })
-      
-          
-
-
   })
 
 $('#DeletarAtendimento').on('click', function(e) {
 
   e.preventDefault()
   var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
-    cpf_cliente = $('#cpf_cliente').val()
-
     id_evento = $('#IdEvento').val()
 
-    
-//Verifica o usuario e o animal, caso existe, preenche a tela seguinte.
-  
-     
         $.ajax({
                 type: "POST",
                 url: '/cliente/get_deleta_atendimento'+ '/' + id_evento ,
@@ -403,20 +379,13 @@ $('#DeletarAtendimento').on('click', function(e) {
                 $('#visualizar').modal('hide');
                 alerta(data.mensagem, data.tipo, data.time)
 
-                 $('#calendar').fullCalendar('removeEvents', id_evento );
-
-               
-
-
-
-     
-                        
-                 
+                $('#calendar').fullCalendar('removeEvents', id_evento );
+  
                 }
 
               })
-      
-          
-
-
   })
+
+
+
+

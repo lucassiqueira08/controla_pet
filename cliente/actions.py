@@ -130,7 +130,6 @@ def get_deleta_atendimento(request,id_evento):
         google= GCalGoogle()
         google.deletar(atendimento.id_google_agenda)
         
-
     except Exception :
         context = {
             'tipo':"erro",
@@ -150,7 +149,6 @@ def get_deleta_atendimento(request,id_evento):
 
               }   
     try:  
-        
         atendimento.delete()
     except Exception :
         context = {
@@ -167,4 +165,11 @@ def get_deleta_atendimento(request,id_evento):
 
               }       
    
-    return HttpResponse(json.dumps(context),content_type='application/json')    
+    return HttpResponse(json.dumps(context),content_type='application/json')  
+
+
+
+
+
+
+

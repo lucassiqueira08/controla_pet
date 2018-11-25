@@ -133,7 +133,7 @@ class ViewCadastrarAnimal(BaseView):
         # Animal
         try:
             datanasc = request.POST.get('datanasc')
-            if datanasc is not '':
+            if datanasc:
                 animal.datanasc = datetime.strptime(datanasc, "%d/%m/%Y").strftime('%Y-%m-%d')
 
         except ValueError:

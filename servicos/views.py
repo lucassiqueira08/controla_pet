@@ -56,7 +56,8 @@ class ViewCadastroProcedimento(View):
                 procedimento = ProcedimentoEstetico()
                 procedimento.nome = nome
                 procedimento.descricao = descricao
-                procedimento.preco = preco.replace(",", ".")
+                if preco:
+                    procedimento.preco = preco.replace(",", ".")
                 procedimento.especie = especie
                 procedimento.save()
         except Exception:

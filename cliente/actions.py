@@ -25,7 +25,7 @@ def get_animal(request, cpf_cliente, nome_animal):
     return HttpResponse(data_json, content_type='application/json')
 
 
-def get_ficha_animal(request, cpf_cliente , nome_animal):
+def get_ficha_animal(request, cpf_cliente , id_animal):
 
     cliente = Cliente.objects.filter(cpf=cpf_cliente).first()
     if cliente:

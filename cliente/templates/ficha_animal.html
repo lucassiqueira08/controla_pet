@@ -7,13 +7,12 @@
 <div class="titulo destacadoCimaBaixo clearMarginTop">
 		<div class="itensTitulo">
 			<div class="circulo">
-				<img src="../static/img/ficha_animal.png" alt="{{menu.descricao}}">
+				<img src="{% static 'img/ficha_animal.png' %}" alt="{{menu.descricao}}">
 			</div>
 	</div>
 </div>
 
 <!--===========INSIRA AQUI SEU CONTEUDO===============-->
-
 
 <div class="container">
 
@@ -42,26 +41,32 @@
 </div>
 <form method="post" class='formEtapas menuOpcoes' id="FichaAnimal">
 	{% csrf_token %}
-		
+
+
+
 		<fieldset id="Ficha">
+			{{ficha}}
 			<h2 class="tituloGrande">Ficha animal</h2 class="tituloGrande">
+				<h3>{{fichasGerais.FichaAnimal}}</h3>
 				<p>Aqui você tem a visão de todas das fichas abertas!</p>
 
 				<ul class="timeline">
+			        
                   {%for ficha in fichas %}
 					<li class="event" data-date="{{ficha.data_consulta}}">
-                        
-              
+
 					<h3>{{ficha.nome}}</h3>
 
 						<p>{{ficha.descricao}}</p>
+
 					<a data-toggle="modal" data-target="#modal_{{ficha.id}}">
 						<button type="button" class="btnPequeno clearMarginTop" name="button"  data-target="#modal_{{ficha.id}}">Ver mais!</button>
 					</a>
-                            
+
 					</li>
 
  <div class="modal fade" id="modal_{{ficha.id}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
+
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -73,68 +78,67 @@
 				<div class="modal-body">
 					<div class="centralizado">
                       	  	<fieldset>
-
-                               <div class="dupla">
-       							 <label class="formLabel">Data da consulta</label>
-									<input type="text" class="formInput" name="dataconsult" id="dataconsult" value ="{{ficha.data_consulta}}" maxlength="50" disabled />
-								</div>
-
-
 							   <div class="dupla">
-							<label for="#" class="formLabel">Descrição:</label>
-							<input id="dono" class="formInput" type="text" value="{{ficha.descricao}}" disabled />
+                            
+							<label for="#" class="formLabel">Descrição da ficha :</label>
+							<input id="dono" class="formInput" type="text" value="{{ficha.descricao}}" disabled/>
 									</div>
+   {% for fichaItens in fichadesc %}
+           {% if fichaItens.id == ficha.id%}
 
+           				   <div class="dupla">
 
-                            {% if ficha.booleano == 0 %}
-                            <div class="dupla"> 
-	 						<label class="formLabel">Possui ?</label>
-									<input type="text" class="formInput" name="booleano" id="booleano" value ="Sim" maxlength="20" disabled/>
-							</div>
-							{% else %}
-							 <div class="dupla">
-								 <label class="formLabel">Possui ?</label>
-									<input type="text" class="formInput" name="booleano" id="booleano" value ="Não" maxlength="20" disabled />
-								</div>	
-							{% endif %}	
+							<label for="#" class="formLabel">Diagnostico:</label>
+                         {% if fichaItens.fichadiagnostico_ficha__id_diagnostico__descricao == None  %}
+                           
+							<input id="dono" class="formInput" type="text" value="Sem diagnostico" disabled/>
 
-								
+                           {% else %}
+                           
+							<input id="dono" class="formInput" type="text" value="{{fichaItens.fichadiagnostico_ficha__id_diagnostico__descricao}}" disabled/>
+									       
+                         
+								{% endif %}
+
+								</div>   
+						{% endif %}
+                  {% endfor %}
 							</fieldset>
-					
+
 
 					</div>
-				
+
 				</div>
 			</div>
 		</div>
+		  
 	</div>
-
+ 					
 			{% endfor %}
 </ul>
 </fieldset>
 </form>
 
-	
 
 	<form method="post" class='formEtapas menuOpcoes' id="Historico" style="display:none;">
 		{% csrf_token %}
 		<fieldset id="Historico">
+	
 			<h2 class="tituloGrande">Histórico</h2 class="tituloGrande">
-				<p>Aqui você tem a visão de todo o Histórico do animal!</p>
-
+				<p>Aqui você tem a visão de todo o Histórico do animal!</p>            
 				<ul class="timeline">
-                  {%for historico in historicos%}
-					<li class="event" data-date="{{historico.data_solicitacao}}">
-                        
-              
-						<h3>{{historico.nome}}</h3>
 
-						<p>{{historico.descricao}}</p>
+                  {%for historico in hist%}
+					<li class="event " data-date="{{historico.data_solicitacao}}">
+      
+						<h3>{{historico.atendimentoprocclinico_atendimento__id_proc_clinico_id__nome}}</h3>
+
+
+						<p>{{historico.atendimentoprocclinico_atendimento__id_proc_clinico_id__descricao}}</p>
 					<a data-toggle="modal" data-target="#modal_Hist_{{historico.id_proc_clinico}}">
 						<button type="button" class="btnPequeno clearMarginTop" name="button">Ver mais!</button>
-                    </a>        
+                    </a>
 					</li>
-
  <div class="modal fade" id="modal_Hist_{{historico.id_proc_clinico}}" tabindex="-1" role="dialog" aria-labelledby="modal_1Label" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -147,56 +151,50 @@
 				<div class="modal-body">
 					<div class="centralizado">
 
-		
                       	  	<fieldset>
-                           
+
                                <div class="dupla">
        							 <label class="formLabel">Data/Hora da solicitação</label>
 									<input type="text" class="formInput" name="dataconsult" id="dataconsult" value ="{{historico.data_solicitacao}}" maxlength="50" disabled />
 								</div>
 
-
 							   <div class="dupla">
 							<label for="#" class="formLabel">Descrição</label>
-							<input id="dono" class="formInput" type="text" value="{{historico.descricao}}" disabled />
+							<input id="dono" class="formInput" type="text" value="{{historico.atendimentoprocclinico_atendimento__id_proc_clinico_id__descricao}}" disabled />
 									</div>
 
  						<div class="dupla">
 							<label for="#" class="formLabel">Observação</label>
 							<input id="dono" class="formInput" type="text" value="{{historico.observacao}}" disabled />
 									</div>
-                          
 
-                            {% if historico.preco > 0 %}
+                            {% if historico.atendimentoprocclinico_atendimento__id_proc_clinico_id__preco > 0 %}
                             <div class="dupla"> 
+
 	 						<label class="formLabel">Valor</label>
-									<input type="text" class="formInput" name="booleano" id="booleano" value ="R$ {{historico.preco}}" maxlength="20" disabled/>
+									<input type="text" class="formInput" name="booleano" id="booleano" value ="R$ {{historico.atendimentoprocclinico_atendimento__id_proc_clinico_id__preco}}" maxlength="20" disabled/>
 							</div>
 							{% else %}
 							 <div class="dupla">
 								 <label class="formLabel">Valor</label>
 									<input type="text" class="formInput" name="booleano" id="booleano" value ="sem" maxlength="20" disabled />
+
 								</div>	
 							{% endif %}	
-
 								
-							</fieldset>
-					
+							</fieldset>					
 
 					</div>
-				
+
 				</div>
 			</div>
 		</div>
 	</div>
                   {%endfor%}
-		
+
 				</ul>
-
-
 			</fieldset>
 		</form>
-
 		<form method="post" class='formEtapas menuOpcoes' id="Exames" style="display:none;">
 			{% csrf_token %}
 			<fieldset id="Exames">
@@ -206,18 +204,17 @@
 				<ul class="timeline">
 						{% for exame in exames %}
 					<li class="event" data-date="{{exame.data_realizacao}}">
-					
+
 						<h3>{{exame.nome}}</h3>
 						<div class="arquivo">
 							<img src="{% static 'img/file.png' %}" alt="testes">
 							<a href="{% static exame.link_doc %}" target="_blank">{{exame.link_doc}}</a>
 						</div>
 						<p><h3>{{exame.descricao}}</h3></p>
-                       
+
 					</li>
 					 {%endfor%}
 				</ul>
 				</fieldset>
 			</form>
-
 			{% endblock %}

@@ -24,7 +24,7 @@
 	  <a id="sinoNotificacao" onclick="fadeInOut();" class="sinoNotificacaoInativo">
 	    <img class="icone" src="{% static 'img/notification.png' %}" alt="Notificações">
 	  </a>
-		<a href="{% url 'logout' %}">Sair</a>
+		<a href="{% url 'logout_url' %}">Sair</a>
 	</div>
 	{% endif %}
 </header>
@@ -107,7 +107,7 @@
 		<div class="titulo destacadoCimaBaixo clearMarginTop">
 			<div class="itensTitulo">
 				<div class="circulo">
-					<img src="../static/img/{{menu.url}}.png" alt="{{menu.descricao}}">
+					<img src="{% static 'img/index.png' %}" alt="{{menu.descricao}}">
 				</div>
 			</div>
 		</div>

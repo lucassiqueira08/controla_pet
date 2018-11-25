@@ -3,9 +3,9 @@
 {% block content_base %}
 <div class="coluna centralizado">
   <h2 class="tituloGrande">Oops! Você não tem permissão para isso...</h2 class="tituloGrande">
-  <p class="textoErro">Você não tem permissão para realizar essa requisição! <a href="{% url 'index' %}">Voltar para a home...</a></p>
-
+  <p class="textoErro">Você não tem permissão para realizar essa requisição!</p>
   <img class="imgPagErros" src="{% static 'img/Luke_Duvida.png' %}" alt="Erro!">
+  <a href="{% url 'index' %}">Voltar para a home...</a>
 </div>
 
 {% endblock %}

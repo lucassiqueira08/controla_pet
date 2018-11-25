@@ -1,13 +1,10 @@
 from django.urls import path
 
-from .views import ViewIndexBemVindo, ViewIndex, Erro403, Erro404, Erro500
+from .views import ViewIndexBemVindo, ViewIndex
 from .actions import get_atendimentos, get_notificacao
 
 urlpatterns = [
-    path('index',      ViewIndex.as_view(), name='index'),
-    path('erro_403',   Erro403.as_view(),   name='erro_403'),
-    path('erro_404',   Erro404.as_view(),   name='erro_404'),
-    path('erro_500',   Erro500.as_view(),   name='erro_500'),
+    path('index', ViewIndex.as_view(), name='index'),
     path(
         'get_atendimentos', get_atendimentos
     ),

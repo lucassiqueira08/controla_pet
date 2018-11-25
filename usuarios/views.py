@@ -10,13 +10,6 @@ from .models import Funcionario, FuncionarioAbstrato, Veterinario, User
 from raven.contrib.django.raven_compat.models import client
 
 
-class ViewEsqueceuSenha(View):
-
-    template = 'esqueceu_senha.html'
-
-    def get(self, request):
-        return render(request, self.template)
-
 class ViewCadastroFuncionario(View):
 
     template = 'cadastro_funcionario.html'

@@ -208,7 +208,7 @@ def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,
                   },
 
                 }
-                
+
         data_nova = dataAtendimento
         hora_nova =hora_atendimento
 
@@ -229,6 +229,7 @@ def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,
              
               } 
             gid=''      
+            return HttpResponse(json.dumps(context),content_type='application/json')  
         
         try:
             feito = FeitoPor()
@@ -267,5 +268,6 @@ def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,
                 'time':5000,
 
             }
+            return HttpResponse(json.dumps(context),content_type='application/json')  
    
     return HttpResponse(json.dumps(context),content_type='application/json')          

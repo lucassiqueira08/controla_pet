@@ -393,9 +393,11 @@ $('#CriaAtendimento').on('click', function(e) {
     HoraAtendimento = $('#HoraAtendimento').val()
     obs = $('#obs').val()
     funcionarios = $('#funcionarios').val()
-    funcionarios = $('#funcionarios').val()
     selectAnimal = $('#selectAnimal').val()
     cpf_cliente = $('#cpf_cliente').val()
+    if (dataAtendimento.trim()!= '' && HoraAtendimento.trim()!='' && funcionarios.trim()!=''  && cpf_cliente.trim()!='' && selectAnimal.trim()!='')
+    {
+
 
         $.ajax({
                 type: "POST",
@@ -435,5 +437,10 @@ $('#CriaAtendimento').on('click', function(e) {
 
                 }
               })
+      }
+      else
+      {
+        alerta('Você precisa preecher todos os campos corretamente','erro',6000);
+      }
   })
 

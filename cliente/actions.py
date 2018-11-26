@@ -171,7 +171,7 @@ def get_deleta_atendimento(request,id_evento):
 
 
 def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,cpf_cliente,selectAnimal,radio):
-    contador= 0
+    contador= 1
     periodo= 0
     if radio == 'M':
         contador = 5 
@@ -208,47 +208,66 @@ def GravarAtendimento(request,dataAtendimento,hora_atendimento,obs,funcionarios,
                   },
 
                 }
+
         data_nova = dataAtendimento
         hora_nova =hora_atendimento
 
-        google= GCalGoogle()
-        gid = google.criar(event)
+        context = {
+                'tipo':"ok",
+                'mensagem':'Atendimento registrado',
+                'time':5000,
+                }
+        try:
+            google= GCalGoogle()
+            gid = google.criar(event)
   
-        feito = FeitoPor()
-        cliente = Cliente.objects.get(cpf= cpf_cliente )
-        atendimento = Atendimento()
-        atendimento.observacao = request.POST.get('obs')
-                  
-        data_nova =  datetime.strptime(dataAtendimento, "%Y-%m-%d").date()
-        data_nova = date.fromordinal(data_nova.toordinal() + periodo) 
-        data_nova = str(data_nova)
-        data_atend = data_nova +' ' + hora_nova
-        atendimento.data_solicitacao =  data_atend
-        Atend_animal= Animal.objects.get(cpf_cliente=cliente, pk= selectAnimal)
-        atendimento.id_animal = Atend_animal
-        Responsavel = Funcionario.objects.get(cpf= funcionarios)
-        atendimento.id_google_agenda = gid
-        atendimento.save()
-        feito.id_atendimento= atendimento
-        feito.id_funcionario = Responsavel
-        feito.save()
-        if radio == 'M':
-            periodo = periodo + 30
-        if radio == 'S':
-            periodo = periodo + 7 
-        if radio == 'A':
-            periodo = periodo + 365
-        if radio == 'N':
-            periodo = 0             
-
-    context = {
-            'tipo':"ok",
-            'mensagem':'Atendimento registrado',
+        except Exception :
+            context = {
+            'tipo':"erro",
+            'mensagem':'Problema ao sincronzar com o google agenda',
             'time':5000,
-            'id_data':atendimento.id,       
-            'data_atend':atendimento.data_solicitacao,       
-            'data_obs':atendimento.observacao,       
+             
+              } 
+            gid=''      
+            return HttpResponse(json.dumps(context),content_type='application/json')  
+        
+        try:
+            feito = FeitoPor()
+            cliente = Cliente.objects.get(cpf= cpf_cliente )
+            atendimento = Atendimento()
+            atendimento.observacao = request.POST.get('obs') 
+            data_nova =  datetime.strptime(dataAtendimento, "%Y-%m-%d").date()
+            data_nova = date.fromordinal(data_nova.toordinal() + periodo) 
+            data_nova = str(data_nova)
+            data_atend = data_nova +' ' + hora_nova
+            atendimento.data_solicitacao =  data_atend
+            Atend_animal= Animal.objects.get(cpf_cliente=cliente, pk= selectAnimal)
+            atendimento.id_animal = Atend_animal
+            Responsavel = Funcionario.objects.get(cpf= funcionarios)
+            atendimento.id_google_agenda = gid
+            atendimento.save()
+            feito.id_atendimento= atendimento
+            feito.id_funcionario = Responsavel
+            feito.save()
+            context['id_data']= atendimento.id
+            context['data_atend']= atendimento.data_solicitacao
+            context['data_obs']= atendimento.observacao
+            if radio == 'M':
+                periodo = periodo + 30
+            if radio == 'S':
+                periodo = periodo + 7 
+            if radio == 'A':
+                periodo = periodo + 365
+            if radio == 'N':
+                periodo = 0       
+        except Exception:   
+        
+            context = {
+                'tipo':"erro",
+                'mensagem':'Ocorreu um erro',
+                'time':5000,
 
-              }       
+            }
+            return HttpResponse(json.dumps(context),content_type='application/json')  
    
     return HttpResponse(json.dumps(context),content_type='application/json')          

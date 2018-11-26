@@ -200,9 +200,7 @@ function InputModalAnimal(animal) {
   $("input[name='especie']").val(animal.especie)
   $("input[name='datanasc']").val(animal.datanasc)
   $("input[name='obs']").val(animal.observacao)
-  if (animal.microchip!='None'){
-    $("input[name='microchip']").val(animal.microchip)
-  }
+  $("input[name='microchip']").val(animal.microchip)
   $("input[name='cpf_cliente']").val(animal.cpf_cliente)
   $('#url_foto_visualiza_animal').attr('src', animal.url_foto)
 }
@@ -261,10 +259,10 @@ $('#achar_animal').on('click', function(e) {
     cpf_cliente = $('#cpf_cliente').val()
 
     id_animal = $('#selectAnimal').val()
-
+    
 //Verifica o usuario e o animal, caso existe, preenche a tela seguinte.
     if ($('#selectAnimal').val().trim() != '') {
-
+     
         $.ajax({
                 type: "POST",
                 url: '/cliente/get_ficha_animal'+ '/' + cpf_cliente + '/' + id_animal,
@@ -274,12 +272,12 @@ $('#achar_animal').on('click', function(e) {
                 data:{
                    cpf_cliente     : $('#cpf_cliente').val(),
                 },
-                success: function (data)
+                success: function (data) 
                 {
                   if (data.tipo=='erro' ) {
-                    $('#voltar').click()
+                    $('#voltar').click()  
                     alerta(data.mensagem, data.tipo, data.time)
-
+              
                   }
                   else{
                   $('#nome').val(data[0].fields.nome)
@@ -295,20 +293,19 @@ $('#achar_animal').on('click', function(e) {
                   $('#cep').val(data[1].fields.cep)
                   $('#cidade').val(data[1].fields.cidade)
                   $('#estado').val(data[1].fields.estado)
-
+                  
                   $('#foto_animal').attr('src',data[0].fields.url_foto)
-
 
                   }
                  
                 }
 
               })
-
+      
           }
 
          else {
-
+        
     alerta("Por favor selecione um cliente e animal válido..", "aviso", 5000)
     setTimeout(function(){
       $("#voltar").click()
@@ -396,9 +393,11 @@ $('#CriaAtendimento').on('click', function(e) {
     HoraAtendimento = $('#HoraAtendimento').val()
     obs = $('#obs').val()
     funcionarios = $('#funcionarios').val()
-    funcionarios = $('#funcionarios').val()
     selectAnimal = $('#selectAnimal').val()
     cpf_cliente = $('#cpf_cliente').val()
+    if (dataAtendimento.trim()!= '' && HoraAtendimento.trim()!='' && funcionarios.trim()!=''  && cpf_cliente.trim()!='' && selectAnimal.trim()!='')
+    {
+
 
         $.ajax({
                 type: "POST",
@@ -424,6 +423,7 @@ $('#CriaAtendimento').on('click', function(e) {
              
                 alerta(data.mensagem, data.tipo, data.time)
                  
+            
                  $('#calendar').fullCalendar('renderEvent',
                     {
                    id :  data.id_data,  
@@ -431,10 +431,16 @@ $('#CriaAtendimento').on('click', function(e) {
                    start: data.data_atend,
 
                      }
-                    ) ;  
+                    ) ; 
+                  let timerId = setInterval(() => window.location.reload(), data.time); 
 
 
                 }
               })
+      }
+      else
+      {
+        alerta('Você precisa preecher todos os campos corretamente','erro',6000);
+      }
   })
 

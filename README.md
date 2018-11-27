@@ -251,4 +251,5 @@ Para subir suas alterações ao GitHub, digite:
 * Digite mensagens em commits sem sentido
 * Force um commit com conflitos
 
+Obrigado!
 ---
